@@ -1047,13 +1047,14 @@
     let isManual = false;
 
     wrap.addEventListener('wheel', (e) => {
+      if (!e.deltaX) return;
       e.preventDefault();
       if (!isManual) {
         const matrix = new DOMMatrix(window.getComputedStyle(track).transform);
         manualOffset = matrix.m41;
         isManual = true;
       }
-      manualOffset -= (e.deltaX || e.deltaY) * 0.6;
+      manualOffset -= e.deltaX * 0.6;
       const halfWidth = track.scrollWidth / 2;
       if (manualOffset < -halfWidth) manualOffset += halfWidth;
       if (manualOffset > 0) manualOffset -= halfWidth;
