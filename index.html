@@ -1,0 +1,1076 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Prasham Chavda — Sr. Product Designer</title>
+  <link href="https://fonts.googleapis.com/css2?family=Mulish:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,300;1,400&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #0C0E13;
+      --surface: #111318;
+      --surface2: #181C27;
+      --border: #21263A;
+      --amber: #F5A623;
+      --amber-dim: rgba(245,166,35,0.10);
+      --text: #DDE1EC;
+      --muted: #6B7290;
+      --white: #FFFFFF;
+      --radius: 16px;
+      --radius-sm: 8px;
+      --ease: cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Mulish', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    /* SCROLL REVEAL */
+    .reveal {
+      opacity: 0;
+      transform: translateY(26px);
+      transition: opacity 0.65s var(--ease), transform 0.65s var(--ease);
+    }
+    .reveal.in-view { opacity: 1; transform: translateY(0); }
+    .reveal-d1 { transition-delay: 0.09s; }
+    .reveal-d2 { transition-delay: 0.18s; }
+    .reveal-d3 { transition-delay: 0.27s; }
+    .reveal-d4 { transition-delay: 0.36s; }
+
+    @media (prefers-reduced-motion: reduce) {
+      .reveal { opacity: 1; transform: none; transition: none; }
+      *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
+    }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes marquee {
+      from { transform: translateX(0); }
+      to   { transform: translateX(-50%); }
+    }
+
+    /* FOCUS */
+    :focus-visible { outline: 2px solid var(--amber); outline-offset: 3px; border-radius: 4px; }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 18px 48px;
+      background: rgba(12,14,19,0.88);
+      backdrop-filter: blur(18px);
+      -webkit-backdrop-filter: blur(18px);
+      border-bottom: 1px solid var(--border);
+    }
+    .nav-logo {
+      font-family: 'Mulish', sans-serif;
+      font-weight: 900; font-size: 15px;
+      letter-spacing: 0.08em; text-transform: uppercase;
+      color: var(--white); text-decoration: none;
+      transition: opacity 0.2s;
+    }
+    .nav-logo:hover { opacity: 0.7; }
+    .nav-logo span { color: var(--amber); }
+
+    .nav-links { display: flex; gap: 28px; list-style: none; }
+    .nav-links a {
+      font-size: 12px; font-weight: 600; letter-spacing: 0.06em;
+      text-transform: uppercase; color: var(--muted);
+      text-decoration: none; transition: color 0.2s; cursor: pointer;
+    }
+    .nav-links a:hover { color: var(--white); }
+
+    .nav-cta {
+      background: var(--amber); color: #0C0E13;
+      padding: 9px 22px; border-radius: 40px;
+      font-size: 13px; font-weight: 700; letter-spacing: 0.02em;
+      text-decoration: none; transition: opacity 0.2s, transform 0.2s var(--ease);
+      cursor: pointer;
+    }
+    .nav-cta:hover { opacity: 0.85; transform: translateY(-1px); }
+
+    .nav-burger {
+      display: none; background: none;
+      border: 1px solid var(--border); border-radius: var(--radius-sm);
+      cursor: pointer; color: var(--text);
+      padding: 8px; line-height: 0;
+      transition: border-color 0.2s, color 0.2s;
+    }
+    .nav-burger:hover { border-color: var(--amber); color: var(--amber); }
+
+    /* ── HERO ── */
+    #hero {
+      min-height: 100svh;
+      display: flex; flex-direction: column;
+      justify-content: center; align-items: center;
+      padding: 140px 48px 100px;
+      text-align: center;
+      position: relative; overflow: hidden;
+    }
+    #hero::before {
+      content: ''; position: absolute;
+      top: -280px; right: -280px;
+      width: 760px; height: 760px;
+      background: radial-gradient(circle, rgba(245,166,35,0.055) 0%, transparent 60%);
+      pointer-events: none;
+    }
+    #hero::after {
+      content: ''; position: absolute;
+      bottom: -180px; left: -180px;
+      width: 560px; height: 560px;
+      background: radial-gradient(circle, rgba(37,99,235,0.035) 0%, transparent 65%);
+      pointer-events: none;
+    }
+
+    .hero-eyebrow {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: var(--amber-dim);
+      border: 1px solid rgba(245,166,35,0.22);
+      border-radius: 40px; padding: 7px 20px;
+      font-size: 13px; font-weight: 600; letter-spacing: 0.04em;
+      color: var(--amber); margin-bottom: 36px;
+      animation: fadeUp 0.5s var(--ease) 0.1s both;
+    }
+    .hero-title {
+      font-family: 'Mulish', sans-serif;
+      font-size: clamp(32px, 5vw, 62px);
+      font-weight: 900; line-height: 1.06;
+      color: var(--white); margin-bottom: 28px;
+      letter-spacing: -0.03em;
+      animation: fadeUp 0.65s var(--ease) 0.25s both;
+    }
+    .hero-title em { font-style: normal; color: var(--amber); }
+
+    .hero-sub {
+      font-size: 17px; color: var(--muted);
+      max-width: 510px; margin: 0 auto 48px;
+      line-height: 1.8;
+      animation: fadeUp 0.65s var(--ease) 0.4s both;
+    }
+    .hero-actions {
+      display: flex; gap: 12px; flex-wrap: wrap; justify-content: center;
+      animation: fadeUp 0.65s var(--ease) 0.52s both;
+    }
+
+    /* BUTTONS */
+    .btn-primary {
+      background: var(--amber); color: #0C0E13;
+      padding: 13px 28px; border-radius: 40px;
+      font-size: 14px; font-weight: 700; text-decoration: none;
+      transition: transform 0.25s var(--ease), opacity 0.2s;
+      display: inline-flex; align-items: center; gap: 8px; cursor: pointer;
+    }
+    .btn-primary:hover { transform: translateY(-2px); opacity: 0.88; }
+
+    .btn-ghost {
+      border: 1px solid var(--border); color: var(--text);
+      padding: 13px 28px; border-radius: 40px;
+      font-size: 14px; font-weight: 600; text-decoration: none;
+      transition: border-color 0.2s, color 0.2s, transform 0.25s var(--ease);
+      display: inline-flex; align-items: center; gap: 8px; cursor: pointer;
+    }
+    .btn-ghost:hover { border-color: var(--amber); color: var(--amber); transform: translateY(-2px); }
+
+    /* ── SECTIONS ── */
+    section { padding: 96px 48px; }
+    .section-eyebrow {
+      font-size: 11px; font-weight: 700; letter-spacing: 0.18em;
+      text-transform: uppercase; color: var(--amber); margin-bottom: 12px;
+    }
+    .section-title {
+      font-family: 'Mulish', sans-serif;
+      font-size: clamp(28px, 3vw, 44px);
+      font-weight: 900; color: var(--white);
+      letter-spacing: -0.025em; line-height: 1.08; margin-bottom: 14px;
+    }
+    .section-sub { font-size: 16px; color: var(--muted); max-width: 540px; line-height: 1.75; }
+    .section-head { margin-bottom: 52px; }
+
+    /* ── WORK ── */
+    #work { background: var(--bg); }
+    .project-list {
+      display: flex; flex-direction: column; gap: 2px;
+      border: 1px solid var(--border); border-radius: var(--radius); overflow: hidden;
+    }
+    .project-item {
+      background: var(--surface); border-bottom: 1px solid var(--border);
+      display: grid; grid-template-columns: 1fr 1.5fr;
+      transition: background 0.25s; min-height: 340px;
+      text-decoration: none; color: inherit; cursor: default;
+    }
+    .project-item:last-child { border-bottom: none; }
+    .project-item:hover { background: var(--surface2); }
+    .project-item:hover .project-link-btn {
+      background: var(--amber); color: #0C0E13; border-color: var(--amber);
+    }
+    a.project-item { cursor: pointer; }
+
+    .project-item.reverse { grid-template-columns: 1.5fr 1fr; }
+    .project-item.reverse .project-visual { grid-column: 2; grid-row: 1; }
+    .project-item.reverse .project-content { grid-column: 1; grid-row: 1; }
+
+    .project-visual {
+      position: relative; overflow: hidden;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .pv-1 { background: linear-gradient(145deg, #0b1828 0%, #102244 100%); }
+    .pv-2 { background: linear-gradient(145deg, #13092b 0%, #1f1042 100%); }
+    .pv-3 { background: linear-gradient(145deg, #091b20 0%, #0f3038 100%); }
+    .pv-4 { background: linear-gradient(145deg, #091c11 0%, #0e3020 100%); }
+
+    .project-visual::before {
+      content: ''; position: absolute; inset: 0;
+      background-image: radial-gradient(circle, rgba(255,255,255,0.025) 1px, transparent 1px);
+      background-size: 30px 30px;
+    }
+    .project-visual::after {
+      content: attr(data-num); position: absolute;
+      right: -14px; bottom: -28px;
+      font-family: 'Mulish', sans-serif;
+      font-size: 200px; font-weight: 900;
+      color: rgba(255,255,255,0.032); line-height: 1;
+      letter-spacing: -0.05em; user-select: none; pointer-events: none;
+    }
+    .project-chip {
+      position: absolute; top: 20px; left: 20px;
+      background: rgba(12,14,19,0.72); backdrop-filter: blur(8px);
+      border: 1px solid var(--border); border-radius: 40px;
+      padding: 5px 14px; font-size: 11px; font-weight: 700;
+      color: var(--amber); letter-spacing: 0.08em; text-transform: uppercase;
+    }
+    .project-content {
+      padding: 44px 40px; display: flex;
+      flex-direction: column; justify-content: center;
+    }
+    .project-number {
+      font-size: 11px; font-weight: 700; color: var(--muted);
+      letter-spacing: 0.14em; text-transform: uppercase; margin-bottom: 12px;
+    }
+    .project-title {
+      font-family: 'Mulish', sans-serif;
+      font-size: 23px; font-weight: 800; color: var(--white);
+      margin-bottom: 12px; line-height: 1.2;
+    }
+    .project-desc { font-size: 14px; color: var(--muted); line-height: 1.75; margin-bottom: 28px; }
+    .project-footer { display: flex; align-items: center; justify-content: space-between; gap: 16px; }
+    .project-tags { display: flex; gap: 6px; flex-wrap: wrap; }
+    .tag {
+      background: var(--surface2); border: 1px solid var(--border); border-radius: 6px;
+      padding: 4px 11px; font-size: 11px; font-weight: 600; color: var(--muted);
+    }
+    .project-link-btn {
+      width: 40px; height: 40px; min-width: 40px; border-radius: 50%;
+      border: 1px solid var(--border); display: flex; align-items: center;
+      justify-content: center; color: var(--muted);
+      transition: background 0.2s, color 0.2s, border-color 0.2s;
+    }
+
+    /* ── SKILLS ── */
+    #skills { background: var(--surface); }
+    .skills-grid {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 2px;
+      border: 1px solid var(--border); border-radius: var(--radius); overflow: hidden;
+    }
+    .skill-item {
+      background: var(--bg); padding: 40px;
+      border-right: 1px solid var(--border); border-bottom: 1px solid var(--border);
+      transition: background 0.25s; position: relative;
+    }
+    .skill-item::before {
+      content: ''; position: absolute; left: 0; top: 0; bottom: 0;
+      width: 3px; background: var(--amber); opacity: 0; transition: opacity 0.25s;
+    }
+    .skill-item:hover { background: var(--surface); }
+    .skill-item:hover::before { opacity: 1; }
+    .skill-item:nth-child(even) { border-right: none; }
+    .skill-item:nth-last-child(-n+2) { border-bottom: none; }
+    .skill-label {
+      font-size: 11px; font-weight: 700; color: var(--amber);
+      letter-spacing: 0.14em; text-transform: uppercase; margin-bottom: 10px;
+    }
+    .skill-name {
+      font-family: 'Mulish', sans-serif;
+      font-size: 17px; font-weight: 800; color: var(--white);
+      margin-bottom: 10px; line-height: 1.25;
+    }
+    .skill-desc { font-size: 14px; color: var(--muted); line-height: 1.7; }
+    .skill-points { list-style: none; margin-top: 14px; display: flex; flex-direction: column; gap: 7px; }
+    .skill-points li {
+      font-size: 13px; color: var(--muted); line-height: 1.5; padding-left: 16px; position: relative;
+    }
+    .skill-points li::before {
+      content: ''; position: absolute; left: 0; top: 7px;
+      width: 5px; height: 5px;
+      border-top: 1.5px solid var(--amber); border-right: 1.5px solid var(--amber);
+      transform: rotate(45deg);
+    }
+
+    /* ── TOOLS ── */
+    #tools { background: var(--bg); padding-left: 0; padding-right: 0; }
+    #tools .section-head { padding: 0 48px; margin-bottom: 44px; }
+    .tools-marquee-wrap {
+      position: relative; overflow: hidden;
+      mask-image: linear-gradient(to right, transparent 0%, black 6%, black 94%, transparent 100%);
+      -webkit-mask-image: linear-gradient(to right, transparent 0%, black 6%, black 94%, transparent 100%);
+    }
+    .tools-track {
+      display: flex; gap: 14px; width: max-content;
+      animation: marquee 34s linear infinite; padding: 4px 0;
+    }
+    .tools-track:hover { animation-play-state: paused; }
+    .tool-card {
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: var(--radius); padding: 20px 18px;
+      display: flex; flex-direction: column; align-items: center;
+      min-width: 128px; flex-shrink: 0;
+      transition: border-color 0.2s, transform 0.25s var(--ease);
+    }
+    .tool-card:hover { border-color: rgba(245,166,35,0.4); transform: translateY(-4px); }
+    .tool-logo-wrap {
+      width: 48px; height: 48px; border-radius: 12px;
+      display: flex; align-items: center; justify-content: center;
+      margin-bottom: 11px; overflow: hidden; flex-shrink: 0;
+    }
+    .tool-logo-wrap img { width: 30px; height: 30px; object-fit: contain; display: block; }
+    .tool-name { font-size: 12px; font-weight: 700; color: var(--white); margin-bottom: 2px; text-align: center; white-space: nowrap; }
+    .tool-role { font-size: 11px; color: var(--muted); font-weight: 500; text-align: center; }
+
+    /* ── PROCESS ── */
+    #process { background: var(--surface); }
+    .process-steps {
+      display: grid; grid-template-columns: repeat(4, 1fr); gap: 2px;
+      border: 1px solid var(--border); border-radius: var(--radius); overflow: hidden;
+    }
+    .process-step {
+      background: var(--bg); padding: 36px 28px;
+      border-right: 1px solid var(--border); position: relative;
+      transition: background 0.25s;
+    }
+    .process-step:last-child { border-right: none; }
+    .process-step:hover { background: var(--surface2); }
+    .process-step-num {
+      font-family: 'Mulish', sans-serif;
+      position: absolute; top: 18px; right: 18px;
+      font-size: 54px; font-weight: 900; font-style: italic;
+      color: var(--surface2); line-height: 1;
+      user-select: none; pointer-events: none; transition: color 0.25s;
+    }
+    .process-step:hover .process-step-num { color: rgba(245,166,35,0.07); }
+    .process-icon-wrap {
+      width: 44px; height: 44px; border-radius: 12px;
+      background: var(--amber-dim); border: 1px solid rgba(245,166,35,0.18);
+      display: flex; align-items: center; justify-content: center;
+      color: var(--amber); margin-bottom: 20px; flex-shrink: 0;
+    }
+    .process-name {
+      font-family: 'Mulish', sans-serif;
+      font-size: 16px; font-weight: 800; color: var(--white); margin-bottom: 8px;
+    }
+    .process-desc { font-size: 13px; color: var(--muted); line-height: 1.65; }
+
+    /* ── EXPERIENCE ── */
+    #experience { background: var(--bg); }
+    .exp-list {
+      display: flex; flex-direction: column; gap: 2px;
+      border: 1px solid var(--border); border-radius: var(--radius); overflow: hidden;
+    }
+    .exp-item {
+      background: var(--surface); padding: 40px 44px; border-bottom: 1px solid var(--border);
+      display: grid; grid-template-columns: 240px 1fr; gap: 44px; transition: background 0.2s;
+    }
+    .exp-item:hover { background: var(--surface2); }
+    .exp-item:last-child { border-bottom: none; }
+    .exp-company { font-family: 'Mulish', sans-serif; font-size: 16px; font-weight: 800; color: var(--white); margin-bottom: 5px; }
+    .exp-role { font-size: 13px; color: var(--amber); font-weight: 600; margin-bottom: 8px; }
+    .exp-period { font-size: 12px; color: var(--muted); font-weight: 500; margin-bottom: 3px; }
+    .exp-location { font-size: 12px; color: var(--muted); display: flex; align-items: center; gap: 5px; }
+    .exp-right-label {
+      font-size: 11px; font-weight: 700; color: var(--muted);
+      letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 12px;
+    }
+    .exp-keywords { display: flex; flex-wrap: wrap; gap: 7px; }
+    .exp-kw {
+      background: var(--surface2); border: 1px solid var(--border); border-radius: 6px;
+      padding: 4px 12px; font-size: 12px; font-weight: 600; color: var(--muted);
+    }
+    .exp-kw.highlight {
+      background: var(--amber-dim); border-color: rgba(245,166,35,0.25); color: var(--amber);
+    }
+
+    /* ── ABOUT ── */
+    #about {
+      background: var(--surface);
+      display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center;
+    }
+    .about-image-wrap { position: relative; }
+    .about-photo {
+      width: 100%; aspect-ratio: 4/5;
+      background: linear-gradient(145deg, var(--surface2), #1e2438);
+      display: flex; align-items: center; justify-content: center;
+      border-radius: var(--radius); border: 1px solid var(--border);
+      overflow: hidden; position: relative;
+    }
+    .about-photo::before {
+      content: ''; position: absolute; inset: 0;
+      background-image: radial-gradient(circle, rgba(255,255,255,0.025) 1px, transparent 1px);
+      background-size: 28px 28px;
+    }
+    .about-initials {
+      font-family: 'Mulish', sans-serif; font-size: 90px; font-weight: 900;
+      color: rgba(245,166,35,0.12); letter-spacing: -0.04em;
+      user-select: none; position: relative;
+    }
+    .about-badge {
+      position: absolute; bottom: -16px; right: -16px;
+      background: var(--amber); color: #0C0E13;
+      padding: 14px 18px; border-radius: var(--radius);
+      font-weight: 800; font-size: 12px; text-align: center;
+      box-shadow: 0 8px 32px rgba(245,166,35,0.22); line-height: 1.35;
+    }
+    .about-badge strong {
+      display: block; font-family: 'Mulish', sans-serif;
+      font-size: 22px; line-height: 1; margin-bottom: 2px;
+    }
+    .about-text { font-size: 16px; color: var(--muted); line-height: 1.8; margin-bottom: 18px; }
+    .about-actions { display: flex; gap: 12px; flex-wrap: wrap; margin-top: 32px; }
+
+    /* ── CONTACT ── */
+    #contact { background: var(--bg); text-align: center; }
+    .contact-card {
+      max-width: 640px; margin: 0 auto;
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: 24px; padding: 56px 48px;
+      position: relative; overflow: hidden;
+    }
+    .contact-card::before {
+      content: ''; position: absolute; top: -120px; right: -120px;
+      width: 440px; height: 440px;
+      background: radial-gradient(circle, rgba(245,166,35,0.06) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    .contact-title {
+      font-family: 'Mulish', sans-serif; font-size: 36px; font-weight: 900;
+      color: var(--white); letter-spacing: -0.025em; margin-bottom: 14px;
+    }
+    .contact-sub {
+      font-size: 15px; color: var(--muted); margin-bottom: 40px;
+      line-height: 1.75; max-width: 440px; margin-left: auto; margin-right: auto;
+    }
+    .contact-links { display: flex; justify-content: center; gap: 10px; flex-wrap: wrap; }
+    .contact-pill {
+      display: inline-flex; align-items: center; gap: 9px;
+      border: 1px solid var(--border); border-radius: 40px;
+      padding: 11px 22px; font-size: 13px; font-weight: 600;
+      color: var(--text); text-decoration: none;
+      transition: border-color 0.2s, color 0.2s, transform 0.25s var(--ease);
+      cursor: pointer;
+    }
+    .contact-pill:hover { border-color: var(--amber); color: var(--amber); transform: translateY(-2px); }
+    .contact-pill.primary { background: var(--amber); border-color: var(--amber); color: #0C0E13; }
+    .contact-pill.primary:hover { opacity: 0.88; color: #0C0E13; transform: translateY(-2px); }
+
+    /* ── FOOTER ── */
+    footer {
+      background: var(--surface); border-top: 1px solid var(--border);
+      padding: 40px 48px; display: flex;
+      align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 20px;
+    }
+    .footer-logo {
+      font-family: 'Mulish', sans-serif; font-weight: 900;
+      font-size: 13px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--white);
+    }
+    .footer-logo span { color: var(--amber); }
+    .footer-copy { font-size: 13px; color: var(--muted); }
+    .footer-links { display: flex; gap: 24px; }
+    .footer-links a {
+      font-size: 13px; color: var(--muted); text-decoration: none;
+      font-weight: 500; transition: color 0.2s; cursor: pointer;
+    }
+    .footer-links a:hover { color: var(--amber); }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 1024px) {
+      .project-item,
+      .project-item.reverse { grid-template-columns: 1fr; }
+      .project-item.reverse .project-visual,
+      .project-item.reverse .project-content { grid-column: 1; grid-row: auto; }
+      .project-visual { aspect-ratio: 16/9; }
+      .skills-grid { grid-template-columns: 1fr; }
+      .skill-item:nth-child(even) { border-right: none; }
+      .skill-item:nth-last-child(-n+2) { border-bottom: 1px solid var(--border); }
+      .skill-item:last-child { border-bottom: none; }
+      #about { grid-template-columns: 1fr; gap: 40px; }
+      .about-image-wrap { display: none; }
+      .process-steps { grid-template-columns: 1fr 1fr; }
+      .exp-item { grid-template-columns: 1fr; gap: 20px; }
+    }
+    @media (max-width: 768px) {
+      nav { padding: 14px 20px; }
+      .nav-links {
+        display: none; flex-direction: column;
+        position: absolute; top: 100%; left: 0; right: 0;
+        background: rgba(12,14,19,0.97); backdrop-filter: blur(20px);
+        border-bottom: 1px solid var(--border); padding: 8px 20px 20px; gap: 0;
+      }
+      .nav-links.open { display: flex; }
+      .nav-links li { border-top: 1px solid var(--border); padding: 13px 0; }
+      .nav-links li:first-child { border-top: none; }
+      .nav-links a { font-size: 14px; }
+      .nav-burger { display: flex; }
+      .nav-cta { display: none; }
+
+      section { padding: 68px 20px; }
+      #hero { padding: 110px 20px 68px; }
+      #tools .section-head { padding: 0 20px; }
+
+      .process-steps { grid-template-columns: 1fr; }
+      .process-step { border-right: none; border-bottom: 1px solid var(--border); }
+      .process-step:last-child { border-bottom: none; }
+
+      .contact-card { padding: 36px 24px; }
+      .exp-item { padding: 28px 20px; }
+      .project-content { padding: 28px 20px; }
+      footer { padding: 28px 20px; flex-direction: column; align-items: flex-start; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="#hero" class="nav-logo">Prasham<span>.</span>Chavda</a>
+  <ul class="nav-links" id="navLinks">
+    <li><a href="#work">Work</a></li>
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#tools">Tools</a></li>
+    <li><a href="#experience">Experience</a></li>
+    <li><a href="#about">About</a></li>
+  </ul>
+  <a href="#contact" class="nav-cta">Let's talk &rarr;</a>
+  <button class="nav-burger" id="navBurger" aria-label="Toggle navigation" aria-expanded="false">
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+      <line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/>
+    </svg>
+  </button>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-eyebrow">Hi, I'm Prasham &#x1F44B;</div>
+  <h1 class="hero-title">
+    Human Instinct &amp; Systems Thinking<br>
+    for <em>Digital Outcomes.</em><br>
+    I <em>design</em> decisions that matter.
+  </h1>
+  <p class="hero-sub">
+    Sr. Product Designer with 3+ years of experience specialising in high-growth platforms. M.Des from NID. Based in Mumbai.
+</p>
+  <div class="hero-actions">
+    <a href="#work" class="btn-primary">
+      View my work
+      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14"/><path d="m19 12-7 7-7-7"/></svg>
+    </a>
+    <a href="#about" class="btn-ghost">About me</a>
+  </div>
+</section>
+
+<!-- WORK -->
+<section id="work">
+  <div class="section-head reveal">
+    <div class="section-eyebrow">Selected Work</div>
+    <h2 class="section-title">Projects I'm proud of</h2>
+    <p class="section-sub">Real problems, real impact — here's a look at the work behind the numbers.</p>
+  </div>
+  <div class="project-list">
+
+    <a href="casestudy-navbar.html" class="project-item reveal">
+      <div class="project-visual pv-1" data-num="01">
+        <div class="project-chip">Navigation &middot; IA</div>
+      </div>
+      <div class="project-content">
+        <div class="project-number">Project 01</div>
+        <h3 class="project-title">Website Navigation Revamp</h3>
+        <p class="project-desc">Orchestrated a full information architecture overhaul of the website navigation system. Improved findability and wayfinding resulted in a measurable 9% reduction in user drop-off during critical conversion paths.</p>
+        <div class="project-footer">
+          <div class="project-tags">
+            <span class="tag">IA</span>
+            <span class="tag">UX Audit</span>
+            <span class="tag">Analytics</span>
+          </div>
+          <span class="project-link-btn">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+          </span>
+        </div>
+      </div>
+    </a>
+
+    <a href="nda.html" class="project-item reverse reveal">
+      <div class="project-visual pv-2" data-num="02">
+        <div class="project-chip">Dashboard &middot; FinTech</div>
+      </div>
+      <div class="project-content">
+        <div class="project-number">Project 02</div>
+        <h3 class="project-title">ETF Product Ecosystem</h3>
+        <p class="project-desc">End-to-end design of a data-rich ETF dashboard and high-conversion buy journey. Led strategic UX decisions that drove an 81% surge in platform turnover and 34% growth in the client base, from 12.5k to 16.8k investors.</p>
+        <div class="project-footer">
+          <div class="project-tags">
+            <span class="tag">UX Research</span>
+            <span class="tag">Data Viz</span>
+            <span class="tag">Figma</span>
+            <span class="tag">Prototyping</span>
+          </div>
+          <span class="project-link-btn">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+          </span>
+        </div>
+      </div>
+    </a>
+
+    <a href="nda.html" class="project-item reveal">
+      <div class="project-visual pv-3" data-num="03">
+        <div class="project-chip">Mobile &middot; Web</div>
+      </div>
+      <div class="project-content">
+        <div class="project-number">Project 03</div>
+        <h3 class="project-title">IPO Product Redesign</h3>
+        <p class="project-desc">Simplified a complex IPO application flow for both web and mobile. Streamlined the journey, removed drop-off points, and validated a 14% increase in engagement through structured user testing sessions.</p>
+        <div class="project-footer">
+          <div class="project-tags">
+            <span class="tag">User Testing</span>
+            <span class="tag">iOS</span>
+            <span class="tag">Android</span>
+            <span class="tag">Maze</span>
+          </div>
+          <span class="project-link-btn">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+          </span>
+        </div>
+      </div>
+    </a>
+
+    <a href="nda.html" class="project-item reverse reveal">
+      <div class="project-visual pv-4" data-num="04">
+        <div class="project-chip">Complex UX &middot; Trading</div>
+      </div>
+      <div class="project-content">
+        <div class="project-number">Project 04</div>
+        <h3 class="project-title">Algorithmic Trading Platform</h3>
+        <p class="project-desc">Lead designer on a high-complexity algo trading platform built for professional traders. Responsible for defining information architecture, end-to-end workflow mapping, and high-fidelity prototyping. Currently in development.</p>
+        <div class="project-footer">
+          <div class="project-tags">
+            <span class="tag">IA</span>
+            <span class="tag">Complex UX</span>
+            <span class="tag">Hi-fi Prototyping</span>
+          </div>
+          <span class="project-link-btn">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+          </span>
+        </div>
+      </div>
+    </a>
+
+  </div>
+</section>
+
+<!-- SKILLS -->
+<section id="skills">
+  <div class="section-head reveal">
+    <div class="section-eyebrow">Ways of Working</div>
+    <h2 class="section-title">Skills I bring to the table</h2>
+  </div>
+  <div class="skills-grid">
+
+    <div class="skill-item reveal">
+      <div class="skill-label">Research</div>
+      <div class="skill-name">Understanding people first</div>
+      <div class="skill-desc">I lead with empathy, listening before solving. My research practice is built on genuinely wanting to understand the person on the other side of the screen.</div>
+      <ul class="skill-points">
+        <li>User interviews and contextual inquiry</li>
+        <li>Ethnographic research and field observation</li>
+        <li>Usability testing, moderated and unmoderated</li>
+        <li>Affinity mapping and thematic analysis</li>
+        <li>Journey mapping and user personas</li>
+      </ul>
+    </div>
+
+    <div class="skill-item reveal reveal-d1">
+      <div class="skill-label">UX / UI Design</div>
+      <div class="skill-name">Craft that communicates and converts</div>
+      <div class="skill-desc">I design interfaces that are not just visually sharp but behaviourally sound, grounded in how people actually think and interact with digital products.</div>
+      <ul class="skill-points">
+        <li>Wireframing, hi-fidelity mockups and design systems</li>
+        <li>Heuristic evaluation and cognitive walkthrough</li>
+        <li>Interaction design and micro-interaction thinking</li>
+        <li>WCAG 2.2 accessibility standards</li>
+        <li>Cross-platform design, iOS, Android, and Web</li>
+      </ul>
+    </div>
+
+    <div class="skill-item reveal">
+      <div class="skill-label">Prototyping</div>
+      <div class="skill-name">Test before you build</div>
+      <div class="skill-desc">From rough wireframes to high-fidelity interactive prototypes, I get ideas in front of real users fast to validate direction and reduce risk before development begins.</div>
+      <ul class="skill-points">
+        <li>Interactive prototyping in Figma and Framer</li>
+        <li>High-complexity flows with Axure RP</li>
+        <li>Rapid iteration based on user feedback</li>
+        <li>Prototype-led user testing via Maze</li>
+      </ul>
+    </div>
+
+    <div class="skill-item reveal reveal-d1">
+      <div class="skill-label">Design with Business Goals</div>
+      <div class="skill-name">Where design meets outcomes</div>
+      <div class="skill-desc">Great design is not just good UX, it moves metrics. I connect every design decision to business objectives, making it easy to prioritise what actually creates value.</div>
+      <ul class="skill-points">
+        <li>UX metrics and KPI alignment</li>
+        <li>Data analysis with Google Analytics, Power BI, and Looker</li>
+        <li>Competitive analysis and UX audits</li>
+        <li>Double Diamond and Design Thinking frameworks</li>
+      </ul>
+    </div>
+
+    <div class="skill-item reveal">
+      <div class="skill-label">Systems Thinking</div>
+      <div class="skill-name">Design that scales</div>
+      <div class="skill-desc">I build component libraries, token systems, and IA frameworks that keep products consistent as they grow, making design and engineering faster together.</div>
+      <ul class="skill-points">
+        <li>Design systems and component architecture</li>
+        <li>Information architecture and navigation design</li>
+        <li>Figma variables and token management</li>
+      </ul>
+    </div>
+
+    <div class="skill-item reveal reveal-d1">
+      <div class="skill-label">Collaboration</div>
+      <div class="skill-name">Cross-team alignment</div>
+      <div class="skill-desc">I thrive in cross-functional teams, bridging product, engineering, and stakeholders through clear communication, structured workshops, and shared design language.</div>
+      <ul class="skill-points">
+        <li>Design sprints and ideation workshops</li>
+        <li>Agile development collaboration</li>
+        <li>Stakeholder presentations and design critique</li>
+      </ul>
+    </div>
+
+  </div>
+</section>
+
+<!-- TOOLS -->
+<section id="tools">
+  <div class="section-head reveal">
+    <div class="section-eyebrow">My Toolkit</div>
+    <h2 class="section-title">Tools I reach for every day</h2>
+  </div>
+  <div class="tools-marquee-wrap">
+    <div class="tools-track">
+
+      <div class="tool-card"><div class="tool-logo-wrap" style="background:#1E1E1E;"><img src="https://cdn.jsdelivr.net/npm/simple-icons@v13/icons/figma.svg" style="filter:invert(1);" alt="Figma"/></div><div class="tool-name">Figma</div><div class="tool-role">UI Design &amp; Systems</div></div>
+      <div class="tool-card"><div class="tool-logo-wrap" style="background:#F24E1E;"><img src="https://cdn.jsdelivr.net/npm/simple-icons@v13/icons/figma.svg" style="filter:invert(1);" alt="FigJam"/></div><div class="tool-name">FigJam</div><div class="tool-role">Workshops &amp; Mapping</div></div>
+      <div class="tool-card"><div class="tool-logo-wrap" style="background:#0055FF;"><img src="https://cdn.jsdelivr.net/npm/simple-icons@v13/icons/framer.svg" style="filter:invert(1);" alt="Framer"/></div><div class="tool-name">Framer</div><div class="tool-role">Web &amp; Prototyping</div></div>
+      <div class="tool-card"><div class="tool-logo-wrap" style="background:#FF0000;"><img src="https://cdn.jsdelivr.net/npm/simple-icons@v13/icons/adobecreativecloud.svg" style="filter:invert(1);" alt="Adobe"/></div><div class="tool-name">Adobe Suite</div><div class="tool-role">Visual Design</div></div>
+      <div class="tool-card"><div class="tool-logo-wrap" style="background:#1A1A1A;"><svg width="30" height="30" viewBox="0 0 24 24" fill="white" xmlns="http://www.w3.org/2000/svg"><path d="M5.5 3.21v17.58c0 .45.54.67.85.35l4.86-4.86a.5.5 0 0 1 .35-.15h6.87c.45 0 .67-.54.35-.85L6.35 2.85a.5.5 0 0 0-.85.36z"/></svg></div><div class="tool-name">Cursor AI</div><div class="tool-role">AI-assisted Dev</div></div>
+      <div class="tool-card"><div class="tool-logo-wrap" style="background:#FF4D6D;"><svg width="30" height="30" viewBox="0 0 24 24" fill="white" xmlns="http://www.w3.org/2000/svg"><path d="M12 21.593c-5.63-5.539-11-10.297-11-14.402 0-3.791 3.068-5.191 5.281-5.191 1.312 0 4.151.501 5.719 4.457 1.59-3.968 4.464-4.447 5.726-4.447 2.54 0 5.274 1.621 5.274 5.181 0 4.069-5.136 8.625-11 14.402z"/></svg></div><div class="tool-name">Lovable.ai</div><div class="tool-role">No-code Builds</div></div>
+      <div class="tool-card"><div class="tool-logo-wrap" style="background:#6B2EFF;"><img src="https://cdn.jsdelivr.net/npm/simple-icons@v13/icons/maze.svg" style="filter:invert(1);" alt="Maze"/></div><div class="tool-name">Maze</div><div class="tool-role">Usability Testing</div></div>
+      <div class="tool-card"><div class="tool-logo-wrap" style="background:#E8F0FE;"><img src="https://cdn.jsdelivr.net/npm/simple-icons@v13/icons/googleanalytics.svg" alt="Google Analytics"/></div><div class="tool-name">Google Analytics</div><div class="tool-role">UX Metrics</div></div>
+      <div class="tool-card"><div class="tool-logo-wrap" style="background:#F2C811;"><img src="https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/powerbi.svg" alt="Power BI"/></div><div class="tool-name">Power BI</div><div class="tool-role">Data Visualisation</div></div>
+      <div class="tool-card"><div class="tool-logo-wrap" style="background:#FFD02F;"><img src="https://cdn.jsdelivr.net/npm/simple-icons@v13/icons/miro.svg" alt="Miro"/></div><div class="tool-name">Miro</div><div class="tool-role">Ideation &amp; Research</div></div>
+      <div class="tool-card"><div class="tool-logo-wrap" style="background:#FFFFFF;"><img src="https://cdn.jsdelivr.net/npm/simple-icons@v13/icons/notion.svg" alt="Notion"/></div><div class="tool-name">Notion</div><div class="tool-role">Documentation</div></div>
+      <div class="tool-card"><div class="tool-logo-wrap" style="background:#10A37F;"><img src="https://cdn.jsdelivr.net/npm/simple-icons@v13/icons/openai.svg" style="filter:invert(1);" alt="ChatGPT"/></div><div class="tool-name">ChatGPT</div><div class="tool-role">Research &amp; Thinking</div></div>
+      <div class="tool-card"><div class="tool-logo-wrap" style="background:#D77655;"><svg width="30" height="30" viewBox="0 0 512 509.64" xmlns="http://www.w3.org/2000/svg"><path fill="#FCF2EE" fill-rule="nonzero" d="M142.27 316.619l73.655-41.326 1.238-3.589-1.238-1.996-3.589-.001-12.31-.759-42.084-1.138-36.498-1.516-35.361-1.896-8.897-1.895-8.34-10.995.859-5.484 7.482-5.03 10.717.935 23.683 1.617 35.537 2.452 25.782 1.517 38.193 3.968h6.064l.86-2.451-2.073-1.517-1.618-1.517-36.776-24.922-39.81-26.338-20.852-15.166-11.273-7.683-5.687-7.204-2.451-15.721 10.237-11.273 13.75.935 3.513.936 13.928 10.716 29.749 23.027 38.848 28.612 5.687 4.727 2.275-1.617.278-1.138-2.553-4.271-21.13-38.193-22.546-38.848-10.035-16.101-2.654-9.655c-.935-3.968-1.617-7.304-1.617-11.374l11.652-15.823 6.445-2.073 15.545 2.073 6.547 5.687 9.655 22.092 15.646 34.78 24.265 47.291 7.103 14.028 3.791 12.992 1.416 3.968 2.449-.001v-2.275l1.997-26.641 3.69-32.707 3.589-42.084 1.239-11.854 5.863-14.206 11.652-7.683 9.099 4.348 7.482 10.716-1.036 6.926-4.449 28.915-8.72 45.294-5.687 30.331h3.313l3.792-3.791 15.342-20.372 25.782-32.227 11.374-12.789 13.27-14.129 8.517-6.724 16.1-.001 11.854 17.617-5.307 18.199-16.581 21.029-13.75 17.819-19.716 26.54-12.309 21.231 1.138 1.694 2.932-.278 44.536-9.479 24.062-4.347 28.714-4.928 12.992 6.066 1.416 6.167-5.106 12.613-30.71 7.583-36.018 7.204-53.636 12.689-.657.48.758.935 24.164 2.275 10.337.556h25.301l47.114 3.514 12.309 8.139 7.381 9.959-1.238 7.583-18.957 9.655-25.579-6.066-59.702-14.205-20.474-5.106-2.83-.001v1.694l17.061 16.682 31.266 28.233 39.152 36.397 1.997 8.999-5.03 7.102-5.307-.758-34.401-25.883-13.27-11.651-30.053-25.302-1.996-.001v2.654l6.926 10.136 36.574 54.975 1.895 16.859-2.653 5.485-9.479 3.311-10.414-1.895-21.408-30.054-22.092-33.844-17.819-30.331-2.173 1.238-10.515 113.261-4.929 5.788-11.374 4.348-9.478-7.204-5.03-11.652 5.03-23.027 6.066-30.052 4.928-23.886 4.449-29.674 2.654-9.858-.177-.657-2.173.278-22.37 30.71-34.021 45.977-26.919 28.815-6.445 2.553-11.173-5.789 1.037-10.337 6.243-9.2 37.257-47.392 22.47-29.371 14.508-16.961-.101-2.451h-.859l-98.954 64.251-17.618 2.275-7.583-7.103.936-11.652 3.589-3.791 29.749-20.474-.101.102.024.101z"/></svg></div><div class="tool-name">Claude</div><div class="tool-role">Research &amp; Writing</div></div>
+      <div class="tool-card"><div class="tool-logo-wrap" style="background:#00AEEF;"><svg width="30" height="30" viewBox="0 0 24 24" fill="white" xmlns="http://www.w3.org/2000/svg"><path d="M12 2L22 12L12 22L2 12L12 2ZM12 5.83L5.83 12L12 18.17L18.17 12L12 5.83Z"/></svg></div><div class="tool-name">Axure RP</div><div class="tool-role">Complex Prototypes</div></div>
+
+      <!-- Duplicate for seamless loop -->
+      <div class="tool-card"><div class="tool-logo-wrap" style="background:#1E1E1E;"><img src="https://cdn.jsdelivr.net/npm/simple-icons@v13/icons/figma.svg" style="filter:invert(1);" alt="Figma"/></div><div class="tool-name">Figma</div><div class="tool-role">UI Design &amp; Systems</div></div>
+      <div class="tool-card"><div class="tool-logo-wrap" style="background:#F24E1E;"><img src="https://cdn.jsdelivr.net/npm/simple-icons@v13/icons/figma.svg" style="filter:invert(1);" alt="FigJam"/></div><div class="tool-name">FigJam</div><div class="tool-role">Workshops &amp; Mapping</div></div>
+      <div class="tool-card"><div class="tool-logo-wrap" style="background:#0055FF;"><img src="https://cdn.jsdelivr.net/npm/simple-icons@v13/icons/framer.svg" style="filter:invert(1);" alt="Framer"/></div><div class="tool-name">Framer</div><div class="tool-role">Web &amp; Prototyping</div></div>
+      <div class="tool-card"><div class="tool-logo-wrap" style="background:#FF0000;"><img src="https://cdn.jsdelivr.net/npm/simple-icons@v13/icons/adobecreativecloud.svg" style="filter:invert(1);" alt="Adobe"/></div><div class="tool-name">Adobe Suite</div><div class="tool-role">Visual Design</div></div>
+      <div class="tool-card"><div class="tool-logo-wrap" style="background:#1A1A1A;"><svg width="30" height="30" viewBox="0 0 24 24" fill="white" xmlns="http://www.w3.org/2000/svg"><path d="M5.5 3.21v17.58c0 .45.54.67.85.35l4.86-4.86a.5.5 0 0 1 .35-.15h6.87c.45 0 .67-.54.35-.85L6.35 2.85a.5.5 0 0 0-.85.36z"/></svg></div><div class="tool-name">Cursor AI</div><div class="tool-role">AI-assisted Dev</div></div>
+      <div class="tool-card"><div class="tool-logo-wrap" style="background:#FF4D6D;"><svg width="30" height="30" viewBox="0 0 24 24" fill="white" xmlns="http://www.w3.org/2000/svg"><path d="M12 21.593c-5.63-5.539-11-10.297-11-14.402 0-3.791 3.068-5.191 5.281-5.191 1.312 0 4.151.501 5.719 4.457 1.59-3.968 4.464-4.447 5.726-4.447 2.54 0 5.274 1.621 5.274 5.181 0 4.069-5.136 8.625-11 14.402z"/></svg></div><div class="tool-name">Lovable.ai</div><div class="tool-role">No-code Builds</div></div>
+      <div class="tool-card"><div class="tool-logo-wrap" style="background:#6B2EFF;"><img src="https://cdn.jsdelivr.net/npm/simple-icons@v13/icons/maze.svg" style="filter:invert(1);" alt="Maze"/></div><div class="tool-name">Maze</div><div class="tool-role">Usability Testing</div></div>
+      <div class="tool-card"><div class="tool-logo-wrap" style="background:#E8F0FE;"><img src="https://cdn.jsdelivr.net/npm/simple-icons@v13/icons/googleanalytics.svg" alt="Google Analytics"/></div><div class="tool-name">Google Analytics</div><div class="tool-role">UX Metrics</div></div>
+      <div class="tool-card"><div class="tool-logo-wrap" style="background:#F2C811;"><img src="https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/powerbi.svg" alt="Power BI"/></div><div class="tool-name">Power BI</div><div class="tool-role">Data Visualisation</div></div>
+      <div class="tool-card"><div class="tool-logo-wrap" style="background:#FFD02F;"><img src="https://cdn.jsdelivr.net/npm/simple-icons@v13/icons/miro.svg" alt="Miro"/></div><div class="tool-name">Miro</div><div class="tool-role">Ideation &amp; Research</div></div>
+      <div class="tool-card"><div class="tool-logo-wrap" style="background:#FFFFFF;"><img src="https://cdn.jsdelivr.net/npm/simple-icons@v13/icons/notion.svg" alt="Notion"/></div><div class="tool-name">Notion</div><div class="tool-role">Documentation</div></div>
+      <div class="tool-card"><div class="tool-logo-wrap" style="background:#10A37F;"><img src="https://cdn.jsdelivr.net/npm/simple-icons@v13/icons/openai.svg" style="filter:invert(1);" alt="ChatGPT"/></div><div class="tool-name">ChatGPT</div><div class="tool-role">Research &amp; Thinking</div></div>
+      <div class="tool-card"><div class="tool-logo-wrap" style="background:#D77655;"><svg width="30" height="30" viewBox="0 0 512 509.64" xmlns="http://www.w3.org/2000/svg"><path fill="#FCF2EE" fill-rule="nonzero" d="M142.27 316.619l73.655-41.326 1.238-3.589-1.238-1.996-3.589-.001-12.31-.759-42.084-1.138-36.498-1.516-35.361-1.896-8.897-1.895-8.34-10.995.859-5.484 7.482-5.03 10.717.935 23.683 1.617 35.537 2.452 25.782 1.517 38.193 3.968h6.064l.86-2.451-2.073-1.517-1.618-1.517-36.776-24.922-39.81-26.338-20.852-15.166-11.273-7.683-5.687-7.204-2.451-15.721 10.237-11.273 13.75.935 3.513.936 13.928 10.716 29.749 23.027 38.848 28.612 5.687 4.727 2.275-1.617.278-1.138-2.553-4.271-21.13-38.193-22.546-38.848-10.035-16.101-2.654-9.655c-.935-3.968-1.617-7.304-1.617-11.374l11.652-15.823 6.445-2.073 15.545 2.073 6.547 5.687 9.655 22.092 15.646 34.78 24.265 47.291 7.103 14.028 3.791 12.992 1.416 3.968 2.449-.001v-2.275l1.997-26.641 3.69-32.707 3.589-42.084 1.239-11.854 5.863-14.206 11.652-7.683 9.099 4.348 7.482 10.716-1.036 6.926-4.449 28.915-8.72 45.294-5.687 30.331h3.313l3.792-3.791 15.342-20.372 25.782-32.227 11.374-12.789 13.27-14.129 8.517-6.724 16.1-.001 11.854 17.617-5.307 18.199-16.581 21.029-13.75 17.819-19.716 26.54-12.309 21.231 1.138 1.694 2.932-.278 44.536-9.479 24.062-4.347 28.714-4.928 12.992 6.066 1.416 6.167-5.106 12.613-30.71 7.583-36.018 7.204-53.636 12.689-.657.48.758.935 24.164 2.275 10.337.556h25.301l47.114 3.514 12.309 8.139 7.381 9.959-1.238 7.583-18.957 9.655-25.579-6.066-59.702-14.205-20.474-5.106-2.83-.001v1.694l17.061 16.682 31.266 28.233 39.152 36.397 1.997 8.999-5.03 7.102-5.307-.758-34.401-25.883-13.27-11.651-30.053-25.302-1.996-.001v2.654l6.926 10.136 36.574 54.975 1.895 16.859-2.653 5.485-9.479 3.311-10.414-1.895-21.408-30.054-22.092-33.844-17.819-30.331-2.173 1.238-10.515 113.261-4.929 5.788-11.374 4.348-9.478-7.204-5.03-11.652 5.03-23.027 6.066-30.052 4.928-23.886 4.449-29.674 2.654-9.858-.177-.657-2.173.278-22.37 30.71-34.021 45.977-26.919 28.815-6.445 2.553-11.173-5.789 1.037-10.337 6.243-9.2 37.257-47.392 22.47-29.371 14.508-16.961-.101-2.451h-.859l-98.954 64.251-17.618 2.275-7.583-7.103.936-11.652 3.589-3.791 29.749-20.474-.101.102.024.101z"/></svg></div><div class="tool-name">Claude</div><div class="tool-role">Research &amp; Writing</div></div>
+      <div class="tool-card"><div class="tool-logo-wrap" style="background:#00AEEF;"><svg width="30" height="30" viewBox="0 0 24 24" fill="white" xmlns="http://www.w3.org/2000/svg"><path d="M12 2L22 12L12 22L2 12L12 2ZM12 5.83L5.83 12L12 18.17L18.17 12L12 5.83Z"/></svg></div><div class="tool-name">Axure RP</div><div class="tool-role">Complex Prototypes</div></div>
+
+    </div>
+  </div>
+</section>
+
+<!-- PROCESS -->
+<section id="process">
+  <div class="section-head reveal">
+    <div class="section-eyebrow">How I Work</div>
+    <h2 class="section-title">My design process</h2>
+  </div>
+  <div class="process-steps">
+
+    <div class="process-step reveal">
+      <span class="process-step-num">1</span>
+      <div class="process-icon-wrap">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+      </div>
+      <div class="process-name">Discover</div>
+      <div class="process-desc">User interviews, ethnographic research, competitive analysis, and heuristic evaluation to understand the real problem space.</div>
+    </div>
+
+    <div class="process-step reveal reveal-d1">
+      <span class="process-step-num">2</span>
+      <div class="process-icon-wrap">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 14c.2-1 .7-1.7 1.5-2.5 1-.9 1.5-2.2 1.5-3.5A6 6 0 0 0 6 8c0 1 .2 2.2 1.5 3.5.7.7 1.3 1.5 1.5 2.5"/><path d="M9 18h6"/><path d="M10 22h4"/></svg>
+      </div>
+      <div class="process-name">Define</div>
+      <div class="process-desc">Synthesising research into personas, journey maps, and clear problem statements. Double Diamond thinking to narrow what to solve.</div>
+    </div>
+
+    <div class="process-step reveal reveal-d2">
+      <span class="process-step-num">3</span>
+      <div class="process-icon-wrap">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>
+      </div>
+      <div class="process-name">Design</div>
+      <div class="process-desc">Wireframes, hi-fi UI, and interactive prototypes, tested and iterated with users via Maze and moderated sessions.</div>
+    </div>
+
+    <div class="process-step reveal reveal-d3">
+      <span class="process-step-num">4</span>
+      <div class="process-icon-wrap">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+      </div>
+      <div class="process-name">Deliver</div>
+      <div class="process-desc">Dev-ready specs, design system handoff, QA of UI, and post-launch measurement with analytics to validate outcomes.</div>
+    </div>
+
+  </div>
+</section>
+
+<!-- EXPERIENCE -->
+<section id="experience">
+  <div class="section-head reveal">
+    <div class="section-eyebrow">Experience</div>
+    <h2 class="section-title">Where I've done the work</h2>
+  </div>
+  <div class="exp-list">
+
+    <div class="exp-item reveal">
+      <div>
+        <div class="exp-company">5paisa Capital Ltd.</div>
+        <div class="exp-role">Sr. Product Designer</div>
+        <div class="exp-period">Sept 2022 &ndash; Present</div>
+        <div class="exp-location">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
+          Mumbai, India
+        </div>
+      </div>
+      <div>
+        <div class="exp-right-label">Projects &amp; Focus Areas</div>
+        <div class="exp-keywords">
+          <span class="exp-kw highlight">ETF Ecosystem</span>
+          <span class="exp-kw highlight">Navigation Overhaul</span>
+          <span class="exp-kw highlight">IPO Redesign</span>
+          <span class="exp-kw highlight">Algo Trading Platform</span>
+          <span class="exp-kw highlight">App Revamp</span>
+          <span class="exp-kw">Information Architecture</span>
+          <span class="exp-kw">Design System</span>
+          <span class="exp-kw">UI Bug QA</span>
+          <span class="exp-kw">User Research</span>
+          <span class="exp-kw">Data-backed UX</span>
+          <span class="exp-kw">iOS &middot; Android &middot; Web</span>
+          <span class="exp-kw">Accessibility</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="exp-item reveal">
+      <div>
+        <div class="exp-company">WIRIN</div>
+        <div class="exp-role">Design Intern</div>
+        <div class="exp-period">June 2021</div>
+        <div class="exp-location">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
+          Bangalore, India
+        </div>
+        <div style="margin-top:10px; font-size:12px; color:var(--muted); line-height:1.5;">Wipro IISc Innovation Network</div>
+      </div>
+      <div>
+        <div class="exp-right-label">Projects &amp; Focus Areas</div>
+        <div class="exp-keywords">
+          <span class="exp-kw highlight">Autonomous Vehicle Simulator</span>
+          <span class="exp-kw">Secondary Research</span>
+          <span class="exp-kw">Primary Research</span>
+          <span class="exp-kw">Wireframing</span>
+          <span class="exp-kw">Prototyping</span>
+          <span class="exp-kw">User Testing</span>
+          <span class="exp-kw">Visual Design</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="exp-item reveal">
+      <div>
+        <div class="exp-company">National Institute of Design</div>
+        <div class="exp-role">M.Des &mdash; New Media Design</div>
+        <div class="exp-period">2019 &ndash; 2021</div>
+        <div class="exp-location">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
+          Ahmedabad, India
+        </div>
+      </div>
+      <div>
+        <div class="exp-right-label">Relevant Studies</div>
+        <div class="exp-keywords">
+          <span class="exp-kw highlight">Experience Design</span>
+          <span class="exp-kw highlight">Problem Solving</span>
+          <span class="exp-kw highlight">Ethnography Research</span>
+          <span class="exp-kw highlight">Speculative Design</span>
+          <span class="exp-kw highlight">Interaction Design</span>
+          <span class="exp-kw">HCI</span>
+          <span class="exp-kw">Information Architecture</span>
+          <span class="exp-kw">User-Centered Design</span>
+          <span class="exp-kw">Design Thinking</span>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="about-image-wrap">
+    <div class="about-photo">
+      <span class="about-initials">PC</span>
+    </div>
+    <div class="about-badge"><strong>3+</strong> years industry experience</div>
+  </div>
+  <div class="reveal">
+    <div class="section-eyebrow">About Me</div>
+    <h2 class="section-title">Crafting experiences,<br>not just screens</h2>
+    <p class="about-text">
+      I'm Prasham, a product designer who believes the best digital experiences are born from genuine curiosity about people. I hold an M.Des from the National Institute of Design (NID) and bring 3+ years of hands-on experience designing complex, high-stakes products where clarity and trust are everything.
+    </p>
+    <p class="about-text">
+      My process blends rigorous research with sharp visual craft. I care as much about why something is designed as how it looks. Whether I'm mapping a tangled user journey or refining a design system, I bring the same intention: make it simple, make it meaningful, make it work.
+    </p>
+    <div class="about-actions">
+      <a href="#" class="btn-primary">
+        Download Resume
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14"/><path d="m19 12-7 7-7-7"/></svg>
+      </a>
+      <a href="https://www.linkedin.com/in/prashamchavda" class="btn-ghost" target="_blank" rel="noopener">
+        LinkedIn
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7"/><path d="M7 7h10v10"/></svg>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="contact-card reveal">
+    <div class="section-eyebrow" style="display:block; text-align:center;">Let's Connect</div>
+    <h2 class="contact-title">Got a project in mind?</h2>
+    <p class="contact-sub">Whether you need a design partner, a fresh perspective on your product, or someone who can bridge research and craft, I'd love to hear about it.</p>
+    <div class="contact-links">
+      <a href="mailto:prasham0007@gmail.com" class="contact-pill primary">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+        prasham0007@gmail.com
+      </a>
+      <a href="https://www.linkedin.com/in/prashamchavda" class="contact-pill" target="_blank" rel="noopener">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect width="4" height="12" x="2" y="9"/><circle cx="4" cy="4" r="2"/></svg>
+        LinkedIn
+      </a>
+      <a href="tel:+918460606609" class="contact-pill">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.56 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+        +91 84606 06609
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo">Prasham<span>.</span>Chavda</div>
+  <div class="footer-copy">&copy; 2026 Prasham Chavda &mdash; Sr. Product Designer</div>
+  <div class="footer-links">
+    <a href="#work">Work</a>
+    <a href="#skills">Skills</a>
+    <a href="#experience">Experience</a>
+    <a href="#contact">Contact</a>
+  </div>
+</footer>
+
+<script>
+  // Scroll reveal
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.classList.add('in-view');
+        observer.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.08 });
+  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+  // Mobile nav
+  const burger = document.getElementById('navBurger');
+  const navLinks = document.getElementById('navLinks');
+  burger.addEventListener('click', () => {
+    const open = navLinks.classList.toggle('open');
+    burger.setAttribute('aria-expanded', open);
+  });
+  navLinks.querySelectorAll('a').forEach(a => {
+    a.addEventListener('click', () => {
+      navLinks.classList.remove('open');
+      burger.setAttribute('aria-expanded', 'false');
+    });
+  });
+
+  // Mouse wheel horizontal scroll for tools marquee
+  (function() {
+    const wrap = document.querySelector('.tools-marquee-wrap');
+    const track = document.querySelector('.tools-track');
+    let pauseTimer;
+    let manualOffset = 0;
+    let isManual = false;
+
+    wrap.addEventListener('wheel', (e) => {
+      if (!e.deltaX) return;
+      e.preventDefault();
+      if (!isManual) {
+        const matrix = new DOMMatrix(window.getComputedStyle(track).transform);
+        manualOffset = matrix.m41;
+        isManual = true;
+      }
+      manualOffset -= e.deltaX * 0.6;
+      const halfWidth = track.scrollWidth / 2;
+      if (manualOffset < -halfWidth) manualOffset += halfWidth;
+      if (manualOffset > 0) manualOffset -= halfWidth;
+      track.style.animation = 'none';
+      track.style.transform = `translateX(${manualOffset}px)`;
+      clearTimeout(pauseTimer);
+      pauseTimer = setTimeout(() => {
+        isManual = false;
+        const progress = Math.abs(manualOffset) / (track.scrollWidth / 2);
+        const delay = -(progress * 34);
+        track.style.transform = '';
+        track.style.animation = `marquee 34s linear ${delay}s infinite`;
+      }, 1500);
+    }, { passive: false });
+  })();
+</script>
+
+</body>
+</html>
