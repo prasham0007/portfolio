@@ -189,13 +189,7 @@
     .ia-chip { padding: 4px 11px; border-radius: 6px; font-size: 11px; font-weight: 700; }
     .ia-col.before .ia-chip { background: rgba(229,92,92,0.10); border: 1px solid rgba(229,92,92,0.22); color: var(--red); }
     .ia-col.after .ia-chip { background: rgba(76,175,125,0.10); border: 1px solid rgba(76,175,125,0.22); color: var(--green); }
-    .ia-graphic-ph {
-      margin-top: 32px; aspect-ratio: 16/6;
-      background: var(--surface); border: 1px dashed var(--border);
-      border-radius: var(--radius); display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 8px; text-align: center;
-    }
-    .ia-graphic-ph-label { font-size: 11px; font-weight: 800; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); }
-    .ia-graphic-ph-file { font-family: monospace; font-size: 10px; color: var(--border); }
+    .ia-graphic-ph { margin-top: 32px; border-radius: var(--radius); overflow: hidden; }
 
     /* IMG PLACEHOLDER */
     .img-holder {
@@ -589,9 +583,192 @@
     </div>
 
     <div class="ia-graphic-ph">
-      <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" opacity="0.25"><rect x="3" y="3" width="18" height="14" rx="2"/><path d="M3 9h18M9 9v9"/></svg>
-      <div class="ia-graphic-ph-label">IA Transformation Graphic</div>
-      <div class="ia-graphic-ph-file">Showing 66% complexity reduction &amp; relative CTR comparison</div>
+      <div style="background:#0C0E13; padding:16px 24px 14px; border-bottom:1px solid #21263A; display:flex; align-items:center; gap:16px;">
+        <span style="font-size:9px; font-weight:800; letter-spacing:0.14em; text-transform:uppercase; color:#6B7290;">Information Architecture</span>
+        <span style="font-size:9px; font-weight:800; letter-spacing:0.14em; text-transform:uppercase; color:#F5A623;">After Redesign</span>
+      </div>
+      <svg viewBox="0 0 1600 600" xmlns="http://www.w3.org/2000/svg" style="width:100%;display:block;">
+        <!-- BG -->
+        <rect width="1600" height="600" fill="#0C0E13"/>
+
+        <!-- NAV BAR -->
+        <rect x="16" y="16" width="1568" height="44" rx="8" fill="#111318" stroke="#21263A" stroke-width="1"/>
+        <!-- tab dividers — at gap midpoints so each tab region centres over its card -->
+        <line x1="336" y1="24" x2="336" y2="52" stroke="#21263A" stroke-width="1"/>
+        <line x1="516" y1="24" x2="516" y2="52" stroke="#21263A" stroke-width="1"/>
+        <line x1="828" y1="24" x2="828" y2="52" stroke="#21263A" stroke-width="1"/>
+        <line x1="932" y1="24" x2="932" y2="52" stroke="#21263A" stroke-width="1"/>
+        <line x1="1304" y1="24" x2="1304" y2="52" stroke="#21263A" stroke-width="1"/>
+        <line x1="1408" y1="24" x2="1408" y2="52" stroke="#21263A" stroke-width="1"/>
+        <!-- tab labels — centred in their tab regions -->
+        <text x="176" y="43" text-anchor="middle" fill="#DDE1EC" font-family="Mulish,sans-serif" font-size="11" font-weight="700" letter-spacing="1.5">INVEST</text>
+        <text x="426" y="43" text-anchor="middle" fill="#DDE1EC" font-family="Mulish,sans-serif" font-size="11" font-weight="700" letter-spacing="1.5">TRADE</text>
+        <text x="672" y="43" text-anchor="middle" fill="#DDE1EC" font-family="Mulish,sans-serif" font-size="11" font-weight="700" letter-spacing="1.5">PRODUCTS</text>
+        <text x="880" y="43" text-anchor="middle" fill="#DDE1EC" font-family="Mulish,sans-serif" font-size="11" font-weight="700" letter-spacing="1.5">PRICING</text>
+        <text x="1118" y="43" text-anchor="middle" fill="#DDE1EC" font-family="Mulish,sans-serif" font-size="11" font-weight="700" letter-spacing="1.5">MARKETS</text>
+        <text x="1356" y="43" text-anchor="middle" fill="#DDE1EC" font-family="Mulish,sans-serif" font-size="11" font-weight="700" letter-spacing="1.5">LEARN</text>
+        <text x="1496" y="43" text-anchor="middle" fill="#DDE1EC" font-family="Mulish,sans-serif" font-size="11" font-weight="700" letter-spacing="1.5">PARTNER</text>
+
+        <!-- connector lines nav→cards -->
+        <line x1="176" y1="60" x2="176" y2="76" stroke="#21263A" stroke-width="1"/>
+        <line x1="426" y1="60" x2="426" y2="76" stroke="#21263A" stroke-width="1"/>
+        <line x1="672" y1="60" x2="672" y2="76" stroke="#21263A" stroke-width="1"/>
+        <line x1="1118" y1="60" x2="1118" y2="76" stroke="#21263A" stroke-width="1"/>
+
+        <!-- ── INVEST CARD x=16 w=316 ── -->
+        <rect x="16" y="76" width="316" height="492" rx="8" fill="#111318" stroke="#21263A" stroke-width="1"/>
+        <rect x="16" y="76" width="316" height="36" rx="8" fill="#1A1D26"/>
+        <rect x="16" y="96" width="316" height="16" fill="#1A1D26"/>
+        <text x="28" y="99" fill="#DDE1EC" font-family="Mulish,sans-serif" font-size="9" font-weight="900" letter-spacing="2">INVEST</text>
+        <!-- section 1 -->
+        <text x="28" y="124" fill="#6B7290" font-family="Mulish,sans-serif" font-size="8" font-weight="800" letter-spacing="1.5">INVESTMENT PRODUCTS</text>
+        <circle cx="30" cy="141" r="2.5" fill="#4CAF7D"/><text x="40" y="145" fill="#DDE1EC" font-family="Mulish,sans-serif" font-size="11">Stocks</text>
+        <circle cx="30" cy="161" r="2.5" fill="#4CAF7D"/><text x="40" y="165" fill="#DDE1EC" font-family="Mulish,sans-serif" font-size="11">Mutual Funds</text>
+        <circle cx="30" cy="181" r="2.5" fill="#4CAF7D"/><text x="40" y="185" fill="#DDE1EC" font-family="Mulish,sans-serif" font-size="11">IPOs</text>
+        <circle cx="30" cy="201" r="2.5" fill="#4CAF7D"/><text x="40" y="205" fill="#DDE1EC" font-family="Mulish,sans-serif" font-size="11">ETF</text>
+        <circle cx="30" cy="221" r="2.5" fill="#4CAF7D"/><text x="40" y="225" fill="#DDE1EC" font-family="Mulish,sans-serif" font-size="11">US Stocks</text>
+        <circle cx="30" cy="241" r="2.5" fill="#4CAF7D"/><text x="40" y="245" fill="#DDE1EC" font-family="Mulish,sans-serif" font-size="11">NFO</text>
+        <line x1="16" y1="257" x2="332" y2="257" stroke="#21263A" stroke-width="1"/>
+        <!-- section 2 -->
+        <text x="28" y="275" fill="#6B7290" font-family="Mulish,sans-serif" font-size="8" font-weight="800" letter-spacing="1.5">TOOLS</text>
+        <circle cx="30" cy="292" r="2.5" fill="#F5A623" opacity="0.8"/><text x="40" y="296" fill="#DDE1EC" font-family="Mulish,sans-serif" font-size="11">Brokerage Calculator</text>
+        <circle cx="30" cy="312" r="2.5" fill="#F5A623" opacity="0.8"/><text x="40" y="316" fill="#DDE1EC" font-family="Mulish,sans-serif" font-size="11">SIP Calculator</text>
+        <circle cx="30" cy="332" r="2.5" fill="#F5A623" opacity="0.8"/><text x="40" y="336" fill="#DDE1EC" font-family="Mulish,sans-serif" font-size="11">Stock Comparison</text>
+        <circle cx="30" cy="352" r="2.5" fill="#F5A623" opacity="0.8"/><text x="40" y="356" fill="#DDE1EC" font-family="Mulish,sans-serif" font-size="11">Stock Screener</text>
+        <circle cx="30" cy="372" r="2.5" fill="#F5A623" opacity="0.8"/><text x="40" y="376" fill="#DDE1EC" font-family="Mulish,sans-serif" font-size="11">ELSS Calculator</text>
+        <circle cx="30" cy="392" r="2.5" fill="#F5A623" opacity="0.8"/><text x="40" y="396" fill="#DDE1EC" font-family="Mulish,sans-serif" font-size="11">Compare Mutual Funds</text>
+        <circle cx="30" cy="416" r="2.5" fill="#F5A623" opacity="0.8"/><text x="40" y="420" fill="#DDE1EC" font-family="Mulish,sans-serif" font-size="11">All Calculators</text>
+
+        <!-- item count badge -->
+        <rect x="94" y="85" width="72" height="18" rx="9" fill="#1A2A1A"/>
+        <text x="130" y="97" text-anchor="middle" fill="#4CAF7D" font-family="Mulish,sans-serif" font-size="9" font-weight="700">13 items</text>
+
+        <!-- ── TRADE CARD x=340 w=172 ── -->
+        <rect x="340" y="76" width="172" height="300" rx="8" fill="#111318" stroke="#21263A" stroke-width="1"/>
+        <rect x="340" y="76" width="172" height="36" rx="8" fill="#1A1D26"/>
+        <rect x="340" y="96" width="172" height="16" fill="#1A1D26"/>
+        <text x="352" y="99" fill="#DDE1EC" font-family="Mulish,sans-serif" font-size="9" font-weight="900" letter-spacing="2">TRADE</text>
+        <text x="352" y="124" fill="#6B7290" font-family="Mulish,sans-serif" font-size="8" font-weight="800" letter-spacing="1.5">TRADING PRODUCTS</text>
+        <circle cx="354" cy="141" r="2.5" fill="#4CAF7D"/><text x="364" y="145" fill="#DDE1EC" font-family="Mulish,sans-serif" font-size="11">Futures &amp; Options</text>
+        <circle cx="354" cy="161" r="2.5" fill="#4CAF7D"/><text x="364" y="165" fill="#DDE1EC" font-family="Mulish,sans-serif" font-size="11">Commodities</text>
+        <line x1="340" y1="177" x2="512" y2="177" stroke="#21263A" stroke-width="1"/>
+        <text x="352" y="196" fill="#6B7290" font-family="Mulish,sans-serif" font-size="8" font-weight="800" letter-spacing="1.5">TOOLS</text>
+        <circle cx="354" cy="213" r="2.5" fill="#F5A623" opacity="0.8"/><text x="364" y="217" fill="#DDE1EC" font-family="Mulish,sans-serif" font-size="11">Margin Calculator</text>
+        <circle cx="354" cy="233" r="2.5" fill="#F5A623" opacity="0.8"/><text x="364" y="237" fill="#DDE1EC" font-family="Mulish,sans-serif" font-size="11">MTF Calculator</text>
+        <circle cx="354" cy="253" r="2.5" fill="#F5A623" opacity="0.8"/><text x="364" y="257" fill="#DDE1EC" font-family="Mulish,sans-serif" font-size="11">Stock Screener</text>
+        <circle cx="354" cy="276" r="2.5" fill="#F5A623" opacity="0.8"/><text x="364" y="280" fill="#DDE1EC" font-family="Mulish,sans-serif" font-size="11">All Calculators</text>
+        <!-- item count badge -->
+        <rect x="406" y="85" width="72" height="18" rx="9" fill="#1A2A1A"/>
+        <text x="442" y="97" text-anchor="middle" fill="#4CAF7D" font-family="Mulish,sans-serif" font-size="9" font-weight="700">5 items</text>
+
+        <!-- ── PRODUCTS CARD x=520 w=304 ── -->
+        <rect x="520" y="76" width="304" height="310" rx="8" fill="#111318" stroke="#21263A" stroke-width="1"/>
+        <rect x="520" y="76" width="304" height="36" rx="8" fill="#1A1D26"/>
+        <rect x="520" y="96" width="304" height="16" fill="#1A1D26"/>
+        <text x="532" y="99" fill="#DDE1EC" font-family="Mulish,sans-serif" font-size="9" font-weight="900" letter-spacing="2">PRODUCTS</text>
+        <text x="532" y="124" fill="#6B7290" font-family="Mulish,sans-serif" font-size="8" font-weight="800" letter-spacing="1.5">5PAISA PRODUCTS</text>
+        <!-- 2 cols: x=532 and x=672 -->
+        <circle cx="534" cy="141" r="2.5" fill="#4CAF7D"/><text x="544" y="145" fill="#DDE1EC" font-family="Mulish,sans-serif" font-size="10.5">5paisa Trading App</text>
+        <circle cx="674" cy="141" r="2.5" fill="#4CAF7D"/><text x="684" y="145" fill="#DDE1EC" font-family="Mulish,sans-serif" font-size="10.5">Trader's Terminal</text>
+        <circle cx="534" cy="161" r="2.5" fill="#4CAF7D"/><text x="544" y="165" fill="#DDE1EC" font-family="Mulish,sans-serif" font-size="10.5">AlgoSpace</text>
+        <circle cx="674" cy="161" r="2.5" fill="#4CAF7D"/><text x="684" y="165" fill="#DDE1EC" font-family="Mulish,sans-serif" font-size="10.5">5paisa EXE</text>
+        <circle cx="534" cy="181" r="2.5" fill="#4CAF7D"/><text x="544" y="185" fill="#DDE1EC" font-family="Mulish,sans-serif" font-size="10.5">T+5</text>
+        <circle cx="674" cy="181" r="2.5" fill="#4CAF7D"/><text x="684" y="185" fill="#DDE1EC" font-family="Mulish,sans-serif" font-size="10.5">FnO 360</text>
+        <circle cx="534" cy="201" r="2.5" fill="#4CAF7D"/><text x="544" y="205" fill="#DDE1EC" font-family="Mulish,sans-serif" font-size="10.5">Xstream APIs</text>
+        <circle cx="674" cy="201" r="2.5" fill="#4CAF7D"/><text x="684" y="205" fill="#DDE1EC" font-family="Mulish,sans-serif" font-size="10.5">Publisher Js</text>
+        <circle cx="534" cy="221" r="2.5" fill="#4CAF7D"/><text x="544" y="225" fill="#DDE1EC" font-family="Mulish,sans-serif" font-size="10.5">MTF</text>
+        <circle cx="674" cy="221" r="2.5" fill="#4CAF7D"/><text x="684" y="225" fill="#DDE1EC" font-family="Mulish,sans-serif" font-size="10.5">5paisa MCP</text>
+        <circle cx="534" cy="241" r="2.5" fill="#4CAF7D"/><text x="544" y="245" fill="#DDE1EC" font-family="Mulish,sans-serif" font-size="10.5">Scalper Terminal</text>
+        <circle cx="674" cy="241" r="2.5" fill="#4CAF7D"/><text x="684" y="245" fill="#DDE1EC" font-family="Mulish,sans-serif" font-size="10.5">Trade on Charts</text>
+        <!-- item count badge -->
+        <rect x="618" y="85" width="72" height="18" rx="9" fill="#1A2A1A"/>
+        <text x="654" y="97" text-anchor="middle" fill="#4CAF7D" font-family="Mulish,sans-serif" font-size="9" font-weight="700">12 items</text>
+
+        <!-- ── PRICING CARD x=832 w=96 ── -->
+        <rect x="832" y="76" width="96" height="108" rx="8" fill="#111318" stroke="#21263A" stroke-width="1"/>
+        <rect x="832" y="76" width="96" height="36" rx="8" fill="#1A1D26"/>
+        <rect x="832" y="96" width="96" height="16" fill="#1A1D26"/>
+        <text x="844" y="99" fill="#6B7290" font-family="Mulish,sans-serif" font-size="9" font-weight="900" letter-spacing="1.5">PRICING</text>
+        <text x="880" y="130" text-anchor="middle" fill="#6B7290" font-family="Mulish,sans-serif" font-size="22" opacity="0.6">↗</text>
+        <text x="880" y="152" text-anchor="middle" fill="#6B7290" font-family="Mulish,sans-serif" font-size="9" font-weight="600">Redirect</text>
+
+        <!-- ── MARKETS CARD x=936 w=364 ── -->
+        <rect x="936" y="76" width="364" height="468" rx="8" fill="#111318" stroke="#21263A" stroke-width="1"/>
+        <rect x="936" y="76" width="364" height="36" rx="8" fill="#1A1D26"/>
+        <rect x="936" y="96" width="364" height="16" fill="#1A1D26"/>
+        <text x="948" y="99" fill="#DDE1EC" font-family="Mulish,sans-serif" font-size="9" font-weight="900" letter-spacing="2">MARKETS</text>
+        <!-- sub-nav pills -->
+        <text x="948" y="122" fill="#6B7290" font-family="Mulish,sans-serif" font-size="8" font-weight="800" letter-spacing="1.5">SUB-NAVIGATION</text>
+        <rect x="948" y="130" width="104" height="20" rx="4" fill="#1A1D26"/>
+        <text x="1000" y="144" text-anchor="middle" fill="#6B7290" font-family="Mulish,sans-serif" font-size="9">Market Movers</text>
+        <rect x="1060" y="130" width="48" height="20" rx="4" fill="#1A1D26"/>
+        <text x="1084" y="144" text-anchor="middle" fill="#6B7290" font-family="Mulish,sans-serif" font-size="9">Stocks</text>
+        <rect x="1116" y="130" width="68" height="20" rx="4" fill="#1A1D26"/>
+        <text x="1150" y="144" text-anchor="middle" fill="#6B7290" font-family="Mulish,sans-serif" font-size="9">Pop. Stocks</text>
+        <rect x="1192" y="130" width="52" height="20" rx="4" fill="#1A1D26"/>
+        <text x="1218" y="144" text-anchor="middle" fill="#6B7290" font-family="Mulish,sans-serif" font-size="9">Indices</text>
+        <rect x="1252" y="130" width="36" height="20" rx="4" fill="#1A1D26"/>
+        <text x="1270" y="144" text-anchor="middle" fill="#6B7290" font-family="Mulish,sans-serif" font-size="9">IPO</text>
+        <rect x="948" y="156" width="80" height="20" rx="4" fill="#1A1D26"/>
+        <text x="988" y="170" text-anchor="middle" fill="#6B7290" font-family="Mulish,sans-serif" font-size="9">Mutual Funds</text>
+        <line x1="936" y1="184" x2="1300" y2="184" stroke="#21263A" stroke-width="1"/>
+        <!-- market movers content -->
+        <text x="948" y="203" fill="#6B7290" font-family="Mulish,sans-serif" font-size="8" font-weight="800" letter-spacing="1.5">MARKET MOVERS</text>
+        <!-- col1=948, col2=1120 -->
+        <circle cx="950" cy="220" r="2.5" fill="#4CAF7D"/><text x="960" y="224" fill="#DDE1EC" font-family="Mulish,sans-serif" font-size="11">Market Today</text>
+        <circle cx="1122" cy="220" r="2.5" fill="#4CAF7D"/><text x="1132" y="224" fill="#DDE1EC" font-family="Mulish,sans-serif" font-size="11">Volume Shockers</text>
+        <circle cx="950" cy="240" r="2.5" fill="#4CAF7D"/><text x="960" y="244" fill="#DDE1EC" font-family="Mulish,sans-serif" font-size="11">52 Week High</text>
+        <circle cx="1122" cy="240" r="2.5" fill="#4CAF7D"/><text x="1132" y="244" fill="#DDE1EC" font-family="Mulish,sans-serif" font-size="11">Value Shockers</text>
+        <circle cx="950" cy="260" r="2.5" fill="#4CAF7D"/><text x="960" y="264" fill="#DDE1EC" font-family="Mulish,sans-serif" font-size="11">52 Week Low</text>
+        <circle cx="1122" cy="260" r="2.5" fill="#4CAF7D"/><text x="1132" y="264" fill="#DDE1EC" font-family="Mulish,sans-serif" font-size="11">Only Buyers</text>
+        <circle cx="950" cy="280" r="2.5" fill="#4CAF7D"/><text x="960" y="284" fill="#DDE1EC" font-family="Mulish,sans-serif" font-size="11">FII DII</text>
+        <circle cx="1122" cy="280" r="2.5" fill="#4CAF7D"/><text x="1132" y="284" fill="#DDE1EC" font-family="Mulish,sans-serif" font-size="11">Only Sellers</text>
+        <circle cx="950" cy="300" r="2.5" fill="#4CAF7D"/><text x="960" y="304" fill="#DDE1EC" font-family="Mulish,sans-serif" font-size="11">Top Gainers</text>
+        <circle cx="1122" cy="300" r="2.5" fill="#4CAF7D"/><text x="1132" y="304" fill="#DDE1EC" font-family="Mulish,sans-serif" font-size="11">F&amp;O Ban List</text>
+        <circle cx="950" cy="320" r="2.5" fill="#4CAF7D"/><text x="960" y="324" fill="#DDE1EC" font-family="Mulish,sans-serif" font-size="11">Top Losers</text>
+        <circle cx="1122" cy="320" r="2.5" fill="#4CAF7D"/><text x="1132" y="324" fill="#DDE1EC" font-family="Mulish,sans-serif" font-size="11">Active Contracts</text>
+        <line x1="936" y1="338" x2="1300" y2="338" stroke="#21263A" stroke-width="1"/>
+        <!-- stocks sub-section -->
+        <text x="948" y="357" fill="#6B7290" font-family="Mulish,sans-serif" font-size="8" font-weight="800" letter-spacing="1.5">STOCKS</text>
+        <circle cx="950" cy="374" r="2.5" fill="#4CAF7D"/><text x="960" y="378" fill="#DDE1EC" font-family="Mulish,sans-serif" font-size="11">Nifty 50</text>
+        <circle cx="1122" cy="374" r="2.5" fill="#4CAF7D"/><text x="1132" y="378" fill="#DDE1EC" font-family="Mulish,sans-serif" font-size="11">Large Cap</text>
+        <circle cx="950" cy="394" r="2.5" fill="#4CAF7D"/><text x="960" y="398" fill="#DDE1EC" font-family="Mulish,sans-serif" font-size="11">Sensex</text>
+        <circle cx="1122" cy="394" r="2.5" fill="#4CAF7D"/><text x="1132" y="398" fill="#DDE1EC" font-family="Mulish,sans-serif" font-size="11">Mid Cap</text>
+        <line x1="936" y1="412" x2="1300" y2="412" stroke="#21263A" stroke-width="1"/>
+        <!-- mutual funds sub-section -->
+        <text x="948" y="432" fill="#6B7290" font-family="Mulish,sans-serif" font-size="8" font-weight="800" letter-spacing="1.5">MUTUAL FUNDS</text>
+        <circle cx="950" cy="450" r="2.5" fill="#4CAF7D"/><text x="960" y="454" fill="#DDE1EC" font-family="Mulish,sans-serif" font-size="11">Categories</text>
+        <circle cx="950" cy="470" r="2.5" fill="#4CAF7D"/><text x="960" y="474" fill="#DDE1EC" font-family="Mulish,sans-serif" font-size="11">AMCs</text>
+        <circle cx="950" cy="490" r="2.5" fill="#4CAF7D"/><text x="960" y="494" fill="#DDE1EC" font-family="Mulish,sans-serif" font-size="11">Schemes</text>
+        <!-- item count badge -->
+        <rect x="1024" y="85" width="72" height="18" rx="9" fill="#1A2A1A"/>
+        <text x="1060" y="97" text-anchor="middle" fill="#4CAF7D" font-family="Mulish,sans-serif" font-size="9" font-weight="700">20+ items</text>
+
+        <!-- ── LEARN CARD x=1308 w=96 ── -->
+        <rect x="1308" y="76" width="96" height="108" rx="8" fill="#111318" stroke="#21263A" stroke-width="1"/>
+        <rect x="1308" y="76" width="96" height="36" rx="8" fill="#1A1D26"/>
+        <rect x="1308" y="96" width="96" height="16" fill="#1A1D26"/>
+        <text x="1320" y="99" fill="#6B7290" font-family="Mulish,sans-serif" font-size="9" font-weight="900" letter-spacing="1.5">LEARN</text>
+        <text x="1356" y="130" text-anchor="middle" fill="#6B7290" font-family="Mulish,sans-serif" font-size="22" opacity="0.6">↗</text>
+        <text x="1356" y="152" text-anchor="middle" fill="#6B7290" font-family="Mulish,sans-serif" font-size="9" font-weight="600">Redirect</text>
+
+        <!-- ── PARTNER CARD x=1412 w=172 ── -->
+        <rect x="1412" y="76" width="172" height="108" rx="8" fill="#111318" stroke="#21263A" stroke-width="1"/>
+        <rect x="1412" y="76" width="172" height="36" rx="8" fill="#1A1D26"/>
+        <rect x="1412" y="96" width="172" height="16" fill="#1A1D26"/>
+        <text x="1424" y="99" fill="#6B7290" font-family="Mulish,sans-serif" font-size="9" font-weight="900" letter-spacing="1.5">PARTNER</text>
+        <text x="1498" y="130" text-anchor="middle" fill="#6B7290" font-family="Mulish,sans-serif" font-size="22" opacity="0.6">↗</text>
+        <text x="1498" y="152" text-anchor="middle" fill="#6B7290" font-family="Mulish,sans-serif" font-size="9" font-weight="600">Redirect</text>
+
+        <!-- ── LEGEND ── -->
+        <rect x="16" y="562" width="1568" height="1" fill="#21263A"/>
+        <circle cx="28" cy="585" r="4" fill="#4CAF7D"/>
+        <text x="40" y="589" fill="#6B7290" font-family="Mulish,sans-serif" font-size="10" font-weight="600">Product / Content Item</text>
+        <circle cx="200" cy="585" r="4" fill="#F5A623" opacity="0.8"/>
+        <text x="212" y="589" fill="#6B7290" font-family="Mulish,sans-serif" font-size="10" font-weight="600">Tool / Calculator</text>
+        <text x="360" y="589" fill="#6B7290" font-family="Mulish,sans-serif" font-size="10" font-weight="600">↗  Redirect = no dropdown, opens page directly</text>
+        <text x="1100" y="589" fill="#6B7290" font-family="Mulish,sans-serif" font-size="10" font-weight="600">~40 high-intent destinations · down from 119+ legacy links · 66% fewer choices</text>
+      </svg>
     </div>
   </section>
 
@@ -600,7 +777,7 @@
   <!-- TABS SHOWCASE -->
   <section id="tabs-showcase" class="cs-sec">
     <div class="eyebrow">Final Design &mdash; Tab-by-Tab Breakdown</div>
-    <h2 class="sec-title">Six intent-driven navigation tabs</h2>
+    <h2 class="sec-title">Intent-driven navigation tabs</h2>
     <p class="body" style="max-width:600px;">Each tab designed around a specific user intent &mdash; moving from a product dump to a purposeful, action-oriented architecture where every section earns its place.</p>
 
     <div class="tab-wrap">
@@ -609,8 +786,6 @@
         <button class="tab-btn" onclick="switchTab(1)">Trade</button>
         <button class="tab-btn" onclick="switchTab(2)">Products</button>
         <button class="tab-btn" onclick="switchTab(3)">Markets</button>
-        <button class="tab-btn" onclick="switchTab(4)">Learn</button>
-        <button class="tab-btn" onclick="switchTab(5)">Partner</button>
       </div>
 
       <div class="tab-panel active" id="tab-0">
@@ -625,12 +800,8 @@
             <li>Completely separated from active trading to prevent cognitive collision</li>
           </ul>
         </div>
-        <div class="tab-visual-area">
-          <div class="img-holder">
-            <svg class="img-holder-icon" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="14" rx="2"/><path d="M3 9h18M9 9v9"/></svg>
-            <div class="img-holder-name">Screenshot Asset</div>
-            <div class="img-holder-file">Screenshot 2026-01-25 at 5.56.20 PM.png</div>
-          </div>
+        <div class="tab-visual-area" style="padding:0;overflow:hidden;">
+          <img src="images/tab-invest.png" alt="Invest tab design" style="width:100%;height:100%;object-fit:cover;display:block;">
         </div>
       </div>
 
@@ -646,12 +817,8 @@
             <li>Reduces cognitive collision between novice and expert user flows</li>
           </ul>
         </div>
-        <div class="tab-visual-area">
-          <div class="img-holder">
-            <svg class="img-holder-icon" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="14" rx="2"/><path d="M3 9h18M9 9v9"/></svg>
-            <div class="img-holder-name">Screenshot Asset</div>
-            <div class="img-holder-file">Screenshot 2026-01-25 at 5.56.34 PM.png</div>
-          </div>
+        <div class="tab-visual-area" style="padding:0;overflow:hidden;">
+          <img src="images/tab-trade.png" alt="Trade tab design" style="width:100%;height:100%;object-fit:cover;display:block;">
         </div>
       </div>
 
@@ -667,12 +834,8 @@
             <li>Taxonomy now aligned with real user language and mental models</li>
           </ul>
         </div>
-        <div class="tab-visual-area">
-          <div class="img-holder">
-            <svg class="img-holder-icon" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="14" rx="2"/><path d="M3 9h18M9 9v9"/></svg>
-            <div class="img-holder-name">Screenshot Asset</div>
-            <div class="img-holder-file">Screenshot 2026-01-25 at 5.56.41 PM.jpg</div>
-          </div>
+        <div class="tab-visual-area" style="padding:0;overflow:hidden;">
+          <img src="images/tab-products.png" alt="Products tab design" style="width:100%;height:100%;object-fit:cover;display:block;">
         </div>
       </div>
 
@@ -688,56 +851,11 @@
             <li>Time-sensitive data separated from static transactional product folders</li>
           </ul>
         </div>
-        <div class="tab-visual-area">
-          <div class="img-holder">
-            <svg class="img-holder-icon" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="14" rx="2"/><path d="M3 9h18M9 9v9"/></svg>
-            <div class="img-holder-name">Screenshot Asset</div>
-            <div class="img-holder-file">Screenshot 2026-01-25 at 5.56.51 PM.png</div>
-          </div>
+        <div class="tab-visual-area" style="padding:0;overflow:hidden;">
+          <img src="images/tab-markets.png" alt="Markets tab design" style="width:100%;height:100%;object-fit:cover;display:block;">
         </div>
       </div>
 
-      <div class="tab-panel" id="tab-4">
-        <div class="tab-content-area">
-          <div class="tab-tag">Tab 05 &middot; Centralized Knowledge Architecture</div>
-          <div class="tab-title">The "Learn" Tab</div>
-          <div class="tab-desc">Unified fragmented knowledge pathways into a single, organized educational repository &mdash; making learning accessible for new investors without polluting the transactional experience.</div>
-          <ul class="tab-pts">
-            <li>FinSchool, Market Guide, and Stock Market News centralized</li>
-            <li>Blogs, Videos, and TradeBetter unified under one clear, descriptive label</li>
-            <li>Fragmented educational content consolidated from across the platform</li>
-            <li>Clean separation from Trade prevents beginner and expert content collision</li>
-          </ul>
-        </div>
-        <div class="tab-visual-area">
-          <div class="img-holder">
-            <svg class="img-holder-icon" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="14" rx="2"/><path d="M3 9h18M9 9v9"/></svg>
-            <div class="img-holder-name">Screenshot Asset</div>
-            <div class="img-holder-file">Screenshot 2026-01-25 at 5.56.58 PM.png</div>
-          </div>
-        </div>
-      </div>
-
-      <div class="tab-panel" id="tab-5">
-        <div class="tab-content-area">
-          <div class="tab-tag">Tab 06 &middot; The Business Ecosystem Gateway</div>
-          <div class="tab-title">The "Partner" Tab</div>
-          <div class="tab-desc">Streamlined the partner funnel into a single, clean entry point &mdash; consolidating the B2B ecosystem without letting partner content dilute the primary user experience.</div>
-          <ul class="tab-pts">
-            <li>Authorised Person, Refer &amp; Earn, Partner Program consolidated</li>
-            <li>Partner Dashboard surfaced with clear CTA hierarchy</li>
-            <li>B2B funnel kept cleanly separate from B2C transactional flows</li>
-            <li>Single layout prevents partner content from diluting primary UX</li>
-          </ul>
-        </div>
-        <div class="tab-visual-area">
-          <div class="img-holder">
-            <svg class="img-holder-icon" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="14" rx="2"/><path d="M3 9h18M9 9v9"/></svg>
-            <div class="img-holder-name">Screenshot Asset</div>
-            <div class="img-holder-file">Screenshot 2026-01-25 at 5.57.06 PM.png</div>
-          </div>
-        </div>
-      </div>
     </div>
   </section>
 
@@ -793,7 +911,7 @@
         <div class="rq-avatar">PC</div>
         <div>
           <div class="rq-name">Prasham Chavda</div>
-          <div class="rq-role">Lead UX Designer &amp; Researcher &middot; 5paisa Capital</div>
+          <div class="rq-role">Senior Product Designer &middot; 5paisa Capital</div>
         </div>
       </div>
     </div>
