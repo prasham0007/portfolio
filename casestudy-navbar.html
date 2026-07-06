@@ -1,0 +1,852 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Navigation Redesign Case Study — Prasham Chavda</title>
+  <link href="https://fonts.googleapis.com/css2?family=Mulish:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,300;1,400&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --bg: #0C0E13; --surface: #111318; --surface2: #181C27;
+      --border: #21263A; --amber: #F5A623;
+      --amber-dim: rgba(245,166,35,0.10); --amber-border: rgba(245,166,35,0.25);
+      --text: #DDE1EC; --muted: #6B7290; --white: #FFFFFF;
+      --green: #4CAF7D; --red: #E55C5C;
+      --radius: 16px; --radius-sm: 8px;
+      --ease: cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    html { scroll-behavior: smooth; }
+    body { font-family: 'Mulish', sans-serif; background: var(--bg); color: var(--text); line-height: 1.6; overflow-x: hidden; }
+    a { text-decoration: none; color: inherit; }
+    :focus-visible { outline: 2px solid var(--amber); outline-offset: 3px; border-radius: 4px; }
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
+    }
+
+    /* NAV */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 20px 64px;
+      background: rgba(12,14,19,0.92); backdrop-filter: blur(16px);
+      border-bottom: 1px solid var(--border);
+    }
+    .nav-logo { font-weight: 900; font-size: 14px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--white); }
+    .nav-logo span { color: var(--amber); }
+    .nav-back {
+      display: inline-flex; align-items: center; gap: 8px;
+      font-size: 13px; font-weight: 700; color: var(--muted);
+      transition: color 0.2s;
+    }
+    .nav-back:hover { color: var(--amber); }
+
+    /* HERO */
+    #hero {
+      min-height: 100vh; display: flex; flex-direction: column; justify-content: flex-end;
+      padding: 140px 72px 80px; position: relative; overflow: hidden;
+    }
+    .hero-grid-bg {
+      position: absolute; inset: 0; z-index: 0;
+      background-image:
+        linear-gradient(rgba(245,166,35,0.025) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(245,166,35,0.025) 1px, transparent 1px);
+      background-size: 72px 72px;
+    }
+    .hero-glow {
+      position: absolute; top: -250px; right: -250px; z-index: 0;
+      width: 900px; height: 900px;
+      background: radial-gradient(circle, rgba(245,166,35,0.05) 0%, transparent 60%);
+    }
+    .hero-content { position: relative; z-index: 1; max-width: 860px; }
+    .eyebrow-pill {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: var(--amber-dim); border: 1px solid var(--amber-border);
+      border-radius: 40px; padding: 6px 16px;
+      font-size: 11px; font-weight: 800; color: var(--amber);
+      letter-spacing: 0.16em; text-transform: uppercase; margin-bottom: 28px;
+    }
+    .hero-h1 {
+      font-size: clamp(30px, 4.2vw, 58px); font-weight: 900;
+      color: var(--white); line-height: 1.07; letter-spacing: -0.025em;
+      margin-bottom: 24px;
+    }
+    .hero-h1 em { font-style: normal; color: var(--amber); }
+    .hero-sub { font-size: 18px; color: var(--muted); max-width: 660px; line-height: 1.75; margin-bottom: 52px; }
+    .hero-meta {
+      display: flex; gap: 0; width: fit-content;
+      border: 1px solid var(--border); border-radius: var(--radius);
+      overflow: hidden; background: var(--surface);
+    }
+    .meta-item { padding: 18px 28px; border-right: 1px solid var(--border); }
+    .meta-item:last-child { border-right: none; }
+    .meta-label { font-size: 10px; font-weight: 800; color: var(--muted); letter-spacing: 0.14em; text-transform: uppercase; margin-bottom: 6px; }
+    .meta-value { font-size: 13px; font-weight: 800; color: var(--white); }
+
+    /* SHARED SECTION */
+    .cs-sec { padding: 96px 72px; }
+    .divider { height: 1px; background: var(--border); }
+    .eyebrow { font-size: 11px; font-weight: 800; letter-spacing: 0.16em; text-transform: uppercase; color: var(--amber); margin-bottom: 14px; }
+    .sec-title { font-size: clamp(26px, 2.8vw, 42px); font-weight: 900; color: var(--white); letter-spacing: -0.02em; line-height: 1.1; margin-bottom: 18px; }
+    .body { font-size: 16px; color: var(--muted); line-height: 1.8; }
+    .body + .body { margin-top: 14px; }
+    .hl { color: var(--text); font-weight: 800; }
+    .amber { color: var(--amber); font-weight: 800; }
+
+    /* BACKGROUND */
+    .bg-two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 56px; align-items: start; }
+    .bg-text-col { display: flex; flex-direction: column; }
+    .stat-strip {
+      display: flex; gap: 0; margin-top: 36px;
+      border: 1px solid var(--border); border-radius: var(--radius); overflow: hidden;
+    }
+    .stat-item { flex: 1; padding: 20px 24px; border-right: 1px solid var(--border); }
+    .stat-item:last-child { border-right: none; }
+    .stat-label { font-size: 9px; font-weight: 800; color: var(--muted); letter-spacing: 0.14em; text-transform: uppercase; margin-bottom: 6px; }
+    .stat-big { font-size: 32px; font-weight: 900; color: var(--amber); line-height: 1; }
+    .stat-desc { font-size: 11px; color: var(--muted); margin-top: 4px; line-height: 1.4; }
+
+    /* LEGACY NAV SLIDESHOW */
+    .bg-slideshow-wrap { display: flex; flex-direction: column; gap: 12px; }
+    .bg-slideshow { position: relative; border-radius: var(--radius); overflow: hidden; border: 1px solid var(--border); background: var(--surface2); aspect-ratio: 755/377; width: 100%; }
+    .slide { position: absolute; inset: 0; opacity: 0; transition: opacity 0.7s ease; display: flex; align-items: center; justify-content: center; }
+    .slide.active { opacity: 1; }
+    .slide img { width: 100%; height: 100%; object-fit: contain; display: block; }
+    .slide-placeholder { width: 100%; height: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 10px; color: var(--muted); }
+    .slide-placeholder span { font-size: 11px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; }
+    .slide-controls { display: flex; flex-direction: column; align-items: center; gap: 6px; }
+    .slide-dots { display: flex; gap: 6px; }
+    .slide-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--border); cursor: pointer; transition: background 0.3s, transform 0.3s; border: none; padding: 0; }
+    .slide-dot.active { background: var(--amber); transform: scale(1.3); }
+    .slide-caption { font-size: 10px; font-weight: 700; color: var(--muted); letter-spacing: 0.1em; text-transform: uppercase; }
+
+    /* PROBLEM */
+    .audit-trio { display: grid; grid-template-columns: repeat(3,1fr); gap: 2px; border: 1px solid var(--border); border-radius: var(--radius); overflow: hidden; margin-top: 44px; }
+    .audit-card { background: var(--bg); padding: 36px 28px; border-right: 1px solid var(--border); }
+    .audit-card:last-child { border-right: none; }
+    .audit-icon {
+      width: 44px; height: 44px; border-radius: 10px;
+      background: var(--amber-dim); border: 1px solid var(--amber-border);
+      display: flex; align-items: center; justify-content: center;
+      color: var(--amber); margin-bottom: 18px;
+    }
+    .audit-type { font-size: 10px; font-weight: 800; color: var(--amber); letter-spacing: 0.14em; text-transform: uppercase; margin-bottom: 10px; }
+    .audit-title { font-size: 16px; font-weight: 800; color: var(--white); margin-bottom: 10px; }
+    .audit-body { font-size: 13px; color: var(--muted); line-height: 1.65; }
+    .problem-stmt {
+      margin-top: 44px; padding: 36px 40px;
+      background: var(--amber-dim); border: 1px solid var(--amber-border);
+      border-left: 4px solid var(--amber); border-radius: var(--radius);
+    }
+    .ps-label { font-size: 10px; font-weight: 800; color: var(--amber); letter-spacing: 0.14em; text-transform: uppercase; margin-bottom: 12px; }
+    .ps-body { font-size: 17px; color: var(--text); line-height: 1.7; font-weight: 600; }
+
+    /* PROCESS TIMELINE */
+    .timeline { margin-top: 44px; display: flex; flex-direction: column; gap: 0; position: relative; }
+    .timeline::before { content: ''; position: absolute; left: 23px; top: 0; bottom: 0; width: 1px; background: var(--border); z-index: 0; }
+    .tl-step { display: grid; grid-template-columns: 68px 1fr; gap: 24px; padding-bottom: 36px; }
+    .tl-step:last-child { padding-bottom: 0; }
+    .tl-num { width: 46px; height: 46px; border-radius: 50%; background: var(--surface); border: 1px solid var(--border); display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 900; color: var(--amber); flex-shrink: 0; z-index: 1; transition: background 0.2s, border-color 0.2s; }
+    .tl-step:hover .tl-num { background: var(--amber-dim); border-color: var(--amber-border); }
+    .tl-body { padding-top: 10px; }
+    .tl-title { font-size: 16px; font-weight: 800; color: var(--white); margin-bottom: 6px; }
+    .tl-desc { font-size: 14px; color: var(--muted); line-height: 1.65; }
+
+    /* RESEARCH */
+    .insights-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 44px; }
+    .insight { background: var(--bg); border: 1px solid var(--border); border-radius: var(--radius); padding: 30px; transition: border-color 0.2s; }
+    .insight:hover { border-color: var(--amber-border); }
+    .insight-tag { font-size: 10px; font-weight: 800; color: var(--amber); letter-spacing: 0.14em; text-transform: uppercase; margin-bottom: 12px; }
+    .insight-title { font-size: 15px; font-weight: 800; color: var(--white); margin-bottom: 8px; }
+    .insight-body { font-size: 13px; color: var(--muted); line-height: 1.65; }
+
+    /* STRATEGY */
+    .strategy-cols { display: grid; grid-template-columns: 1fr 1fr; gap: 48px; margin-top: 44px; }
+    .col-label { font-size: 10px; font-weight: 800; color: var(--muted); letter-spacing: 0.14em; text-transform: uppercase; padding-bottom: 14px; border-bottom: 1px solid var(--border); margin-bottom: 24px; }
+    .sp { display: flex; gap: 14px; margin-bottom: 24px; }
+    .sp:last-child { margin-bottom: 0; }
+    .sp-dot { width: 7px; height: 7px; background: var(--amber); border-radius: 50%; flex-shrink: 0; margin-top: 7px; }
+    .sp-text { font-size: 14px; color: var(--muted); line-height: 1.65; }
+    .sp-text strong { color: var(--text); font-weight: 800; display: block; margin-bottom: 3px; font-size: 14px; }
+
+    /* SOLUTION */
+    .ia-box { margin-top: 44px; border: 1px solid var(--border); border-radius: var(--radius); overflow: hidden; }
+    .ia-header { padding: 18px 28px; background: var(--surface2); border-bottom: 1px solid var(--border); font-size: 11px; font-weight: 800; color: var(--muted); letter-spacing: 0.12em; text-transform: uppercase; }
+    .ia-body { display: grid; grid-template-columns: 1fr 56px 1fr; }
+    .ia-col { padding: 32px 28px; }
+    .ia-col.before { border-right: 1px solid var(--border); background: var(--surface); }
+    .ia-col.after { background: var(--surface); }
+    .ia-arrow-col { display: flex; align-items: center; justify-content: center; background: var(--amber-dim); border-right: 1px solid var(--amber-border); }
+    .ia-arrow-col svg { width: 22px; height: 22px; color: var(--amber); }
+    .ia-side-label { font-size: 10px; font-weight: 800; letter-spacing: 0.14em; text-transform: uppercase; margin-bottom: 12px; }
+    .ia-col.before .ia-side-label { color: var(--red); }
+    .ia-col.after .ia-side-label { color: var(--green); }
+    .ia-big { font-size: 44px; font-weight: 900; line-height: 1; margin-bottom: 6px; }
+    .ia-col.before .ia-big { color: var(--red); }
+    .ia-col.after .ia-big { color: var(--green); }
+    .ia-sub { font-size: 13px; color: var(--muted); margin-bottom: 20px; }
+    .ia-chips { display: flex; flex-wrap: wrap; gap: 7px; }
+    .ia-chip { padding: 4px 11px; border-radius: 6px; font-size: 11px; font-weight: 700; }
+    .ia-col.before .ia-chip { background: rgba(229,92,92,0.10); border: 1px solid rgba(229,92,92,0.22); color: var(--red); }
+    .ia-col.after .ia-chip { background: rgba(76,175,125,0.10); border: 1px solid rgba(76,175,125,0.22); color: var(--green); }
+    .ia-graphic-ph {
+      margin-top: 32px; aspect-ratio: 16/6;
+      background: var(--surface); border: 1px dashed var(--border);
+      border-radius: var(--radius); display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 8px; text-align: center;
+    }
+    .ia-graphic-ph-label { font-size: 11px; font-weight: 800; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); }
+    .ia-graphic-ph-file { font-family: monospace; font-size: 10px; color: var(--border); }
+
+    /* IMG PLACEHOLDER */
+    .img-holder {
+      width: 100%; border-radius: var(--radius-sm);
+      background: var(--surface2); border: 1px dashed var(--border);
+      display: flex; flex-direction: column; align-items: center; justify-content: center;
+      color: var(--muted); gap: 8px; text-align: center; padding: 20px;
+    }
+    .img-holder-icon { opacity: 0.3; }
+    .img-holder-name { font-size: 11px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; }
+    .img-holder-file { font-family: monospace; font-size: 10px; color: var(--border); word-break: break-all; }
+
+    /* TABS */
+    .tab-wrap { margin-top: 44px; }
+    .tab-nav { display: flex; border: 1px solid var(--border); border-bottom: none; border-radius: var(--radius) var(--radius) 0 0; overflow: hidden; background: var(--surface); }
+    .tab-btn { flex: 1; padding: 14px 10px; font-family: 'Mulish', sans-serif; font-size: 12px; font-weight: 800; letter-spacing: 0.06em; text-transform: uppercase; color: var(--muted); background: transparent; border: none; border-right: 1px solid var(--border); cursor: pointer; transition: color 0.2s, background 0.2s; }
+    .tab-btn:last-child { border-right: none; }
+    .tab-btn:hover { color: var(--text); background: var(--surface2); }
+    .tab-btn.active { color: var(--amber); background: var(--amber-dim); }
+    .tab-panel { display: none; border: 1px solid var(--border); border-radius: 0 0 var(--radius) var(--radius); overflow: hidden; }
+    .tab-panel.active { display: grid; grid-template-columns: 1fr 1.15fr; }
+    .tab-content-area { padding: 40px 36px; background: var(--surface); }
+    .tab-tag { font-size: 10px; font-weight: 800; color: var(--amber); letter-spacing: 0.14em; text-transform: uppercase; margin-bottom: 12px; }
+    .tab-title { font-size: 21px; font-weight: 900; color: var(--white); margin-bottom: 14px; line-height: 1.2; }
+    .tab-desc { font-size: 14px; color: var(--muted); line-height: 1.7; margin-bottom: 22px; }
+    .tab-pts { list-style: none; display: flex; flex-direction: column; gap: 9px; }
+    .tab-pts li { font-size: 13px; color: var(--muted); padding-left: 20px; position: relative; line-height: 1.5; }
+    .tab-pts li::before {
+      content: ''; position: absolute; left: 0; top: 6px;
+      width: 6px; height: 6px;
+      border-top: 2px solid var(--amber); border-right: 2px solid var(--amber);
+      transform: rotate(45deg);
+    }
+    .tab-visual-area { background: var(--surface2); border-left: 1px solid var(--border); display: flex; align-items: center; justify-content: center; padding: 28px; }
+    .tab-visual-area .img-holder { aspect-ratio: 16/10; }
+
+    /* RESULTS */
+    .results-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2px; border: 1px solid var(--border); border-radius: var(--radius); overflow: hidden; margin-top: 44px; }
+    .result-card { background: var(--bg); padding: 40px 36px; border-right: 1px solid var(--border); border-bottom: 1px solid var(--border); position: relative; overflow: hidden; transition: background 0.2s; }
+    .result-card::after { content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 3px; background: var(--amber); transform: scaleX(0); transition: transform 0.3s; transform-origin: left; }
+    .result-card:hover::after { transform: scaleX(1); }
+    .result-card:hover { background: var(--surface); }
+    .result-card:nth-child(even) { border-right: none; }
+    .result-card:nth-last-child(-n+2) { border-bottom: none; }
+    .result-num { font-size: 52px; font-weight: 900; color: var(--amber); line-height: 1; margin-bottom: 10px; }
+    .result-title { font-size: 15px; font-weight: 800; color: var(--white); margin-bottom: 8px; }
+    .result-desc { font-size: 13px; color: var(--muted); line-height: 1.6; }
+
+    /* REFLECTION */
+    .reflection-block {
+      margin-top: 44px; padding: 48px 52px;
+      background: var(--surface); border: 1px solid var(--border);
+      border-left: 4px solid var(--amber); border-radius: var(--radius);
+    }
+    .rq-label { font-size: 10px; font-weight: 800; color: var(--amber); letter-spacing: 0.14em; text-transform: uppercase; margin-bottom: 24px; display: flex; align-items: center; gap: 12px; }
+    .rq-label::after { content: ''; flex: 1; height: 1px; background: var(--border); }
+    .rq-text { font-size: 18px; color: var(--text); line-height: 1.82; font-style: italic; font-weight: 400; margin-bottom: 36px; }
+    .rq-text strong { color: var(--amber); font-style: normal; font-weight: 800; }
+    .rq-author { display: flex; align-items: center; gap: 14px; }
+    .rq-avatar { width: 44px; height: 44px; border-radius: 50%; background: var(--amber-dim); border: 2px solid var(--amber-border); display: flex; align-items: center; justify-content: center; font-weight: 900; font-size: 13px; color: var(--amber); flex-shrink: 0; }
+    .rq-name { font-size: 14px; font-weight: 800; color: var(--white); }
+    .rq-role { font-size: 12px; color: var(--muted); }
+
+    /* FOOTER */
+    footer { background: var(--surface); border-top: 1px solid var(--border); padding: 40px 72px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 20px; }
+    .footer-logo { font-weight: 900; font-size: 13px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--white); }
+    .footer-logo span { color: var(--amber); }
+    .footer-copy { font-size: 13px; color: var(--muted); }
+    .btn-back { display: inline-flex; align-items: center; gap: 8px; border: 1px solid var(--border); border-radius: 40px; padding: 10px 22px; font-size: 13px; font-weight: 700; color: var(--text); transition: border-color 0.2s, color 0.2s; }
+    .btn-back:hover { border-color: var(--amber); color: var(--amber); }
+
+    /* RESPONSIVE */
+    @media (max-width: 1024px) {
+      #hero, .cs-sec, footer { padding-left: 32px; padding-right: 32px; }
+      nav { padding: 16px 24px; }
+      .bg-two-col, .insights-grid, .strategy-cols { grid-template-columns: 1fr; gap: 28px; }
+      .audit-trio { grid-template-columns: 1fr; }
+      .audit-card { border-right: none; border-bottom: 1px solid var(--border); }
+      .audit-card:last-child { border-bottom: none; }
+      .ia-body { grid-template-columns: 1fr; }
+      .ia-arrow-col { display: none; }
+      .ia-col.before { border-right: none; border-bottom: 1px solid var(--border); }
+      .tab-panel.active { grid-template-columns: 1fr; }
+      .tab-visual-area { border-left: none; border-top: 1px solid var(--border); }
+      .results-grid { grid-template-columns: 1fr; }
+      .result-card { border-right: none; }
+      .result-card:nth-last-child(-n+2) { border-bottom: 1px solid var(--border); }
+      .result-card:last-child { border-bottom: none; }
+      .reflection-block { padding: 32px 28px; }
+      .rq-text { font-size: 16px; }
+      .hero-meta { flex-wrap: wrap; }
+    }
+    @media (max-width: 680px) {
+      .tab-nav { flex-wrap: wrap; }
+      .tab-btn { width: 33.33%; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <a href="portfolio.html" class="nav-logo">Prasham<span>.</span>Chavda</a>
+    <a href="portfolio.html" class="nav-back">
+      <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M10 3L5 8l5 5"/></svg>
+      Home
+    </a>
+  </nav>
+
+  <!-- HERO -->
+  <section id="hero">
+    <div class="hero-grid-bg"></div>
+    <div class="hero-glow"></div>
+    <div class="hero-content">
+      <div class="eyebrow-pill">Navigation Bar &middot; Case Study</div>
+      <h1 class="hero-h1">
+        Decoding Financial Complexity:<br>
+        Overhauling Navigation for a<br>
+        <em>High-Volume Brokerage</em>
+      </h1>
+      <p class="hero-sub">How a data-led Information Architecture strategy transformed choice paralysis into an intent-driven, high-conversion user journey.</p>
+      <div class="hero-meta">
+        <div class="meta-item">
+          <div class="meta-label">Duration</div>
+          <div class="meta-value">8 Weeks</div>
+        </div>
+        <div class="meta-item">
+          <div class="meta-label">Role</div>
+          <div class="meta-value">Lead UX Designer &amp; Researcher</div>
+        </div>
+        <div class="meta-item">
+          <div class="meta-label">Expertise</div>
+          <div class="meta-value">IA &middot; UX Strategy &middot; Data-Led Design</div>
+        </div>
+        <div class="meta-item">
+          <div class="meta-label">Platform</div>
+          <div class="meta-value">5paisa Web</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- BACKGROUND -->
+  <section id="background" class="cs-sec">
+    <div class="eyebrow">Background</div>
+    <div class="bg-two-col">
+      <div class="bg-text-col">
+        <h2 class="sec-title">A navigational failure at scale</h2>
+        <p class="body">The project addressed a critical failure within a leading discount brokerage web platform. The legacy system operated on a <span class="hl">product-centric "wall of links" model</span> featuring over 119 entries under vague labels like "Technology" and "Resources."</p>
+        <p class="body">This forced users into <span class="amber">3&ndash;4 clicks</span> to reach any core product, resulting in severe cognitive overload and decision paralysis. Internal audits revealed a significant Metric Crisis where core revenue-generating assets like Mutual Funds and IPOs were <span class="amber">virtually invisible</span>.</p>
+        <p class="body">By restructuring the IA into an intent-based hierarchy &mdash; specifically separating <span class="amber">"Invest" from "Trade"</span> &mdash; the goal was to restore user trust, reduce interaction costs, and dramatically boost discoverability.</p>
+        <div class="stat-strip">
+          <div class="stat-item">
+            <div class="stat-label">Engagement Gap</div>
+            <div class="stat-big">1/50th</div>
+            <div class="stat-desc">Core assets vs. Login route</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-label">Legacy Links</div>
+            <div class="stat-big">119+</div>
+            <div class="stat-desc">Entries under vague labels</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-label">Interaction Depth</div>
+            <div class="stat-big">4</div>
+            <div class="stat-desc">Clicks to reach core product</div>
+          </div>
+        </div>
+      </div>
+      <div class="bg-slideshow-wrap">
+        <div class="bg-slideshow" id="legacySlideshow">
+          <div class="slide active">
+            <img src="images/legacy-nav-1.png" alt="Legacy navigation — Products dropdown">
+          </div>
+          <div class="slide">
+            <img src="images/legacy-nav-2.png" alt="Legacy navigation — Stocks dropdown">
+          </div>
+          <div class="slide">
+            <img src="images/legacy-nav-3.png" alt="Legacy navigation — Mutual Funds dropdown">
+          </div>
+          <div class="slide">
+            <img src="images/legacy-nav-4.png" alt="Legacy navigation — IPO dropdown">
+          </div>
+          <div class="slide">
+            <img src="images/legacy-nav-5.png" alt="Legacy navigation — Resources dropdown">
+          </div>
+        </div>
+        <div class="slide-controls">
+          <div class="slide-dots" id="slideDots"></div>
+          <span class="slide-caption" id="slideCaption">Legacy Nav · Products</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- PROBLEM -->
+  <section id="problem" class="cs-sec" style="background: var(--surface);">
+    <div class="eyebrow">Problem Identification</div>
+    <h2 class="sec-title">A three-pronged audit</h2>
+    <p class="body" style="max-width:600px;">To uncover root causes, I performed a multi-dimensional audit combining quantitative signals with qualitative IA analysis.</p>
+
+    <div class="audit-trio">
+      <div class="audit-card">
+        <div class="audit-icon">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
+        </div>
+        <div class="audit-type">Quantitative Audit</div>
+        <div class="audit-title">Data-revealed invisibility</div>
+        <div class="audit-body">Core revenue-generating assets performed at <strong style="color:var(--text)">less than 1/50th</strong> of the primary Login route. High-value features had near-zero organic discovery.</div>
+      </div>
+      <div class="audit-card">
+        <div class="audit-icon">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 3v18"/></svg>
+        </div>
+        <div class="audit-type">IA &amp; Cognitive Load Audit</div>
+        <div class="audit-title">119-link wall of chaos</div>
+        <div class="audit-body">A product-centric <strong style="color:var(--text)">"wall of links"</strong> forcing 3&ndash;4 clicks to reach any core product. Each nesting level added interaction cost and decision fatigue.</div>
+      </div>
+      <div class="audit-card">
+        <div class="audit-icon">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"/><line x1="7" y1="7" x2="7.01" y2="7"/></svg>
+        </div>
+        <div class="audit-type">Taxonomy &amp; Labeling Failure</div>
+        <div class="audit-title">Language that breaks trust</div>
+        <div class="audit-body">Critical sections labeled as <strong style="color:var(--text)">"Technology"</strong> and <strong style="color:var(--text)">"Resources"</strong> &mdash; completely failing to match user mental models for a trading platform.</div>
+      </div>
+    </div>
+
+    <div class="problem-stmt">
+      <div class="ps-label">Problem Statement</div>
+      <p class="ps-body">The existing navigation is an overwhelming "wall of links" causing severe cognitive overload. Due to poor categorization and misleading labeling, high-value products are <strong style="color:var(--amber)">functionally invisible</strong> &mdash; resulting in near-zero discoverability across core revenue segments.</p>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- PROCESS -->
+  <section id="process" class="cs-sec">
+    <div class="eyebrow">The Process</div>
+    <h2 class="sec-title">Structured, data-driven from day one</h2>
+    <p class="body" style="max-width:580px;">An 8-week initiative with a disciplined process ensuring every decision was grounded in both user needs and business goals.</p>
+
+    <div class="timeline">
+      <div class="tl-step">
+        <div><div class="tl-num">01</div></div>
+        <div class="tl-body">
+          <div class="tl-title">Empathize &amp; Audit</div>
+          <div class="tl-desc">Deep-dive into analytics to identify Metric Crisis areas. Manually mapped all 119+ legacy navigation links to quantify the full scope of the architecture problem.</div>
+        </div>
+      </div>
+      <div class="tl-step">
+        <div><div class="tl-num">02</div></div>
+        <div class="tl-body">
+          <div class="tl-title">Define &amp; User Research</div>
+          <div class="tl-desc">Conducted in-depth interviews with 12 participants spanning active traders to new investors, uncovering mental model mismatches in the existing taxonomy.</div>
+        </div>
+      </div>
+      <div class="tl-step">
+        <div><div class="tl-num">03</div></div>
+        <div class="tl-body">
+          <div class="tl-title">Competitive Benchmarking</div>
+          <div class="tl-desc">Audited 5 leading FinTech platforms to identify proven patterns: limiting top-level items to 4&ndash;7 and using action-oriented, intent-based labeling throughout.</div>
+        </div>
+      </div>
+      <div class="tl-step">
+        <div><div class="tl-num">04</div></div>
+        <div class="tl-body">
+          <div class="tl-title">Ideate &amp; Structure</div>
+          <div class="tl-desc">Applied Hick's Law to reduce choices at each hierarchy level. Developed a new intent-based sitemap splitting navigation into "Invest" (long-term) and "Trade" (active execution).</div>
+        </div>
+      </div>
+      <div class="tl-step">
+        <div><div class="tl-num">05</div></div>
+        <div class="tl-body">
+          <div class="tl-title">Prototype &amp; Design</div>
+          <div class="tl-desc">Created high-fidelity mega-menus for all 6 navigation tabs. Revamped product names for clarity, developed color-coded iconography and micro-copy badges for the Products tab.</div>
+        </div>
+      </div>
+      <div class="tl-step">
+        <div><div class="tl-num">06</div></div>
+        <div class="tl-body">
+          <div class="tl-title">Validate &amp; Handoff</div>
+          <div class="tl-desc">Delivered annotated mockups with clearly defined success metrics for engineering alignment. Established KPIs to track post-launch CTR improvements across key product segments.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- RESEARCH -->
+  <section id="research" class="cs-sec" style="background: var(--surface);">
+    <div class="eyebrow">Research &amp; Insights</div>
+    <h2 class="sec-title">12 users revealed four friction patterns</h2>
+    <p class="body" style="max-width:600px;">Interviews spanning active traders to new investors surfaced consistent, repeatable pain points &mdash; the qualitative "why" behind the quantitative data.</p>
+
+    <div class="insights-grid">
+      <div class="insight">
+        <div class="insight-tag">Finding 01 &middot; Taxonomy Misalignment</div>
+        <div class="insight-title">Users bypassed "Technology" entirely</div>
+        <div class="insight-body">Users consistently skipped the "Technology" label when looking for trading tools. It simply didn't match their mental model of where a trading platform should live &mdash; creating an invisible wall around the most-used product.</div>
+      </div>
+      <div class="insight">
+        <div class="insight-tag">Finding 02 &middot; Category Confusion</div>
+        <div class="insight-title">"Pogo-sticking" between sections</div>
+        <div class="insight-body">Participants clicking "Stocks" or "Mutual Funds" expected a portal to trade &mdash; but found static market data. The expectation mismatch caused repeated back-and-forth "pogo-sticking" behavior, eroding trust.</div>
+      </div>
+      <div class="insight">
+        <div class="insight-tag">Finding 03 &middot; Labeling Friction</div>
+        <div class="insight-title">"Resources" felt generic and unappealing</div>
+        <div class="insight-body">High-value tools were buried under "Resources" &mdash; a label participants found non-descriptive and actively avoided. Some of the platform's most powerful features were hiding in plain sight behind the worst possible label.</div>
+      </div>
+      <div class="insight">
+        <div class="insight-tag">Finding 04 &middot; Market Data Misplacement</div>
+        <div class="insight-title">Power users couldn't find time-sensitive data</div>
+        <div class="insight-body">High-priority data like BTST and Penny Stocks were buried in static product folders &mdash; creating significant friction for power users who need real-time analytics without transactional clutter surrounding them.</div>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- STRATEGY -->
+  <section id="strategy" class="cs-sec">
+    <div class="eyebrow">Competitive Benchmarking &amp; Design Strategy</div>
+    <h2 class="sec-title">Learning from leaders, applying UX law</h2>
+
+    <div class="strategy-cols">
+      <div>
+        <div class="col-label">Market Patterns (5 Platforms Audited)</div>
+        <div class="sp"><div class="sp-dot"></div><div class="sp-text"><strong>Standardizing Complexity</strong>Successful competitors limit primary navigation to 4&ndash;7 top-level items, validating the need to eliminate our 119-link legacy structure.</div></div>
+        <div class="sp"><div class="sp-dot"></div><div class="sp-text"><strong>Intent-Based Labels</strong>Industry leaders use action-oriented, user-centric labels &mdash; "Trade" instead of generic product groupings &mdash; reducing cognitive effort at first glance.</div></div>
+        <div class="sp"><div class="sp-dot"></div><div class="sp-text"><strong>Functional Separation</strong>Top platforms clearly differentiate transactional links from support and educational resources &mdash; preventing user intent collision.</div></div>
+      </div>
+      <div>
+        <div class="col-label">Design Strategy Applied</div>
+        <div class="sp"><div class="sp-dot"></div><div class="sp-text"><strong>Hick's Law Applied</strong>Decreased decision-making time by limiting choices at each hierarchy level &mdash; transforming "choice fatigue" into a streamlined path to action.</div></div>
+        <div class="sp"><div class="sp-dot"></div><div class="sp-text"><strong>Intent-Centric Categorization</strong>Moved from product-centric to user-intent model &mdash; splitting primary navigation into "Invest" (long-term growth) and "Trade" (active execution).</div></div>
+        <div class="sp"><div class="sp-dot"></div><div class="sp-text"><strong>Taxonomy Correction</strong>Moved platforms from "Technology" to "Products," pulled live data into "Markets" &mdash; each label now matching real user terminology.</div></div>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- SOLUTION -->
+  <section id="solution" class="cs-sec" style="background: var(--surface);">
+    <div class="eyebrow">Solution &amp; IA Transformation</div>
+    <h2 class="sec-title">From chaos to clarity: 66% fewer choices</h2>
+    <p class="body" style="max-width:620px;">Consolidated 119+ legacy links into ~40 high-intent destinations. Flattened the architecture from 4 levels deep to a maximum of 2 levels at any point in the navigation.</p>
+
+    <div class="ia-box">
+      <div class="ia-header">IA Transformation &mdash; Before vs. After</div>
+      <div class="ia-body">
+        <div class="ia-col before">
+          <div class="ia-side-label">Before &mdash; Legacy System</div>
+          <div class="ia-big">119+</div>
+          <div class="ia-sub">Navigation entries across vague, mislabeled categories</div>
+          <div class="ia-chips">
+            <span class="ia-chip">Wall of Links</span>
+            <span class="ia-chip">4-Level Deep Nesting</span>
+            <span class="ia-chip">"Technology" Label</span>
+            <span class="ia-chip">"Resources" Tab</span>
+            <span class="ia-chip">Product-Centric</span>
+            <span class="ia-chip">Choice Paralysis</span>
+            <span class="ia-chip">3&ndash;4 Clicks to Core</span>
+          </div>
+        </div>
+        <div class="ia-arrow-col">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M5 12h14M13 6l6 6-6 6"/>
+          </svg>
+        </div>
+        <div class="ia-col after">
+          <div class="ia-side-label">After &mdash; Intent-Driven System</div>
+          <div class="ia-big">~40</div>
+          <div class="ia-sub">High-intent destinations, max 2 levels deep</div>
+          <div class="ia-chips">
+            <span class="ia-chip">6 Clear Top Tabs</span>
+            <span class="ia-chip">Max 2-Level Depth</span>
+            <span class="ia-chip">"Products" Tab</span>
+            <span class="ia-chip">"Markets" Hub</span>
+            <span class="ia-chip">Intent-Based Model</span>
+            <span class="ia-chip">Invest vs. Trade Split</span>
+            <span class="ia-chip">66% Fewer Choices</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="ia-graphic-ph">
+      <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" opacity="0.25"><rect x="3" y="3" width="18" height="14" rx="2"/><path d="M3 9h18M9 9v9"/></svg>
+      <div class="ia-graphic-ph-label">IA Transformation Graphic</div>
+      <div class="ia-graphic-ph-file">Showing 66% complexity reduction &amp; relative CTR comparison</div>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- TABS SHOWCASE -->
+  <section id="tabs-showcase" class="cs-sec">
+    <div class="eyebrow">Final Design &mdash; Tab-by-Tab Breakdown</div>
+    <h2 class="sec-title">Six intent-driven navigation tabs</h2>
+    <p class="body" style="max-width:600px;">Each tab designed around a specific user intent &mdash; moving from a product dump to a purposeful, action-oriented architecture where every section earns its place.</p>
+
+    <div class="tab-wrap">
+      <div class="tab-nav">
+        <button class="tab-btn active" onclick="switchTab(0)">Invest</button>
+        <button class="tab-btn" onclick="switchTab(1)">Trade</button>
+        <button class="tab-btn" onclick="switchTab(2)">Products</button>
+        <button class="tab-btn" onclick="switchTab(3)">Markets</button>
+        <button class="tab-btn" onclick="switchTab(4)">Learn</button>
+        <button class="tab-btn" onclick="switchTab(5)">Partner</button>
+      </div>
+
+      <div class="tab-panel active" id="tab-0">
+        <div class="tab-content-area">
+          <div class="tab-tag">Tab 01 &middot; Long-Term Wealth Creation</div>
+          <div class="tab-title">The "Invest" Tab</div>
+          <div class="tab-desc">Dedicated exclusively to strategic, long-term investment products &mdash; a clean, uncluttered entry point to wealth-building instruments, completely free from active trading noise.</div>
+          <ul class="tab-pts">
+            <li>Houses Stocks, Mutual Funds, IPOs, ETFs, and US Stocks</li>
+            <li>Integrated contextual right-hand column with high-intent calculators</li>
+            <li>Brokerage, SIP, ELSS, and Stock Screener tools surfaced prominently</li>
+            <li>Completely separated from active trading to prevent cognitive collision</li>
+          </ul>
+        </div>
+        <div class="tab-visual-area">
+          <div class="img-holder">
+            <svg class="img-holder-icon" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="14" rx="2"/><path d="M3 9h18M9 9v9"/></svg>
+            <div class="img-holder-name">Screenshot Asset</div>
+            <div class="img-holder-file">Screenshot 2026-01-25 at 5.56.20 PM.png</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="tab-panel" id="tab-1">
+        <div class="tab-content-area">
+          <div class="tab-tag">Tab 02 &middot; Active Execution &amp; Speculation</div>
+          <div class="tab-title">The "Trade" Tab</div>
+          <div class="tab-desc">Built for high-frequency, active instruments &mdash; cleanly separated from beginner investment avenues so experienced traders can execute without drowning in informational noise.</div>
+          <ul class="tab-pts">
+            <li>Houses Futures &amp; Options and Commodity instruments</li>
+            <li>"Tools" column shifts dynamically to surface Margin and MTF Calculators</li>
+            <li>Active execution pathway distinct from long-term Invest tab</li>
+            <li>Reduces cognitive collision between novice and expert user flows</li>
+          </ul>
+        </div>
+        <div class="tab-visual-area">
+          <div class="img-holder">
+            <svg class="img-holder-icon" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="14" rx="2"/><path d="M3 9h18M9 9v9"/></svg>
+            <div class="img-holder-name">Screenshot Asset</div>
+            <div class="img-holder-file">Screenshot 2026-01-25 at 5.56.34 PM.png</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="tab-panel" id="tab-2">
+        <div class="tab-content-area">
+          <div class="tab-tag">Tab 03 &middot; The Taxonomy Correction</div>
+          <div class="tab-title">The "Products" Tab</div>
+          <div class="tab-desc">Completely retired the ignored "Technology" label. Proprietary platforms are now explicitly organized under a word users actually understand &mdash; driving immediate recognition and engagement.</div>
+          <ul class="tab-pts">
+            <li>Retired the underperforming "Technology" category entirely</li>
+            <li>Trading App, Trader's Terminal, FnO360, Scalper Terminal now front and center</li>
+            <li>Color-coded iconography with micro-copy badges for instant recognition</li>
+            <li>Taxonomy now aligned with real user language and mental models</li>
+          </ul>
+        </div>
+        <div class="tab-visual-area">
+          <div class="img-holder">
+            <svg class="img-holder-icon" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="14" rx="2"/><path d="M3 9h18M9 9v9"/></svg>
+            <div class="img-holder-name">Screenshot Asset</div>
+            <div class="img-holder-file">Screenshot 2026-01-25 at 5.56.41 PM.jpg</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="tab-panel" id="tab-3">
+        <div class="tab-content-area">
+          <div class="tab-tag">Tab 04 &middot; The Real-Time Utility Hub</div>
+          <div class="tab-title">The "Markets" Tab</div>
+          <div class="tab-desc">Pulled 25+ live analytics and directory links out of static transactional folders into a dedicated real-time hub &mdash; serving power users without creating clutter for casual investors.</div>
+          <ul class="tab-pts">
+            <li>25+ live analytics and directory links centralized in one dedicated hub</li>
+            <li>Two-tier layout: left quick-switch submenu populates data grids on the right</li>
+            <li>Market Today, Top Gainers/Losers instantly accessible for active traders</li>
+            <li>Time-sensitive data separated from static transactional product folders</li>
+          </ul>
+        </div>
+        <div class="tab-visual-area">
+          <div class="img-holder">
+            <svg class="img-holder-icon" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="14" rx="2"/><path d="M3 9h18M9 9v9"/></svg>
+            <div class="img-holder-name">Screenshot Asset</div>
+            <div class="img-holder-file">Screenshot 2026-01-25 at 5.56.51 PM.png</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="tab-panel" id="tab-4">
+        <div class="tab-content-area">
+          <div class="tab-tag">Tab 05 &middot; Centralized Knowledge Architecture</div>
+          <div class="tab-title">The "Learn" Tab</div>
+          <div class="tab-desc">Unified fragmented knowledge pathways into a single, organized educational repository &mdash; making learning accessible for new investors without polluting the transactional experience.</div>
+          <ul class="tab-pts">
+            <li>FinSchool, Market Guide, and Stock Market News centralized</li>
+            <li>Blogs, Videos, and TradeBetter unified under one clear, descriptive label</li>
+            <li>Fragmented educational content consolidated from across the platform</li>
+            <li>Clean separation from Trade prevents beginner and expert content collision</li>
+          </ul>
+        </div>
+        <div class="tab-visual-area">
+          <div class="img-holder">
+            <svg class="img-holder-icon" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="14" rx="2"/><path d="M3 9h18M9 9v9"/></svg>
+            <div class="img-holder-name">Screenshot Asset</div>
+            <div class="img-holder-file">Screenshot 2026-01-25 at 5.56.58 PM.png</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="tab-panel" id="tab-5">
+        <div class="tab-content-area">
+          <div class="tab-tag">Tab 06 &middot; The Business Ecosystem Gateway</div>
+          <div class="tab-title">The "Partner" Tab</div>
+          <div class="tab-desc">Streamlined the partner funnel into a single, clean entry point &mdash; consolidating the B2B ecosystem without letting partner content dilute the primary user experience.</div>
+          <ul class="tab-pts">
+            <li>Authorised Person, Refer &amp; Earn, Partner Program consolidated</li>
+            <li>Partner Dashboard surfaced with clear CTA hierarchy</li>
+            <li>B2B funnel kept cleanly separate from B2C transactional flows</li>
+            <li>Single layout prevents partner content from diluting primary UX</li>
+          </ul>
+        </div>
+        <div class="tab-visual-area">
+          <div class="img-holder">
+            <svg class="img-holder-icon" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="14" rx="2"/><path d="M3 9h18M9 9v9"/></svg>
+            <div class="img-holder-name">Screenshot Asset</div>
+            <div class="img-holder-file">Screenshot 2026-01-25 at 5.57.06 PM.png</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- RESULTS -->
+  <section id="results" class="cs-sec" style="background: var(--surface);">
+    <div class="eyebrow">Results &amp; Business ROI</div>
+    <h2 class="sec-title">Measured impact across four dimensions</h2>
+    <p class="body" style="max-width:600px;">Strategic outcomes from the IA overhaul &mdash; metrics normalized for NDA compliance. The redesign created compounding value across discoverability, efficiency, and platform trust.</p>
+
+    <div class="results-grid">
+      <div class="result-card">
+        <div class="result-num">300%+</div>
+        <div class="result-title">Core Product Discoverability</div>
+        <div class="result-desc">Projected CTR lift across non-equity segments (Mutual Funds, IPOs) after moving high-value assets out of deep nested submenus into intent-based top-level tabs.</div>
+      </div>
+      <div class="result-card">
+        <div class="result-num">66%</div>
+        <div class="result-title">Reduction in Cognitive Load</div>
+        <div class="result-desc">Consolidated 119+ legacy links into ~40 high-intent destinations &mdash; a 66% reduction in the number of choices presented to any user at any navigation level.</div>
+      </div>
+      <div class="result-card">
+        <div class="result-num">4&#8594;2</div>
+        <div class="result-title">Interaction Depth Flattened</div>
+        <div class="result-desc">Minimized maximum user journey depth from 4 levels to 2 &mdash; dramatically reducing interaction cost to reach any core product or platform feature.</div>
+      </div>
+      <div class="result-card">
+        <div class="result-num">&#8593;</div>
+        <div class="result-title">Platform Engagement Boost</div>
+        <div class="result-desc">Retiring "Technology" in favour of "Products" instantly boosted engagement with proprietary trading platforms &mdash; connecting users to tools they were actively looking for but couldn't find.</div>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- REFLECTION -->
+  <section id="reflection" class="cs-sec">
+    <div class="eyebrow">Lead UX Reflection</div>
+    <h2 class="sec-title">What this project taught me about design leadership</h2>
+
+    <div class="reflection-block">
+      <div class="rq-label">In Prasham's Words</div>
+      <p class="rq-text">
+        "Steering this Information Architecture overhaul taught me that a Lead UX Designer's responsibility extends far beyond visual aesthetics. <strong>True leadership lies in the ability to balance dense business requirements with user simplicity.</strong>
+        <br><br>
+        The core challenge wasn't just drawing the lines of a new sitemap &mdash; it was <strong>securing buy-in from multi-departmental stakeholders to eliminate nearly 66% of legacy content.</strong> By anchoring my strategy in established psychological frameworks like Hick's Law and supporting it with qualitative user interview patterns, I shifted the internal conversation from <strong>'how much content can we fit?'</strong> to <strong>'how quickly can a user take action?'</strong>
+        <br><br>
+        The resulting ecosystem proves that in complex, high-stakes digital spaces, <strong>minimizing choices is the single most powerful way to build user trust and accelerate business conversion.</strong>"
+      </p>
+      <div class="rq-author">
+        <div class="rq-avatar">PC</div>
+        <div>
+          <div class="rq-name">Prasham Chavda</div>
+          <div class="rq-role">Lead UX Designer &amp; Researcher &middot; 5paisa Capital</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <a href="portfolio.html" class="footer-logo">Prasham<span>.</span>Chavda</a>
+    <div class="footer-copy">Navigation Redesign Case Study &middot; 5paisa Capital &middot; 2024</div>
+    <a href="portfolio.html" class="btn-back">
+      <svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M10 3L5 8l5 5"/></svg>
+      Back to all work
+    </a>
+  </footer>
+
+  <script>
+    function switchTab(i) {
+      document.querySelectorAll('.tab-btn').forEach((b, j) => b.classList.toggle('active', i === j));
+      document.querySelectorAll('.tab-panel').forEach((p, j) => p.classList.toggle('active', i === j));
+    }
+
+    // Legacy nav slideshow
+    (function() {
+      const captions = ['Legacy Nav · Products', 'Legacy Nav · Stocks', 'Legacy Nav · Mutual Funds', 'Legacy Nav · IPO', 'Legacy Nav · Resources'];
+      const slides = document.querySelectorAll('#legacySlideshow .slide');
+      const dotsEl = document.getElementById('slideDots');
+      const captionEl = document.getElementById('slideCaption');
+      let current = 0, timer;
+
+      slides.forEach((_, i) => {
+        const dot = document.createElement('button');
+        dot.className = 'slide-dot' + (i === 0 ? ' active' : '');
+        dot.onclick = () => goTo(i);
+        dotsEl.appendChild(dot);
+      });
+
+      function goTo(n) {
+        slides[current].classList.remove('active');
+        dotsEl.children[current].classList.remove('active');
+        current = (n + slides.length) % slides.length;
+        slides[current].classList.add('active');
+        dotsEl.children[current].classList.add('active');
+        captionEl.textContent = captions[current];
+      }
+
+      function start() { timer = setInterval(() => goTo(current + 1), 2800); }
+      function stop() { clearInterval(timer); }
+
+      document.querySelector('.bg-slideshow-wrap').addEventListener('mouseenter', stop);
+      document.querySelector('.bg-slideshow-wrap').addEventListener('mouseleave', start);
+      start();
+    })();
+  </script>
+
+</body>
+</html>
