@@ -412,34 +412,30 @@
       background: var(--surface);
       display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center;
     }
-    .about-image-wrap { position: relative; }
+    .about-image-wrap { display: flex; justify-content: center; align-items: center; }
+    .about-photo-group { position: relative; width: fit-content; }
     .about-photo {
-      width: 100%; aspect-ratio: 4/5;
-      background: linear-gradient(145deg, var(--surface2), #1e2438);
-      display: flex; align-items: center; justify-content: center;
-      border-radius: var(--radius); border: 1px solid var(--border);
+      width: 180px; height: 180px;
+      border-radius: 50%;
+      border: 3px solid var(--border);
       overflow: hidden; position: relative;
+      flex-shrink: 0;
     }
-    .about-photo::before {
-      content: ''; position: absolute; inset: 0;
-      background-image: radial-gradient(circle, rgba(255,255,255,0.025) 1px, transparent 1px);
-      background-size: 28px 28px;
-    }
-    .about-initials {
-      font-family: 'Mulish', sans-serif; font-size: 90px; font-weight: 900;
-      color: rgba(245,166,35,0.12); letter-spacing: -0.04em;
-      user-select: none; position: relative;
+    .about-photo img {
+      width: 100%; height: 100%;
+      object-fit: cover; object-position: center 20%;
+      display: block;
     }
     .about-badge {
-      position: absolute; bottom: -16px; right: -16px;
+      position: absolute; bottom: -8px; right: -16px;
       background: var(--amber); color: #0C0E13;
-      padding: 14px 18px; border-radius: var(--radius);
-      font-weight: 800; font-size: 12px; text-align: center;
+      padding: 10px 14px; border-radius: var(--radius);
+      font-weight: 800; font-size: 11px; text-align: center;
       box-shadow: 0 8px 32px rgba(245,166,35,0.22); line-height: 1.35;
     }
     .about-badge strong {
       display: block; font-family: 'Mulish', sans-serif;
-      font-size: 22px; line-height: 1; margin-bottom: 2px;
+      font-size: 18px; line-height: 1; margin-bottom: 2px;
     }
     .about-text { font-size: 16px; color: var(--muted); line-height: 1.8; margin-bottom: 18px; }
     .about-actions { display: flex; gap: 12px; flex-wrap: wrap; margin-top: 32px; }
@@ -510,7 +506,7 @@
       .skill-item:nth-last-child(-n+2) { border-bottom: 1px solid var(--border); }
       .skill-item:last-child { border-bottom: none; }
       #about { grid-template-columns: 1fr; gap: 40px; }
-      .about-image-wrap { display: none; }
+      .about-image-wrap { display: flex; justify-content: center; }
       .process-steps { grid-template-columns: 1fr 1fr; }
       .exp-item { grid-template-columns: 1fr; gap: 20px; }
     }
@@ -595,7 +591,7 @@
 
     <a href="casestudy-navbar.html" class="project-item reveal">
       <div class="project-visual pv-1" data-num="01">
-        <div class="project-chip">Navigation &middot; IA</div>
+        <div class="project-chip">Website</div>
       </div>
       <div class="project-content">
         <div class="project-number">Project 01</div>
@@ -605,7 +601,10 @@
           <div class="project-tags">
             <span class="tag">IA</span>
             <span class="tag">UX Audit</span>
-            <span class="tag">Analytics</span>
+            <span class="tag">User Centric</span>
+            <span class="tag">Data Driven</span>
+            <span class="tag">Revamp</span>
+            <span class="tag">UI</span>
           </div>
           <span class="project-link-btn">
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
@@ -616,7 +615,7 @@
 
     <a href="nda.html" class="project-item reverse reveal">
       <div class="project-visual pv-2" data-num="02">
-        <div class="project-chip">Dashboard &middot; FinTech</div>
+        <div class="project-chip">Mobile App &middot; Web App</div>
       </div>
       <div class="project-content">
         <div class="project-number">Project 02</div>
@@ -625,9 +624,10 @@
         <div class="project-footer">
           <div class="project-tags">
             <span class="tag">UX Research</span>
-            <span class="tag">Data Viz</span>
-            <span class="tag">Figma</span>
+            <span class="tag">Dashboard</span>
+            <span class="tag">UI</span>
             <span class="tag">Prototyping</span>
+            <span class="tag">Revenue Growth</span>
           </div>
           <span class="project-link-btn">
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
@@ -638,7 +638,7 @@
 
     <a href="nda.html" class="project-item reveal">
       <div class="project-visual pv-3" data-num="03">
-        <div class="project-chip">Mobile &middot; Web</div>
+        <div class="project-chip">Mobile App &middot; Web App</div>
       </div>
       <div class="project-content">
         <div class="project-number">Project 03</div>
@@ -646,10 +646,10 @@
         <p class="project-desc">Simplified a complex IPO application flow for both web and mobile. Streamlined the journey, removed drop-off points, and validated a 14% increase in engagement through structured user testing sessions.</p>
         <div class="project-footer">
           <div class="project-tags">
+            <span class="tag">UX Research</span>
+            <span class="tag">Redesign</span>
+            <span class="tag">UI</span>
             <span class="tag">User Testing</span>
-            <span class="tag">iOS</span>
-            <span class="tag">Android</span>
-            <span class="tag">Maze</span>
           </div>
           <span class="project-link-btn">
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
@@ -660,7 +660,7 @@
 
     <a href="nda.html" class="project-item reverse reveal">
       <div class="project-visual pv-4" data-num="04">
-        <div class="project-chip">Complex UX &middot; Trading</div>
+        <div class="project-chip">Website &middot; Web App</div>
       </div>
       <div class="project-content">
         <div class="project-number">Project 04</div>
@@ -668,9 +668,12 @@
         <p class="project-desc">Lead designer on a high-complexity algo trading platform built for professional traders. Responsible for defining information architecture, end-to-end workflow mapping, and high-fidelity prototyping. Currently in development.</p>
         <div class="project-footer">
           <div class="project-tags">
-            <span class="tag">IA</span>
             <span class="tag">Complex UX</span>
-            <span class="tag">Hi-fi Prototyping</span>
+            <span class="tag">Automate</span>
+            <span class="tag">UI</span>
+            <span class="tag">IA</span>
+            <span class="tag">Prototyping</span>
+            <span class="tag">New Launch</span>
           </div>
           <span class="project-link-btn">
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
@@ -950,10 +953,12 @@
 <!-- ABOUT -->
 <section id="about">
   <div class="about-image-wrap">
-    <div class="about-photo">
-      <span class="about-initials">PC</span>
+    <div class="about-photo-group">
+      <div class="about-photo">
+        <img src="images/prasham-photo.png" alt="Prasham Chavda" />
+      </div>
+      <div class="about-badge"><strong>3+</strong> years industry experience</div>
     </div>
-    <div class="about-badge"><strong>3+</strong> years industry experience</div>
   </div>
   <div class="reveal">
     <div class="section-eyebrow">About Me</div>
