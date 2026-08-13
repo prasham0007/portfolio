@@ -29,6 +29,8 @@
       min-height: 100vh;
       display: flex;
       flex-direction: column;
+      font-optical-sizing: auto;
+      -webkit-font-smoothing: antialiased;
     }
 
     /* NAV */
@@ -36,9 +38,10 @@
       position: fixed; top: 0; left: 0; right: 0; z-index: 100;
       display: flex; align-items: center; justify-content: space-between;
       padding: 18px 48px;
-      background: rgba(12,14,19,0.88);
-      backdrop-filter: blur(18px);
-      border-bottom: 1px solid var(--border);
+      background: rgba(12,14,19,0.82);
+      backdrop-filter: blur(24px) saturate(180%);
+      -webkit-backdrop-filter: blur(24px) saturate(180%);
+      border-bottom: 1px solid rgba(255,255,255,0.06);
     }
     .nav-logo {
       font-weight: 900; font-size: 15px;
@@ -139,9 +142,11 @@
       font-size: 13px; font-weight: 800;
       padding: 12px 24px; border-radius: 40px;
       text-decoration: none;
-      transition: opacity 0.2s, transform 0.2s;
+      transition: opacity 0.2s, transform 0.35s cubic-bezier(0.16,1,0.3,1);
+      will-change: transform;
     }
-    .btn-primary:hover { opacity: 0.88; transform: translateY(-1px); }
+    .btn-primary:hover { opacity: 0.92; transform: translateY(-1px) scale(1.02); }
+    .btn-primary:active { transform: scale(0.97); opacity: 1; transition-duration: 0.1s; }
     .btn-ghost {
       display: inline-flex; align-items: center; gap: 8px;
       background: transparent; color: var(--text);
@@ -150,9 +155,11 @@
       padding: 12px 24px; border-radius: 40px;
       border: 1px solid var(--border);
       text-decoration: none;
-      transition: border-color 0.2s, color 0.2s;
+      transition: border-color 0.2s, color 0.2s, transform 0.35s cubic-bezier(0.16,1,0.3,1);
+      will-change: transform;
     }
-    .btn-ghost:hover { border-color: var(--text); }
+    .btn-ghost:hover { border-color: var(--text); transform: translateY(-1px); }
+    .btn-ghost:active { transform: scale(0.97); transition-duration: 0.1s; }
 
     /* FOOTER */
     footer {

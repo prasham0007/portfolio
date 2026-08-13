@@ -31,6 +31,8 @@
       color: var(--text);
       line-height: 1.6;
       overflow-x: hidden;
+      font-optical-sizing: auto;
+      -webkit-font-smoothing: antialiased;
     }
 
     /* SCROLL REVEAL */
@@ -67,10 +69,10 @@
       position: fixed; top: 0; left: 0; right: 0; z-index: 100;
       display: flex; align-items: center; justify-content: space-between;
       padding: 18px 48px;
-      background: rgba(12,14,19,0.88);
-      backdrop-filter: blur(18px);
-      -webkit-backdrop-filter: blur(18px);
-      border-bottom: 1px solid var(--border);
+      background: rgba(12,14,19,0.82);
+      backdrop-filter: blur(24px) saturate(180%);
+      -webkit-backdrop-filter: blur(24px) saturate(180%);
+      border-bottom: 1px solid rgba(255,255,255,0.06);
     }
     .nav-logo {
       font-family: 'Mulish', sans-serif;
@@ -167,19 +169,23 @@
       background: var(--amber); color: #0C0E13;
       padding: 13px 28px; border-radius: 40px;
       font-size: 14px; font-weight: 700; text-decoration: none;
-      transition: transform 0.25s var(--ease), opacity 0.2s;
+      transition: transform 0.35s var(--ease), opacity 0.2s;
       display: inline-flex; align-items: center; gap: 8px; cursor: pointer;
+      will-change: transform;
     }
-    .btn-primary:hover { transform: translateY(-2px); opacity: 0.88; }
+    .btn-primary:hover { transform: translateY(-2px) scale(1.02); opacity: 0.92; }
+    .btn-primary:active { transform: scale(0.97); opacity: 1; transition-duration: 0.1s; }
 
     .btn-ghost {
       border: 1px solid var(--border); color: var(--text);
       padding: 13px 28px; border-radius: 40px;
       font-size: 14px; font-weight: 600; text-decoration: none;
-      transition: border-color 0.2s, color 0.2s, transform 0.25s var(--ease);
+      transition: border-color 0.2s, color 0.2s, transform 0.35s var(--ease);
       display: inline-flex; align-items: center; gap: 8px; cursor: pointer;
+      will-change: transform;
     }
     .btn-ghost:hover { border-color: var(--amber); color: var(--amber); transform: translateY(-2px); }
+    .btn-ghost:active { transform: scale(0.97); transition-duration: 0.1s; }
 
     /* ── SECTIONS ── */
     section { padding: 96px 48px; }
@@ -593,56 +599,12 @@
   </div>
   <div class="project-list">
 
-    <div class="project-item reveal">
-      <div class="project-visual pv-1" data-num="01">
-        <div class="project-chip">Dashboard &middot; FinTech</div>
-      </div>
-      <div class="project-content">
-        <div class="project-number">Project 01</div>
-        <h3 class="project-title">ETF Product Ecosystem</h3>
-        <p class="project-desc">End-to-end design of a data-rich ETF dashboard and high-conversion buy journey. Led strategic UX decisions that drove an 81% surge in platform turnover and 34% growth in the client base, from 12.5k to 16.8k investors.</p>
-        <div class="project-footer">
-          <div class="project-tags">
-            <span class="tag">UX Research</span>
-            <span class="tag">Data Viz</span>
-            <span class="tag">Figma</span>
-            <span class="tag">Prototyping</span>
-          </div>
-          <span class="project-link-btn">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
-          </span>
-        </div>
-      </div>
-    </div>
-
-    <div class="project-item reverse reveal">
-      <div class="project-visual pv-2" data-num="02">
-        <div class="project-chip">Mobile &middot; Web</div>
-      </div>
-      <div class="project-content">
-        <div class="project-number">Project 02</div>
-        <h3 class="project-title">IPO Product Redesign</h3>
-        <p class="project-desc">Simplified a complex IPO application flow for both web and mobile. Streamlined the journey, removed drop-off points, and validated a 14% increase in engagement through structured user testing sessions.</p>
-        <div class="project-footer">
-          <div class="project-tags">
-            <span class="tag">User Testing</span>
-            <span class="tag">iOS</span>
-            <span class="tag">Android</span>
-            <span class="tag">Maze</span>
-          </div>
-          <span class="project-link-btn">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
-          </span>
-        </div>
-      </div>
-    </div>
-
     <a href="casestudy-navbar.html" class="project-item reveal">
-      <div class="project-visual pv-3" data-num="03">
+      <div class="project-visual pv-1" data-num="01">
         <div class="project-chip">Navigation &middot; IA</div>
       </div>
       <div class="project-content">
-        <div class="project-number">Project 03</div>
+        <div class="project-number">Project 01</div>
         <h3 class="project-title">Website Navigation Revamp</h3>
         <p class="project-desc">Orchestrated a full information architecture overhaul of the website navigation system. Improved findability and wayfinding resulted in a measurable 9% reduction in user drop-off during critical conversion paths.</p>
         <div class="project-footer">
@@ -658,7 +620,51 @@
       </div>
     </a>
 
-    <div class="project-item reverse reveal">
+    <a href="nda.html" class="project-item reverse reveal">
+      <div class="project-visual pv-2" data-num="02">
+        <div class="project-chip">Dashboard &middot; FinTech</div>
+      </div>
+      <div class="project-content">
+        <div class="project-number">Project 02</div>
+        <h3 class="project-title">ETF Product Ecosystem</h3>
+        <p class="project-desc">End-to-end design of a data-rich ETF dashboard and high-conversion buy journey. Led strategic UX decisions that drove an 81% surge in platform turnover and 34% growth in the client base, from 12.5k to 16.8k investors.</p>
+        <div class="project-footer">
+          <div class="project-tags">
+            <span class="tag">UX Research</span>
+            <span class="tag">Data Viz</span>
+            <span class="tag">Figma</span>
+            <span class="tag">Prototyping</span>
+          </div>
+          <span class="project-link-btn">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+          </span>
+        </div>
+      </div>
+    </a>
+
+    <a href="nda.html" class="project-item reveal">
+      <div class="project-visual pv-3" data-num="03">
+        <div class="project-chip">Mobile &middot; Web</div>
+      </div>
+      <div class="project-content">
+        <div class="project-number">Project 03</div>
+        <h3 class="project-title">IPO Product Redesign</h3>
+        <p class="project-desc">Simplified a complex IPO application flow for both web and mobile. Streamlined the journey, removed drop-off points, and validated a 14% increase in engagement through structured user testing sessions.</p>
+        <div class="project-footer">
+          <div class="project-tags">
+            <span class="tag">User Testing</span>
+            <span class="tag">iOS</span>
+            <span class="tag">Android</span>
+            <span class="tag">Maze</span>
+          </div>
+          <span class="project-link-btn">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+          </span>
+        </div>
+      </div>
+    </a>
+
+    <a href="nda.html" class="project-item reverse reveal">
       <div class="project-visual pv-4" data-num="04">
         <div class="project-chip">Complex UX &middot; Trading</div>
       </div>
@@ -677,7 +683,7 @@
           </span>
         </div>
       </div>
-    </div>
+    </a>
 
   </div>
 </section>
