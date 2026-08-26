@@ -348,9 +348,13 @@
     }
 
     .project-grid {
-      display: grid; grid-template-columns: 1fr 1fr; gap: 64px 40px;
-      align-items: start; position: relative; z-index: 1;
+      display: flex; gap: 40px; align-items: flex-start;
+      position: relative; z-index: 1;
     }
+    .project-col {
+      flex: 1; display: flex; flex-direction: column; gap: 64px;
+    }
+    .project-col--right { margin-top: 64px; }
     #work .section-head { position: relative; z-index: 1; }
 
     .project-card {
@@ -359,7 +363,6 @@
     }
     .project-card:hover { transform: translateY(-6px); }
     .project-card:active { transform: translateY(-2px) scale(0.99); transition-duration: 0.1s; }
-    .project-grid > .project-card:nth-child(even) { margin-top: 64px; }
 
     .pcard-visual-wrap {
       overflow: hidden; position: relative; aspect-ratio: 16/9;
@@ -371,18 +374,17 @@
       position: relative; transition: transform 0.6s var(--ease); will-change: transform;
     }
     .project-card:hover .pcard-visual { transform: scale(1.04); }
-    .pv-1 { background: linear-gradient(145deg, #C8DCEF 0%, #A0C3E4 100%); }
+    .pv-1 { background: linear-gradient(145deg, #C8DCEF 0%, #A0C3E4 100%); position: relative; }
+    .pv-1::after { display: none; }
+    .pv-1 .pv-mockup {
+      position: absolute; bottom: 0; left: 50%; transform: translateX(-50%);
+      width: 90%; pointer-events: none; display: block;
+      filter: drop-shadow(0 16px 40px rgba(0,0,0,0.28)) drop-shadow(0 2px 8px rgba(0,0,0,0.18));
+    }
     .pv-2 { background: linear-gradient(145deg, #CEC4E8 0%, #B0A0D8 100%); }
     .pv-3 { background: linear-gradient(145deg, #B8DDD0 0%, #90C8B6 100%); }
     .pv-4 { background: linear-gradient(145deg, #F2D4BB 0%, #E8B899 100%); }
-    .pcard-visual::after {
-      content: attr(data-num); position: absolute;
-      right: -10px; bottom: -24px;
-      font-family: 'Mulish', sans-serif;
-      font-size: 180px; font-weight: 900; line-height: 1;
-      color: rgba(0,0,0,0.06); letter-spacing: -0.05em;
-      user-select: none; pointer-events: none;
-    }
+    .pcard-visual::after { display: none; }
     .pcard-chip {
       position: absolute; top: 16px; left: 16px;
       background: rgba(255,255,255,0.72); backdrop-filter: blur(8px);
@@ -416,8 +418,9 @@
     .project-card:hover .pcard-arrow { background: #181818; color: #fff; border-color: #181818; }
 
     @media (max-width: 1024px) {
-      .project-grid { grid-template-columns: 1fr; }
-      .project-grid > .project-card:nth-child(even) { margin-top: 0; }
+      .project-grid { flex-direction: column; gap: 0; }
+      .project-col { gap: 48px; }
+      .project-col--right { margin-top: 0; }
     }
 
     /* ── SKILLS ── */
@@ -711,8 +714,9 @@
       #tools .section-head { padding: 0 48px; }
       .tools-marquee-wrap { margin-left: -48px; margin-right: -48px; }
 
-      .project-grid { grid-template-columns: 1fr; gap: 48px; }
-      .project-grid > .project-card:nth-child(even) { margin-top: 0; }
+      .project-grid { flex-direction: column; gap: 0; }
+      .project-col { gap: 48px; }
+      .project-col--right { margin-top: 0; }
 
       .skills-tabs { grid-template-columns: 1fr; gap: 32px; }
       .skills-content { min-height: 360px; }
@@ -762,8 +766,9 @@
       #tools .section-head { padding: 0 20px; }
       .tools-marquee-wrap { margin-left: -20px; margin-right: -20px; margin-top: 72px; }
 
-      .project-grid { grid-template-columns: 1fr; gap: 40px; }
-      .project-grid > .project-card:nth-child(even) { margin-top: 0; }
+      .project-grid { flex-direction: column; gap: 0; }
+      .project-col { gap: 40px; }
+      .project-col--right { margin-top: 0; }
       .pcard-title { font-size: 22px; }
       .pcard-desc { font-size: 15px; }
 
@@ -862,90 +867,94 @@
   </div>
   <div class="project-grid">
 
-    <a href="casestudy-navbar.html" class="project-card reveal">
-      <div class="pcard-visual-wrap">
-        <div class="pcard-visual pv-1" data-num="01"></div>
-        <div class="pcard-chip">Website</div>
-      </div>
-      <div class="pcard-body">
-        <h3 class="pcard-title">Website Navigation Revamp<span class="dot">.</span></h3>
-        <p class="pcard-desc">Orchestrated a full IA overhaul of the navigation system. Improved findability resulted in a measurable 9% reduction in user drop-off during critical conversion paths.</p>
-        <div class="pcard-footer">
-          <div class="pcard-tags">
-            <span class="pcard-tag">IA</span>
-            <span class="pcard-tag">UX Audit</span>
-            <span class="pcard-tag">Data Driven</span>
-            <span class="pcard-tag">UI</span>
-          </div>
-          <span class="pcard-arrow">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
-          </span>
+    <div class="project-col project-col--left">
+      <a href="casestudy-navbar.html" class="project-card reveal">
+        <div class="pcard-visual-wrap" style="aspect-ratio: 16/5.5;">
+          <div class="pcard-visual pv-1" data-num="01"><img src="images/mock.svg" class="pv-mockup" alt=""/></div>
+          <div class="pcard-chip">Website</div>
         </div>
-      </div>
-    </a>
+        <div class="pcard-body">
+          <h3 class="pcard-title">Website Navigation Revamp<span class="dot">.</span></h3>
+          <p class="pcard-desc">Orchestrated a full IA overhaul of the navigation system. Improved findability resulted in a measurable 9% reduction in user drop-off during critical conversion paths.</p>
+          <div class="pcard-footer">
+            <div class="pcard-tags">
+              <span class="pcard-tag">IA</span>
+              <span class="pcard-tag">UX Audit</span>
+              <span class="pcard-tag">Data Driven</span>
+              <span class="pcard-tag">UI</span>
+            </div>
+            <span class="pcard-arrow">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+            </span>
+          </div>
+        </div>
+      </a>
 
-    <a href="nda.html" class="project-card reveal reveal-d1">
-      <div class="pcard-visual-wrap">
-        <div class="pcard-visual pv-2" data-num="02"></div>
-        <div class="pcard-chip">Mobile &middot; Web App</div>
-      </div>
-      <div class="pcard-body">
-        <h3 class="pcard-title">ETF Product Ecosystem<span class="dot">.</span></h3>
-        <p class="pcard-desc">End-to-end design of a data-rich ETF dashboard and high-conversion buy journey. Led strategic UX decisions that drove an 81% surge in platform turnover.</p>
-        <div class="pcard-footer">
-          <div class="pcard-tags">
-            <span class="pcard-tag">UX Research</span>
-            <span class="pcard-tag">Dashboard</span>
-            <span class="pcard-tag">Revenue Growth</span>
-          </div>
-          <span class="pcard-arrow">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
-          </span>
+      <a href="nda.html" class="project-card reveal reveal-d2">
+        <div class="pcard-visual-wrap">
+          <div class="pcard-visual pv-3" data-num="03"></div>
+          <div class="pcard-chip">Mobile &middot; Web App</div>
         </div>
-      </div>
-    </a>
+        <div class="pcard-body">
+          <h3 class="pcard-title">IPO Product Redesign<span class="dot">.</span></h3>
+          <p class="pcard-desc">Simplified a complex IPO application flow for web and mobile. Streamlined the journey and validated a 14% increase in engagement through structured user testing.</p>
+          <div class="pcard-footer">
+            <div class="pcard-tags">
+              <span class="pcard-tag">UX Research</span>
+              <span class="pcard-tag">Redesign</span>
+              <span class="pcard-tag">User Testing</span>
+            </div>
+            <span class="pcard-arrow">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+            </span>
+          </div>
+        </div>
+      </a>
+    </div>
 
-    <a href="nda.html" class="project-card reveal reveal-d2">
-      <div class="pcard-visual-wrap">
-        <div class="pcard-visual pv-3" data-num="03"></div>
-        <div class="pcard-chip">Mobile &middot; Web App</div>
-      </div>
-      <div class="pcard-body">
-        <h3 class="pcard-title">IPO Product Redesign<span class="dot">.</span></h3>
-        <p class="pcard-desc">Simplified a complex IPO application flow for web and mobile. Streamlined the journey and validated a 14% increase in engagement through structured user testing.</p>
-        <div class="pcard-footer">
-          <div class="pcard-tags">
-            <span class="pcard-tag">UX Research</span>
-            <span class="pcard-tag">Redesign</span>
-            <span class="pcard-tag">User Testing</span>
-          </div>
-          <span class="pcard-arrow">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
-          </span>
+    <div class="project-col project-col--right">
+      <a href="nda.html" class="project-card reveal reveal-d1">
+        <div class="pcard-visual-wrap">
+          <div class="pcard-visual pv-2" data-num="02"></div>
+          <div class="pcard-chip">Mobile &middot; Web App</div>
         </div>
-      </div>
-    </a>
+        <div class="pcard-body">
+          <h3 class="pcard-title">ETF Product Ecosystem<span class="dot">.</span></h3>
+          <p class="pcard-desc">End-to-end design of a data-rich ETF dashboard and high-conversion buy journey. Led strategic UX decisions that drove an 81% surge in platform turnover.</p>
+          <div class="pcard-footer">
+            <div class="pcard-tags">
+              <span class="pcard-tag">UX Research</span>
+              <span class="pcard-tag">Dashboard</span>
+              <span class="pcard-tag">Revenue Growth</span>
+            </div>
+            <span class="pcard-arrow">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+            </span>
+          </div>
+        </div>
+      </a>
 
-    <a href="nda.html" class="project-card reveal reveal-d3">
-      <div class="pcard-visual-wrap">
-        <div class="pcard-visual pv-4" data-num="04"></div>
-        <div class="pcard-chip">Website &middot; Web App</div>
-      </div>
-      <div class="pcard-body">
-        <h3 class="pcard-title">Algorithmic Trading Platform<span class="dot">.</span></h3>
-        <p class="pcard-desc">Lead designer on a high-complexity algo trading platform for professional traders. Defined IA, end-to-end workflow mapping, and high-fidelity prototyping. In development.</p>
-        <div class="pcard-footer">
-          <div class="pcard-tags">
-            <span class="pcard-tag">Complex UX</span>
-            <span class="pcard-tag">IA</span>
-            <span class="pcard-tag">Prototyping</span>
-          </div>
-          <span class="pcard-arrow">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
-          </span>
+      <a href="nda.html" class="project-card reveal reveal-d3">
+        <div class="pcard-visual-wrap">
+          <div class="pcard-visual pv-4" data-num="04"></div>
+          <div class="pcard-chip">Website &middot; Web App</div>
         </div>
-      </div>
-    </a>
+        <div class="pcard-body">
+          <h3 class="pcard-title">Algorithmic Trading Platform<span class="dot">.</span></h3>
+          <p class="pcard-desc">Lead designer on a high-complexity algo trading platform for professional traders. Defined IA, end-to-end workflow mapping, and high-fidelity prototyping. In development.</p>
+          <div class="pcard-footer">
+            <div class="pcard-tags">
+              <span class="pcard-tag">Complex UX</span>
+              <span class="pcard-tag">IA</span>
+              <span class="pcard-tag">Prototyping</span>
+            </div>
+            <span class="pcard-arrow">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+            </span>
+          </div>
+        </div>
+      </a>
+    </div>
 
   </div>
 </section>
