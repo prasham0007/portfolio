@@ -13,8 +13,8 @@
       --surface: #1F1F1F;
       --surface2: #272727;
       --border: #2E2E2E;
-      --amber: #F5A623;
-      --amber-dim: rgba(245,166,35,0.10);
+      --amber: #F04A23;
+      --amber-dim: rgba(240,74,35,0.10);
       --text: #FAF9F7;
       --muted: #888784;
       --white: #FAF9F7;
@@ -66,44 +66,82 @@
     }
 
     /* FOCUS */
-    :focus-visible { outline: 2px solid var(--amber); outline-offset: 3px; border-radius: 4px; }
+    :focus-visible { outline: 2px solid rgba(255,255,255,0.5); outline-offset: 3px; border-radius: 4px; }
 
     /* ── NAV ── */
     nav {
       position: fixed; top: 0; left: 0; right: 0; z-index: 100;
       display: flex; align-items: center; justify-content: space-between;
-      padding: 18px 48px;
-      background: rgba(12,14,19,0.82);
-      backdrop-filter: blur(24px) saturate(180%);
-      -webkit-backdrop-filter: blur(24px) saturate(180%);
-      border-bottom: 1px solid rgba(255,255,255,0.06);
+      padding: 0 80px; height: 116px;
+      transition: transform 0.4s var(--ease);
+      background: rgba(24,24,24,0.88);
+      backdrop-filter: blur(20px) saturate(140%);
+      -webkit-backdrop-filter: blur(20px) saturate(140%);
+      border-bottom: none;
     }
     @media (prefers-reduced-transparency: reduce) {
-      nav { background: #0C0E13; backdrop-filter: none; -webkit-backdrop-filter: none; }
+      nav { background: var(--bg); backdrop-filter: none; -webkit-backdrop-filter: none; }
     }
     .nav-logo {
-      font-family: var(--serif);
+      font-family: 'Mulish', sans-serif;
       font-weight: 600; font-size: 20px;
-      letter-spacing: 0.01em;
+      letter-spacing: 0.08em; text-transform: uppercase;
       color: var(--white); text-decoration: none;
       transition: opacity 0.2s;
     }
     .nav-logo:hover { opacity: 0.7; }
     .nav-logo span { color: var(--amber); }
 
-    .nav-availability {
-      display: inline-flex; align-items: center; gap: 8px;
-      border: 1px solid rgba(255,255,255,0.1); border-radius: 40px;
-      padding: 7px 16px;
-      font-size: 12px; font-weight: 600; color: var(--text);
-      transition: border-color 0.2s;
+    /* Combined availability + CTA button */
+    .nav-combo-btn {
+      display: inline-flex; align-items: center; gap: 7px;
+      padding: 8px 14px; border-radius: 40px;
+      border: 1px solid transparent;
+      text-decoration: none; cursor: pointer;
+      transition: border-color 0.35s ease, background 0.35s ease, gap 0.25s ease;
+      font-size: 13px; font-weight: 600; color: var(--text);
+      white-space: nowrap;
     }
-    .nav-availability:hover { border-color: rgba(255,255,255,0.25); }
+    .nav-combo-btn:hover { gap: 0; }
+    .nav-combo-btn:hover {
+      border-color: #22c55e;
+      background: rgba(34,197,94,0.06);
+    }
+    .nav-avail-dot {
+      transition: opacity 0.25s ease, width 0.25s ease, margin 0.25s ease;
+    }
+    .nav-combo-btn:hover .nav-avail-dot {
+      opacity: 0; width: 0; margin: 0;
+      animation: none;
+    }
+    .nav-combo-label {
+      position: relative; display: inline-block;
+      /* sized by whichever child is wider */
+    }
+    .nav-combo-available {
+      display: block; white-space: nowrap;
+      transition: opacity 0.28s ease, transform 0.28s ease;
+    }
+    .nav-combo-talk {
+      position: absolute; left: 0; right: 0; top: 50%;
+      transform: translateY(calc(-50% + 5px));
+      white-space: nowrap; opacity: 0;
+      display: inline-flex; align-items: center; gap: 6px;
+      transition: opacity 0.28s ease, transform 0.28s ease;
+      justify-content: center;
+    }
+    .nav-combo-btn:hover .nav-combo-available {
+      opacity: 0; transform: translateY(-5px);
+    }
+    .nav-combo-btn:hover .nav-combo-talk {
+      opacity: 1; transform: translateY(-50%);
+    }
     .nav-avail-dot {
       width: 8px; height: 8px; border-radius: 50%;
-      background: #22c55e; flex-shrink: 0;
+      background: #22c55e; flex-shrink: 0; overflow: hidden;
       box-shadow: 0 0 0 0 rgba(34,197,94,0.4);
       animation: pulse-green 2s infinite;
+      transition: opacity 0.25s ease, width 0.25s ease;
     }
     @keyframes pulse-green {
       0%   { box-shadow: 0 0 0 0 rgba(34,197,94,0.5); }
@@ -113,7 +151,10 @@
 
     .nav-right { display: flex; align-items: center; gap: 12px; }
 
-    .nav-links { display: flex; gap: 28px; list-style: none; }
+    .nav-links {
+      display: flex; gap: 28px; list-style: none;
+      position: absolute; left: 50%; transform: translateX(-50%);
+    }
     .nav-links a {
       font-size: 12px; font-weight: 600; letter-spacing: 0.06em;
       text-transform: uppercase; color: var(--muted);
@@ -129,7 +170,7 @@
       text-decoration: none; transition: border-color 0.2s, color 0.2s, transform 0.35s var(--ease);
       cursor: pointer; will-change: transform;
     }
-    .nav-cta:hover { border-color: var(--amber); color: var(--amber); transform: translateY(-1px); }
+    .nav-cta:hover { border-color: rgba(255,255,255,0.4); color: var(--white); transform: translateY(-1px); }
     .nav-cta:active { transform: scale(0.96); transition-duration: 0.1s; }
 
     .nav-burger {
@@ -139,22 +180,25 @@
       padding: 8px; line-height: 0;
       transition: border-color 0.2s, color 0.2s;
     }
-    .nav-burger:hover { border-color: var(--amber); color: var(--amber); }
+    .nav-burger:hover { border-color: rgba(255,255,255,0.3); color: var(--white); }
 
     /* ── HERO ── */
     #hero {
-      min-height: 100svh;
+      height: 100svh;
       display: flex; flex-direction: column;
       justify-content: flex-end; align-items: flex-start;
       padding: 160px 80px 100px;
       text-align: left;
-      position: relative; overflow: hidden;
+      position: sticky; top: 0; z-index: 1;
+      overflow: hidden;
+      transform-origin: 50% 40%;
+      will-change: transform, filter;
     }
     #hero::before {
       content: ''; position: absolute;
       top: -280px; right: -280px;
       width: 760px; height: 760px;
-      background: radial-gradient(circle, rgba(245,166,35,0.055) 0%, transparent 60%);
+      background: radial-gradient(circle, rgba(255,255,255,0.03) 0%, transparent 60%);
       pointer-events: none;
     }
     #hero::after {
@@ -166,18 +210,18 @@
     }
 
     .hero-eyebrow {
-      display: inline-flex; align-items: center; gap: 8px;
-      background: rgba(255,255,255,0.07);
-      border: 1px solid rgba(255,255,255,0.12);
-      border-radius: 4px; padding: 7px 16px;
-      font-size: 13px; font-weight: 500; letter-spacing: 0.02em;
-      color: var(--muted); margin-bottom: 40px;
+      display: inline-flex; align-items: center; gap: 10px;
+      background: transparent;
+      border: 1px solid rgba(255,255,255,0.22);
+      border-radius: 999px; padding: 10px 22px;
+      font-size: 15px; font-weight: 500; letter-spacing: 0.01em;
+      color: var(--text); margin-bottom: 40px;
       animation: fadeUp 0.5s var(--ease) 0.1s both;
     }
     .hero-title {
       font-family: 'Mulish', sans-serif;
-      font-size: clamp(52px, 8vw, 110px);
-      font-weight: 900; line-height: 0.95;
+      font-size: clamp(52px, 10.4vw, 178px);
+      font-weight: 800; line-height: 0.93;
       color: var(--white); margin-bottom: 40px;
       letter-spacing: -0.04em;
       font-optical-sizing: auto;
@@ -188,7 +232,7 @@
 
     .hero-sub {
       font-size: 16px; color: var(--muted);
-      max-width: 440px; margin: 0 0 48px;
+      max-width: 440px; margin: 0;
       line-height: 1.8;
       animation: fadeUp 0.65s var(--ease) 0.35s both;
     }
@@ -197,16 +241,39 @@
       animation: fadeUp 0.65s var(--ease) 0.48s both;
     }
 
+    /* Sub + stats side by side — full width */
+    .hero-sub-row {
+      display: flex; align-items: center;
+      width: 100%; margin-bottom: 52px;
+    }
+    .hero-sub-row .hero-sub {
+      margin-bottom: 0; width: 42%; flex-shrink: 0; max-width: none;
+      padding-right: 56px;
+    }
+    @media (max-width: 1024px) {
+      .hero-sub-row {
+        flex-direction: column; align-items: flex-start; gap: 32px;
+      }
+      .hero-sub-row .hero-sub { width: 100%; padding-right: 0; }
+      .hero-stats { padding-left: 0; justify-content: flex-start; gap: 40px; }
+    }
+
     /* Stats row — Jon Prinz style */
     .hero-stats {
-      display: flex; gap: 48px; margin-bottom: 52px;
+      display: grid; grid-template-columns: repeat(3, 1fr);
+      flex: 1; align-self: stretch; align-items: center;
+      padding-left: 56px;
       animation: fadeUp 0.65s var(--ease) 0.56s both;
     }
+    .hero-stats > div {
+      min-width: 5ch;
+    }
     .hero-stat-num {
-      font-family: var(--serif);
+      font-family: 'Mulish', sans-serif;
       font-size: clamp(36px, 4vw, 56px);
-      font-weight: 700; color: var(--white);
+      font-weight: 900; color: var(--white);
       line-height: 1; margin-bottom: 4px;
+      font-variant-numeric: tabular-nums;
     }
     .hero-stat-label {
       font-size: 10px; font-weight: 700; letter-spacing: 0.14em;
@@ -215,16 +282,25 @@
 
     /* BUTTONS — ghost system matching reference */
     .btn-primary {
-      background: transparent; color: var(--amber);
-      border: 1px solid var(--amber);
+      background: transparent; color: var(--white);
+      border: 1px solid rgba(255,255,255,0.35);
       padding: 13px 28px; border-radius: 40px;
       font-size: 14px; font-weight: 700; text-decoration: none;
-      transition: background 0.2s, color 0.2s, transform 0.35s var(--ease);
+      transition: background 0.2s, color 0.2s, border-color 0.2s, transform 0.35s var(--ease);
       display: inline-flex; align-items: center; gap: 8px; cursor: pointer;
       will-change: transform;
     }
-    .btn-primary:hover { background: var(--amber); color: #181818; transform: translateY(-2px); }
+    .btn-primary:hover { background: rgba(255,255,255,0.1); border-color: rgba(255,255,255,0.6); transform: translateY(-2px); }
     .btn-primary:active { transform: scale(0.97); transition-duration: 0.1s; }
+    .btn-tertiary {
+      background: transparent; color: var(--muted);
+      border: none; padding: 13px 4px;
+      font-size: 14px; font-weight: 600; text-decoration: none;
+      transition: color 0.2s, transform 0.35s var(--ease);
+      display: inline-flex; align-items: center; gap: 6px; cursor: pointer;
+    }
+    .btn-tertiary:hover { color: var(--white); transform: translateY(-2px); }
+    .btn-tertiary:active { transform: scale(0.97); transition-duration: 0.1s; }
 
     .btn-ghost {
       border: 1px solid rgba(255,255,255,0.18); color: var(--muted);
@@ -238,175 +314,189 @@
     .btn-ghost:active { transform: scale(0.97); transition-duration: 0.1s; }
 
     /* ── SECTIONS ── */
-    section { padding: 96px 48px; }
+    section { padding: 128px; position: relative; z-index: 2; }
     .section-eyebrow {
-      font-size: 11px; font-weight: 700; letter-spacing: 0.18em;
-      text-transform: uppercase; color: var(--amber); margin-bottom: 12px;
+      font-size: 14px; font-weight: 600; letter-spacing: 0.14em;
+      text-transform: uppercase; color: var(--muted); margin-bottom: 14px;
     }
     .section-title {
       font-family: 'Mulish', sans-serif;
-      font-size: clamp(32px, 3.5vw, 54px);
-      font-weight: 900; color: var(--white);
-      letter-spacing: -0.03em; line-height: 1.04; margin-bottom: 14px;
+      font-size: clamp(26px, 2.6vw, 36px);
+      font-weight: 700; color: var(--white);
+      letter-spacing: -0.025em; line-height: 1.1; margin-bottom: 14px;
       font-optical-sizing: auto;
     }
     .section-title .dot { color: var(--amber); }
 
-    /* Cream section (work) */
-    .section-cream .section-title { color: var(--ink); }
-    .section-cream .section-eyebrow { color: #B07D1A; }
-    .section-cream .section-sub { color: var(--ink-muted); }
     .section-sub { font-size: 16px; color: var(--muted); max-width: 540px; line-height: 1.75; }
     .section-head { margin-bottom: 52px; }
 
     /* ── WORK ── */
-    #work { background: var(--bg); }
-    .project-list {
-      display: flex; flex-direction: column; gap: 2px;
-      border: 1px solid var(--border); border-radius: var(--radius); overflow: hidden;
+    #work {
+      background: #FAF9F7;
+      position: relative; z-index: 2;
     }
-    .project-item {
-      background: var(--surface); border-bottom: 1px solid var(--border);
-      display: grid; grid-template-columns: 1fr 1.5fr;
-      transition: background 0.4s var(--ease), transform 0.35s var(--ease), box-shadow 0.35s var(--ease);
-      min-height: 340px;
-      text-decoration: none; color: inherit; cursor: default;
-      will-change: transform;
-    }
-    .project-item:last-child { border-bottom: none; }
-    .project-item:hover { background: var(--surface2); }
-    a.project-item:hover {
-      transform: translateY(-3px);
-      box-shadow: 0 16px 48px rgba(0,0,0,0.40);
-      z-index: 1; position: relative;
-    }
-    a.project-item:active { transform: translateY(0) scale(0.995); transition-duration: 0.1s; }
-    .project-item:hover .project-link-btn {
-      background: var(--amber); color: #181818; border-color: var(--amber);
-    }
-    a.project-item { cursor: pointer; }
+    #work .section-eyebrow { color: #999; }
+    #work .section-title { color: #181818; }
+    #work .section-sub { color: #666; }
 
-    .project-item.reverse { grid-template-columns: 1.5fr 1fr; }
-    .project-item.reverse .project-visual { grid-column: 2; grid-row: 1; }
-    .project-item.reverse .project-content { grid-column: 1; grid-row: 1; }
+    /* Work flood overlay */
+    #work-flood {
+      position: absolute; inset: 0; pointer-events: none; z-index: 0;
+      opacity: 0;
+      clip-path: circle(0% at 50% 50%);
+    }
 
-    .project-visual {
-      position: relative; overflow: hidden;
+    .project-grid {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 64px 40px;
+      align-items: start; position: relative; z-index: 1;
+    }
+    #work .section-head { position: relative; z-index: 1; }
+
+    .project-card {
+      text-decoration: none; color: inherit; display: block; cursor: pointer;
+      transition: transform 0.5s var(--ease);
+    }
+    .project-card:hover { transform: translateY(-6px); }
+    .project-card:active { transform: translateY(-2px) scale(0.99); transition-duration: 0.1s; }
+    .project-grid > .project-card:nth-child(even) { margin-top: 64px; }
+
+    .pcard-visual-wrap {
+      overflow: hidden; position: relative; aspect-ratio: 16/9;
+      border-radius: 0; margin-bottom: 28px;
+    }
+    .pcard-visual {
+      width: 100%; height: 115%;
       display: flex; align-items: center; justify-content: center;
+      position: relative; transition: transform 0.6s var(--ease); will-change: transform;
     }
-    .pv-1 { background: linear-gradient(145deg, #0b1828 0%, #102244 100%); }
-    .pv-2 { background: linear-gradient(145deg, #13092b 0%, #1f1042 100%); }
-    .pv-3 { background: linear-gradient(145deg, #091b20 0%, #0f3038 100%); }
-    .pv-4 { background: linear-gradient(145deg, #091c11 0%, #0e3020 100%); }
-
-    .project-visual::before {
-      content: ''; position: absolute; inset: 0;
-      background-image: radial-gradient(circle, rgba(255,255,255,0.025) 1px, transparent 1px);
-      background-size: 30px 30px;
-    }
-    .project-visual::after {
+    .project-card:hover .pcard-visual { transform: scale(1.04); }
+    .pv-1 { background: linear-gradient(145deg, #C8DCEF 0%, #A0C3E4 100%); }
+    .pv-2 { background: linear-gradient(145deg, #CEC4E8 0%, #B0A0D8 100%); }
+    .pv-3 { background: linear-gradient(145deg, #B8DDD0 0%, #90C8B6 100%); }
+    .pv-4 { background: linear-gradient(145deg, #F2D4BB 0%, #E8B899 100%); }
+    .pcard-visual::after {
       content: attr(data-num); position: absolute;
-      right: -14px; bottom: -28px;
+      right: -10px; bottom: -24px;
       font-family: 'Mulish', sans-serif;
-      font-size: 200px; font-weight: 900;
-      color: rgba(255,255,255,0.032); line-height: 1;
-      letter-spacing: -0.05em; user-select: none; pointer-events: none;
+      font-size: 180px; font-weight: 900; line-height: 1;
+      color: rgba(0,0,0,0.06); letter-spacing: -0.05em;
+      user-select: none; pointer-events: none;
     }
-    .project-chip {
-      position: absolute; top: 20px; left: 20px;
-      background: rgba(12,14,19,0.75); backdrop-filter: blur(8px);
-      border: 1px solid rgba(255,255,255,0.1); border-radius: 40px;
-      padding: 5px 14px; font-size: 11px; font-weight: 700;
-      color: var(--amber); letter-spacing: 0.08em; text-transform: uppercase;
+    .pcard-chip {
+      position: absolute; top: 16px; left: 16px;
+      background: rgba(255,255,255,0.72); backdrop-filter: blur(8px);
+      border: 1px solid rgba(0,0,0,0.07); border-radius: 40px;
+      padding: 5px 13px; font-size: 10px; font-weight: 700;
+      color: #555; letter-spacing: 0.08em; text-transform: uppercase;
     }
-    .project-content {
-      padding: 44px 40px; display: flex;
-      flex-direction: column; justify-content: center;
-    }
-    .project-number {
-      font-size: 11px; font-weight: 700; color: var(--muted);
-      letter-spacing: 0.14em; text-transform: uppercase; margin-bottom: 12px;
-    }
-    .project-title {
+    .pcard-body { padding: 0; background: transparent; }
+    .pcard-title {
       font-family: 'Mulish', sans-serif;
-      font-size: 22px; font-weight: 800; color: var(--white);
-      margin-bottom: 12px; line-height: 1.2;
+      font-size: 28px; font-weight: 800; color: #181818;
+      line-height: 1.2; margin-bottom: 12px; letter-spacing: -0.02em;
     }
-    .project-desc { font-size: 14px; color: var(--muted); line-height: 1.75; margin-bottom: 28px; }
-    .project-footer { display: flex; align-items: center; justify-content: space-between; gap: 16px; }
-    .project-tags { display: flex; gap: 6px; flex-wrap: wrap; }
-    .tag {
-      background: var(--surface2); border: 1px solid var(--border); border-radius: 6px;
-      padding: 4px 11px; font-size: 11px; font-weight: 600; color: var(--muted);
+    .pcard-title .dot { color: var(--amber); }
+    .pcard-desc { font-size: 16px; color: #666; line-height: 1.7; margin-bottom: 24px; }
+    .pcard-footer { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+    .pcard-tags { display: flex; gap: 5px; flex-wrap: wrap; }
+    .pcard-tag {
+      background: rgba(0,0,0,0.06); border-radius: 999px;
+      padding: 4px 12px; font-size: 11px; font-weight: 600; color: #555;
+      transition: background 0.2s;
     }
-    .project-link-btn {
-      width: 40px; height: 40px; min-width: 40px; border-radius: 50%;
-      border: 1px solid var(--border); display: flex; align-items: center;
-      justify-content: center; color: var(--muted);
-      transition: background 0.2s, color 0.2s, border-color 0.2s;
+    .project-card:hover .pcard-tag { background: rgba(0,0,0,0.1); }
+    .pcard-arrow {
+      width: 36px; height: 36px; min-width: 36px; border-radius: 50%;
+      border: 1px solid rgba(0,0,0,0.14);
+      display: flex; align-items: center; justify-content: center;
+      color: #999; flex-shrink: 0;
+      transition: background 0.25s, color 0.25s, border-color 0.25s;
+    }
+    .project-card:hover .pcard-arrow { background: #181818; color: #fff; border-color: #181818; }
+
+    @media (max-width: 1024px) {
+      .project-grid { grid-template-columns: 1fr; }
+      .project-grid > .project-card:nth-child(even) { margin-top: 0; }
     }
 
     /* ── SKILLS ── */
-    #skills { background: var(--surface); }
-    .skills-grid {
-      display: grid; grid-template-columns: 1fr 1fr; gap: 2px;
-      border: 1px solid var(--border); border-radius: var(--radius); overflow: hidden;
+    #skills { background: var(--surface); position: relative; z-index: 2; }
+    /* Skills split layout */
+    /* Skills tabs – split collage layout */
+    .skills-tabs {
+      display: grid; grid-template-columns: 340px 1fr; gap: 80px; align-items: start;
     }
-    .skill-item {
-      background: var(--bg); padding: 40px;
-      border-right: 1px solid var(--border); border-bottom: 1px solid var(--border);
-      transition: background 0.25s; position: relative;
+    .skills-tab-list {
+      display: flex; flex-wrap: wrap; gap: 12px; align-content: flex-start;
     }
-    .skill-item::before {
-      content: ''; position: absolute; left: 0; top: 0; bottom: 0;
-      width: 3px; background: var(--amber); opacity: 0; transition: opacity 0.25s;
+    .skill-tab {
+      padding: 14px 28px; cursor: default;
+      font-family: 'Mulish', sans-serif; font-size: 16px; font-weight: 800;
+      color: var(--muted); white-space: nowrap;
+      border: 1.5px solid var(--border); border-radius: 100px;
+      background: transparent;
+      position: relative; transition: color 0.25s, background 0.25s, border-color 0.25s, transform 0.25s var(--ease);
+      flex: none;
     }
-    .skill-item:hover { background: var(--surface); }
-    .skill-item:hover::before { opacity: 1; }
-    .skill-item:nth-child(even) { border-right: none; }
-    .skill-item:nth-last-child(-n+2) { border-bottom: none; }
-    .skill-label {
-      font-size: 11px; font-weight: 700; color: var(--amber);
-      letter-spacing: 0.14em; text-transform: uppercase; margin-bottom: 10px;
+    .skill-tab.active {
+      color: var(--white); background: var(--surface2);
+      border-color: rgba(255,255,255,0.5);
+      transform: scale(1.06);
     }
-    .skill-name {
+    .skill-tab:hover { color: var(--white); border-color: rgba(255,255,255,0.3); transform: scale(1.04); }
+
+    .skills-content { position: relative; min-height: 320px; }
+    .skill-panel {
+      position: absolute; inset: 0;
+      opacity: 0; transition: opacity 0.3s ease;
+      pointer-events: none;
+    }
+    .skill-panel.active { opacity: 1; pointer-events: auto; }
+    .skill-panel-left { margin-bottom: 28px; }
+    .skill-detail-eyebrow {
+      font-size: 10px; font-weight: 700; letter-spacing: 0.14em;
+      text-transform: uppercase; color: var(--amber); margin-bottom: 12px;
+    }
+    .skill-detail-heading {
       font-family: 'Mulish', sans-serif;
-      font-size: 17px; font-weight: 800; color: var(--white);
-      margin-bottom: 10px; line-height: 1.25;
+      font-size: clamp(24px, 2.4vw, 32px); font-weight: 800; color: var(--white);
+      line-height: 1.15; margin-bottom: 16px; letter-spacing: -0.02em;
     }
-    .skill-desc { font-size: 14px; color: var(--muted); line-height: 1.7; }
-    .skill-points { list-style: none; margin-top: 14px; display: flex; flex-direction: column; gap: 7px; }
+    .skill-desc { font-size: 15px; color: var(--muted); line-height: 1.8; }
+    .skill-points { list-style: none; display: flex; flex-direction: column; gap: 10px; padding-top: 4px; }
     .skill-points li {
-      font-size: 13px; color: var(--muted); line-height: 1.5; padding-left: 16px; position: relative;
+      font-size: 14px; color: var(--muted); line-height: 1.5; padding-left: 18px; position: relative;
     }
     .skill-points li::before {
       content: ''; position: absolute; left: 0; top: 7px;
       width: 5px; height: 5px;
-      border-top: 1.5px solid var(--amber); border-right: 1.5px solid var(--amber);
+      border-top: 1.5px solid rgba(255,255,255,0.3); border-right: 1.5px solid rgba(255,255,255,0.3);
       transform: rotate(45deg);
     }
 
     /* ── TOOLS ── */
     #tools { background: var(--bg); padding-left: 0; padding-right: 0; }
-    #tools .section-head { padding: 0 48px; margin-bottom: 44px; }
+    #tools .section-head { padding: 0 80px; margin-bottom: 44px; }
     .tools-marquee-wrap {
-      position: relative; overflow: hidden;
+      position: relative; overflow: hidden; margin-top: 168px;
+      margin-left: -128px; margin-right: -128px;
       mask-image: linear-gradient(to right, transparent 0%, black 6%, black 94%, transparent 100%);
       -webkit-mask-image: linear-gradient(to right, transparent 0%, black 6%, black 94%, transparent 100%);
     }
     .tools-track {
-      display: flex; gap: 14px; width: max-content;
+      display: flex; gap: 40px; width: max-content;
       animation: marquee 34s linear infinite; padding: 4px 0;
     }
     .tools-track:hover { animation-play-state: paused; }
     .tool-card {
-      background: var(--surface); border: 1px solid var(--border);
-      border-radius: var(--radius); padding: 20px 18px;
+      background: transparent; border: none;
+      border-radius: var(--radius); padding: 0 18px;
       display: flex; flex-direction: column; align-items: center;
-      min-width: 128px; flex-shrink: 0;
-      transition: border-color 0.2s, transform 0.25s var(--ease);
+      min-width: 96px; flex-shrink: 0;
+      transition: transform 0.25s var(--ease);
     }
-    .tool-card:hover { border-color: rgba(245,166,35,0.4); transform: translateY(-4px); }
+    .tool-card:hover { transform: translateY(-4px); }
     .tool-logo-wrap {
       width: 48px; height: 48px; border-radius: 12px;
       display: flex; align-items: center; justify-content: center;
@@ -417,7 +507,13 @@
     .tool-role { font-size: 11px; color: var(--muted); font-weight: 500; text-align: center; }
 
     /* ── PROCESS ── */
-    #process { background: var(--surface); }
+    #process { display: none; }
+    .skills-process-head { margin-top: 80px; margin-bottom: 32px; }
+    .skills-process-title {
+      font-family: 'Mulish', sans-serif;
+      font-size: 22px; font-weight: 700; color: var(--white);
+      letter-spacing: -0.02em; margin-top: 8px;
+    }
     .process-steps {
       display: grid; grid-template-columns: repeat(4, 1fr); gap: 2px;
       border: 1px solid var(--border); border-radius: var(--radius); overflow: hidden;
@@ -436,12 +532,12 @@
       color: var(--surface2); line-height: 1;
       user-select: none; pointer-events: none; transition: color 0.25s;
     }
-    .process-step:hover .process-step-num { color: rgba(245,166,35,0.07); }
+    .process-step:hover .process-step-num { color: rgba(255,255,255,0.06); }
     .process-icon-wrap {
       width: 44px; height: 44px; border-radius: 12px;
-      background: var(--amber-dim); border: 1px solid rgba(245,166,35,0.18);
+      background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.1);
       display: flex; align-items: center; justify-content: center;
-      color: var(--amber); margin-bottom: 20px; flex-shrink: 0;
+      color: var(--muted); margin-bottom: 20px; flex-shrink: 0;
     }
     .process-name {
       font-family: 'Mulish', sans-serif;
@@ -449,38 +545,70 @@
     }
     .process-desc { font-size: 13px; color: var(--muted); line-height: 1.65; }
 
-    /* ── EXPERIENCE ── */
-    #experience { background: var(--bg); }
-    .exp-list {
-      display: flex; flex-direction: column; gap: 2px;
-      border: 1px solid var(--border); border-radius: var(--radius); overflow: hidden;
+    /* ── EXPERIENCE & EDUCATION ── */
+    #experience, #education {
+      background: #FAF9F7;
+      --white: #0C0E13;
+      --muted: #6B6966;
+      --border: #E2E0DD;
+      --surface: #F0EFED;
+      --surface2: #E8E6E3;
+      display: grid;
+      grid-template-columns: 160px 1fr;
+      column-gap: 80px;
+      align-items: start;
     }
+    #education { padding-top: 0; }
+    #experience .section-eyebrow, #education .section-eyebrow { color: #999; }
+    #experience .section-head, #education .section-head { padding-top: 10px; }
+    #experience .exp-item:first-child, #education .exp-item:first-child { padding-top: 16px; }
+    #experience .exp-kw.highlight, #education .exp-kw.highlight {
+      background: rgba(0,0,0,0.07); border-color: rgba(0,0,0,0.18); color: #0C0E13;
+    }
+    .exp-list { display: flex; flex-direction: column; }
     .exp-item {
-      background: var(--surface); padding: 40px 44px; border-bottom: 1px solid var(--border);
-      display: grid; grid-template-columns: 240px 1fr; gap: 44px; transition: background 0.2s;
+      padding: 36px 0;
+      border-bottom: 1px solid var(--border);
+      cursor: default;
     }
-    .exp-item:hover { background: var(--surface2); }
-    .exp-item:last-child { border-bottom: none; }
-    .exp-company { font-family: 'Mulish', sans-serif; font-size: 16px; font-weight: 800; color: var(--white); margin-bottom: 5px; }
-    .exp-role { font-size: 13px; color: var(--amber); font-weight: 600; margin-bottom: 8px; }
-    .exp-period { font-size: 12px; color: var(--muted); font-weight: 500; margin-bottom: 3px; }
-    .exp-location { font-size: 12px; color: var(--muted); display: flex; align-items: center; gap: 5px; }
+    .exp-main {
+      display: flex; justify-content: space-between; align-items: flex-start; gap: 40px;
+    }
+    .exp-left { flex: 1; }
+    .exp-role-title {
+      font-family: 'Mulish', sans-serif; font-size: 28px; font-weight: 600;
+      color: var(--white); letter-spacing: -0.02em; line-height: 1.15; margin-bottom: 8px;
+    }
+    .exp-dot { color: var(--amber); }
+    .exp-company { font-size: 14px; color: var(--muted); font-weight: 500; }
+    .exp-right { text-align: right; flex-shrink: 0; }
+    .exp-period {
+      font-size: 13px; font-weight: 600; color: var(--muted);
+      letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 4px;
+    }
+    .exp-location { font-size: 13px; color: var(--muted); display: flex; align-items: center; gap: 4px; justify-content: flex-end; }
+    .exp-details {
+      max-height: 0; overflow: hidden; opacity: 0;
+      transition: max-height 0.4s var(--ease), opacity 0.3s ease, margin-top 0.3s ease;
+      margin-top: 0;
+    }
+    .exp-item:hover .exp-details { max-height: 200px; opacity: 1; margin-top: 24px; }
     .exp-right-label {
       font-size: 11px; font-weight: 700; color: var(--muted);
-      letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 12px;
+      letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 10px;
     }
     .exp-keywords { display: flex; flex-wrap: wrap; gap: 7px; }
     .exp-kw {
-      background: var(--surface2); border: 1px solid var(--border); border-radius: 6px;
+      background: var(--surface); border: 1px solid var(--border); border-radius: 6px;
       padding: 4px 12px; font-size: 12px; font-weight: 600; color: var(--muted);
     }
     .exp-kw.highlight {
-      background: var(--amber-dim); border-color: rgba(245,166,35,0.25); color: var(--amber);
+      background: rgba(255,255,255,0.07); border-color: rgba(255,255,255,0.15); color: var(--white);
     }
 
     /* ── ABOUT ── */
     #about {
-      background: var(--surface);
+      background: var(--bg);
       display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center;
     }
     .about-image-wrap { display: flex; justify-content: center; align-items: center; }
@@ -499,17 +627,17 @@
     }
     .about-badge {
       position: absolute; bottom: -8px; right: -16px;
-      background: var(--amber); color: #0C0E13;
+      background: var(--white); color: #0C0E13;
       padding: 10px 14px; border-radius: var(--radius);
       font-weight: 800; font-size: 11px; text-align: center;
-      box-shadow: 0 8px 32px rgba(245,166,35,0.22); line-height: 1.35;
+      box-shadow: 0 8px 32px rgba(0,0,0,0.3); line-height: 1.35;
     }
     .about-badge strong {
       display: block; font-family: 'Mulish', sans-serif;
       font-size: 18px; line-height: 1; margin-bottom: 2px;
     }
     .about-text { font-size: 16px; color: var(--muted); line-height: 1.8; margin-bottom: 18px; }
-    .about-actions { display: flex; gap: 12px; flex-wrap: wrap; margin-top: 32px; }
+    .about-actions { display: flex; gap: 24px; align-items: center; flex-wrap: wrap; margin-top: 32px; }
 
     /* ── CONTACT ── */
     #contact { background: var(--bg); text-align: center; }
@@ -522,7 +650,7 @@
     .contact-card::before {
       content: ''; position: absolute; top: -120px; right: -120px;
       width: 440px; height: 440px;
-      background: radial-gradient(circle, rgba(245,166,35,0.06) 0%, transparent 70%);
+      background: radial-gradient(circle, rgba(255,255,255,0.03) 0%, transparent 70%);
       pointer-events: none;
     }
     .contact-title {
@@ -542,19 +670,19 @@
       transition: border-color 0.2s, color 0.2s, transform 0.25s var(--ease);
       cursor: pointer;
     }
-    .contact-pill:hover { border-color: var(--amber); color: var(--amber); transform: translateY(-2px); }
-    .contact-pill.primary { background: var(--amber); border-color: var(--amber); color: #0C0E13; }
-    .contact-pill.primary:hover { opacity: 0.88; color: #0C0E13; transform: translateY(-2px); }
+    .contact-pill:hover { border-color: rgba(255,255,255,0.4); color: var(--white); transform: translateY(-2px); }
+    .contact-pill.primary { background: rgba(255,255,255,0.1); border-color: rgba(255,255,255,0.35); color: var(--white); }
+    .contact-pill.primary:hover { background: rgba(255,255,255,0.16); border-color: rgba(255,255,255,0.5); transform: translateY(-2px); }
 
     /* ── FOOTER ── */
     footer {
-      background: var(--surface); border-top: 1px solid var(--border);
-      padding: 40px 48px; display: flex;
+      background: var(--bg); border-top: 1px solid var(--border);
+      padding: 40px 80px; display: flex;
       align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 20px;
     }
     .footer-logo {
-      font-family: 'Mulish', sans-serif; font-weight: 900;
-      font-size: 13px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--white);
+      font-family: 'Mulish', sans-serif; font-weight: 600;
+      font-size: 20px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--white);
     }
     .footer-logo span { color: var(--amber); }
     .footer-copy { font-size: 13px; color: var(--muted); }
@@ -563,7 +691,7 @@
       font-size: 13px; color: var(--muted); text-decoration: none;
       font-weight: 500; transition: color 0.2s; cursor: pointer;
     }
-    .footer-links a:hover { color: var(--amber); }
+    .footer-links a:hover { color: var(--white); }
 
     /* ── RESPONSIVE ── */
     @media (max-width: 1024px) {
@@ -572,14 +700,13 @@
       .project-item.reverse .project-visual,
       .project-item.reverse .project-content { grid-column: 1; grid-row: auto; }
       .project-visual { aspect-ratio: 16/9; }
-      .skills-grid { grid-template-columns: 1fr; }
-      .skill-item:nth-child(even) { border-right: none; }
-      .skill-item:nth-last-child(-n+2) { border-bottom: 1px solid var(--border); }
-      .skill-item:last-child { border-bottom: none; }
+      .skills-tabs { grid-template-columns: 1fr; gap: 32px; }
+      .skills-content { min-height: 360px; }
       #about { grid-template-columns: 1fr; gap: 40px; }
       .about-image-wrap { display: flex; justify-content: center; }
       .process-steps { grid-template-columns: 1fr 1fr; }
-      .exp-item { grid-template-columns: 1fr; gap: 20px; }
+      .exp-main { flex-direction: column; gap: 8px; }
+      .exp-right { text-align: left; }
     }
     @media (max-width: 768px) {
       nav { padding: 14px 20px; }
@@ -595,10 +722,8 @@
       .nav-links a { font-size: 14px; }
       .nav-burger { display: flex; }
       .nav-right { gap: 8px; }
-      .nav-availability { display: none; }
-      .nav-cta { display: none; }
 
-      section { padding: 68px 20px; }
+      section { padding: 68px 24px; }
       #hero { padding: 120px 20px 68px; align-items: flex-start; }
       #tools .section-head { padding: 0 20px; }
 
@@ -617,20 +742,22 @@
 
 <!-- NAV -->
 <nav>
-  <a href="#hero" class="nav-logo">Prasham<span>.</span>Chavda</a>
+  <a href="#" class="nav-logo">Prasham Chavda<span>.</span></a>
   <ul class="nav-links" id="navLinks">
     <li><a href="#work">Work</a></li>
     <li><a href="#skills">Skills</a></li>
-    <li><a href="#tools">Tools</a></li>
+
     <li><a href="#experience">Experience</a></li>
     <li><a href="#about">About</a></li>
   </ul>
   <div class="nav-right">
-    <span class="nav-availability">
+    <a href="#contact" class="nav-combo-btn">
       <span class="nav-avail-dot"></span>
-      Open to work
-    </span>
-    <a href="#contact" class="nav-cta">Let's talk &rarr;</a>
+      <span class="nav-combo-label">
+        <span class="nav-combo-available">Available for work</span>
+        <span class="nav-combo-talk"><span>Reach me</span><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></span>
+      </span>
+    </a>
   </div>
   <button class="nav-burger" id="navBurger" aria-label="Toggle navigation" aria-expanded="false">
     <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
@@ -643,12 +770,12 @@
 <section id="hero">
   <div class="hero-eyebrow">&#x1F44B; Hi, I'm Prasham</div>
   <h1 class="hero-title">
-    Human Instinct<br>
-    &amp; Systems<br>
-    Thinking<span class="dot">.</span>
+    Growth-Driven<br>
+    Product Designer<span class="dot">.</span>
   </h1>
+  <div class="hero-sub-row">
   <p class="hero-sub">
-    Sr. Product Designer with 3.5+ years of experience designing decisions that matter.
+    I'm a Product Designer with a strong background in UX/UI design for Android, iOS and web platforms, simplifying complex user journeys into accessible solutions that ensure an increase in qualified leads and conversions.
   </p>
   <div class="hero-stats">
     <div>
@@ -656,119 +783,105 @@
       <div class="hero-stat-label">Years Experience</div>
     </div>
     <div>
-      <div class="hero-stat-num" data-count="4" data-suffix="">4</div>
-      <div class="hero-stat-label">Key Projects</div>
+      <div class="hero-stat-num" data-count="10" data-suffix="+">10+</div>
+      <div class="hero-stat-label">Projects Launched</div>
     </div>
     <div>
-      <div class="hero-stat-num">M.Des</div>
-      <div class="hero-stat-label">NID Ahmedabad</div>
+      <div class="hero-stat-num">M.Des.</div>
+      <div class="hero-stat-label">NID</div>
     </div>
   </div>
-  <div class="hero-actions">
-    <a href="#work" class="btn-primary">
-      View my work
-      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14"/><path d="m19 12-7 7-7-7"/></svg>
-    </a>
-    <a href="#about" class="btn-ghost">About me</a>
   </div>
 </section>
 
 <!-- WORK -->
 <section id="work">
+  <div id="work-flood"></div>
   <div class="section-head reveal">
-    <div class="section-eyebrow">Selected Work</div>
-    <h2 class="section-title">Projects I'm proud of<span class="dot">.</span></h2>
-    <p class="section-sub">Real problems, real impact — here's a look at the work behind the numbers.</p>
+    <div class="section-eyebrow">Design Solutions</div>
+    <h2 class="section-title">Featured Projects<span class="dot">.</span></h2>
   </div>
-  <div class="project-list">
+  <div class="project-grid">
 
-    <a href="casestudy-navbar.html" class="project-item reveal">
-      <div class="project-visual pv-1" data-num="01">
-        <div class="project-chip">Website</div>
+    <a href="casestudy-navbar.html" class="project-card reveal">
+      <div class="pcard-visual-wrap">
+        <div class="pcard-visual pv-1" data-num="01"></div>
+        <div class="pcard-chip">Website</div>
       </div>
-      <div class="project-content">
-        <div class="project-number">Project 01</div>
-        <h3 class="project-title">Website Navigation Revamp</h3>
-        <p class="project-desc">Orchestrated a full information architecture overhaul of the website navigation system. Improved findability and wayfinding resulted in a measurable 9% reduction in user drop-off during critical conversion paths.</p>
-        <div class="project-footer">
-          <div class="project-tags">
-            <span class="tag">IA</span>
-            <span class="tag">UX Audit</span>
-            <span class="tag">User Centric</span>
-            <span class="tag">Data Driven</span>
-            <span class="tag">Revamp</span>
-            <span class="tag">UI</span>
+      <div class="pcard-body">
+        <h3 class="pcard-title">Website Navigation Revamp<span class="dot">.</span></h3>
+        <p class="pcard-desc">Orchestrated a full IA overhaul of the navigation system. Improved findability resulted in a measurable 9% reduction in user drop-off during critical conversion paths.</p>
+        <div class="pcard-footer">
+          <div class="pcard-tags">
+            <span class="pcard-tag">IA</span>
+            <span class="pcard-tag">UX Audit</span>
+            <span class="pcard-tag">Data Driven</span>
+            <span class="pcard-tag">UI</span>
           </div>
-          <span class="project-link-btn">
+          <span class="pcard-arrow">
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
           </span>
         </div>
       </div>
     </a>
 
-    <a href="nda.html" class="project-item reverse reveal">
-      <div class="project-visual pv-2" data-num="02">
-        <div class="project-chip">Mobile App &middot; Web App</div>
+    <a href="nda.html" class="project-card reveal reveal-d1">
+      <div class="pcard-visual-wrap">
+        <div class="pcard-visual pv-2" data-num="02"></div>
+        <div class="pcard-chip">Mobile &middot; Web App</div>
       </div>
-      <div class="project-content">
-        <div class="project-number">Project 02</div>
-        <h3 class="project-title">ETF Product Ecosystem</h3>
-        <p class="project-desc">End-to-end design of a data-rich ETF dashboard and high-conversion buy journey. Led strategic UX decisions that drove an 81% surge in platform turnover and 34% growth in the client base, from 12.5k to 16.8k investors.</p>
-        <div class="project-footer">
-          <div class="project-tags">
-            <span class="tag">UX Research</span>
-            <span class="tag">Dashboard</span>
-            <span class="tag">UI</span>
-            <span class="tag">Prototyping</span>
-            <span class="tag">Revenue Growth</span>
+      <div class="pcard-body">
+        <h3 class="pcard-title">ETF Product Ecosystem<span class="dot">.</span></h3>
+        <p class="pcard-desc">End-to-end design of a data-rich ETF dashboard and high-conversion buy journey. Led strategic UX decisions that drove an 81% surge in platform turnover.</p>
+        <div class="pcard-footer">
+          <div class="pcard-tags">
+            <span class="pcard-tag">UX Research</span>
+            <span class="pcard-tag">Dashboard</span>
+            <span class="pcard-tag">Revenue Growth</span>
           </div>
-          <span class="project-link-btn">
+          <span class="pcard-arrow">
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
           </span>
         </div>
       </div>
     </a>
 
-    <a href="nda.html" class="project-item reveal">
-      <div class="project-visual pv-3" data-num="03">
-        <div class="project-chip">Mobile App &middot; Web App</div>
+    <a href="nda.html" class="project-card reveal reveal-d2">
+      <div class="pcard-visual-wrap">
+        <div class="pcard-visual pv-3" data-num="03"></div>
+        <div class="pcard-chip">Mobile &middot; Web App</div>
       </div>
-      <div class="project-content">
-        <div class="project-number">Project 03</div>
-        <h3 class="project-title">IPO Product Redesign</h3>
-        <p class="project-desc">Simplified a complex IPO application flow for both web and mobile. Streamlined the journey, removed drop-off points, and validated a 14% increase in engagement through structured user testing sessions.</p>
-        <div class="project-footer">
-          <div class="project-tags">
-            <span class="tag">UX Research</span>
-            <span class="tag">Redesign</span>
-            <span class="tag">UI</span>
-            <span class="tag">User Testing</span>
+      <div class="pcard-body">
+        <h3 class="pcard-title">IPO Product Redesign<span class="dot">.</span></h3>
+        <p class="pcard-desc">Simplified a complex IPO application flow for web and mobile. Streamlined the journey and validated a 14% increase in engagement through structured user testing.</p>
+        <div class="pcard-footer">
+          <div class="pcard-tags">
+            <span class="pcard-tag">UX Research</span>
+            <span class="pcard-tag">Redesign</span>
+            <span class="pcard-tag">User Testing</span>
           </div>
-          <span class="project-link-btn">
+          <span class="pcard-arrow">
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
           </span>
         </div>
       </div>
     </a>
 
-    <a href="nda.html" class="project-item reverse reveal">
-      <div class="project-visual pv-4" data-num="04">
-        <div class="project-chip">Website &middot; Web App</div>
+    <a href="nda.html" class="project-card reveal reveal-d3">
+      <div class="pcard-visual-wrap">
+        <div class="pcard-visual pv-4" data-num="04"></div>
+        <div class="pcard-chip">Website &middot; Web App</div>
       </div>
-      <div class="project-content">
-        <div class="project-number">Project 04</div>
-        <h3 class="project-title">Algorithmic Trading Platform</h3>
-        <p class="project-desc">Lead designer on a high-complexity algo trading platform built for professional traders. Responsible for defining information architecture, end-to-end workflow mapping, and high-fidelity prototyping. Currently in development.</p>
-        <div class="project-footer">
-          <div class="project-tags">
-            <span class="tag">Complex UX</span>
-            <span class="tag">Automate</span>
-            <span class="tag">UI</span>
-            <span class="tag">IA</span>
-            <span class="tag">Prototyping</span>
-            <span class="tag">New Launch</span>
+      <div class="pcard-body">
+        <h3 class="pcard-title">Algorithmic Trading Platform<span class="dot">.</span></h3>
+        <p class="pcard-desc">Lead designer on a high-complexity algo trading platform for professional traders. Defined IA, end-to-end workflow mapping, and high-fidelity prototyping. In development.</p>
+        <div class="pcard-footer">
+          <div class="pcard-tags">
+            <span class="pcard-tag">Complex UX</span>
+            <span class="pcard-tag">IA</span>
+            <span class="pcard-tag">Prototyping</span>
           </div>
-          <span class="project-link-btn">
+          <span class="pcard-arrow">
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
           </span>
         </div>
@@ -781,91 +894,87 @@
 <!-- SKILLS -->
 <section id="skills">
   <div class="section-head reveal">
-    <div class="section-eyebrow">Ways of Working</div>
-    <h2 class="section-title">Skills I bring to the table</h2>
+    <div class="section-eyebrow">What I Do</div>
+    <h2 class="section-title">Skills &amp; Process<span style="color:var(--amber)">.</span></h2>
   </div>
-  <div class="skills-grid">
-
-    <div class="skill-item reveal">
-      <div class="skill-label">Research</div>
-      <div class="skill-name">Understanding people first</div>
-      <div class="skill-desc">I lead with empathy, listening before solving. My research practice is built on genuinely wanting to understand the person on the other side of the screen.</div>
-      <ul class="skill-points">
-        <li>User interviews and contextual inquiry</li>
-        <li>Ethnographic research and field observation</li>
-        <li>Usability testing, moderated and unmoderated</li>
-        <li>Affinity mapping and thematic analysis</li>
-        <li>Journey mapping and user personas</li>
-      </ul>
+  <div class="skills-tabs reveal">
+    <div class="skills-tab-list">
+      <div class="skill-tab active" data-tab="0">User Research</div>
+      <div class="skill-tab" data-tab="1">UX/UI Design</div>
+      <div class="skill-tab" data-tab="2">Growth-Driven Design</div>
+      <div class="skill-tab" data-tab="3">Systems Thinking</div>
+      <div class="skill-tab" data-tab="4">Collaboration &amp; Leadership</div>
     </div>
-
-    <div class="skill-item reveal reveal-d1">
-      <div class="skill-label">UX / UI Design</div>
-      <div class="skill-name">Craft that communicates and converts</div>
-      <div class="skill-desc">I design interfaces that are not just visually sharp but behaviourally sound, grounded in how people actually think and interact with digital products.</div>
-      <ul class="skill-points">
-        <li>Wireframing, hi-fidelity mockups and design systems</li>
-        <li>Heuristic evaluation and cognitive walkthrough</li>
-        <li>Interaction design and micro-interaction thinking</li>
-        <li>WCAG 2.2 accessibility standards</li>
-        <li>Cross-platform design, iOS, Android, and Web</li>
-      </ul>
+    <div class="skills-content">
+      <div class="skill-panel active" data-panel="0">
+        <div class="skill-panel-left">
+          <div class="skill-detail-eyebrow">User Research</div>
+          <div class="skill-detail-heading">Understanding people first</div>
+          <div class="skill-desc">I lead with empathy, listening before solving. I discover real problems through research, then synthesise findings into clear problem statements that guide every design decision.</div>
+        </div>
+        <ul class="skill-points">
+          <li>User interviews and contextual inquiry</li>
+          <li>Competitive analysis and heuristic evaluation</li>
+          <li>Usability testing, moderated and unmoderated</li>
+          <li>Affinity mapping, thematic analysis and journey mapping</li>
+          <li>Synthesising insights into personas and problem statements</li>
+        </ul>
+      </div>
+      <div class="skill-panel" data-panel="1">
+        <div class="skill-panel-left">
+          <div class="skill-detail-eyebrow">UX/UI &amp; Prototyping</div>
+          <div class="skill-detail-heading">Design, prototype, validate</div>
+          <div class="skill-desc">I design interfaces that are visually sharp and behaviourally sound, then get them in front of real users through high-fidelity prototypes — iterating before a single line of code is written.</div>
+        </div>
+        <ul class="skill-points">
+          <li>Wireframing, hi-fidelity mockups and design systems</li>
+          <li>Interaction design and micro-interaction thinking</li>
+          <li>Interactive prototyping in Figma, Framer and Axure RP</li>
+          <li>Cross-platform design — iOS, Android and Web</li>
+          <li>Design validation before development handoff</li>
+        </ul>
+      </div>
+      <div class="skill-panel" data-panel="2">
+        <div class="skill-panel-left">
+          <div class="skill-detail-eyebrow">Growth-Driven Design</div>
+          <div class="skill-detail-heading">Where design meets outcomes</div>
+          <div class="skill-desc">Great design is not just good UX, it moves metrics. I frame problems with Double Diamond thinking, connect decisions to business objectives, and validate outcomes with post-launch data.</div>
+        </div>
+        <ul class="skill-points">
+          <li>UX metrics and KPI alignment</li>
+          <li>Double Diamond and Design Thinking frameworks</li>
+          <li>Problem framing and clear problem statements</li>
+          <li>Post-launch measurement with Google Analytics and Looker</li>
+          <li>Competitive analysis and UX audits</li>
+        </ul>
+      </div>
+      <div class="skill-panel" data-panel="3">
+        <div class="skill-panel-left">
+          <div class="skill-detail-eyebrow">Systems Thinking</div>
+          <div class="skill-detail-heading">Design that scales</div>
+          <div class="skill-desc">I build component libraries, token systems, and IA frameworks that keep products consistent as they grow — and deliver dev-ready specs so engineering can ship with confidence.</div>
+        </div>
+        <ul class="skill-points">
+          <li>Design systems and component architecture</li>
+          <li>Information architecture and navigation design</li>
+          <li>Figma variables and token management</li>
+          <li>Dev-ready specs and developer handoff</li>
+          <li>UI QA before and after launch</li>
+        </ul>
+      </div>
+      <div class="skill-panel" data-panel="4">
+        <div class="skill-panel-left">
+          <div class="skill-detail-eyebrow">Collaboration &amp; Leadership</div>
+          <div class="skill-detail-heading">Cross-team alignment</div>
+          <div class="skill-desc">I thrive in cross-functional teams, bridging product, engineering, and stakeholders through clear communication, structured workshops, and shared design language.</div>
+        </div>
+        <ul class="skill-points">
+          <li>Design sprints and ideation workshops</li>
+          <li>Agile development collaboration</li>
+          <li>Stakeholder presentations and design critique</li>
+        </ul>
+      </div>
     </div>
-
-    <div class="skill-item reveal">
-      <div class="skill-label">Prototyping</div>
-      <div class="skill-name">Test before you build</div>
-      <div class="skill-desc">From rough wireframes to high-fidelity interactive prototypes, I get ideas in front of real users fast to validate direction and reduce risk before development begins.</div>
-      <ul class="skill-points">
-        <li>Interactive prototyping in Figma and Framer</li>
-        <li>High-complexity flows with Axure RP</li>
-        <li>Rapid iteration based on user feedback</li>
-        <li>Prototype-led user testing via Maze</li>
-      </ul>
-    </div>
-
-    <div class="skill-item reveal reveal-d1">
-      <div class="skill-label">Design with Business Goals</div>
-      <div class="skill-name">Where design meets outcomes</div>
-      <div class="skill-desc">Great design is not just good UX, it moves metrics. I connect every design decision to business objectives, making it easy to prioritise what actually creates value.</div>
-      <ul class="skill-points">
-        <li>UX metrics and KPI alignment</li>
-        <li>Data analysis with Google Analytics, Power BI, and Looker</li>
-        <li>Competitive analysis and UX audits</li>
-        <li>Double Diamond and Design Thinking frameworks</li>
-      </ul>
-    </div>
-
-    <div class="skill-item reveal">
-      <div class="skill-label">Systems Thinking</div>
-      <div class="skill-name">Design that scales</div>
-      <div class="skill-desc">I build component libraries, token systems, and IA frameworks that keep products consistent as they grow, making design and engineering faster together.</div>
-      <ul class="skill-points">
-        <li>Design systems and component architecture</li>
-        <li>Information architecture and navigation design</li>
-        <li>Figma variables and token management</li>
-      </ul>
-    </div>
-
-    <div class="skill-item reveal reveal-d1">
-      <div class="skill-label">Collaboration</div>
-      <div class="skill-name">Cross-team alignment</div>
-      <div class="skill-desc">I thrive in cross-functional teams, bridging product, engineering, and stakeholders through clear communication, structured workshops, and shared design language.</div>
-      <ul class="skill-points">
-        <li>Design sprints and ideation workshops</li>
-        <li>Agile development collaboration</li>
-        <li>Stakeholder presentations and design critique</li>
-      </ul>
-    </div>
-
-  </div>
-</section>
-
-<!-- TOOLS -->
-<section id="tools">
-  <div class="section-head reveal">
-    <div class="section-eyebrow">My Toolkit</div>
-    <h2 class="section-title">Tools I reach for every day</h2>
   </div>
   <div class="tools-marquee-wrap">
     <div class="tools-track">
@@ -904,6 +1013,7 @@
     </div>
   </div>
 </section>
+
 
 <!-- PROCESS -->
 <section id="process">
@@ -955,52 +1065,73 @@
 <!-- EXPERIENCE -->
 <section id="experience">
   <div class="section-head reveal">
-    <div class="section-eyebrow">Experience</div>
-    <h2 class="section-title">Where I've done the work</h2>
+    <div class="section-eyebrow">Work Experience</div>
   </div>
   <div class="exp-list">
 
     <div class="exp-item reveal">
-      <div>
-        <div class="exp-company">5paisa Capital Ltd.</div>
-        <div class="exp-role">Sr. Product Designer</div>
-        <div class="exp-period">Sept 2022 &ndash; Present</div>
-        <div class="exp-location">
-          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
-          Mumbai, India
+      <div class="exp-main">
+        <div class="exp-left">
+          <div class="exp-role-title">Senior Product Designer<span class="exp-dot">.</span></div>
+          <div class="exp-company">5paisa Capital Ltd.</div>
+        </div>
+        <div class="exp-right">
+          <div class="exp-period">Mar 2025 &ndash; Present</div>
+          <div class="exp-location"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>Mumbai, India</div>
         </div>
       </div>
-      <div>
+      <div class="exp-details">
         <div class="exp-right-label">Projects &amp; Focus Areas</div>
         <div class="exp-keywords">
           <span class="exp-kw highlight">ETF Ecosystem</span>
-          <span class="exp-kw highlight">Navigation Overhaul</span>
-          <span class="exp-kw highlight">IPO Redesign</span>
           <span class="exp-kw highlight">Algo Trading Platform</span>
           <span class="exp-kw highlight">App Revamp</span>
+          <span class="exp-kw">Design Leadership</span>
+          <span class="exp-kw">Team Mentoring</span>
           <span class="exp-kw">Information Architecture</span>
-          <span class="exp-kw">Design System</span>
-          <span class="exp-kw">UI Bug QA</span>
-          <span class="exp-kw">User Research</span>
-          <span class="exp-kw">Data-backed UX</span>
-          <span class="exp-kw">iOS &middot; Android &middot; Web</span>
           <span class="exp-kw">Accessibility</span>
+          <span class="exp-kw">iOS &middot; Android &middot; Web</span>
         </div>
       </div>
     </div>
 
     <div class="exp-item reveal">
-      <div>
-        <div class="exp-company">WIRIN</div>
-        <div class="exp-role">Design Intern</div>
-        <div class="exp-period">June 2021</div>
-        <div class="exp-location">
-          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
-          Bangalore, India
+      <div class="exp-main">
+        <div class="exp-left">
+          <div class="exp-role-title">Product Designer<span class="exp-dot">.</span></div>
+          <div class="exp-company">5paisa Capital Ltd.</div>
         </div>
-        <div style="margin-top:10px; font-size:12px; color:var(--muted); line-height:1.5;">Wipro IISc Innovation Network</div>
+        <div class="exp-right">
+          <div class="exp-period">Sept 2022 &ndash; Mar 2025</div>
+          <div class="exp-location"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>Mumbai, India</div>
+        </div>
       </div>
-      <div>
+      <div class="exp-details">
+        <div class="exp-right-label">Projects &amp; Focus Areas</div>
+        <div class="exp-keywords">
+          <span class="exp-kw highlight">Navigation Overhaul</span>
+          <span class="exp-kw highlight">IPO Redesign</span>
+          <span class="exp-kw highlight">UI Bug QA</span>
+          <span class="exp-kw">User Research</span>
+          <span class="exp-kw">Data-backed UX</span>
+          <span class="exp-kw">Design System</span>
+          <span class="exp-kw">iOS &middot; Android &middot; Web</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="exp-item reveal">
+      <div class="exp-main">
+        <div class="exp-left">
+          <div class="exp-role-title">Design Intern<span class="exp-dot">.</span></div>
+          <div class="exp-company">WIRIN &mdash; Wipro IISc Innovation Network</div>
+        </div>
+        <div class="exp-right">
+          <div class="exp-period">Feb 2021 &ndash; June 2021</div>
+          <div class="exp-location"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>Bangalore, India</div>
+        </div>
+      </div>
+      <div class="exp-details">
         <div class="exp-right-label">Projects &amp; Focus Areas</div>
         <div class="exp-keywords">
           <span class="exp-kw highlight">Autonomous Vehicle Simulator</span>
@@ -1014,17 +1145,28 @@
       </div>
     </div>
 
+  </div>
+</section>
+
+<!-- EDUCATION -->
+<section id="education">
+  <div class="section-head reveal">
+    <div class="section-eyebrow">Education</div>
+  </div>
+  <div class="exp-list">
+
     <div class="exp-item reveal">
-      <div>
-        <div class="exp-company">National Institute of Design</div>
-        <div class="exp-role">M.Des &mdash; New Media Design</div>
-        <div class="exp-period">2019 &ndash; 2021</div>
-        <div class="exp-location">
-          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
-          Ahmedabad, India
+      <div class="exp-main">
+        <div class="exp-left">
+          <div class="exp-role-title">M.Des. in New Media Design<span class="exp-dot">.</span></div>
+          <div class="exp-company">National Institute of Design</div>
+        </div>
+        <div class="exp-right">
+          <div class="exp-period">2018 &ndash; 2021</div>
+          <div class="exp-location"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>Gandhinagar, India</div>
         </div>
       </div>
-      <div>
+      <div class="exp-details">
         <div class="exp-right-label">Relevant Studies</div>
         <div class="exp-keywords">
           <span class="exp-kw highlight">Experience Design</span>
@@ -1045,64 +1187,37 @@
 
 <!-- ABOUT -->
 <section id="about">
-  <div class="about-image-wrap">
+  <div class="reveal">
+    <div class="section-eyebrow">About Me</div>
+    <h2 class="section-title">Hey there, I'm Prasham<span style="color:var(--amber)">.</span><br>My empathetic style and conversion focused approach creates truly unforgettable designs.</h2>
+    <div class="about-actions">
+      <a href="Prasham_Chavda_Aug26.pdf" target="_blank" class="btn-primary">
+        Download My Resume
+      </a>
+      <a href="https://www.linkedin.com/in/prasham0007/" target="_blank" class="btn-tertiary">
+        LinkedIn
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7"/><path d="M7 7h10v10"/></svg>
+      </a>
+    </div>
+  </div>
+  <div class="about-image-wrap" style="align-self: start;">
     <div class="about-photo-group">
       <div class="about-photo">
         <img src="images/prasham-photo.png" alt="Prasham Chavda" />
       </div>
-      <div class="about-badge"><strong>3+</strong> years industry experience</div>
-    </div>
-  </div>
-  <div class="reveal">
-    <div class="section-eyebrow">About Me</div>
-    <h2 class="section-title">Crafting experiences,<br>not just screens</h2>
-    <p class="about-text">
-      I'm Prasham, a product designer who believes the best digital experiences are born from genuine curiosity about people. I hold an M.Des from the National Institute of Design (NID) and bring 3+ years of hands-on experience designing complex, high-stakes products where clarity and trust are everything.
-    </p>
-    <p class="about-text">
-      My process blends rigorous research with sharp visual craft. I care as much about why something is designed as how it looks. Whether I'm mapping a tangled user journey or refining a design system, I bring the same intention: make it simple, make it meaningful, make it work.
-    </p>
-    <div class="about-actions">
-      <a href="Prasham_Chavda_Aug26.pdf" target="_blank" class="btn-primary">
-        Download Resume
-        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14"/><path d="m19 12-7 7-7-7"/></svg>
-      </a>
     </div>
   </div>
 </section>
 
-<!-- CONTACT -->
-<section id="contact">
-  <div class="contact-card reveal">
-    <div class="section-eyebrow" style="display:block; text-align:center;">Let's Connect</div>
-    <h2 class="contact-title">Got a project in mind?</h2>
-    <p class="contact-sub">Whether you need a design partner, a fresh perspective on your product, or someone who can bridge research and craft, I'd love to hear about it.</p>
-    <div class="contact-links">
-      <a href="mailto:prasham0007@gmail.com" class="contact-pill primary">
-        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
-        prasham0007@gmail.com
-      </a>
-      <a href="https://www.linkedin.com/in/prasham0007/" class="contact-pill" target="_blank" rel="noopener">
-        <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect width="4" height="12" x="2" y="9"/><circle cx="4" cy="4" r="2"/></svg>
-        LinkedIn
-      </a>
-      <a href="tel:+918460606609" class="contact-pill">
-        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.56 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
-        +91 84606 06609
-      </a>
-    </div>
-  </div>
-</section>
 
 <!-- FOOTER -->
 <footer>
-  <div class="footer-logo">Prasham<span>.</span>Chavda</div>
-  <div class="footer-copy">&copy; 2026 Prasham Chavda &mdash; Sr. Product Designer</div>
+  <div class="footer-logo">Prasham Chavda<span>.</span></div>
+  <div class="footer-copy">&copy; 2026 Prasham Chavda</div>
   <div class="footer-links">
     <a href="#work">Work</a>
     <a href="#skills">Skills</a>
     <a href="#experience">Experience</a>
-    <a href="#contact">Contact</a>
   </div>
 </footer>
 
@@ -1144,6 +1259,50 @@
     });
   }, { threshold: 0.5 });
   statNums.forEach(el => statObserver.observe(el));
+
+  // Work section flood hover effect
+  (function() {
+    const section = document.querySelector('#work');
+    const flood = document.getElementById('work-flood');
+    if (!flood || !section) return;
+
+    const cardColors = {
+      'pv-1': 'rgba(160,195,228,0.45)',
+      'pv-2': 'rgba(176,160,216,0.42)',
+      'pv-3': 'rgba(144,200,182,0.42)',
+      'pv-4': 'rgba(232,184,153,0.42)',
+    };
+
+    document.querySelectorAll('.project-card').forEach(card => {
+      const visual = card.querySelector('.pcard-visual');
+      if (!visual) return;
+      const colorKey = [...visual.classList].find(c => c.startsWith('pv-'));
+      const color = cardColors[colorKey] || 'rgba(200,200,200,0.3)';
+
+      card.addEventListener('mouseenter', () => {
+        const sr = section.getBoundingClientRect();
+        const vr = card.querySelector('.pcard-visual-wrap').getBoundingClientRect();
+        const cx = (vr.left + vr.width / 2 - sr.left).toFixed(1);
+        const cy = (vr.top + vr.height / 2 - sr.top).toFixed(1);
+
+        flood.style.transition = 'none';
+        flood.style.background = color;
+        flood.style.clipPath = `circle(0% at ${cx}px ${cy}px)`;
+        flood.style.opacity = '1';
+
+        requestAnimationFrame(() => {
+          flood.style.transition = 'clip-path 0.75s cubic-bezier(0.16,1,0.3,1), opacity 0.2s ease';
+          flood.style.clipPath = `circle(130% at ${cx}px ${cy}px)`;
+        });
+      });
+
+      card.addEventListener('mouseleave', () => {
+        flood.style.transition = 'clip-path 0.5s cubic-bezier(0.7,0,0.84,0), opacity 0.4s ease 0.05s';
+        flood.style.clipPath = `circle(0% at ${flood.style.clipPath.match(/at (.+)\)/)?.[1] || '50% 50%'})`;
+        flood.style.opacity = '0';
+      });
+    });
+  })();
 
   // Mobile nav
   const burger = document.getElementById('navBurger');
@@ -1190,6 +1349,88 @@
         track.style.animation = `marquee 34s linear ${delay}s infinite`;
       }, 1500);
     }, { passive: false });
+  })();
+
+  /* Hero sticky scale-out — work section slides over, hero zooms out */
+  (function() {
+    const hero = document.querySelector('#hero');
+    const work = document.querySelector('#work');
+    let ticking = false;
+
+    function updateHeroScale() {
+      const vh = window.innerHeight;
+      const workTop = work.getBoundingClientRect().top;
+      // progress: 0 when work bottom is at viewport bottom, 1 when work top reaches viewport top
+      const progress = Math.max(0, Math.min(1, (vh - workTop) / vh));
+
+      const scale   = 1 - progress * 0.12;
+      const opacity = 1 - progress * 0.6;
+
+      hero.style.transform = `scale(${scale.toFixed(4)})`;
+      hero.style.opacity   = opacity.toFixed(4);
+      hero.style.filter    = '';
+
+      ticking = false;
+    }
+
+    window.addEventListener('scroll', () => {
+      if (!ticking) { requestAnimationFrame(updateHeroScale); ticking = true; }
+    }, { passive: true });
+  })();
+
+  /* Project card mouse parallax */
+  document.querySelectorAll('.project-card').forEach(card => {
+    const visual = card.querySelector('.pcard-visual');
+    let raf;
+    card.addEventListener('mousemove', (e) => {
+      cancelAnimationFrame(raf);
+      raf = requestAnimationFrame(() => {
+        const r = card.getBoundingClientRect();
+        const x = (e.clientX - r.left) / r.width - 0.5;
+        const y = (e.clientY - r.top) / r.height - 0.5;
+        visual.style.transition = 'transform 0.08s linear';
+        visual.style.transform = `translate(${x * -14}px, ${y * -10}px) scale(1.04)`;
+      });
+    });
+    card.addEventListener('mouseleave', () => {
+      cancelAnimationFrame(raf);
+      visual.style.transition = 'transform 0.6s cubic-bezier(0.25,0.46,0.45,0.94)';
+      visual.style.transform = 'translate(0,0) scale(1)';
+    });
+  });
+
+  // Skills horizontal tabs
+  const skillTabs = document.querySelectorAll('.skill-tab[data-tab]');
+  const skillPanels = document.querySelectorAll('.skill-panel[data-panel]');
+  skillTabs.forEach(tab => {
+    tab.addEventListener('mouseenter', () => {
+      const idx = tab.dataset.tab;
+      skillTabs.forEach(t => t.classList.remove('active'));
+      skillPanels.forEach(p => p.classList.remove('active'));
+      tab.classList.add('active');
+      const panel = document.querySelector(`.skill-panel[data-panel="${idx}"]`);
+      if (panel) panel.classList.add('active');
+    });
+  });
+  // Hide nav after hero, show on scroll up
+  (function() {
+    const nav = document.querySelector('nav');
+    const hero = document.getElementById('hero');
+    let lastY = window.scrollY;
+
+    window.addEventListener('scroll', () => {
+      const y = window.scrollY;
+      const threshold = window.innerHeight;
+
+      if (y < threshold) {
+        nav.style.transform = 'translateY(0)';
+      } else if (y > lastY) {
+        nav.style.transform = 'translateY(-100%)';
+      } else {
+        nav.style.transform = 'translateY(0)';
+      }
+      lastY = y;
+    }, { passive: true });
   })();
 </script>
 
