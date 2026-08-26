@@ -28,19 +28,27 @@
     nav {
       position: fixed; top: 0; left: 0; right: 0; z-index: 100;
       display: flex; align-items: center; justify-content: space-between;
-      padding: 20px 64px;
-      background: rgba(12,14,19,0.82); backdrop-filter: blur(24px) saturate(180%);
-      -webkit-backdrop-filter: blur(24px) saturate(180%);
-      border-bottom: 1px solid rgba(255,255,255,0.06);
+      padding: 0 80px; height: 116px;
+      background: rgba(24,24,24,0.88); backdrop-filter: blur(20px) saturate(140%);
+      -webkit-backdrop-filter: blur(20px) saturate(140%);
+      transition: transform 0.4s var(--ease);
     }
-    .nav-logo { font-weight: 900; font-size: 14px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--white); }
+    .nav-logo {
+      font-family: 'Mulish', sans-serif; font-weight: 600; font-size: 20px;
+      letter-spacing: 0.08em; text-transform: uppercase;
+      color: var(--white); text-decoration: none; transition: opacity 0.2s;
+    }
+    .nav-logo:hover { opacity: 0.7; }
     .nav-logo span { color: var(--amber); }
     .nav-back {
       display: inline-flex; align-items: center; gap: 8px;
-      font-size: 13px; font-weight: 700; color: var(--muted);
+      font-size: 13px; font-weight: 600; color: var(--muted);
+      letter-spacing: 0.06em; text-transform: uppercase;
       transition: color 0.2s;
     }
-    .nav-back:hover { color: var(--amber); }
+    .nav-back:hover { color: var(--white); }
+    .nav-back svg { transition: transform 0.2s; }
+    .nav-back:hover svg { transform: translateX(-3px); }
 
     /* HERO */
     #hero {
@@ -293,7 +301,7 @@
 
   <!-- NAV -->
   <nav>
-    <a href="index.html" class="nav-logo">Prasham<span>.</span>Chavda</a>
+    <a href="index.html" class="nav-logo">Prasham Chavda<span>.</span></a>
     <a href="index.html" class="nav-back">
       <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M10 3L5 8l5 5"/></svg>
       Home
