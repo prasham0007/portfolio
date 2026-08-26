@@ -9,15 +9,18 @@
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
     :root {
-      --bg: #0C0E13;
-      --surface: #111318;
-      --surface2: #181C27;
-      --border: #21263A;
+      --bg: #181818;
+      --surface: #1F1F1F;
+      --surface2: #272727;
+      --border: #2E2E2E;
       --amber: #F5A623;
       --amber-dim: rgba(245,166,35,0.10);
-      --text: #DDE1EC;
-      --muted: #6B7290;
-      --white: #FFFFFF;
+      --text: #FAF9F7;
+      --muted: #888784;
+      --white: #FAF9F7;
+      --cream: #FAF9F7;
+      --ink: #181818;
+      --ink-muted: #666462;
       --radius: 16px;
       --radius-sm: 8px;
       /* Spring-tuned easing: fast out, slow settle — matches Apple's critically-damped spring */
@@ -37,20 +40,19 @@
       -webkit-font-smoothing: antialiased;
     }
 
-    /* SCROLL REVEAL */
+    /* SCROLL REVEAL — opacity-only like reference (no translateY) */
     .reveal {
-      opacity: 0;
-      transform: translateY(26px);
-      transition: opacity 0.65s var(--ease), transform 0.65s var(--ease);
+      opacity: 0.08;
+      transition: opacity 0.9s cubic-bezier(0.25, 0.46, 0.45, 0.94);
     }
-    .reveal.in-view { opacity: 1; transform: translateY(0); }
-    .reveal-d1 { transition-delay: 0.09s; }
-    .reveal-d2 { transition-delay: 0.18s; }
-    .reveal-d3 { transition-delay: 0.27s; }
-    .reveal-d4 { transition-delay: 0.36s; }
+    .reveal.in-view { opacity: 1; }
+    .reveal-d1 { transition-delay: 0.1s; }
+    .reveal-d2 { transition-delay: 0.2s; }
+    .reveal-d3 { transition-delay: 0.3s; }
+    .reveal-d4 { transition-delay: 0.4s; }
 
     @media (prefers-reduced-motion: reduce) {
-      .reveal { opacity: 1; transform: none; transition: none; }
+      .reveal { opacity: 1; transition: none; }
       *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
     }
 
@@ -80,14 +82,36 @@
       nav { background: #0C0E13; backdrop-filter: none; -webkit-backdrop-filter: none; }
     }
     .nav-logo {
-      font-family: 'Mulish', sans-serif;
-      font-weight: 900; font-size: 15px;
-      letter-spacing: 0.08em; text-transform: uppercase;
+      font-family: var(--serif);
+      font-weight: 600; font-size: 20px;
+      letter-spacing: 0.01em;
       color: var(--white); text-decoration: none;
       transition: opacity 0.2s;
     }
     .nav-logo:hover { opacity: 0.7; }
     .nav-logo span { color: var(--amber); }
+
+    .nav-availability {
+      display: inline-flex; align-items: center; gap: 8px;
+      border: 1px solid rgba(255,255,255,0.1); border-radius: 40px;
+      padding: 7px 16px;
+      font-size: 12px; font-weight: 600; color: var(--text);
+      transition: border-color 0.2s;
+    }
+    .nav-availability:hover { border-color: rgba(255,255,255,0.25); }
+    .nav-avail-dot {
+      width: 8px; height: 8px; border-radius: 50%;
+      background: #22c55e; flex-shrink: 0;
+      box-shadow: 0 0 0 0 rgba(34,197,94,0.4);
+      animation: pulse-green 2s infinite;
+    }
+    @keyframes pulse-green {
+      0%   { box-shadow: 0 0 0 0 rgba(34,197,94,0.5); }
+      70%  { box-shadow: 0 0 0 6px rgba(34,197,94,0); }
+      100% { box-shadow: 0 0 0 0 rgba(34,197,94,0); }
+    }
+
+    .nav-right { display: flex; align-items: center; gap: 12px; }
 
     .nav-links { display: flex; gap: 28px; list-style: none; }
     .nav-links a {
@@ -98,14 +122,15 @@
     .nav-links a:hover { color: var(--white); }
 
     .nav-cta {
-      background: var(--amber); color: #0C0E13;
+      background: transparent; color: var(--text);
       padding: 9px 22px; border-radius: 40px;
-      font-size: 13px; font-weight: 700; letter-spacing: 0.02em;
-      text-decoration: none; transition: opacity 0.2s, transform 0.35s var(--ease);
+      border: 1px solid var(--border);
+      font-size: 13px; font-weight: 600; letter-spacing: 0.02em;
+      text-decoration: none; transition: border-color 0.2s, color 0.2s, transform 0.35s var(--ease);
       cursor: pointer; will-change: transform;
     }
-    .nav-cta:hover { opacity: 0.88; transform: translateY(-1px) scale(1.02); }
-    .nav-cta:active { transform: scale(0.96); opacity: 1; transition-duration: 0.1s; }
+    .nav-cta:hover { border-color: var(--amber); color: var(--amber); transform: translateY(-1px); }
+    .nav-cta:active { transform: scale(0.96); transition-duration: 0.1s; }
 
     .nav-burger {
       display: none; background: none;
@@ -120,9 +145,9 @@
     #hero {
       min-height: 100svh;
       display: flex; flex-direction: column;
-      justify-content: center; align-items: center;
-      padding: 140px 48px 100px;
-      text-align: center;
+      justify-content: flex-end; align-items: flex-start;
+      padding: 160px 80px 100px;
+      text-align: left;
       position: relative; overflow: hidden;
     }
     #hero::before {
@@ -142,56 +167,74 @@
 
     .hero-eyebrow {
       display: inline-flex; align-items: center; gap: 8px;
-      background: var(--amber-dim);
-      border: 1px solid rgba(245,166,35,0.22);
-      border-radius: 40px; padding: 7px 20px;
-      font-size: 13px; font-weight: 600; letter-spacing: 0.04em;
-      color: var(--amber); margin-bottom: 36px;
+      background: rgba(255,255,255,0.07);
+      border: 1px solid rgba(255,255,255,0.12);
+      border-radius: 4px; padding: 7px 16px;
+      font-size: 13px; font-weight: 500; letter-spacing: 0.02em;
+      color: var(--muted); margin-bottom: 40px;
       animation: fadeUp 0.5s var(--ease) 0.1s both;
     }
     .hero-title {
       font-family: 'Mulish', sans-serif;
-      font-size: clamp(32px, 5vw, 62px);
-      font-weight: 900; line-height: 1.04;
-      color: var(--white); margin-bottom: 28px;
-      letter-spacing: -0.035em;
+      font-size: clamp(52px, 8vw, 110px);
+      font-weight: 900; line-height: 0.95;
+      color: var(--white); margin-bottom: 40px;
+      letter-spacing: -0.04em;
       font-optical-sizing: auto;
-      animation: fadeUp 0.65s var(--ease) 0.25s both;
+      animation: fadeUp 0.65s var(--ease) 0.2s both;
     }
     .hero-title em { font-style: normal; color: var(--amber); }
+    .hero-title .dot { color: var(--amber); }
 
     .hero-sub {
-      font-size: 17px; color: var(--muted);
-      max-width: 510px; margin: 0 auto 48px;
+      font-size: 16px; color: var(--muted);
+      max-width: 440px; margin: 0 0 48px;
       line-height: 1.8;
-      animation: fadeUp 0.65s var(--ease) 0.4s both;
+      animation: fadeUp 0.65s var(--ease) 0.35s both;
     }
     .hero-actions {
-      display: flex; gap: 12px; flex-wrap: wrap; justify-content: center;
-      animation: fadeUp 0.65s var(--ease) 0.52s both;
+      display: flex; gap: 12px; flex-wrap: wrap; justify-content: flex-start;
+      animation: fadeUp 0.65s var(--ease) 0.48s both;
     }
 
-    /* BUTTONS — respond on pointer-down (Apple §1), spring easing out */
+    /* Stats row — Jon Prinz style */
+    .hero-stats {
+      display: flex; gap: 48px; margin-bottom: 52px;
+      animation: fadeUp 0.65s var(--ease) 0.56s both;
+    }
+    .hero-stat-num {
+      font-family: var(--serif);
+      font-size: clamp(36px, 4vw, 56px);
+      font-weight: 700; color: var(--white);
+      line-height: 1; margin-bottom: 4px;
+    }
+    .hero-stat-label {
+      font-size: 10px; font-weight: 700; letter-spacing: 0.14em;
+      text-transform: uppercase; color: var(--muted);
+    }
+
+    /* BUTTONS — ghost system matching reference */
     .btn-primary {
-      background: var(--amber); color: #0C0E13;
+      background: transparent; color: var(--amber);
+      border: 1px solid var(--amber);
       padding: 13px 28px; border-radius: 40px;
       font-size: 14px; font-weight: 700; text-decoration: none;
-      transition: transform 0.35s var(--ease), opacity 0.2s;
+      transition: background 0.2s, color 0.2s, transform 0.35s var(--ease);
       display: inline-flex; align-items: center; gap: 8px; cursor: pointer;
       will-change: transform;
     }
-    .btn-primary:hover { transform: translateY(-2px) scale(1.02); opacity: 0.92; }
-    .btn-primary:active { transform: scale(0.97); opacity: 1; transition-duration: 0.1s; }
+    .btn-primary:hover { background: var(--amber); color: #181818; transform: translateY(-2px); }
+    .btn-primary:active { transform: scale(0.97); transition-duration: 0.1s; }
 
     .btn-ghost {
-      border: 1px solid var(--border); color: var(--text);
+      border: 1px solid rgba(255,255,255,0.18); color: var(--muted);
       padding: 13px 28px; border-radius: 40px;
       font-size: 14px; font-weight: 600; text-decoration: none;
       transition: border-color 0.2s, color 0.2s, transform 0.35s var(--ease);
       display: inline-flex; align-items: center; gap: 8px; cursor: pointer;
       will-change: transform;
     }
-    .btn-ghost:hover { border-color: var(--amber); color: var(--amber); transform: translateY(-2px); }
+    .btn-ghost:hover { border-color: var(--text); color: var(--text); transform: translateY(-2px); }
     .btn-ghost:active { transform: scale(0.97); transition-duration: 0.1s; }
 
     /* ── SECTIONS ── */
@@ -202,11 +245,17 @@
     }
     .section-title {
       font-family: 'Mulish', sans-serif;
-      font-size: clamp(28px, 3vw, 44px);
+      font-size: clamp(32px, 3.5vw, 54px);
       font-weight: 900; color: var(--white);
-      letter-spacing: -0.03em; line-height: 1.06; margin-bottom: 14px;
+      letter-spacing: -0.03em; line-height: 1.04; margin-bottom: 14px;
       font-optical-sizing: auto;
     }
+    .section-title .dot { color: var(--amber); }
+
+    /* Cream section (work) */
+    .section-cream .section-title { color: var(--ink); }
+    .section-cream .section-eyebrow { color: #B07D1A; }
+    .section-cream .section-sub { color: var(--ink-muted); }
     .section-sub { font-size: 16px; color: var(--muted); max-width: 540px; line-height: 1.75; }
     .section-head { margin-bottom: 52px; }
 
@@ -228,12 +277,12 @@
     .project-item:hover { background: var(--surface2); }
     a.project-item:hover {
       transform: translateY(-3px);
-      box-shadow: 0 16px 48px rgba(0,0,0,0.32);
+      box-shadow: 0 16px 48px rgba(0,0,0,0.40);
       z-index: 1; position: relative;
     }
     a.project-item:active { transform: translateY(0) scale(0.995); transition-duration: 0.1s; }
     .project-item:hover .project-link-btn {
-      background: var(--amber); color: #0C0E13; border-color: var(--amber);
+      background: var(--amber); color: #181818; border-color: var(--amber);
     }
     a.project-item { cursor: pointer; }
 
@@ -265,8 +314,8 @@
     }
     .project-chip {
       position: absolute; top: 20px; left: 20px;
-      background: rgba(12,14,19,0.72); backdrop-filter: blur(8px);
-      border: 1px solid var(--border); border-radius: 40px;
+      background: rgba(12,14,19,0.75); backdrop-filter: blur(8px);
+      border: 1px solid rgba(255,255,255,0.1); border-radius: 40px;
       padding: 5px 14px; font-size: 11px; font-weight: 700;
       color: var(--amber); letter-spacing: 0.08em; text-transform: uppercase;
     }
@@ -280,7 +329,7 @@
     }
     .project-title {
       font-family: 'Mulish', sans-serif;
-      font-size: 23px; font-weight: 800; color: var(--white);
+      font-size: 22px; font-weight: 800; color: var(--white);
       margin-bottom: 12px; line-height: 1.2;
     }
     .project-desc { font-size: 14px; color: var(--muted); line-height: 1.75; margin-bottom: 28px; }
@@ -545,10 +594,12 @@
       .nav-links li:first-child { border-top: none; }
       .nav-links a { font-size: 14px; }
       .nav-burger { display: flex; }
+      .nav-right { gap: 8px; }
+      .nav-availability { display: none; }
       .nav-cta { display: none; }
 
       section { padding: 68px 20px; }
-      #hero { padding: 110px 20px 68px; }
+      #hero { padding: 120px 20px 68px; align-items: flex-start; }
       #tools .section-head { padding: 0 20px; }
 
       .process-steps { grid-template-columns: 1fr; }
@@ -574,7 +625,13 @@
     <li><a href="#experience">Experience</a></li>
     <li><a href="#about">About</a></li>
   </ul>
-  <a href="#contact" class="nav-cta">Let's talk &rarr;</a>
+  <div class="nav-right">
+    <span class="nav-availability">
+      <span class="nav-avail-dot"></span>
+      Open to work
+    </span>
+    <a href="#contact" class="nav-cta">Let's talk &rarr;</a>
+  </div>
   <button class="nav-burger" id="navBurger" aria-label="Toggle navigation" aria-expanded="false">
     <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
       <line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/>
@@ -584,15 +641,29 @@
 
 <!-- HERO -->
 <section id="hero">
-  <div class="hero-eyebrow">Hi, I'm Prasham &#x1F44B;</div>
+  <div class="hero-eyebrow">&#x1F44B; Hi, I'm Prasham</div>
   <h1 class="hero-title">
-    Human Instinct &amp; Systems Thinking<br>
-    for <em>Digital Outcomes.</em><br>
-    I <em>design</em> decisions that matter.
+    Human Instinct<br>
+    &amp; Systems<br>
+    Thinking<span class="dot">.</span>
   </h1>
   <p class="hero-sub">
-    Sr. Product Designer with 3+ years of experience specialising in high-growth platforms. M.Des from NID. Based in Mumbai.
-</p>
+    Sr. Product Designer with 3.5+ years of experience designing decisions that matter.
+  </p>
+  <div class="hero-stats">
+    <div>
+      <div class="hero-stat-num" data-count="3.5" data-suffix="+">3.5+</div>
+      <div class="hero-stat-label">Years Experience</div>
+    </div>
+    <div>
+      <div class="hero-stat-num" data-count="4" data-suffix="">4</div>
+      <div class="hero-stat-label">Key Projects</div>
+    </div>
+    <div>
+      <div class="hero-stat-num">M.Des</div>
+      <div class="hero-stat-label">NID Ahmedabad</div>
+    </div>
+  </div>
   <div class="hero-actions">
     <a href="#work" class="btn-primary">
       View my work
@@ -606,7 +677,7 @@
 <section id="work">
   <div class="section-head reveal">
     <div class="section-eyebrow">Selected Work</div>
-    <h2 class="section-title">Projects I'm proud of</h2>
+    <h2 class="section-title">Projects I'm proud of<span class="dot">.</span></h2>
     <p class="section-sub">Real problems, real impact — here's a look at the work behind the numbers.</p>
   </div>
   <div class="project-list">
@@ -1036,7 +1107,7 @@
 </footer>
 
 <script>
-  // Scroll reveal
+  // Scroll reveal — opacity-only, matching reference site
   const observer = new IntersectionObserver((entries) => {
     entries.forEach(e => {
       if (e.isIntersecting) {
@@ -1044,8 +1115,35 @@
         observer.unobserve(e.target);
       }
     });
-  }, { threshold: 0.08 });
+  }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
   document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+  // Count-up animation for stat numbers
+  function countUp(el, target, suffix, duration) {
+    const isDecimal = target % 1 !== 0;
+    const start = performance.now();
+    function step(now) {
+      const p = Math.min((now - start) / duration, 1);
+      const eased = 1 - Math.pow(1 - p, 3);
+      const val = isDecimal ? (eased * target).toFixed(1) : Math.floor(eased * target);
+      el.textContent = val + suffix;
+      if (p < 1) requestAnimationFrame(step);
+    }
+    requestAnimationFrame(step);
+  }
+  const statNums = document.querySelectorAll('[data-count]');
+  const statObserver = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        const el = e.target;
+        const target = parseFloat(el.dataset.count);
+        const suffix = el.dataset.suffix || '';
+        countUp(el, target, suffix, 1600);
+        statObserver.unobserve(el);
+      }
+    });
+  }, { threshold: 0.5 });
+  statNums.forEach(el => statObserver.observe(el));
 
   // Mobile nav
   const burger = document.getElementById('navBurger');
