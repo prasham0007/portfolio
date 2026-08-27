@@ -427,55 +427,61 @@
     #skills { background: var(--surface); position: relative; z-index: 2; }
     /* Skills split layout */
     /* Skills tabs – split collage layout */
-    .skills-tabs {
-      display: grid; grid-template-columns: 340px 1fr; gap: 80px; align-items: start;
+    .skill-cols {
+      display: flex;
+      align-items: stretch;
     }
-    .skills-tab-list {
-      display: flex; flex-wrap: wrap; gap: 12px; align-content: flex-start;
+    .skill-col {
+      flex: 1; min-width: 0; overflow: hidden;
+      padding: 130px 24px 28px;
+      height: 310px;
+      transition: flex 0.55s var(--ease), padding-top 0.55s var(--ease);
+      cursor: default;
     }
-    .skill-tab {
-      padding: 14px 28px; cursor: default;
-      font-family: 'Mulish', sans-serif; font-size: 16px; font-weight: 800;
-      color: var(--muted); white-space: nowrap;
-      border: 1.5px solid var(--border); border-radius: 100px;
-      background: transparent;
-      position: relative; transition: color 0.25s, background 0.25s, border-color 0.25s, transform 0.25s var(--ease);
-      flex: none;
+    .skill-col:hover { padding-top: 28px; }
+    .skill-col:hover { flex: 2; }
+    .skill-col-hd { }
+    .skill-col-chevron { display: none; }
+    .skill-col-num {
+      font-size: 11px; font-weight: 600; letter-spacing: 0.12em;
+      color: var(--muted); opacity: 0.5; margin-bottom: 20px;
     }
-    .skill-tab.active {
-      color: var(--white); background: var(--surface2);
-      border-color: rgba(255,255,255,0.5);
-      transform: scale(1.06);
+    .skill-col-name {
+      display: inline-block;
+      font-size: 13px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase;
+      color: var(--white);
+      border: 1px solid var(--border);
+      border-radius: 100px;
+      padding: 6px 14px;
+      white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+      transition: color 0.25s, border-color 0.25s;
     }
-    .skill-tab:hover { color: var(--white); border-color: rgba(255,255,255,0.3); transform: scale(1.04); }
-
-    .skills-content { position: relative; min-height: 320px; }
-    .skill-panel {
-      position: absolute; inset: 0;
-      opacity: 0; transition: opacity 0.3s ease;
-      pointer-events: none;
+    .skill-col:hover .skill-col-name { color: var(--amber); border-color: var(--amber); }
+    .skill-col-detail {
+      opacity: 0; transform: translateY(10px);
+      margin-top: 16px; pointer-events: none;
+      transition: opacity 0.35s var(--ease) 0.1s, transform 0.35s var(--ease) 0.1s;
     }
-    .skill-panel.active { opacity: 1; pointer-events: auto; }
-    .skill-panel-left { margin-bottom: 28px; }
-    .skill-detail-eyebrow {
+    .skill-col:hover .skill-col-detail {
+      opacity: 1; transform: translateY(0); pointer-events: auto;
+    }
+    .skill-col-eyebrow {
       font-size: 10px; font-weight: 700; letter-spacing: 0.14em;
-      text-transform: uppercase; color: var(--amber); margin-bottom: 12px;
+      text-transform: uppercase; color: var(--amber); margin-bottom: 10px;
     }
-    .skill-detail-heading {
-      font-family: 'Mulish', sans-serif;
-      font-size: clamp(24px, 2.4vw, 32px); font-weight: 600; color: var(--white);
-      line-height: 1.15; margin-bottom: 16px; letter-spacing: -0.02em;
+    .skill-col-heading {
+      font-size: clamp(16px, 1.6vw, 22px); font-weight: 600; color: var(--white);
+      line-height: 1.2; letter-spacing: -0.02em; margin-bottom: 10px;
     }
-    .skill-desc { font-size: 15px; color: var(--muted); line-height: 1.8; }
-    .skill-points { list-style: none; display: flex; flex-direction: column; gap: 10px; padding-top: 4px; }
-    .skill-points li {
-      font-size: 14px; color: var(--muted); line-height: 1.5; padding-left: 18px; position: relative;
+    .skill-col-desc {
+      font-size: 13px; color: var(--muted); line-height: 1.75;
+      list-style: none; padding: 0; margin: 0; overflow: visible;
     }
-    .skill-points li::before {
-      content: ''; position: absolute; left: 0; top: 7px;
-      width: 5px; height: 5px;
-      border-top: 1.5px solid rgba(255,255,255,0.3); border-right: 1.5px solid rgba(255,255,255,0.3);
-      transform: rotate(45deg);
+    .skill-col-desc li {
+      position: relative; padding-left: 14px; margin-bottom: 6px;
+    }
+    .skill-col-desc li::before {
+      content: '•'; position: absolute; left: 0; color: var(--muted); font-size: 11px; line-height: 1.9;
     }
 
     /* ── TOOLS ── */
@@ -718,8 +724,36 @@
       .project-col { gap: 48px; }
       .project-col--right { margin-top: 0; }
 
-      .skills-tabs { grid-template-columns: 1fr; gap: 32px; }
-      .skills-content { min-height: 360px; }
+      .skill-cols { flex-direction: column; }
+      .skill-col { height: auto; padding: 20px 0; border-bottom: 1px solid var(--border); }
+      .skill-col:last-child { border-bottom: none; }
+      .skill-col-hd { display: flex; align-items: center; gap: 12px; cursor: pointer; padding: 0; }
+      .skill-col-hd .skill-col-num { margin-bottom: 0; }
+      .skill-col-chevron {
+        display: flex; align-items: center; justify-content: center;
+        margin-left: auto; flex-shrink: 0;
+        width: 24px; height: 24px;
+        font-size: 0;
+        transition: transform 0.35s var(--ease);
+      }
+      .skill-col-chevron::before {
+        content: '';
+        display: block;
+        width: 8px; height: 8px;
+        border-right: 1.5px solid var(--muted);
+        border-bottom: 1.5px solid var(--muted);
+        transform: rotate(45deg) translate(-2px, -2px);
+      }
+      .skill-col.is-open .skill-col-chevron { transform: rotate(180deg); }
+      .skill-col-detail {
+        opacity: 0 !important; max-height: 0 !important; overflow: hidden !important;
+        margin-top: 0 !important; pointer-events: none !important;
+        transition: max-height 0.45s var(--ease), opacity 0.3s var(--ease), margin-top 0.3s var(--ease) !important;
+      }
+      .skill-col.is-open .skill-col-detail {
+        opacity: 1 !important; max-height: 500px !important;
+        margin-top: 16px !important; pointer-events: auto !important;
+      }
 
       #experience, #education {
         grid-template-columns: 1fr; column-gap: 0;
@@ -772,7 +806,7 @@
       .pcard-title { font-size: 22px; }
       .pcard-desc { font-size: 15px; }
 
-      .skills-tabs { grid-template-columns: 1fr; gap: 28px; }
+      .skill-cols { flex-direction: column; }
 
       #experience, #education {
         grid-template-columns: 1fr; column-gap: 0;
@@ -965,81 +999,89 @@
     <div class="section-eyebrow">What I Do</div>
     <h2 class="section-title">Skills &amp; Process<span style="color:var(--amber)">.</span></h2>
   </div>
-  <div class="skills-tabs reveal">
-    <div class="skills-tab-list">
-      <div class="skill-tab active" data-tab="0">User Research</div>
-      <div class="skill-tab" data-tab="1">UX/UI Design</div>
-      <div class="skill-tab" data-tab="2">Growth-Driven Design</div>
-      <div class="skill-tab" data-tab="3">Systems Thinking</div>
-      <div class="skill-tab" data-tab="4">Collaboration &amp; Leadership</div>
+  <div class="skill-cols reveal">
+    <div class="skill-col">
+      <div class="skill-col-hd">
+        <div class="skill-col-num">01</div>
+        <div class="skill-col-name">User Research</div>
+        <span class="skill-col-chevron">&#8964;</span>
+      </div>
+      <div class="skill-col-detail">
+        <div class="skill-col-heading">Understanding people first</div>
+        <ul class="skill-col-desc">
+          <li>User interviews &amp; contextual inquiry</li>
+          <li>Surveys, diary studies &amp; usability tests</li>
+          <li>Affinity mapping &amp; insight synthesis</li>
+          <li>Personas, journey maps &amp; JTBD</li>
+          <li>Clear problem statements that drive decisions</li>
+        </ul>
+      </div>
     </div>
-    <div class="skills-content">
-      <div class="skill-panel active" data-panel="0">
-        <div class="skill-panel-left">
-          <div class="skill-detail-eyebrow">User Research</div>
-          <div class="skill-detail-heading">Understanding people first</div>
-          <div class="skill-desc">I lead with empathy, listening before solving. I discover real problems through research, then synthesise findings into clear problem statements that guide every design decision.</div>
-        </div>
-        <ul class="skill-points">
-          <li>User interviews and contextual inquiry</li>
-          <li>Competitive analysis and heuristic evaluation</li>
-          <li>Usability testing, moderated and unmoderated</li>
-          <li>Affinity mapping, thematic analysis and journey mapping</li>
-          <li>Synthesising insights into personas and problem statements</li>
+    <div class="skill-col">
+      <div class="skill-col-hd">
+        <div class="skill-col-num">02</div>
+        <div class="skill-col-name">UX/UI Design</div>
+        <span class="skill-col-chevron">&#8964;</span>
+      </div>
+      <div class="skill-col-detail">
+        <div class="skill-col-heading">Design, prototype, validate</div>
+        <ul class="skill-col-desc">
+          <li>Wireframes, flows &amp; information architecture</li>
+          <li>High-fidelity UI for Android, iOS &amp; web</li>
+          <li>Interactive prototypes for user testing</li>
+          <li>Micro-interactions &amp; motion design</li>
+          <li>Iterating before a line of code is written</li>
         </ul>
       </div>
-      <div class="skill-panel" data-panel="1">
-        <div class="skill-panel-left">
-          <div class="skill-detail-eyebrow">UX/UI &amp; Prototyping</div>
-          <div class="skill-detail-heading">Design, prototype, validate</div>
-          <div class="skill-desc">I design interfaces that are visually sharp and behaviourally sound, then get them in front of real users through high-fidelity prototypes — iterating before a single line of code is written.</div>
-        </div>
-        <ul class="skill-points">
-          <li>Wireframing, hi-fidelity mockups and design systems</li>
-          <li>Interaction design and micro-interaction thinking</li>
-          <li>Interactive prototyping in Figma, Framer and Axure RP</li>
-          <li>Cross-platform design — iOS, Android and Web</li>
-          <li>Design validation before development handoff</li>
+    </div>
+    <div class="skill-col">
+      <div class="skill-col-hd">
+        <div class="skill-col-num">03</div>
+        <div class="skill-col-name">Growth-Driven Design</div>
+        <span class="skill-col-chevron">&#8964;</span>
+      </div>
+      <div class="skill-col-detail">
+        <div class="skill-col-heading">Where design meets outcomes</div>
+        <ul class="skill-col-desc">
+          <li>Double Diamond &amp; jobs-to-be-done framing</li>
+          <li>Funnel analysis &amp; conversion optimisation</li>
+          <li>Tying design decisions to business goals</li>
+          <li>A/B testing &amp; hypothesis-driven design</li>
+          <li>Post-launch data validation &amp; iteration</li>
         </ul>
       </div>
-      <div class="skill-panel" data-panel="2">
-        <div class="skill-panel-left">
-          <div class="skill-detail-eyebrow">Growth-Driven Design</div>
-          <div class="skill-detail-heading">Where design meets outcomes</div>
-          <div class="skill-desc">Great design is not just good UX, it moves metrics. I frame problems with Double Diamond thinking, connect decisions to business objectives, and validate outcomes with post-launch data.</div>
-        </div>
-        <ul class="skill-points">
-          <li>UX metrics and KPI alignment</li>
-          <li>Double Diamond and Design Thinking frameworks</li>
-          <li>Problem framing and clear problem statements</li>
-          <li>Post-launch measurement with Google Analytics and Looker</li>
-          <li>Competitive analysis and UX audits</li>
+    </div>
+    <div class="skill-col">
+      <div class="skill-col-hd">
+        <div class="skill-col-num">04</div>
+        <div class="skill-col-name">Systems Thinking</div>
+        <span class="skill-col-chevron">&#8964;</span>
+      </div>
+      <div class="skill-col-detail">
+        <div class="skill-col-heading">Design that scales</div>
+        <ul class="skill-col-desc">
+          <li>Component libraries &amp; design tokens</li>
+          <li>IA frameworks for scalable products</li>
+          <li>Multi-platform design systems</li>
+          <li>Accessibility &amp; inclusive design</li>
+          <li>Dev-ready specs for engineering handoff</li>
         </ul>
       </div>
-      <div class="skill-panel" data-panel="3">
-        <div class="skill-panel-left">
-          <div class="skill-detail-eyebrow">Systems Thinking</div>
-          <div class="skill-detail-heading">Design that scales</div>
-          <div class="skill-desc">I build component libraries, token systems, and IA frameworks that keep products consistent as they grow — and deliver dev-ready specs so engineering can ship with confidence.</div>
-        </div>
-        <ul class="skill-points">
-          <li>Design systems and component architecture</li>
-          <li>Information architecture and navigation design</li>
-          <li>Figma variables and token management</li>
-          <li>Dev-ready specs and developer handoff</li>
-          <li>UI QA before and after launch</li>
-        </ul>
+    </div>
+    <div class="skill-col">
+      <div class="skill-col-hd">
+        <div class="skill-col-num">05</div>
+        <div class="skill-col-name">Collaboration</div>
+        <span class="skill-col-chevron">&#8964;</span>
       </div>
-      <div class="skill-panel" data-panel="4">
-        <div class="skill-panel-left">
-          <div class="skill-detail-eyebrow">Collaboration &amp; Leadership</div>
-          <div class="skill-detail-heading">Cross-team alignment</div>
-          <div class="skill-desc">I thrive in cross-functional teams, bridging product, engineering, and stakeholders through clear communication, structured workshops, and shared design language.</div>
-        </div>
-        <ul class="skill-points">
-          <li>Design sprints and ideation workshops</li>
-          <li>Agile development collaboration</li>
-          <li>Stakeholder presentations and design critique</li>
+      <div class="skill-col-detail">
+        <div class="skill-col-heading">Cross-team alignment</div>
+        <ul class="skill-col-desc">
+          <li>Bridging product, engineering &amp; stakeholders</li>
+          <li>Structured workshops &amp; design critiques</li>
+          <li>Presenting rationale to leadership</li>
+          <li>Mentoring junior designers</li>
+          <li>Shared design language &amp; documentation</li>
         </ul>
       </div>
     </div>
@@ -1499,6 +1541,19 @@
       }
       lastY = y;
     }, { passive: true });
+  })();
+
+  // Mobile skill accordion
+  (function() {
+    function initSkillAccordion() {
+      if (window.innerWidth > 1024) return;
+      document.querySelectorAll('.skill-col-hd').forEach(function(hd) {
+        hd.addEventListener('click', function() {
+          hd.closest('.skill-col').classList.toggle('is-open');
+        });
+      });
+    }
+    initSkillAccordion();
   })();
 </script>
 
