@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ETF Product Ecosystem — Prasham Chavda</title>
+  <link href="https://fonts.googleapis.com/css2?family=Mulish:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,300;1,400&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #181818;
+      --surface: #1F1F1F;
+      --surface2: #272727;
+      --border: #2E2E2E;
+      --amber: #F04A23;
+      --amber-dim: rgba(240,74,35,0.10);
+      --text: #FAF9F7;
+      --muted: #888784;
+      --white: #FAF9F7;
+      --radius: 16px;
+      --radius-sm: 8px;
+      --ease: cubic-bezier(0.16, 1, 0.3, 1);
+      --ease-out: cubic-bezier(0.33, 1, 0.68, 1);
+      /* ETF accent — lavender from pv-2 card */
+      --accent: #B0A0D8;
+      --accent-dim: rgba(176,160,216,0.10);
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Mulish', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      overflow-x: hidden;
+      font-optical-sizing: auto;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    a { text-decoration: none; color: inherit; }
+
+    :focus-visible { outline: 2px solid rgba(255,255,255,0.5); outline-offset: 3px; border-radius: 4px; }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
+    }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0 80px; height: 116px;
+      background: rgba(24,24,24,0.88);
+      backdrop-filter: blur(20px) saturate(140%);
+      -webkit-backdrop-filter: blur(20px) saturate(140%);
+      border-bottom: none;
+      transition: transform 0.5s var(--ease), opacity 0.4s ease;
+    }
+    nav.hidden {
+      transform: translateY(-100%);
+      opacity: 0;
+      pointer-events: none;
+    }
+    @media (prefers-reduced-transparency: reduce) {
+      nav { background: var(--bg); backdrop-filter: none; }
+    }
+
+    .nav-logo {
+      font-weight: 600; font-size: 20px;
+      letter-spacing: 0.08em; text-transform: uppercase;
+      color: var(--white); text-decoration: none;
+      transition: opacity 0.2s;
+    }
+    .nav-logo:hover { opacity: 0.7; }
+    .nav-logo span { color: var(--amber); }
+
+    .nav-back {
+      display: inline-flex; align-items: center; gap: 8px;
+      font-size: 13px; font-weight: 600; color: var(--muted);
+      letter-spacing: 0.06em; text-transform: uppercase;
+      transition: color 0.2s;
+    }
+    .nav-back:hover { color: var(--white); }
+    .nav-back svg { transition: transform 0.2s; }
+    .nav-back:hover svg { transform: translateX(-3px); }
+
+    /* ── HERO — fold 1 ── */
+    #hero {
+      min-height: 80svh;
+      display: flex; flex-direction: column;
+      justify-content: flex-end;
+      padding: 140px 80px 0;
+      position: relative; overflow: hidden;
+    }
+
+    .hero-label {
+      font-size: 11px; font-weight: 800; letter-spacing: 0.18em;
+      text-transform: uppercase; color: var(--muted);
+      margin-bottom: 20px;
+      animation: fadeUp 0.5s var(--ease) 0.1s both;
+    }
+
+    .hero-title {
+      font-size: clamp(32px, 4vw, 64px);
+      font-weight: 600; line-height: 1;
+      color: var(--white); margin-bottom: 40px;
+      letter-spacing: -0.03em;
+      animation: fadeUp 0.65s var(--ease) 0.2s both;
+    }
+    .hero-title .dot { color: var(--amber); }
+
+    /* Two-column row: large description left, meta right */
+    .hero-body-row {
+      display: flex; align-items: flex-start;
+      gap: 0; width: 100%;
+      will-change: transform, opacity;
+    }
+    .hero-left {
+      flex: 1; padding-right: 10%;
+      animation: fadeUp 0.65s var(--ease) 0.3s both;
+      will-change: transform, opacity;
+    }
+    .hero-desc {
+      font-size: clamp(20px, 2.2vw, 32px);
+      font-weight: 400; color: rgba(250,249,247,0.55);
+      line-height: 1.5; letter-spacing: -0.01em;
+      margin-bottom: 40px;
+    }
+    .hero-cta {
+      display: inline-flex; align-items: center; gap: 8px;
+      border: 1px solid rgba(255,255,255,0.25);
+      border-radius: 999px; padding: 12px 28px;
+      font-size: 14px; font-weight: 600; color: var(--text);
+      text-decoration: none;
+      transition: border-color 0.2s, color 0.2s, transform 0.3s var(--ease);
+    }
+    .hero-cta:hover { border-color: rgba(255,255,255,0.6); color: var(--white); transform: translateY(-2px); }
+
+    .hero-meta {
+      width: 260px; flex-shrink: 0;
+      display: flex; flex-direction: column; gap: 28px;
+      animation: fadeUp 0.65s var(--ease) 0.45s both;
+    }
+    .hero-meta-item { display: flex; flex-direction: column; gap: 6px; }
+    .hero-meta-label {
+      font-size: 10px; font-weight: 500; letter-spacing: 0.16em;
+      text-transform: uppercase; color: var(--muted);
+    }
+    .hero-meta-val {
+      font-size: 15px; font-weight: 400; color: var(--text);
+      line-height: 1.5;
+    }
+
+    /* ── COVER — fold 2 ── */
+    #cover {
+      height: 100svh;
+      display: flex; align-items: center; justify-content: center;
+      background: linear-gradient(to bottom, #181818 0, #181818 20svh, #FAF9F7 20svh);
+      position: relative; overflow: hidden;
+    }
+    .cover-inner {
+      width: 100%;
+      padding: 80px 128px;
+      display: flex; flex-direction: column; justify-content: center;
+      height: 100%;
+    }
+    .cover-label {
+      font-size: 11px; font-weight: 500;
+      letter-spacing: 0.18em; text-transform: uppercase;
+      color: rgba(24,24,24,0.4); margin-bottom: 24px;
+    }
+    .cover-meta-grid {
+      display: grid; grid-template-columns: repeat(2, auto);
+      gap: 0; width: fit-content;
+      border: 1px solid rgba(24,24,24,0.1);
+      border-radius: var(--radius); overflow: hidden;
+    }
+    .cover-meta-item {
+      padding: 20px 32px;
+      border-right: 1px solid rgba(24,24,24,0.1);
+    }
+    .cover-meta-item:last-child { border-right: none; }
+    .cover-meta-key {
+      font-size: 10px; font-weight: 500;
+      letter-spacing: 0.14em; text-transform: uppercase;
+      color: rgba(24,24,24,0.4); margin-bottom: 6px;
+    }
+    .cover-meta-val {
+      font-size: 14px; font-weight: 700;
+      color: rgba(24,24,24,0.85);
+    }
+    .cover-visual {
+      flex: 1; display: flex; align-items: center; justify-content: center;
+    }
+    .cover-placeholder {
+      width: 100%;
+      height: 80svh;
+      background: linear-gradient(145deg, #CEC4E8 0%, #B0A0D8 100%);
+      display: flex; align-items: center; justify-content: center;
+    }
+    .cover-placeholder-text {
+      font-size: 13px; font-weight: 600;
+      letter-spacing: 0.08em; text-transform: uppercase;
+      color: rgba(24,24,24,0.3);
+    }
+
+    /* ── SECTION 3 ── */
+    #section-3 {
+      min-height: 100svh;
+      background: #F0EFED;
+      padding: 128px;
+      position: relative; z-index: 2;
+    }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 1024px) {
+      nav { padding: 0 48px; height: 80px; }
+      .nav-logo { font-size: 16px; }
+      .cover-inner { padding: 60px 48px; }
+      #hero { padding: 120px 48px 0; }
+      .cover-meta-grid { grid-template-columns: repeat(2, auto); }
+      .cover-meta-item:nth-child(2) { border-right: none; }
+      .cover-meta-item:nth-child(3) { border-top: 1px solid rgba(24,24,24,0.12); }
+    }
+
+    @media (max-width: 768px) {
+      nav { padding: 0 20px; height: 64px; }
+      .nav-logo { font-size: 14px; letter-spacing: 0.06em; }
+      #hero { padding: 100px 20px 60px; }
+      .hero-body-row { flex-direction: column; gap: 40px; }
+      .hero-meta { width: 100%; padding-top: 28px; border-top: 1px solid var(--border); }
+      .cover-inner { padding: 40px 20px; }
+      #hero { padding: 96px 20px 0; }
+      .cover-meta-grid { grid-template-columns: 1fr 1fr; width: 100%; }
+      .cover-meta-item:nth-child(2) { border-right: none; }
+      .cover-meta-item:nth-child(3) { border-top: 1px solid rgba(24,24,24,0.12); }
+      .cover-meta-item:nth-child(4) { border-top: 1px solid rgba(24,24,24,0.12); border-right: none; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <a href="index.html" class="nav-logo">Prasham Chavda<span>.</span></a>
+    <a href="index.html#work" class="nav-back">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M19 12H5"/><path d="m12 19-7-7 7-7"/>
+      </svg>
+      All Work
+    </a>
+  </nav>
+
+  <!-- FOLD 1 — HERO -->
+  <section id="hero">
+    <div class="hero-body-row">
+      <div class="hero-left">
+        <h1 class="hero-title">End-to-end design of a<br>data-rich ETF ecosystem<span class="dot">.</span></h1>
+        <p class="hero-desc">
+          Designed the full ETF dashboard and buy journey for 5paisa — a data-heavy investment product that needed to feel both powerful and approachable. Led strategy, UX, and UI across mobile and web, resulting in an 81% surge in platform turnover.
+        </p>
+      </div>
+      <div class="hero-meta">
+        <div class="hero-meta-item">
+          <div class="hero-meta-label">Project Duration</div>
+          <div class="hero-meta-val">4 Months</div>
+        </div>
+        <div class="hero-meta-item">
+          <div class="hero-meta-label">Role</div>
+          <div class="hero-meta-val">Lead Product Designer</div>
+        </div>
+        <div class="hero-meta-item">
+          <div class="hero-meta-label">Tools</div>
+          <div class="hero-meta-val">Figma, Maze, Google Analytics</div>
+        </div>
+        <div class="hero-meta-item">
+          <div class="hero-meta-label">Skills</div>
+          <div class="hero-meta-val">UX Research, Dashboard Design, Data Visualisation, Revenue Optimisation</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOLD 2 — COVER / PROJECT META -->
+  <section id="cover">
+    <div class="cover-inner">
+<div class="cover-visual">
+        <div class="cover-placeholder">
+          <span class="cover-placeholder-text">Cover image</span>
+        </div>
+      </div>
+      <div style="height: 40px;"></div>
+    </div>
+  </section>
+
+  <!-- FOLD 3 -->
+  <section id="section-3">
+  </section>
+
+  <script>
+    const nav = document.querySelector('nav');
+    const hero = document.getElementById('hero');
+    const heroRow = hero.querySelector('.hero-body-row');
+    let raf = false;
+
+    function updateOnScroll() {
+      const scrollY = window.scrollY;
+      const heroH = hero.offsetHeight;
+      const progress = Math.min(1, scrollY / (heroH * 0.75));
+
+      // Fade + parallax hero content
+      heroRow.style.opacity = 1 - progress;
+      heroRow.style.transform = `translateY(${scrollY * -0.18}px)`;
+
+      // Hide nav past hero
+      nav.classList.toggle('hidden', scrollY > heroH * 0.85);
+
+      raf = false;
+    }
+
+    window.addEventListener('scroll', () => {
+      if (!raf) {
+        raf = true;
+        requestAnimationFrame(updateOnScroll);
+      }
+    }, { passive: true });
+  </script>
+</body>
+</html>
