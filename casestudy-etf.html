@@ -114,7 +114,7 @@
       letter-spacing: -0.03em;
       animation: fadeUp 0.65s var(--ease) 0.2s both;
     }
-    .hero-title .dot { color: var(--amber); }
+    .hero-title .dot, .s-eyebrow .dot { color: var(--amber); }
 
     /* Two-column row: large description left, meta right */
     .hero-body-row {
@@ -205,18 +205,227 @@
       background: linear-gradient(145deg, #CEC4E8 0%, #B0A0D8 100%);
       display: flex; align-items: center; justify-content: center;
     }
-    .cover-placeholder-text {
-      font-size: 13px; font-weight: 600;
-      letter-spacing: 0.08em; text-transform: uppercase;
-      color: rgba(24,24,24,0.3);
+    .cover-iframe {
+      width: 100%; height: 100%; border: none; display: block;
     }
 
-    /* ── SECTION 3 ── */
-    #section-3 {
-      min-height: 100svh;
-      background: #F0EFED;
-      padding: 128px;
-      position: relative; z-index: 2;
+    /* ── CASE STUDY SHARED ── */
+    .s-inner { width: 100%; }
+    .s-eyebrow {
+      display: block; font-size: 14px; font-weight: 600;
+      letter-spacing: 0.14em; text-transform: uppercase;
+      color: #888784; margin-bottom: 14px;
+    }
+    .s-heading {
+      font-size: clamp(28px, 3vw, 48px); font-weight: 700;
+      line-height: 1.15; letter-spacing: -0.03em;
+      margin-bottom: 20px;
+    }
+    .s-body {
+      font-size: 17px; font-weight: 400;
+      line-height: 1.75; max-width: 620px;
+    }
+
+    /* ── IMPACT — fold 3 ── */
+    #s-impact {
+      background: #FAF9F7; padding: 0 128px 120px;
+    }
+    .impact-card {
+      background: #181818; border-radius: 12px;
+      padding: 64px 48px;
+    }
+    .impact-grid {
+      display: grid; grid-template-columns: repeat(4, 1fr);
+      column-gap: 96px;
+    }
+    .impact-stat { position: relative; }
+    .impact-stat:not(:last-child)::after {
+      content: ''; position: absolute; right: -48px; top: 5%; height: 90%;
+      width: 1px;
+      background: linear-gradient(to bottom, transparent 0%, rgba(250,249,247,0.45) 50%, transparent 100%);
+    }
+    .stat-num {
+      display: block; font-size: clamp(40px, 5vw, 80px);
+      font-weight: 700; line-height: 1; letter-spacing: -0.04em;
+      color: #FAF9F7; margin-bottom: 14px;
+    }
+    .stat-num .acc { color: #FAF9F7; }
+    .stat-label { font-size: 14px; font-weight: 400; color: rgba(250,249,247,0.55); line-height: 1.55; }
+    .impact-note {
+      margin-top: 24px; font-size: 13px; font-weight: 400;
+      color: rgba(24,24,24,0.55); text-align: center;
+    }
+
+    /* ── BACKGROUND — fold 4 ── */
+    #s-background { background: #F0EFED; padding: 120px 128px; }
+    #s-background .s-eyebrow {
+      font-size: 14px; font-weight: 600;
+      letter-spacing: 0.14em; text-transform: uppercase;
+      color: #888784; margin-bottom: 14px;
+    }
+    #s-background .s-body {
+      font-size: clamp(20px, 2.2vw, 32px); font-weight: 600;
+      line-height: 1.4; letter-spacing: -0.02em;
+      color: #181818; max-width: 100%;
+    }
+    .old-ui-ph {
+      margin-top: 64px; width: 100%; aspect-ratio: 16/9;
+      background: rgba(24,24,24,0.07); border-radius: 16px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 12px; font-weight: 600; letter-spacing: 0.08em;
+      text-transform: uppercase; color: rgba(24,24,24,0.22);
+    }
+
+    /* ── DEFINE — fold 5 ── */
+    #s-define { background: #FAF9F7; padding: 120px 128px; }
+    .problem-stmt {
+      font-size: clamp(20px, 2.2vw, 32px); font-weight: 600;
+      line-height: 1.4; letter-spacing: -0.02em; color: #181818;
+      border-left: 3px solid var(--accent); padding-left: 28px;
+      max-width: 760px; margin-bottom: 72px;
+    }
+    .define-grid {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 48px;
+    }
+    .insight-card {
+      background: #F0EFED; border-radius: 14px; padding: 28px 32px;
+    }
+    .insight-card.accent-card {
+      background: rgba(176,160,216,0.1);
+      border: 1px solid rgba(176,160,216,0.22);
+    }
+    .insight-quote {
+      font-size: 15px; font-weight: 400; font-style: italic;
+      color: rgba(24,24,24,0.7); line-height: 1.65; margin-bottom: 14px;
+    }
+    .insight-card.accent-card .insight-quote {
+      font-style: normal; font-weight: 600; color: #181818;
+    }
+    .insight-tag {
+      font-size: 10px; font-weight: 700; letter-spacing: 0.14em;
+      text-transform: uppercase; color: var(--accent);
+    }
+    .sip-callout {
+      background: #181818; border-radius: 16px;
+      padding: 40px 48px; display: flex; align-items: center; gap: 48px;
+    }
+    .sip-label {
+      font-size: 10px; font-weight: 700; letter-spacing: 0.14em;
+      text-transform: uppercase; color: var(--accent); margin-bottom: 12px;
+    }
+    .sip-text {
+      font-size: 17px; font-weight: 500; color: #FAF9F7;
+      line-height: 1.55; max-width: 520px;
+    }
+    .sip-badge {
+      flex-shrink: 0; background: var(--accent);
+      border-radius: 12px; padding: 16px 28px; text-align: center;
+    }
+    .sip-badge-word {
+      font-size: 20px; font-weight: 800; color: #181818;
+      letter-spacing: -0.02em; display: block;
+    }
+    .sip-badge-sub {
+      font-size: 10px; font-weight: 600; letter-spacing: 0.1em;
+      text-transform: uppercase; color: rgba(24,24,24,0.55);
+      margin-top: 4px; display: block;
+    }
+
+    /* ── PROCESS — fold 6 ── */
+    #s-process { background: #F0EFED; padding: 120px 128px; }
+    #s-process .s-heading { color: #181818; }
+    .process-steps {
+      display: grid; grid-template-columns: repeat(4, 1fr);
+      border-top: 1px solid rgba(24,24,24,0.1);
+      padding-top: 48px; margin-top: 40px;
+    }
+    .process-step { padding-right: 40px; }
+    .step-num {
+      display: block; font-size: 11px; font-weight: 800;
+      letter-spacing: 0.14em; color: var(--accent); margin-bottom: 16px;
+    }
+    .step-title {
+      font-size: 17px; font-weight: 700; color: #181818;
+      margin-bottom: 10px; letter-spacing: -0.01em;
+    }
+    .step-desc {
+      font-size: 14px; font-weight: 400;
+      color: rgba(24,24,24,0.52); line-height: 1.65;
+    }
+
+    /* ── INTENT FRAMEWORK — fold 7 ── */
+    #s-intent { background: #181818; padding: 120px 128px; }
+    #s-intent .s-heading { color: #FAF9F7; }
+    .intent-sub {
+      font-size: 16px; font-weight: 400; color: rgba(250,249,247,0.45);
+      max-width: 560px; line-height: 1.7; margin-bottom: 64px;
+    }
+    .intent-grid {
+      display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px;
+    }
+    .intent-pillar {
+      background: #272727; border-radius: 14px; padding: 28px;
+    }
+    .intent-pillar-name {
+      font-size: 10px; font-weight: 800; letter-spacing: 0.14em;
+      text-transform: uppercase; color: var(--accent); margin-bottom: 16px;
+    }
+    .intent-tags { display: flex; flex-wrap: wrap; gap: 8px; }
+    .intent-tag {
+      font-size: 12px; font-weight: 500;
+      background: rgba(176,160,216,0.1); color: rgba(250,249,247,0.7);
+      border-radius: 6px; padding: 5px 10px;
+    }
+
+    /* ── DESIGN SCREENS — fold 8 ── */
+    #s-screens { background: #181818; padding: 120px 128px; }
+    #s-screens .s-heading { color: #FAF9F7; }
+    .screens-grid {
+      display: grid; grid-template-columns: repeat(2, 1fr);
+      gap: 20px; margin-top: 56px;
+    }
+    .screen-card { background: #272727; border-radius: 20px; overflow: hidden; }
+    .screen-ph-port {
+      width: 100%; aspect-ratio: 9/19;
+      background: linear-gradient(145deg, #CEC4E8 0%, #B0A0D8 100%);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 11px; font-weight: 600; letter-spacing: 0.08em;
+      text-transform: uppercase; color: rgba(24,24,24,0.28);
+    }
+    .screen-label {
+      padding: 16px 22px; font-size: 13px; font-weight: 600;
+      color: rgba(250,249,247,0.5);
+    }
+
+    /* ── WEB — fold 9 ── */
+    #s-web { background: #1F1F1F; padding: 120px 128px; }
+    #s-web .s-heading { color: #FAF9F7; }
+    .web-ph {
+      margin-top: 56px; width: 100%; aspect-ratio: 16/9;
+      background: linear-gradient(145deg, #CEC4E8 0%, #B0A0D8 100%);
+      border-radius: 16px; display: flex; align-items: center; justify-content: center;
+      font-size: 12px; font-weight: 600; letter-spacing: 0.08em;
+      text-transform: uppercase; color: rgba(24,24,24,0.28);
+    }
+    .web-note {
+      margin-top: 20px; font-size: 14px; font-weight: 400;
+      color: rgba(250,249,247,0.3); line-height: 1.6;
+    }
+
+    /* ── NEW DESIGN SYSTEM — fold 10 ── */
+    #s-ds { background: #F0EFED; padding: 120px 128px; }
+    #s-ds .s-heading { color: #181818; }
+    #s-ds .s-body { color: rgba(24,24,24,0.55); }
+    .ds-grid {
+      display: grid; grid-template-columns: repeat(4, 1fr);
+      gap: 14px; margin-top: 56px;
+    }
+    .ds-ph {
+      aspect-ratio: 9/19;
+      background: rgba(24,24,24,0.07); border-radius: 14px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 11px; font-weight: 600; letter-spacing: 0.08em;
+      text-transform: uppercase; color: rgba(24,24,24,0.22);
     }
 
     /* ── RESPONSIVE ── */
@@ -293,15 +502,223 @@
     <div class="cover-inner">
 <div class="cover-visual">
         <div class="cover-placeholder">
-          <span class="cover-placeholder-text">Cover image</span>
+          <iframe id="phoneFrame" class="cover-iframe" src="etf-explore-screen.html?v=6" title="ETF Explore"></iframe>
         </div>
       </div>
       <div style="height: 40px;"></div>
     </div>
   </section>
 
-  <!-- FOLD 3 -->
-  <section id="section-3">
+  <!-- FOLD 3 — IMPACT -->
+  <section id="s-impact">
+    <div class="s-inner">
+      <div class="impact-card">
+        <div class="impact-grid">
+          <div class="impact-stat">
+            <span class="stat-num">81<span class="acc">%</span></span>
+            <span class="stat-label">Turnover surge</span>
+          </div>
+          <div class="impact-stat">
+            <span class="stat-num">52<span class="acc">%</span></span>
+            <span class="stat-label">Growth in ETF order volume</span>
+          </div>
+          <div class="impact-stat">
+            <span class="stat-num">35<span class="acc">%</span></span>
+            <span class="stat-label">Increase in active ETF clients</span>
+          </div>
+          <div class="impact-stat">
+            <span class="stat-num">25<span class="acc">%</span></span>
+            <span class="stat-label">Rise in dashboard engagement</span>
+          </div>
+        </div>
+      </div>
+      <p class="impact-note">Source: CleverTap (Nov → Dec 2025 · First month after launch)</p>
+    </div>
+  </section>
+
+  <!-- FOLD 4 — BACKGROUND -->
+  <section id="s-background">
+    <div class="s-inner">
+      <span class="s-eyebrow">Background</span>
+      <p class="s-body">Before this redesign, ETFs on 5paisa were buried inside the stocks product — a flat list of names, prices, and daily changes. No discovery, no context, no dedicated experience. For users trying to invest in ETFs, the journey started and ended with a number on a screen.</p>
+    </div>
+  </section>
+
+  <!-- FOLD 5 — DEFINE -->
+  <section id="s-define">
+    <div class="s-inner">
+      <span class="s-eyebrow">Define</span>
+      <p class="problem-stmt">"How might we transform ETF from a list of assets into a discovery-first investment product that matches every user's intent?"</p>
+      <div class="define-grid">
+        <div class="insight-card">
+          <p class="insight-quote">"I open the ETF section but I don't know where to begin. It's just names and numbers."</p>
+          <span class="insight-tag">Discovery gap</span>
+        </div>
+        <div class="insight-card">
+          <p class="insight-quote">"I end up buying the same ETF every time — I don't know how to compare the rest."</p>
+          <span class="insight-tag">Habit loop</span>
+        </div>
+        <div class="insight-card">
+          <p class="insight-quote">"It doesn't feel any different from buying a stock."</p>
+          <span class="insight-tag">Product identity gap</span>
+        </div>
+        <div class="insight-card accent-card">
+          <p class="insight-quote">Angel One, INDmoney, and Dhan all use categorisation as a core feature — users navigate better when ETFs are grouped by intent, not listed alphabetically.</p>
+          <span class="insight-tag">Competitive insight</span>
+        </div>
+      </div>
+      <div class="sip-callout">
+        <div style="flex:1">
+          <div class="sip-label">Business alignment</div>
+          <p class="sip-text">Aligned with the business goal of growing SIP adoption — introduced quick "Start SIP" CTAs as a first-action prompt across the dashboard, making the default path growth-oriented for both user and business.</p>
+        </div>
+        <div class="sip-badge">
+          <span class="sip-badge-word">SIP First</span>
+          <span class="sip-badge-sub">Approach</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOLD 6 — PROCESS -->
+  <section id="s-process">
+    <div class="s-inner">
+      <span class="s-eyebrow">Process</span>
+      <h2 class="s-heading">From research to intent.</h2>
+      <div class="process-steps">
+        <div class="process-step">
+          <span class="step-num">01</span>
+          <div class="step-title">Secondary Research</div>
+          <p class="step-desc">Studied ETF market behaviour, investment patterns, and how competing platforms approached ETF discovery.</p>
+        </div>
+        <div class="process-step">
+          <span class="step-num">02</span>
+          <div class="step-title">Competitive Analysis</div>
+          <p class="step-desc">Analysed Angel One, INDmoney, and Dhan — identified categorisation as the key differentiator in successful ETF UX.</p>
+        </div>
+        <div class="process-step">
+          <span class="step-num">03</span>
+          <div class="step-title">User Interviews</div>
+          <p class="step-desc">Spoke with existing ETF investors on platform — surfaced three core pain points around discovery, comparison, and product understanding.</p>
+        </div>
+        <div class="process-step">
+          <span class="step-num">04</span>
+          <div class="step-title">Intent Framework</div>
+          <p class="step-desc">Mapped 7 user intent pillars and derived every dashboard section directly from user goals — not product taxonomy.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOLD 7 — INTENT FRAMEWORK -->
+  <section id="s-intent">
+    <div class="s-inner">
+      <span class="s-eyebrow">Design Solution</span>
+      <h2 class="s-heading">Built around what users want to do.</h2>
+      <p class="intent-sub">Instead of organising ETFs by asset type, we mapped 7 user intent pillars — then derived every dashboard section from those, not from the product taxonomy.</p>
+      <div class="intent-grid">
+        <div class="intent-pillar">
+          <div class="intent-pillar-name">Goal Based</div>
+          <div class="intent-tags">
+            <span class="intent-tag">Stable growth</span>
+            <span class="intent-tag">Low budget start</span>
+            <span class="intent-tag">Liquidity focused</span>
+            <span class="intent-tag">Inflation focused</span>
+            <span class="intent-tag">Diversification</span>
+            <span class="intent-tag">Global exposure</span>
+          </div>
+        </div>
+        <div class="intent-pillar">
+          <div class="intent-pillar-name">Contextual Discovery</div>
+          <div class="intent-tags">
+            <span class="intent-tag">Opportunity focused</span>
+            <span class="intent-tag">Market news driven</span>
+            <span class="intent-tag">Most bought</span>
+          </div>
+        </div>
+        <div class="intent-pillar">
+          <div class="intent-pillar-name">Pattern Driven</div>
+          <div class="intent-tags">
+            <span class="intent-tag">Low cost ETFs</span>
+            <span class="intent-tag">Track the index</span>
+            <span class="intent-tag">High volume</span>
+            <span class="intent-tag">High AUM</span>
+            <span class="intent-tag">Highest return</span>
+          </div>
+        </div>
+        <div class="intent-pillar">
+          <div class="intent-pillar-name">Leverage Oriented</div>
+          <div class="intent-tags">
+            <span class="intent-tag">MTF Margin driven</span>
+          </div>
+        </div>
+        <div class="intent-pillar">
+          <div class="intent-pillar-name">Sales Nudges</div>
+          <div class="intent-tags">
+            <span class="intent-tag">Top recommended</span>
+            <span class="intent-tag">SIP first approach</span>
+          </div>
+        </div>
+        <div class="intent-pillar">
+          <div class="intent-pillar-name">Education</div>
+          <div class="intent-tags">
+            <span class="intent-tag">Help for new users</span>
+            <span class="intent-tag">FAQs</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOLD 8 — DESIGN SCREENS -->
+  <section id="s-screens">
+    <div class="s-inner">
+      <span class="s-eyebrow">Design</span>
+      <h2 class="s-heading">The product.</h2>
+      <div class="screens-grid">
+        <div class="screen-card">
+          <div class="screen-ph-port">ETF Dashboard</div>
+          <div class="screen-label">Dashboard</div>
+        </div>
+        <div class="screen-card">
+          <div class="screen-ph-port">ETF Detail Page</div>
+          <div class="screen-label">ETF Detail</div>
+        </div>
+        <div class="screen-card">
+          <div class="screen-ph-port">Buy Journey</div>
+          <div class="screen-label">Buy Journey</div>
+        </div>
+        <div class="screen-card">
+          <div class="screen-ph-port">Explore All ETFs</div>
+          <div class="screen-label">Explore All</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOLD 9 — WEB -->
+  <section id="s-web">
+    <div class="s-inner">
+      <span class="s-eyebrow">Web</span>
+      <h2 class="s-heading">Shipped on web too.</h2>
+      <div class="web-ph">Web — Dashboard</div>
+      <p class="web-note">The ETF product was implemented end-to-end on the 5paisa web platform, maintaining full feature parity with the mobile experience.</p>
+    </div>
+  </section>
+
+  <!-- FOLD 10 — NEW DESIGN SYSTEM -->
+  <section id="s-ds">
+    <div class="s-inner">
+      <span class="s-eyebrow">New Design System</span>
+      <h2 class="s-heading">Rebuilt with a unified system.</h2>
+      <p class="s-body">After launch, 5paisa underwent a full design system overhaul. All ETF screens were rebuilt under the new system — maintaining every UX decision while elevating visual consistency across the platform.</p>
+      <div class="ds-grid">
+        <div class="ds-ph">Dashboard</div>
+        <div class="ds-ph">ETF Detail</div>
+        <div class="ds-ph">Buy Journey</div>
+        <div class="ds-ph">Explore All</div>
+      </div>
+    </div>
   </section>
 
   <script>
@@ -331,6 +748,57 @@
         requestAnimationFrame(updateOnScroll);
       }
     }, { passive: true });
+
+    // Cover iframe auto-scroll
+    (function() {
+      const iframe = document.getElementById('phoneFrame');
+      if (!iframe) return;
+
+      const SPEED = 30;           // px per second
+      const PAUSE_TOP = 1800;     // ms hold at top before scrolling
+      const PAUSE_BOTTOM = 2000;  // ms hold at bottom before reset
+
+      let currentY = 0;
+      let maxY = 0;
+      let state = 'pausing-top';
+      let lastTime = null;
+      let pauseStart = null;
+
+      function tick(ts) {
+        if (!lastTime) lastTime = ts;
+        const dt = ts - lastTime;
+        lastTime = ts;
+        const win = iframe.contentWindow;
+
+        if (state === 'pausing-top') {
+          if (!pauseStart) pauseStart = ts;
+          if (ts - pauseStart >= PAUSE_TOP) { state = 'scrolling'; pauseStart = null; }
+        } else if (state === 'scrolling') {
+          currentY += SPEED * (dt / 1000);
+          if (currentY >= maxY) { currentY = maxY; state = 'pausing-bottom'; }
+          win.scrollTo(0, currentY);
+        } else if (state === 'pausing-bottom') {
+          if (!pauseStart) pauseStart = ts;
+          if (ts - pauseStart >= PAUSE_BOTTOM) { state = 'resetting'; pauseStart = null; }
+        } else if (state === 'resetting') {
+          currentY = 0;
+          win.scrollTo(0, 0);
+          state = 'pausing-top';
+          lastTime = ts;
+        }
+
+        requestAnimationFrame(tick);
+      }
+
+      iframe.addEventListener('load', function() {
+        const doc = iframe.contentDocument || iframe.contentWindow.document;
+        maxY = doc.body.scrollHeight - iframe.contentWindow.innerHeight;
+        setTimeout(function() {
+          lastTime = null;
+          requestAnimationFrame(tick);
+        }, 800);
+      });
+    })();
   </script>
 </body>
 </html>
