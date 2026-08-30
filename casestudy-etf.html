@@ -428,6 +428,44 @@
       text-transform: uppercase; color: rgba(24,24,24,0.22);
     }
 
+    /* ── REFLECTION — fold 11 ── */
+    #s-reflection { background: #181818; padding: 120px 128px; }
+    #s-reflection .s-eyebrow { color: #888784; }
+    .reflection-body {
+      margin-top: 40px;
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 56px 80px;
+    }
+    .reflection-item { }
+    .reflection-label {
+      font-size: 12px; font-weight: 600; letter-spacing: 0.12em;
+      text-transform: uppercase; color: var(--amber);
+      margin-bottom: 12px; display: block;
+    }
+    .reflection-text {
+      font-size: clamp(15px, 1.4vw, 18px); font-weight: 400;
+      color: rgba(250,249,247,0.65); line-height: 1.7;
+    }
+
+    /* ── FOOTER ── */
+    .cs-footer {
+      background: var(--bg); border-top: 1px solid var(--border);
+      padding: 40px 128px; display: flex;
+      align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 20px;
+    }
+    .cs-footer-logo {
+      font-family: 'Mulish', sans-serif; font-weight: 600;
+      font-size: 20px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--white);
+    }
+    .cs-footer-logo span { color: var(--amber); }
+    .cs-footer-copy { font-size: 14px; color: var(--muted); }
+    .cs-footer-links { display: flex; gap: 24px; }
+    .cs-footer-links a {
+      font-size: 16px; color: var(--muted); text-decoration: none;
+      font-weight: 500; transition: color 0.2s;
+    }
+    .cs-footer-links a:hover { color: var(--white); }
+
     /* ── RESPONSIVE ── */
     @media (max-width: 1024px) {
       nav { padding: 0 48px; height: 80px; }
@@ -451,6 +489,9 @@
       .cover-meta-item:nth-child(2) { border-right: none; }
       .cover-meta-item:nth-child(3) { border-top: 1px solid rgba(24,24,24,0.12); }
       .cover-meta-item:nth-child(4) { border-top: 1px solid rgba(24,24,24,0.12); border-right: none; }
+      #s-reflection { padding: 80px 20px; }
+      .reflection-body { grid-template-columns: 1fr; gap: 40px; }
+      .cs-footer { padding: 32px 20px; flex-direction: column; align-items: flex-start; gap: 16px; }
     }
   </style>
 </head>
@@ -720,6 +761,41 @@
       </div>
     </div>
   </section>
+
+  <!-- FOLD 11 — REFLECTION -->
+  <section id="s-reflection">
+    <div class="s-inner">
+      <span class="s-eyebrow">Reflection</span>
+      <div class="reflection-body">
+        <div class="reflection-item">
+          <span class="reflection-label">What worked</span>
+          <p class="reflection-text">Starting with intent — anchoring discovery around what users are actually trying to do — was the right call. It gave every design decision a clear rationale and made cross-functional alignment much easier. The data-first approach to showing ETF context (1Y returns, category tags, budget filters) removed the friction that had been invisible to the team but very real to users.</p>
+        </div>
+        <div class="reflection-item">
+          <span class="reflection-label">What I'd do differently</span>
+          <p class="reflection-text">I'd involve the engineering team earlier in the process. A few intent-based features were simplified late in delivery because of technical constraints we hadn't mapped to the design. Earlier collaboration would have preserved more of the nuance — or found smarter solutions sooner.</p>
+        </div>
+        <div class="reflection-item">
+          <span class="reflection-label">What I learned</span>
+          <p class="reflection-text">Complexity in a financial product is often a symptom of unresolved product thinking — not a design constraint. The biggest wins came not from polishing UI but from reframing how the product was structured. Design's leverage is highest at that layer.</p>
+        </div>
+        <div class="reflection-item">
+          <span class="reflection-label">Impact in context</span>
+          <p class="reflection-text">The 81% turnover surge and 35% increase in active ETF clients happened in the first month post-launch. What mattered most wasn't any single screen — it was giving users the context and confidence to act. That's the design problem this project was really solving.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer class="cs-footer">
+    <div class="cs-footer-logo">Prasham Chavda<span>.</span></div>
+    <div class="cs-footer-copy">&copy; 2026 Prasham Chavda</div>
+    <div class="cs-footer-links">
+      <a href="index.html">Home</a>
+      <a href="index.html#work">Work</a>
+      <a href="mailto:prasham0007@gmail.com">Contact</a>
+    </div>
+  </footer>
 
   <script>
     const nav = document.querySelector('nav');
