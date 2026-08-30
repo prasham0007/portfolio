@@ -203,46 +203,62 @@
       width: 100%; height: 80svh;
       background: linear-gradient(145deg, #CEC4E8 0%, #B0A0D8 100%);
       display: flex; align-items: center; justify-content: center;
-      gap: clamp(10px, 1.6vw, 24px);
+      gap: clamp(20px, 3.2vw, 48px);
       padding: 32px clamp(20px, 4vw, 64px);
       overflow: hidden;
     }
-    /* iPhone mockup — exact proportions from Figma iPhone 15 Pro frame */
+    /* Cover phones — same style as .ds-device, scaled proportionally */
     .cover-phone {
-      position: relative;
       flex: 1; min-width: 0;
-      background: linear-gradient(160deg, #3A3F4A, #14161B 46%, #2C313A);
-      border-radius: 14.5% / 6.88%; /* 60px circle: x=60/415=14.5%, y=60/874=6.88% */
-      padding: 2.65%;                /* 11px on 415px device */
-      box-shadow:
-        rgba(46,32,86,0.55) 0px 40px 80px -16px,
-        rgba(46,32,86,0.38) 0px 16px 32px -8px,
-        rgba(255,255,255,0.08) 0px 0px 0px 1px;
-    }
-    /* Left buttons: mute 21.1%, vol-up 28.6%, vol-down 36.9% of device height */
-    .cp-mute, .cp-vol1, .cp-vol2, .cp-pwr {
-      position: absolute; width: 2px; background: #2A2E36;
-    }
-    .cp-mute { left: -2px; top: 21.1%; height: 3.9%; border-radius: 2px 0 0 2px; }
-    .cp-vol1 { left: -2px; top: 28.6%; height: 6.6%; border-radius: 2px 0 0 2px; }
-    .cp-vol2 { left: -2px; top: 36.9%; height: 6.6%; border-radius: 2px 0 0 2px; }
-    .cp-pwr  { right:-2px; top: 30.5%; height: 9.8%; border-radius: 0 2px 2px 0; }
-    .cover-phone-screen {
-      border-radius: 12.5% / 5.75%; /* 49px circle: x=49/393=12.5%, y=49/852=5.75% */
-      overflow: hidden;
-      aspect-ratio: 393/852;
       position: relative;
-      background: #F8F9FA;
+      background: #1C1C1E;
+      border-radius: 13.3% / 6.36%; /* 56/421 horiz, 56/880 vert */
+      aspect-ratio: 421/880;      /* device w / (14+852+14) */
+      box-shadow:
+        0 32px 64px rgba(0,0,0,0.50),
+        0 10px 24px rgba(0,0,0,0.30),
+        inset 0 0 0 1px rgba(255,255,255,0.10);
+    }
+    /* Volume up */
+    .cp-vol1 {
+      position: absolute;
+      left: -0.95%; top: 16.82%;   /* 4px left, 148px / 880px */
+      width: 0.95%; height: 4.09%; /* 36px / 880px */
+      background: #3A3A3C; border-radius: 2px 0 0 2px;
+    }
+    /* Volume down */
+    .cp-vol2 {
+      position: absolute;
+      left: -0.95%; top: 22.95%;   /* 202px / 880px */
+      width: 0.95%; height: 4.09%;
+      background: #3A3A3C; border-radius: 2px 0 0 2px;
+    }
+    /* Power */
+    .cp-pwr {
+      position: absolute;
+      right: -0.95%; top: 24.09%; /* 212px / 880px */
+      width: 0.95%; height: 9.09%; /* 80px / 880px */
+      background: #3A3A3C; border-radius: 0 2px 2px 0;
+    }
+    .cover-phone-screen {
+      position: absolute;
+      left: 3.32%; top: 1.59%;    /* 14px / 421px, 14px / 880px */
+      width: 93.35%;               /* 393px / 421px */
+      height: 96.82%;             /* 852px / 880px */
+      border-radius: 11.2% / 5.17%; /* 44/393 horiz, 44/852 vert */
+      overflow: hidden;
+      background: #000;
     }
     .cover-phone-screen img {
       width: 100%; height: 100%;
       object-fit: cover; object-position: top;
       display: block;
     }
-    /* Dynamic island: 112×31px on 393×852 screen = 28.5% × 3.6% */
+    /* Dynamic island */
     .cover-phone-di {
-      position: absolute; top: 1.3%; left: 50%; transform: translateX(-50%);
-      width: 28.5%; height: 3.6%;
+      position: absolute; top: 1.41%; /* 12px / 852px */
+      left: 50%; transform: translateX(-50%);
+      width: 30.5%; height: 4%;    /* 120px / 393px, 34px / 852px */
       background: #000; border-radius: 999px; z-index: 2; pointer-events: none;
     }
 
@@ -415,18 +431,41 @@
     }
 
     /* ── DESIGN SCREENS — fold 8 ── */
-    #s-screens { background: #181818; padding: 120px 128px; }
+    #s-screens {
+      background: #181818;
+      padding: 80px 128px;
+      height: 100svh; box-sizing: border-box;
+      display: flex; flex-direction: column;
+    }
+    #s-screens .s-inner {
+      height: 100%; display: flex; flex-direction: column;
+    }
     #s-screens .s-heading { color: #FAF9F7; }
     .screens-grid {
-      display: grid; grid-template-columns: repeat(4, 1fr);
-      gap: 14px; margin-top: 56px;
+      display: flex; justify-content: space-between;
+      gap: 16px; margin-top: 48px;
+      flex: 1; min-height: 0;
     }
     .screen-ph-port {
-      width: 100%; aspect-ratio: 9/19;
-      background: rgba(250,249,247,0.07); border-radius: 14px;
-      display: flex; align-items: center; justify-content: center;
+      height: 100%;
+      aspect-ratio: 720/1608;
+      flex-shrink: 0;
+      border-radius: 32px;
+      overflow: hidden;
+      position: relative;
+      outline: 1px solid rgba(250,249,247,0.10);
+    }
+    .screen-ph-port img {
+      width: 100%; height: 100%;
+      object-fit: cover; object-position: top;
+      display: block;
+    }
+    .screen-ph-label {
+      position: absolute; bottom: 16px; left: 0; right: 0;
+      text-align: center;
       font-size: 11px; font-weight: 600; letter-spacing: 0.08em;
-      text-transform: uppercase; color: rgba(250,249,247,0.22);
+      text-transform: uppercase; color: rgba(250,249,247,0.55);
+      text-shadow: 0 1px 4px rgba(0,0,0,0.4);
     }
 
     /* ── WEB — fold 9 ── */
@@ -507,7 +546,69 @@
     .ds-screen-iframe {
       width: 100%; height: 100%;
       border: none; display: block;
+      transition: opacity 0.3s ease;
     }
+
+    /* ── DS section extras ── */
+    .ds-scroll-hint {
+      display: flex; align-items: center; gap: 8px;
+      margin-top: 32px;
+      font-size: 13px; font-weight: 500; letter-spacing: 0.04em;
+      color: rgba(24,24,24,0.35);
+      user-select: none;
+    }
+    .ds-scroll-hint svg {
+      animation: ds-bounce 1.6s ease-in-out infinite;
+    }
+    @keyframes ds-bounce {
+      0%, 100% { transform: translateY(0); }
+      50%       { transform: translateY(4px); }
+    }
+    .ds-toggle-row {
+      display: flex; align-items: center; gap: 12px;
+      margin-top: 40px;
+    }
+    .ds-toggle-label {
+      font-size: 13px; font-weight: 500; letter-spacing: 0.04em;
+      color: rgba(24,24,24,0.45);
+    }
+    .ds-toggle {
+      position: relative;
+      width: 56px; height: 30px;
+      background: rgba(24,24,24,0.12);
+      border-radius: 999px;
+      cursor: pointer;
+      border: none; padding: 0;
+      transition: background 0.35s cubic-bezier(0.34,1.56,0.64,1);
+      flex-shrink: 0;
+    }
+    .ds-toggle.dark {
+      background: #181818;
+    }
+    .ds-toggle-thumb {
+      position: absolute;
+      top: 3px; left: 3px;
+      width: 24px; height: 24px;
+      background: #fff;
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 13px; line-height: 1;
+      transition: transform 0.4s cubic-bezier(0.34,1.56,0.64,1);
+      box-shadow: 0 1px 4px rgba(0,0,0,0.20);
+      pointer-events: none;
+    }
+    .ds-toggle.dark .ds-toggle-thumb {
+      transform: translateX(26px);
+    }
+    .ds-toggle-icon-sun,
+    .ds-toggle-icon-moon {
+      position: absolute;
+      transition: opacity 0.25s ease;
+    }
+    .ds-toggle-icon-sun  { opacity: 1; }
+    .ds-toggle-icon-moon { opacity: 0; }
+    .ds-toggle.dark .ds-toggle-icon-sun  { opacity: 0; }
+    .ds-toggle.dark .ds-toggle-icon-moon { opacity: 1; }
 
     /* ── REFLECTION — fold 11 ── */
     #s-reflection { background: #181818; padding: 120px 128px; }
@@ -573,7 +674,8 @@
       #s-reflection { padding: 80px 20px; }
       .reflection-body { grid-template-columns: 1fr; gap: 40px; }
       .cs-footer { padding: 32px 20px; flex-direction: column; align-items: flex-start; gap: 16px; }
-      .screens-grid { grid-template-columns: repeat(2, 1fr); gap: 10px; }
+      .screens-grid { flex-wrap: wrap; gap: 10px; }
+      .screen-ph-port { height: 45svh; }
       #s-ds { grid-template-columns: 1fr; min-height: auto; }
       .ds-text-col { padding: 60px 20px 40px; }
       .ds-frame { min-height: 500px; }
@@ -598,10 +700,10 @@
   <section id="hero">
     <div class="hero-body-row">
       <div class="hero-left">
-        <h1 class="hero-title">End-to-end design of a<br>data-rich ETF ecosystem<span class="dot">.</span></h1>
+        <h1 class="hero-title">End-to-end design of ETF<br>(Exchange-Traded fund) product<span class="dot">.</span></h1>
         <p class="hero-desc">
-          Designed the full ETF dashboard and buy journey for 5paisa — a data-heavy investment product that needed to feel both powerful and approachable. Led strategy, UX, and UI across mobile and web, resulting in an 81% surge in platform turnover.
-        </p>
+          Designed investment product ETF with its dashboard, detail page and buy journey for 5paisa. Led strategy, UX, and UI across mobile and web, resulting in an 81% surge in ETF turnover.
+</p>
       </div>
       <div class="hero-meta">
         <div class="hero-meta-item">
@@ -614,53 +716,64 @@
         </div>
         <div class="hero-meta-item">
           <div class="hero-meta-label">Tools</div>
-          <div class="hero-meta-val">Figma, Maze, Google Analytics</div>
+          <div class="hero-meta-val">Figma, Figjam, Clevertap</div>
         </div>
         <div class="hero-meta-item">
           <div class="hero-meta-label">Skills</div>
-          <div class="hero-meta-val">UX Research, Dashboard Design, Data Visualisation, Revenue Optimisation</div>
+          <div class="hero-meta-val">Design Strategy, User Research, UX/UI Design, Leadership, Dashboard Design, Data Synthesis, Revenue Optimisation</div>
         </div>
       </div>
     </div>
   </section>
 
   <!-- FOLD 2 — COVER / PROJECT META -->
+  <!-- Shared SVG defs for iPhone mockup frames -->
+  <svg style="position:absolute;width:0;height:0;overflow:hidden" aria-hidden="true" xmlns="http://www.w3.org/2000/svg">
+    <defs>
+      <mask id="ph-mask" maskUnits="userSpaceOnUse">
+        <rect x="0" y="0" width="415" height="874" rx="60" ry="60" fill="white"/>
+        <rect x="11" y="11" width="393" height="852" rx="49" ry="49" fill="black"/>
+      </mask>
+    </defs>
+  </svg>
+
   <section id="cover">
     <div class="cover-inner">
 <div class="cover-visual">
         <div class="cover-placeholder">
+
           <div class="cover-phone">
-            <div class="cp-mute"></div><div class="cp-vol1"></div>
-            <div class="cp-vol2"></div><div class="cp-pwr"></div>
+            <div class="cp-vol1"></div><div class="cp-vol2"></div><div class="cp-pwr"></div>
             <div class="cover-phone-screen">
               <img src="etf-ph-1.png" alt="">
               <div class="cover-phone-di"></div>
             </div>
           </div>
+
           <div class="cover-phone">
-            <div class="cp-mute"></div><div class="cp-vol1"></div>
-            <div class="cp-vol2"></div><div class="cp-pwr"></div>
+            <div class="cp-vol1"></div><div class="cp-vol2"></div><div class="cp-pwr"></div>
             <div class="cover-phone-screen">
               <img src="etf-ph-2.png" alt="">
               <div class="cover-phone-di"></div>
             </div>
           </div>
+
           <div class="cover-phone">
-            <div class="cp-mute"></div><div class="cp-vol1"></div>
-            <div class="cp-vol2"></div><div class="cp-pwr"></div>
+            <div class="cp-vol1"></div><div class="cp-vol2"></div><div class="cp-pwr"></div>
             <div class="cover-phone-screen">
               <img src="etf-ph-3.png" alt="">
               <div class="cover-phone-di"></div>
             </div>
           </div>
+
           <div class="cover-phone">
-            <div class="cp-mute"></div><div class="cp-vol1"></div>
-            <div class="cp-vol2"></div><div class="cp-pwr"></div>
+            <div class="cp-vol1"></div><div class="cp-vol2"></div><div class="cp-pwr"></div>
             <div class="cover-phone-screen">
               <img src="etf-ph-4.png" alt="">
               <div class="cover-phone-di"></div>
             </div>
           </div>
+
         </div>
       </div>
       <div style="height: 40px;"></div>
@@ -834,10 +947,10 @@
       <span class="s-eyebrow">Design</span>
       <h2 class="s-heading">The product.</h2>
       <div class="screens-grid">
-        <div class="screen-ph-port">ETF Dashboard</div>
-        <div class="screen-ph-port">ETF Detail Page</div>
-        <div class="screen-ph-port">Buy Journey</div>
-        <div class="screen-ph-port">Explore All ETFs</div>
+        <div class="screen-ph-port"><img src="old 1.png" alt="ETF Dashboard"></div>
+        <div class="screen-ph-port"><img src="old 2.png" alt="ETF Detail Page"></div>
+        <div class="screen-ph-port"><img src="old 3.png" alt="Buy Journey"></div>
+        <div class="screen-ph-port"><img src="old 4.png" alt="Explore All ETFs"></div>
       </div>
     </div>
   </section>
@@ -856,18 +969,56 @@
   <section id="s-ds">
     <div class="ds-text-col">
       <span class="s-eyebrow">New Design System</span>
-      <h2 class="s-heading">Rebuilt with a unified system.</h2>
-      <p class="s-body">After launch, 5paisa underwent a full design system overhaul. All ETF screens were rebuilt under the new system — maintaining every UX decision while elevating visual consistency across the platform.</p>
+      <h2 class="s-heading">Dashboard Prototype<span style="color:var(--amber)">.</span> </h2>
+      <p class="s-body">After launch, 5paisa underwent a full design system overhaul. All ETF screens were rebuilt to elevate visual consistency while maintaining every UX decision.</p>
+
+      <div class="ds-toggle-row">
+        <button class="ds-toggle" id="ds-dark-toggle" aria-label="Toggle dark mode" aria-pressed="false">
+          <span class="ds-toggle-thumb">
+            <span class="ds-toggle-icon-sun">☀️</span>
+            <span class="ds-toggle-icon-moon">🌙</span>
+          </span>
+        </button>
+        <span class="ds-toggle-label" id="ds-toggle-lbl">Light mode</span>
+      </div>
+
+      <div class="ds-scroll-hint">
+        <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M7 2v10M3.5 8.5L7 12l3.5-3.5" stroke="rgba(24,24,24,0.35)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        Scroll inside the prototype to explore screens
+      </div>
     </div>
     <div class="ds-frame">
       <div class="ds-device">
         <div class="ds-device-screen">
           <div class="ds-dynamic-island"></div>
-          <iframe class="ds-screen-iframe" src="etf-ds-screen.html?v=1" scrolling="no"></iframe>
+          <iframe class="ds-screen-iframe ds-iframe-light" src="etf-ds-screen.html?v=1"></iframe>
+          <iframe class="ds-screen-iframe ds-iframe-dark"  src="etf-ds-screen-dark.html" style="position:absolute;inset:0;opacity:0;pointer-events:none;"></iframe>
         </div>
       </div>
     </div>
   </section>
+
+  <script>
+    (function() {
+      var btn       = document.getElementById('ds-dark-toggle');
+      var lbl       = document.getElementById('ds-toggle-lbl');
+      var iLight    = document.querySelector('.ds-iframe-light');
+      var iDark     = document.querySelector('.ds-iframe-dark');
+      var dark      = false;
+      btn.addEventListener('click', function() {
+        dark = !dark;
+        btn.classList.toggle('dark', dark);
+        btn.setAttribute('aria-pressed', dark);
+        lbl.textContent = dark ? 'Dark mode' : 'Light mode';
+        iLight.style.opacity        = dark ? '0' : '1';
+        iLight.style.pointerEvents  = dark ? 'none' : 'auto';
+        iDark.style.opacity         = dark ? '1' : '0';
+        iDark.style.pointerEvents   = dark ? 'auto' : 'none';
+      });
+    })();
+  </script>
 
   <!-- FOLD 11 — REFLECTION -->
   <section id="s-reflection">
