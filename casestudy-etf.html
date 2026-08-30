@@ -238,10 +238,13 @@
       border-radius: clamp(18px, 2.2vw, 30px);
       overflow: hidden;
       aspect-ratio: 393/852;
-      background-image: url('etf-screenshot.png');
-      background-size: 100% auto;
-      background-repeat: no-repeat;
       position: relative;
+      background: #F8F9FA;
+    }
+    .cover-phone-screen img {
+      width: 100%; height: 100%;
+      object-fit: cover; object-position: top;
+      display: block;
     }
     .cover-phone-di {
       position: absolute; top: 4%; left: 50%; transform: translateX(-50%);
@@ -633,22 +636,26 @@
 <div class="cover-visual">
         <div class="cover-placeholder">
           <div class="cover-phone">
-            <div class="cover-phone-screen" style="background-position: 0 0%">
+            <div class="cover-phone-screen">
+              <img src="etf-ph-1.png" alt="">
               <div class="cover-phone-di"></div>
             </div>
           </div>
           <div class="cover-phone">
-            <div class="cover-phone-screen" style="background-position: 0 30%">
+            <div class="cover-phone-screen">
+              <img src="etf-ph-2.png" alt="">
               <div class="cover-phone-di"></div>
             </div>
           </div>
           <div class="cover-phone">
-            <div class="cover-phone-screen" style="background-position: 0 60%">
+            <div class="cover-phone-screen">
+              <img src="etf-ph-3.png" alt="">
               <div class="cover-phone-di"></div>
             </div>
           </div>
           <div class="cover-phone">
-            <div class="cover-phone-screen" style="background-position: 0 88%">
+            <div class="cover-phone-screen">
+              <img src="etf-ph-4.png" alt="">
               <div class="cover-phone-di"></div>
             </div>
           </div>
