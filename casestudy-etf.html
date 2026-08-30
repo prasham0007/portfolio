@@ -207,35 +207,28 @@
       padding: 32px clamp(20px, 4vw, 64px);
       overflow: hidden;
     }
-    /* iPhone mockup in cover */
+    /* iPhone mockup — exact proportions from Figma iPhone 15 Pro frame */
     .cover-phone {
       position: relative;
       flex: 1; min-width: 0;
       background: linear-gradient(160deg, #3A3F4A, #14161B 46%, #2C313A);
-      border-radius: clamp(22px, 2.8vw, 38px);
-      padding: clamp(5px, 0.7vw, 8px);
+      border-radius: 14.5%; /* 60px on 415px device */
+      padding: 2.65%;       /* 11px on 415px device */
       box-shadow:
         rgba(46,32,86,0.55) 0px 40px 80px -16px,
         rgba(46,32,86,0.38) 0px 16px 32px -8px,
         rgba(255,255,255,0.08) 0px 0px 0px 1px;
     }
-    .cover-phone::before {
-      content: '';
-      position: absolute;
-      left: -2px; top: 22%;
-      width: 2px; height: 7%;
-      background: #3A3F4A; border-radius: 2px 0 0 2px;
-      box-shadow: 0 140% 0 #3A3F4A;
+    /* Left buttons: mute 21.1%, vol-up 28.6%, vol-down 36.9% of device height */
+    .cp-mute, .cp-vol1, .cp-vol2, .cp-pwr {
+      position: absolute; width: 2px; background: #2A2E36;
     }
-    .cover-phone::after {
-      content: '';
-      position: absolute;
-      right: -2px; top: 29%;
-      width: 2px; height: 13%;
-      background: #3A3F4A; border-radius: 0 2px 2px 0;
-    }
+    .cp-mute { left: -2px; top: 21.1%; height: 3.9%; border-radius: 2px 0 0 2px; }
+    .cp-vol1 { left: -2px; top: 28.6%; height: 6.6%; border-radius: 2px 0 0 2px; }
+    .cp-vol2 { left: -2px; top: 36.9%; height: 6.6%; border-radius: 2px 0 0 2px; }
+    .cp-pwr  { right:-2px; top: 30.5%; height: 9.8%; border-radius: 0 2px 2px 0; }
     .cover-phone-screen {
-      border-radius: clamp(18px, 2.2vw, 30px);
+      border-radius: 12.5%; /* 49px on 393px screen */
       overflow: hidden;
       aspect-ratio: 393/852;
       position: relative;
@@ -246,9 +239,10 @@
       object-fit: cover; object-position: top;
       display: block;
     }
+    /* Dynamic island: 112×31px on 393×852 screen = 28.5% × 3.6% */
     .cover-phone-di {
-      position: absolute; top: 4%; left: 50%; transform: translateX(-50%);
-      width: 36%; height: 4%;
+      position: absolute; top: 1.3%; left: 50%; transform: translateX(-50%);
+      width: 28.5%; height: 3.6%;
       background: #000; border-radius: 999px; z-index: 2; pointer-events: none;
     }
 
@@ -636,24 +630,32 @@
 <div class="cover-visual">
         <div class="cover-placeholder">
           <div class="cover-phone">
+            <div class="cp-mute"></div><div class="cp-vol1"></div>
+            <div class="cp-vol2"></div><div class="cp-pwr"></div>
             <div class="cover-phone-screen">
               <img src="etf-ph-1.png" alt="">
               <div class="cover-phone-di"></div>
             </div>
           </div>
           <div class="cover-phone">
+            <div class="cp-mute"></div><div class="cp-vol1"></div>
+            <div class="cp-vol2"></div><div class="cp-pwr"></div>
             <div class="cover-phone-screen">
               <img src="etf-ph-2.png" alt="">
               <div class="cover-phone-di"></div>
             </div>
           </div>
           <div class="cover-phone">
+            <div class="cp-mute"></div><div class="cp-vol1"></div>
+            <div class="cp-vol2"></div><div class="cp-pwr"></div>
             <div class="cover-phone-screen">
               <img src="etf-ph-3.png" alt="">
               <div class="cover-phone-di"></div>
             </div>
           </div>
           <div class="cover-phone">
+            <div class="cp-mute"></div><div class="cp-vol1"></div>
+            <div class="cp-vol2"></div><div class="cp-pwr"></div>
             <div class="cover-phone-screen">
               <img src="etf-ph-4.png" alt="">
               <div class="cover-phone-di"></div>
