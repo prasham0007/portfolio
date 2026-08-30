@@ -212,8 +212,8 @@
       position: relative;
       flex: 1; min-width: 0;
       background: linear-gradient(160deg, #3A3F4A, #14161B 46%, #2C313A);
-      border-radius: 14.5%; /* 60px on 415px device */
-      padding: 2.65%;       /* 11px on 415px device */
+      border-radius: 14.5% / 6.88%; /* 60px circle: x=60/415=14.5%, y=60/874=6.88% */
+      padding: 2.65%;                /* 11px on 415px device */
       box-shadow:
         rgba(46,32,86,0.55) 0px 40px 80px -16px,
         rgba(46,32,86,0.38) 0px 16px 32px -8px,
@@ -228,7 +228,7 @@
     .cp-vol2 { left: -2px; top: 36.9%; height: 6.6%; border-radius: 2px 0 0 2px; }
     .cp-pwr  { right:-2px; top: 30.5%; height: 9.8%; border-radius: 0 2px 2px 0; }
     .cover-phone-screen {
-      border-radius: 12.5%; /* 49px on 393px screen */
+      border-radius: 12.5% / 5.75%; /* 49px circle: x=49/393=12.5%, y=49/852=5.75% */
       overflow: hidden;
       aspect-ratio: 393/852;
       position: relative;
