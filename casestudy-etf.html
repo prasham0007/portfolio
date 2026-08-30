@@ -421,20 +421,57 @@
       display: flex; flex-direction: column; justify-content: center;
     }
     .ds-frame {
-      background: linear-gradient(to right, #6D28D9 0%, rgba(109,40,217,0.22) 100%);
+      background: linear-gradient(to right, #B0A0D8 0%, rgba(206,196,232,0.18) 100%);
       border-radius: 0;
       display: flex; align-items: center; justify-content: center;
       overflow: hidden;
     }
-    .ds-mock {
+    /* iPhone mockup frame */
+    .ds-device {
+      position: relative;
+      width: 421px; flex-shrink: 0;
+      background: #1C1C1E;
+      border-radius: 56px;
+      padding: 14px;
+      box-shadow:
+        0 48px 96px rgba(0,0,0,0.45),
+        0 16px 40px rgba(0,0,0,0.28),
+        inset 0 0 0 1.5px rgba(255,255,255,0.12);
+    }
+    /* Volume buttons (left) */
+    .ds-device::before {
+      content: '';
+      position: absolute;
+      left: -4px; top: 148px;
+      width: 4px; height: 36px;
+      background: #3A3A3C; border-radius: 2px 0 0 2px;
+      box-shadow: 0 54px 0 #3A3A3C;
+    }
+    /* Power button (right) */
+    .ds-device::after {
+      content: '';
+      position: absolute;
+      right: -4px; top: 212px;
+      width: 4px; height: 80px;
+      background: #3A3A3C; border-radius: 0 2px 2px 0;
+    }
+    .ds-device-screen {
       width: 393px; height: 852px;
-      border-radius: 52px;
-      box-shadow: 0 40px 80px rgba(0,0,0,0.4), 0 12px 32px rgba(0,0,0,0.25);
-      background: rgba(255,255,255,0.08);
-      overflow: hidden; flex-shrink: 0;
+      border-radius: 44px;
+      overflow: hidden;
+      position: relative;
+      background: rgba(206,196,232,0.25);
+    }
+    .ds-dynamic-island {
+      position: absolute; top: 12px; left: 50%; transform: translateX(-50%);
+      width: 120px; height: 34px;
+      background: #000; border-radius: 20px; z-index: 2;
+    }
+    .ds-screen-ph {
+      width: 100%; height: 100%;
       display: flex; align-items: center; justify-content: center;
       font-size: 11px; font-weight: 600; letter-spacing: 0.08em;
-      text-transform: uppercase; color: rgba(255,255,255,0.25);
+      text-transform: uppercase; color: rgba(24,24,24,0.2);
     }
 
     /* ── REFLECTION — fold 11 ── */
@@ -504,8 +541,8 @@
       .screens-grid { grid-template-columns: repeat(2, 1fr); gap: 10px; }
       #s-ds { grid-template-columns: 1fr; min-height: auto; }
       .ds-text-col { padding: 60px 20px 40px; }
-      .ds-frame { min-height: 480px; }
-      .ds-mock { width: min(393px, 80vw); height: auto; aspect-ratio: 393/852; }
+      .ds-frame { min-height: 500px; }
+      .ds-device { transform: scale(0.72); transform-origin: center center; }
     }
   </style>
 </head>
@@ -757,7 +794,12 @@
       <p class="s-body">After launch, 5paisa underwent a full design system overhaul. All ETF screens were rebuilt under the new system — maintaining every UX decision while elevating visual consistency across the platform.</p>
     </div>
     <div class="ds-frame">
-      <div class="ds-mock">Placeholder</div>
+      <div class="ds-device">
+        <div class="ds-device-screen">
+          <div class="ds-dynamic-island"></div>
+          <div class="ds-screen-ph">Placeholder</div>
+        </div>
+      </div>
     </div>
   </section>
 
