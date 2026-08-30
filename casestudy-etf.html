@@ -414,27 +414,40 @@
     }
 
     /* ── INTENT FRAMEWORK — fold 7 ── */
-    #s-intent { background: #181818; padding: 120px 128px; }
+    #s-intent { background: #181818; position: relative; height: 240vh; }
     #s-intent .s-heading { color: #FAF9F7; }
+    #s-intent .s-inner {
+      position: sticky; top: 0;
+      height: 100svh; overflow: hidden;
+      padding: 120px 128px; box-sizing: border-box;
+      display: flex; flex-direction: row; align-items: flex-start;
+    }
+    .intent-left { flex: 0 0 560px; }
     .intent-sub {
       font-size: 16px; font-weight: 400; color: rgba(250,249,247,0.45);
-      max-width: 560px; line-height: 1.7; margin-bottom: 64px;
+      line-height: 1.7; margin-bottom: 48px;
     }
+    #s-intent .s-heading { margin-bottom: 16px; }
     .intent-grid {
-      display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px;
+      flex-shrink: 0; width: 340px;
+      display: flex; flex-direction: column; gap: 24px;
+      padding-top: 0; margin-left: 384px;
     }
-    .intent-pillar {
-      background: #272727; border-radius: 14px; padding: 28px;
-    }
+    .intent-pillar { }
     .intent-pillar-name {
-      font-size: 10px; font-weight: 800; letter-spacing: 0.14em;
-      text-transform: uppercase; color: var(--accent); margin-bottom: 16px;
+      font-size: 17px; font-weight: 700;
+      color: #FAF9F7; margin-bottom: 10px;
     }
     .intent-tags { display: flex; flex-wrap: wrap; gap: 8px; }
     .intent-tag {
       font-size: 12px; font-weight: 500;
       background: rgba(176,160,216,0.1); color: rgba(250,249,247,0.7);
       border-radius: 6px; padding: 5px 10px;
+    }
+    .intent-subsection, #s-intent .intent-grid {
+      opacity: 0;
+      transform: translateY(32px);
+      will-change: opacity, transform;
     }
 
     /* ── DESIGN SCREENS — fold 8 ── */
@@ -908,12 +921,19 @@
   <!-- FOLD 7 — INTENT FRAMEWORK -->
   <section id="s-intent">
     <div class="s-inner">
-      <span class="s-eyebrow">Design Solution</span>
-      <h2 class="s-heading">User intent focused discovery.</h2>
-      <p class="intent-sub">Dashboard categories should not be based on asset type or product taxonomy. Mapped 7 user intent pillars based on research insight and then derived every dashboard section from those.</p>
-      <h2 class="s-heading">SIP First approach.</h2>
-      <p class="intent-sub">Introduced quick "Start SIP" CTAs as a first-action across the product and nudges about SIP benefits. This will be growth-oriented for both, user and business.</p>
+      <div class="intent-left">
+        <span class="s-eyebrow">Design Solution</span>
+        <div class="intent-subsection">
+          <h2 class="s-heading">User intent focused discovery.</h2>
+          <p class="intent-sub">Dashboard categories should not be based on asset type or product taxonomy. Mapped 7 user intent pillars based on research insight and then derived every dashboard section from those.</p>
+        </div>
+        <div class="intent-subsection">
+          <h2 class="s-heading">SIP First approach.</h2>
+          <p class="intent-sub">Introduced quick "Start SIP" CTAs as a first-action across the product and nudges about SIP benefits. This will be growth-oriented for both, user and business.</p>
+        </div>
+      </div>
       <div class="intent-grid">
+        <span class="s-eyebrow" style="margin-bottom: 0;">Dashboard Sections</span>
         <div class="intent-pillar">
           <div class="intent-pillar-name">Goal Based</div>
           <div class="intent-tags">
@@ -1080,6 +1100,40 @@
       <a href="mailto:prasham0007@gmail.com">Contact</a>
     </div>
   </footer>
+
+  <script>
+    (function() {
+      var section = document.querySelector('#s-intent');
+      var subsections = Array.from(section.querySelectorAll('.intent-subsection'));
+      var grid = section.querySelector('.intent-grid');
+      var items = subsections.concat([grid]);
+
+      // Each item animates within its own scroll-progress window [start, end]
+      var windows = [
+        [0.04, 0.22],  // subsection 1
+        [0.28, 0.46],  // subsection 2
+        [0.52, 0.72],  // right grid
+      ];
+
+      function clamp(v, lo, hi) { return Math.max(lo, Math.min(hi, v)); }
+
+      function onScroll() {
+        var sectionTop = section.getBoundingClientRect().top + window.scrollY;
+        var scrollable = section.offsetHeight - window.innerHeight;
+        var progress = clamp((window.scrollY - sectionTop) / scrollable, 0, 1);
+
+        items.forEach(function(item, i) {
+          var w = windows[i];
+          var p = clamp((progress - w[0]) / (w[1] - w[0]), 0, 1);
+          item.style.opacity = p;
+          item.style.transform = 'translateY(' + ((1 - p) * 32) + 'px)';
+        });
+      }
+
+      window.addEventListener('scroll', onScroll, { passive: true });
+      onScroll();
+    })();
+  </script>
 
   <script>
     const nav = document.querySelector('nav');
