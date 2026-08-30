@@ -93,7 +93,7 @@
 
     /* ── HERO — fold 1 ── */
     #hero {
-      min-height: 80svh;
+      min-height: calc(80svh + 40px);
       display: flex; flex-direction: column;
       justify-content: flex-end;
       padding: 140px 80px 0;
@@ -330,7 +330,7 @@
     }
 
     /* ── DEFINE — fold 5 ── */
-    #s-define { background: #FAF9F7; padding: 120px 128px; }
+    #s-define { background: #F0EFED; padding: 120px 128px; }
     .problem-stmt {
       font-size: clamp(20px, 2.2vw, 32px); font-weight: 600;
       line-height: 1.4; letter-spacing: -0.02em; color: #181818;
@@ -341,7 +341,7 @@
       display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 48px;
     }
     .insight-card {
-      background: #F0EFED; border-radius: 14px; padding: 28px 32px;
+      background: #FAF9F7; border-radius: 14px; padding: 28px 32px;
     }
     .insight-card.accent-card {
       background: rgba(176,160,216,0.1);
@@ -359,7 +359,7 @@
       text-transform: uppercase; color: var(--accent);
     }
     .sip-callout {
-      background: #181818; border-radius: 16px;
+      background: #2A2A2C; border-radius: 16px;
       padding: 40px 48px; display: flex; align-items: center; gap: 48px;
     }
     .sip-label {
@@ -385,11 +385,10 @@
     }
 
     /* ── PROCESS — fold 6 ── */
-    #s-process { background: #F0EFED; padding: 120px 128px; }
+    #s-process { background: #FAF9F7; padding: 120px 128px; }
     #s-process .s-heading { color: #181818; }
     .process-steps {
       display: grid; grid-template-columns: repeat(4, 1fr);
-      border-top: 1px solid rgba(24,24,24,0.1);
       padding-top: 48px; margin-top: 40px;
     }
     .process-step { padding-right: 40px; }
@@ -404,6 +403,14 @@
     .step-desc {
       font-size: 14px; font-weight: 400;
       color: rgba(24,24,24,0.52); line-height: 1.65;
+      padding-left: 0; margin: 0; list-style: none;
+    }
+    ul.step-desc li {
+      padding-left: 14px; position: relative; margin-bottom: 4px;
+    }
+    ul.step-desc li::before {
+      content: '•'; position: absolute; left: 0;
+      color: rgba(24,24,24,0.3);
     }
 
     /* ── INTENT FRAMEWORK — fold 7 ── */
@@ -815,11 +822,68 @@
     </div>
   </section>
 
-  <!-- FOLD 5 — DEFINE -->
+  <!-- FOLD 5 — PROCESS -->
+  <section id="s-process">
+    <div class="s-inner">
+      <span class="s-eyebrow">Process</span>
+      <p class="problem-stmt">"How might we transform ETF from a list of assets into a discovery-first investment product that matches targeted user's intent?"</p>
+      <div class="process-steps">
+        <div class="process-step">
+          <span class="step-num">01</span>
+          <div class="step-title">Research & Insights</div>
+          <ul class="step-desc">
+            <li>ETF market behaviour</li>
+            <li>User interviews</li>
+            <li>User needs &amp; pain points</li>
+            <li>Investment patterns</li>
+            <li>Competition analysis</li>
+            <li>Success metrics</li>
+          </ul>
+        </div>
+        <div class="process-step">
+          <span class="step-num">02</span>
+          <div class="step-title">Solution from Analysis</div>
+          <ul class="step-desc">
+            <li>Reduce decision paralysis</li>
+            <li>Create product identity</li>
+            <li>User intent prioritisation</li>
+
+            <li>Learning academy</li>
+            <li>SIP adoption</li>
+          </ul>
+        </div>
+        <div class="process-step">
+          <span class="step-num">03</span>
+          <div class="step-title">Design & Launch</div>
+          <ul class="step-desc">
+            <li>Design solution</li>
+            <li>Wire-framing</li>
+            <li>Visual design</li>
+            <li>Prototyping design</li>
+            <li>Collaboration with engineers</li>
+            <li>Marketing &amp; Launch</li>
+          </ul>
+        </div>
+        <div class="process-step">
+          <span class="step-num">04</span>
+          <div class="step-title">Impact & Next Steps</div>
+          <ul class="step-desc">
+            <li>Design validation with success metrics</li>
+            <li>Post-Launch evaluation</li>
+            <li>Iterative Optimization</li>
+            <li>Elevate visuals</li>
+            <li>Reflection</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOLD 6 — RESEARCH & INSIGHT -->
   <section id="s-define">
     <div class="s-inner">
-      <span class="s-eyebrow">Define</span>
-      <p class="problem-stmt">"How might we transform ETF from a list of assets into a discovery-first investment product that matches every user's intent?"</p>
+      <span class="s-eyebrow">Research and Insight</span>
+      <p class="problem-stmt">"How might we transform ETF from a list of assets into a discovery-first investment product that matches targeted user's intent?"</p>
       <div class="define-grid">
         <div class="insight-card">
           <p class="insight-quote">"I open the ETF section but I don't know where to begin. It's just names and numbers."</p>
@@ -838,46 +902,6 @@
           <span class="insight-tag">Competitive insight</span>
         </div>
       </div>
-      <div class="sip-callout">
-        <div style="flex:1">
-          <div class="sip-label">Business alignment</div>
-          <p class="sip-text">Aligned with the business goal of growing SIP adoption — introduced quick "Start SIP" CTAs as a first-action prompt across the dashboard, making the default path growth-oriented for both user and business.</p>
-        </div>
-        <div class="sip-badge">
-          <span class="sip-badge-word">SIP First</span>
-          <span class="sip-badge-sub">Approach</span>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- FOLD 6 — PROCESS -->
-  <section id="s-process">
-    <div class="s-inner">
-      <span class="s-eyebrow">Process</span>
-      <h2 class="s-heading">From research to intent.</h2>
-      <div class="process-steps">
-        <div class="process-step">
-          <span class="step-num">01</span>
-          <div class="step-title">Secondary Research</div>
-          <p class="step-desc">Studied ETF market behaviour, investment patterns, and how competing platforms approached ETF discovery.</p>
-        </div>
-        <div class="process-step">
-          <span class="step-num">02</span>
-          <div class="step-title">Competitive Analysis</div>
-          <p class="step-desc">Analysed Angel One, INDmoney, and Dhan — identified categorisation as the key differentiator in successful ETF UX.</p>
-        </div>
-        <div class="process-step">
-          <span class="step-num">03</span>
-          <div class="step-title">User Interviews</div>
-          <p class="step-desc">Spoke with existing ETF investors on platform — surfaced three core pain points around discovery, comparison, and product understanding.</p>
-        </div>
-        <div class="process-step">
-          <span class="step-num">04</span>
-          <div class="step-title">Intent Framework</div>
-          <p class="step-desc">Mapped 7 user intent pillars and derived every dashboard section directly from user goals — not product taxonomy.</p>
-        </div>
-      </div>
     </div>
   </section>
 
@@ -885,8 +909,10 @@
   <section id="s-intent">
     <div class="s-inner">
       <span class="s-eyebrow">Design Solution</span>
-      <h2 class="s-heading">Built around what users want to do.</h2>
-      <p class="intent-sub">Instead of organising ETFs by asset type, we mapped 7 user intent pillars — then derived every dashboard section from those, not from the product taxonomy.</p>
+      <h2 class="s-heading">User intent focused discovery.</h2>
+      <p class="intent-sub">Dashboard categories should not be based on asset type or product taxonomy. Mapped 7 user intent pillars based on research insight and then derived every dashboard section from those.</p>
+      <h2 class="s-heading">SIP First approach.</h2>
+      <p class="intent-sub">Introduced quick "Start SIP" CTAs as a first-action across the product and nudges about SIP benefits. This will be growth-oriented for both, user and business.</p>
       <div class="intent-grid">
         <div class="intent-pillar">
           <div class="intent-pillar-name">Goal Based</div>
