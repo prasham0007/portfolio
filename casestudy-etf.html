@@ -421,7 +421,7 @@
       display: flex; flex-direction: column; justify-content: center;
     }
     .ds-frame {
-      background: linear-gradient(to right, #B0A0D8 0%, rgba(206,196,232,0.18) 100%);
+      background: #F0EFED;
       border-radius: 0;
       display: flex; align-items: center; justify-content: center;
       overflow: hidden;
@@ -460,18 +460,16 @@
       border-radius: 44px;
       overflow: hidden;
       position: relative;
-      background: rgba(206,196,232,0.25);
+      background: #000;
     }
     .ds-dynamic-island {
       position: absolute; top: 12px; left: 50%; transform: translateX(-50%);
       width: 120px; height: 34px;
-      background: #000; border-radius: 20px; z-index: 2;
+      background: #000; border-radius: 20px; z-index: 2; pointer-events: none;
     }
-    .ds-screen-ph {
+    .ds-screen-iframe {
       width: 100%; height: 100%;
-      display: flex; align-items: center; justify-content: center;
-      font-size: 11px; font-weight: 600; letter-spacing: 0.08em;
-      text-transform: uppercase; color: rgba(24,24,24,0.2);
+      border: none; display: block;
     }
 
     /* ── REFLECTION — fold 11 ── */
@@ -797,7 +795,7 @@
       <div class="ds-device">
         <div class="ds-device-screen">
           <div class="ds-dynamic-island"></div>
-          <div class="ds-screen-ph">Placeholder</div>
+          <iframe class="ds-screen-iframe" src="etf-ds-screen.html?v=1" scrolling="no"></iframe>
         </div>
       </div>
     </div>
