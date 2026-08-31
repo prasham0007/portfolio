@@ -382,25 +382,19 @@
       line-height: 1.65; width: 820px; max-width: 100%;
     }
     .define-grid {
-      display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 48px;
+      display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 12px; margin-bottom: 48px;
     }
     .insight-card {
-      background: #FAF9F7; border-radius: 14px; padding: 28px 32px;
-    }
-    .insight-card.accent-card {
-      background: rgba(176,160,216,0.1);
-      border: 1px solid rgba(176,160,216,0.22);
-    }
-    .insight-quote {
-      font-size: 15px; font-weight: 400; font-style: italic;
-      color: rgba(24,24,24,0.7); line-height: 1.65; margin-bottom: 14px;
-    }
-    .insight-card.accent-card .insight-quote {
-      font-style: normal; font-weight: 600; color: #181818;
+      background: #E8E6E3; border-radius: 14px; padding: 24px 28px;
+      display: flex; flex-direction: column; gap: 12px;
     }
     .insight-tag {
       font-size: 10px; font-weight: 700; letter-spacing: 0.14em;
-      text-transform: uppercase; color: var(--accent);
+      text-transform: uppercase; color: var(--amber);
+    }
+    .insight-quote {
+      font-size: 14px; font-weight: 400;
+      color: rgba(24,24,24,0.65); line-height: 1.6;
     }
     .sip-callout {
       background: #2A2A2C; border-radius: 16px;
@@ -727,6 +721,7 @@
       #s-process { padding: 100px 64px; }
       .process-steps { grid-template-columns: repeat(2, 1fr); }
       #s-define { padding: 100px 64px; }
+      .define-grid { grid-template-columns: 1fr 1fr; }
       #s-intent { height: 280vh; }
       #s-intent .s-inner { padding: 100px 64px; }
       .intent-left { flex: 0 0 420px; }
@@ -755,6 +750,7 @@
       #s-background { padding: 80px 20px; }
       #s-process { padding: 80px 20px; }
       #s-define { padding: 80px 20px; }
+      .define-grid { grid-template-columns: 1fr; }
       #s-web { padding: 80px 20px; }
       #s-reflection { padding: 80px 20px; }
 
@@ -1038,20 +1034,44 @@
       </div>
       <div class="define-grid">
         <div class="insight-card">
-          <p class="insight-quote">"I open the ETF section but I don't know where to begin. It's just names and numbers."</p>
-          <span class="insight-tag">Discovery gap</span>
+          <span class="insight-tag">Discovery paralysis</span>
+          <p class="insight-quote">Users open the ETF section but don't know where to start — it reads as a flat, undifferentiated list of names.</p>
         </div>
         <div class="insight-card">
-          <p class="insight-quote">"I end up buying the same ETF every time — I don't know how to compare the rest."</p>
           <span class="insight-tag">Habit loop</span>
+          <p class="insight-quote">Most users repurchase the same ETF every time. They lack the context to evaluate or compare alternatives.</p>
         </div>
         <div class="insight-card">
-          <p class="insight-quote">"It doesn't feel any different from buying a stock."</p>
           <span class="insight-tag">Product identity gap</span>
+          <p class="insight-quote">ETF doesn't feel different from buying a stock — its distinct value as a product category is invisible to users.</p>
         </div>
-        <div class="insight-card accent-card">
-          <p class="insight-quote">Angel One, INDmoney, and Dhan all use categorisation as a core feature — users navigate better when ETFs are grouped by intent, not listed alphabetically.</p>
-          <span class="insight-tag">Competitive insight</span>
+        <div class="insight-card">
+          <span class="insight-tag">Intent-first behaviour</span>
+          <p class="insight-quote">Users form a goal before they browse — the intent ("I want something stable") precedes the product search.</p>
+        </div>
+        <div class="insight-card">
+          <span class="insight-tag">Intent-led navigation</span>
+          <p class="insight-quote">Competitors anchor ETF discovery on intent categories like 'Tax saving' or 'High growth' — outperforming plain search.</p>
+        </div>
+        <div class="insight-card">
+          <span class="insight-tag">Conversion gap</span>
+          <p class="insight-quote">Active ETF clients are a small fraction of total users. Most browse without transacting — low turnover confirms this.</p>
+        </div>
+        <div class="insight-card">
+          <span class="insight-tag">Information overload</span>
+          <p class="insight-quote">Raw metrics — NAV, expense ratio, 1Y return — are shown without context. Users can't judge if a number is good or bad.</p>
+        </div>
+        <div class="insight-card">
+          <span class="insight-tag">Trust through familiarity</span>
+          <p class="insight-quote">Users default to Nifty 50 or Gold ETFs they've heard of. Lesser-known ETFs are skipped regardless of performance.</p>
+        </div>
+        <div class="insight-card">
+          <span class="insight-tag">SIP awareness gap</span>
+          <p class="insight-quote">SIP is the recommended entry point for ETF investing, yet most users have never considered it — it's buried, not surfaced.</p>
+        </div>
+        <div class="insight-card">
+          <span class="insight-tag">Retention friction</span>
+          <p class="insight-quote">Dashboard engagement drops after the first visit. Without a reason to return — alerts, updates, SIP status — users don't come back.</p>
         </div>
       </div>
     </div>
