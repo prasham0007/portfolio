@@ -367,7 +367,10 @@
       width: 90%; pointer-events: none; display: block;
       filter: drop-shadow(0 16px 40px rgba(0,0,0,0.28)) drop-shadow(0 2px 8px rgba(0,0,0,0.18));
     }
-    .pv-2 { background: linear-gradient(145deg, #CEC4E8 0%, #B0A0D8 100%); }
+    .pv-2 {
+      background: url('ETF card.png') center center / cover no-repeat;
+      height: 100%;
+    }
     .pv-3 { background: linear-gradient(145deg, #B8DDD0 0%, #90C8B6 100%); }
     .pv-4 { background: linear-gradient(145deg, #F2D4BB 0%, #E8B899 100%); }
     .pcard-visual::after { display: none; }
@@ -938,13 +941,14 @@
 
     <div class="project-col project-col--right">
       <a href="casestudy-etf.html" class="project-card reveal reveal-d1">
-        <div class="pcard-visual-wrap">
-          <div class="pcard-visual pv-2" data-num="02"></div>
+        <div class="pcard-visual-wrap" style="aspect-ratio: 2904/1570;">
+          <div class="pcard-visual pv-2" data-num="02">
+          </div>
           <div class="pcard-chip">Mobile &middot; Web App</div>
         </div>
         <div class="pcard-body">
           <h3 class="pcard-title">ETF Product Ecosystem<span class="dot">.</span></h3>
-          <p class="pcard-desc">End-to-end design of a data-rich ETF dashboard and high-conversion buy journey. Led strategic UX decisions that drove an 81% surge in platform turnover.</p>
+          <p class="pcard-desc">Designed investment product ETF with its dashboard, detail page and buy journey for 5paisa. Led strategy, UX, and UI across mobile and web, resulting in an 81% surge in ETF turnover.</p>
           <div class="pcard-footer">
             <div class="pcard-tags">
               <span class="pcard-tag">UX Research</span>

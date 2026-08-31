@@ -337,6 +337,55 @@
       border-left: 3px solid var(--accent); padding-left: 28px;
       max-width: 760px; margin-bottom: 72px;
     }
+    .research-flow {
+      display: flex; align-items: center; flex-wrap: wrap;
+      gap: 0; margin-bottom: 32px;
+    }
+    .research-step {
+      display: flex; flex-direction: column; gap: 4px;
+      cursor: pointer; padding: 14px 20px; border-radius: 12px;
+      transition: background 0.2s ease;
+      position: relative;
+    }
+    .research-step:hover { background: rgba(24,24,24,0.06); }
+    .research-step.active { background: rgba(24,24,24,0.08); }
+    .research-step-num {
+      font-size: 11px; font-weight: 700; letter-spacing: 0.12em;
+      text-transform: uppercase; color: rgba(24,24,24,0.35);
+      transition: color 0.2s;
+    }
+    .research-step.active .research-step-num { color: var(--accent); }
+    .research-step-label {
+      font-size: 15px; font-weight: 600; color: rgba(24,24,24,0.5); white-space: nowrap;
+      transition: color 0.2s;
+    }
+    .research-step.active .research-step-label { color: #181818; }
+    .research-step-dot {
+      position: absolute; bottom: -2px; left: 50%; transform: translateX(-50%);
+      width: 5px; height: 5px; border-radius: 50%; background: var(--accent);
+      opacity: 0; transition: opacity 0.2s;
+    }
+    .research-step.active .research-step-dot { opacity: 1; }
+    .research-arrow {
+      flex-shrink: 0; margin: 0 4px; color: rgba(24,24,24,0.2);
+      display: flex; align-items: center;
+    }
+    .research-detail {
+      min-height: 80px; margin-bottom: 56px;
+      border-left: 2px solid var(--accent); padding-left: 24px;
+      display: grid; grid-template-rows: 0fr;
+      transition: grid-template-rows 0.35s ease;
+    }
+    .research-detail.open { grid-template-rows: 1fr; }
+    .research-detail-inner { overflow: hidden; }
+    .research-detail-title {
+      font-size: 13px; font-weight: 700; letter-spacing: 0.08em;
+      text-transform: uppercase; color: var(--accent); margin-bottom: 8px;
+    }
+    .research-detail-text {
+      font-size: 15px; font-weight: 400; color: rgba(24,24,24,0.6);
+      line-height: 1.65; max-width: 640px;
+    }
     .define-grid {
       display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 48px;
     }
@@ -672,34 +721,83 @@
     @media (max-width: 1024px) {
       nav { padding: 0 48px; height: 80px; }
       .nav-logo { font-size: 16px; }
-      .cover-inner { padding: 60px 48px; }
-      #hero { padding: 120px 48px 0; }
+      #hero { padding: 120px 64px 0; }
+      .cover-inner { padding: 60px 64px; }
       .cover-meta-grid { grid-template-columns: repeat(2, auto); }
       .cover-meta-item:nth-child(2) { border-right: none; }
       .cover-meta-item:nth-child(3) { border-top: 1px solid rgba(24,24,24,0.12); }
+      #s-impact { padding: 0 64px 100px; }
+      .impact-grid { grid-template-columns: repeat(2, 1fr); }
+      #s-background { padding: 100px 64px; }
+      #s-process { padding: 100px 64px; }
+      .process-steps { grid-template-columns: repeat(2, 1fr); }
+      #s-define { padding: 100px 64px; }
+      #s-intent { height: 280vh; }
+      #s-intent .s-inner { padding: 100px 64px; }
+      .intent-left { flex: 0 0 420px; }
+      .intent-grid { width: 280px; margin-left: 200px; }
+      #s-screens { padding: 80px 64px; }
+      #s-web { padding: 100px 64px; }
+      #s-ds .ds-text-col { padding: 80px 48px 80px 64px; }
+      #s-reflection { padding: 100px 64px; }
+      .cs-footer { padding: 40px 64px; }
     }
 
     @media (max-width: 768px) {
       nav { padding: 0 20px; height: 64px; }
       .nav-logo { font-size: 14px; letter-spacing: 0.06em; }
-      #hero { padding: 100px 20px 60px; }
+      #hero { padding: 96px 20px 0; }
       .hero-body-row { flex-direction: column; gap: 40px; }
       .hero-meta { width: 100%; padding-top: 28px; border-top: 1px solid var(--border); }
       .cover-inner { padding: 40px 20px; }
-      #hero { padding: 96px 20px 0; }
       .cover-meta-grid { grid-template-columns: 1fr 1fr; width: 100%; }
       .cover-meta-item:nth-child(2) { border-right: none; }
       .cover-meta-item:nth-child(3) { border-top: 1px solid rgba(24,24,24,0.12); }
       .cover-meta-item:nth-child(4) { border-top: 1px solid rgba(24,24,24,0.12); border-right: none; }
+
+      /* shared section padding */
+      #s-impact { padding: 60px 20px 80px; }
+      #s-background { padding: 80px 20px; }
+      #s-process { padding: 80px 20px; }
+      #s-define { padding: 80px 20px; }
+      #s-web { padding: 80px 20px; }
       #s-reflection { padding: 80px 20px; }
+
+      /* grids → single column */
+      .impact-grid { grid-template-columns: 1fr 1fr; }
+      .process-steps { grid-template-columns: 1fr; gap: 32px; }
+      .insight-grid { grid-template-columns: 1fr; }
       .reflection-body { grid-template-columns: 1fr; gap: 40px; }
-      .cs-footer { padding: 32px 20px; flex-direction: column; align-items: flex-start; gap: 16px; }
-      .screens-grid { flex-wrap: wrap; gap: 10px; }
-      .screen-ph-port { height: 45svh; }
+
+      /* s-intent: disable sticky scroll, stack vertically */
+      #s-intent { height: auto; }
+      #s-intent .s-inner {
+        position: static;
+        height: auto;
+        overflow: visible;
+        flex-direction: column;
+        padding: 80px 20px;
+        gap: 48px;
+      }
+      .intent-left { flex: none; width: 100%; }
+      .intent-grid { width: 100%; margin-left: 0; }
+      .intent-subsection, #s-intent .intent-grid {
+        opacity: 1 !important; transform: none !important;
+      }
+
+      /* screens */
+      #s-screens { padding: 60px 20px; height: auto; }
+      #s-screens .s-inner { height: auto; }
+      .screens-grid { flex-wrap: wrap; gap: 12px; margin-top: 32px; flex: none; }
+      .screen-ph-port { height: 52vw; aspect-ratio: auto; flex-shrink: 1; flex: 0 0 calc(50% - 6px); }
+
+      /* ds */
       #s-ds { grid-template-columns: 1fr; min-height: auto; }
       .ds-text-col { padding: 60px 20px 40px; }
       .ds-frame { min-height: 500px; }
       .ds-device { transform: scale(0.72); transform-origin: center center; }
+
+      .cs-footer { padding: 32px 20px; flex-direction: column; align-items: flex-start; gap: 16px; }
     }
   </style>
 </head>
@@ -724,6 +822,10 @@
         <p class="hero-desc">
           Designed investment product ETF with its dashboard, detail page and buy journey for 5paisa. Led strategy, UX, and UI across mobile and web, resulting in an 81% surge in ETF turnover.
 </p>
+        <a href="#s-ds" class="hero-cta" style="margin-top: 32px;">
+          View Prototype
+          <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M2 7h10M8 3l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </a>
       </div>
       <div class="hero-meta">
         <div class="hero-meta-item">
@@ -896,7 +998,49 @@
   <section id="s-define">
     <div class="s-inner">
       <span class="s-eyebrow">Research and Insight</span>
-      <p class="problem-stmt">"How might we transform ETF from a list of assets into a discovery-first investment product that matches targeted user's intent?"</p>
+      <div class="research-flow" id="research-flow">
+        <div class="research-step active" data-step="0">
+          <span class="research-step-num">01</span>
+          <span class="research-step-label">Desk Research</span>
+          <span class="research-step-dot"></span>
+        </div>
+        <div class="research-arrow"><svg width="20" height="16" viewBox="0 0 20 16" fill="none"><path d="M1 8h18M12 2l6 6-6 6" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+        <div class="research-step" data-step="1">
+          <span class="research-step-num">02</span>
+          <span class="research-step-label">Problem Statement</span>
+          <span class="research-step-dot"></span>
+        </div>
+        <div class="research-arrow"><svg width="20" height="16" viewBox="0 0 20 16" fill="none"><path d="M1 8h18M12 2l6 6-6 6" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+        <div class="research-step" data-step="2">
+          <span class="research-step-num">03</span>
+          <span class="research-step-label">Understanding Users</span>
+          <span class="research-step-dot"></span>
+        </div>
+        <div class="research-arrow"><svg width="20" height="16" viewBox="0 0 20 16" fill="none"><path d="M1 8h18M12 2l6 6-6 6" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+        <div class="research-step" data-step="3">
+          <span class="research-step-num">04</span>
+          <span class="research-step-label">Competitor Analysis</span>
+          <span class="research-step-dot"></span>
+        </div>
+        <div class="research-arrow"><svg width="20" height="16" viewBox="0 0 20 16" fill="none"><path d="M1 8h18M12 2l6 6-6 6" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+        <div class="research-step" data-step="4">
+          <span class="research-step-num">05</span>
+          <span class="research-step-label">Data & Analytics Review</span>
+          <span class="research-step-dot"></span>
+        </div>
+        <div class="research-arrow"><svg width="20" height="16" viewBox="0 0 20 16" fill="none"><path d="M1 8h18M12 2l6 6-6 6" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+        <div class="research-step" data-step="5">
+          <span class="research-step-num">06</span>
+          <span class="research-step-label">Research Synthesis</span>
+          <span class="research-step-dot"></span>
+        </div>
+      </div>
+      <div class="research-detail open" id="research-detail">
+        <div class="research-detail-inner">
+          <div class="research-detail-title" id="research-detail-title">Desk Research</div>
+          <p class="research-detail-text" id="research-detail-text">Analysed ETF market behaviour, investment patterns and industry data to understand the product landscape and identify gaps in the existing experience.</p>
+        </div>
+      </div>
       <div class="define-grid">
         <div class="insight-card">
           <p class="insight-quote">"I open the ETF section but I don't know where to begin. It's just names and numbers."</p>
@@ -1066,6 +1210,38 @@
     })();
   </script>
 
+  <script>
+    (function() {
+      var details = [
+        { title: 'Desk Research', text: 'Analysed ETF market behaviour, investment patterns and industry data to understand the product landscape and identify gaps in the existing experience.' },
+        { title: 'Problem Statement', text: '"How might we transform ETF from a list of assets into a discovery-first investment product that matches targeted user\'s intent?"' },
+        { title: 'Understanding Users', text: 'Conducted interviews with 12+ traders across experience levels to identify real pain points, mental models and unmet needs around ETF discovery and investment decisions.' },
+        { title: 'Competitor Analysis', text: 'Reviewed ETF experiences on Angel One, INDmoney and Dhan to benchmark discovery flows, category structures and information density.' },
+        { title: 'Data & Analytics Review', text: 'Reviewed baseline metrics such as ETF turnover, order volume, active ETF clients, and dashboard engagement to establish a benchmark for measuring impact.' },
+        { title: 'Research Synthesis', text: 'Organised raw research notes, interview quotes, and data points into affinity clusters. Tagged recurring themes, grouped overlapping behaviours, and mapped patterns across user segments.' },
+      ];
+
+      var steps = document.querySelectorAll('#research-flow .research-step');
+      var detail = document.getElementById('research-detail');
+      var detailTitle = document.getElementById('research-detail-title');
+      var detailText = document.getElementById('research-detail-text');
+
+      steps.forEach(function(step) {
+        step.addEventListener('click', function() {
+          var idx = parseInt(step.getAttribute('data-step'));
+          steps.forEach(function(s) { s.classList.remove('active'); });
+          step.classList.add('active');
+          detail.classList.remove('open');
+          setTimeout(function() {
+            detailTitle.textContent = details[idx].title;
+            detailText.textContent = details[idx].text;
+            detail.classList.add('open');
+          }, 160);
+        });
+      });
+    })();
+  </script>
+
   <!-- FOLD 11 — REFLECTION -->
   <section id="s-reflection">
     <div class="s-inner">
@@ -1103,6 +1279,7 @@
 
   <script>
     (function() {
+      if (window.innerWidth <= 768) return; // mobile: CSS handles visibility
       var section = document.querySelector('#s-intent');
       var subsections = Array.from(section.querySelectorAll('.intent-subsection'));
       var grid = section.querySelector('.intent-grid');
