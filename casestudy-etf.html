@@ -530,11 +530,11 @@
     #s-web { background: #1F1F1F; padding: 120px 128px; }
     #s-web .s-heading { color: #FAF9F7; }
     .web-ph {
-      margin-top: 56px; width: 100%; aspect-ratio: 16/9;
-      background: linear-gradient(145deg, #CEC4E8 0%, #B0A0D8 100%);
-      border-radius: 16px; display: flex; align-items: center; justify-content: center;
-      font-size: 12px; font-weight: 600; letter-spacing: 0.08em;
-      text-transform: uppercase; color: rgba(24,24,24,0.28);
+      margin-top: 56px; width: 100%;
+      border-radius: 16px; overflow: hidden;
+    }
+    .web-ph img {
+      width: 100%; display: block; border-radius: 16px;
     }
     .web-note {
       margin-top: 20px; font-size: 14px; font-weight: 400;
@@ -1165,7 +1165,7 @@
     <div class="s-inner">
       <span class="s-eyebrow">Web</span>
       <h2 class="s-heading">Shipped on web too<span style="color:var(--amber)">.</span></h2>
-      <div class="web-ph">Web — Dashboard</div>
+      <div class="web-ph"><img src="Dashboard 1280px.png" alt="ETF Web Dashboard"></div>
       <p class="web-note">The ETF product was implemented end-to-end on the 5paisa web platform, maintaining full feature parity with the mobile experience.</p>
     </div>
   </section>
