@@ -130,7 +130,7 @@
       position: relative; overflow: hidden;
     }
     .cover-inner {
-      width: 100%; padding: 80px 128px 0;
+      width: 100%; padding: 80px 64px 0;
       display: flex; flex-direction: column; justify-content: flex-end;
       height: 100%;
     }
@@ -140,7 +140,7 @@
     .cover-placeholder {
       width: 100%; height: 82svh;
       background: linear-gradient(145deg, #C8DCEF 0%, #A0C3E4 100%);
-      border-radius: 16px 16px 0 0;
+      border-radius: 28px 28px 0 0;
       display: flex; align-items: flex-end; justify-content: center;
       padding: 40px 40px 0;
       gap: 16px; overflow: hidden;
@@ -524,7 +524,7 @@
     @media (max-width: 1024px) {
       nav { padding: 0 48px; height: 80px; }
       #hero { padding: 120px 64px 0; }
-      .cover-inner { padding: 60px 64px 0; }
+      .cover-inner { padding: 60px 40px 0; }
       .cover-browser:last-child { display: none; }
       #s-impact { padding: 0 64px 100px; }
       .impact-grid { grid-template-columns: repeat(2, 1fr); }
@@ -589,12 +589,12 @@
 
   <!-- HERO -->
   <section id="hero">
-    <div class="hero-label">Navigation Redesign &middot; Case Study</div>
-    <h1 class="hero-title">
-      Navigating a Brokerage<br>at Scale<span class="dot">.</span>
-    </h1>
     <div class="hero-body-row">
       <div class="hero-left">
+        <div class="hero-label">Navigation Redesign &middot; Case Study</div>
+        <h1 class="hero-title">
+          Navigating a Brokerage<br>at Scale<span class="dot">.</span>
+        </h1>
         <p class="hero-desc">How a data-led Information Architecture overhaul transformed a 119-link wall of chaos into an intent-driven, high-conversion navigation for 5paisa.</p>
       </div>
       <div class="hero-meta">
@@ -1192,8 +1192,6 @@
       var nav = document.querySelector('nav');
       var hero = document.querySelector('#hero');
       var heroRow = hero.querySelector('.hero-body-row');
-      var heroLabel = hero.querySelector('.hero-label');
-      var heroTitle = hero.querySelector('.hero-title');
       var raf = false;
 
       function updateOnScroll() {
@@ -1201,10 +1199,6 @@
         var heroH = hero.offsetHeight;
         var progress = Math.min(1, scrollY / (heroH * 0.75));
 
-        heroLabel.style.opacity = 1 - progress;
-        heroLabel.style.transform = 'translateY(' + (scrollY * -0.12) + 'px)';
-        heroTitle.style.opacity = 1 - progress;
-        heroTitle.style.transform = 'translateY(' + (scrollY * -0.15) + 'px)';
         heroRow.style.opacity = 1 - progress;
         heroRow.style.transform = 'translateY(' + (scrollY * -0.18) + 'px)';
 
