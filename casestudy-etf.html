@@ -382,11 +382,16 @@
       line-height: 1.65; width: 820px; max-width: 100%;
     }
     .define-grid {
-      display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 12px; margin-bottom: 48px;
+      display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 12px; margin-top: 160px; margin-bottom: 48px;
     }
     .insight-card {
       background: #E8E6E3; border-radius: 14px; padding: 24px 28px;
       display: flex; flex-direction: column; gap: 12px;
+      opacity: 0; transform: translateY(24px);
+      transition: opacity 0.45s var(--ease), transform 0.45s var(--ease);
+    }
+    .insight-card.visible {
+      opacity: 1; transform: translateY(0);
     }
     .insight-tag {
       font-size: 10px; font-weight: 700; letter-spacing: 0.14em;
@@ -1035,43 +1040,27 @@
       <div class="define-grid">
         <div class="insight-card">
           <span class="insight-tag">Discovery paralysis</span>
-          <p class="insight-quote">Users open the ETF section but don't know where to start — it reads as a flat, undifferentiated list of names.</p>
+          <p class="insight-quote">Users open the ETF section but don't know where to start. It is read as a flat, undifferentiated list of names.</p>
         </div>
         <div class="insight-card">
           <span class="insight-tag">Habit loop</span>
-          <p class="insight-quote">Most users repurchase the same ETF every time. They lack the context to evaluate or compare alternatives.</p>
+          <p class="insight-quote">Most user purchase ETF as investment of one time. They lack the benefits they can achieve by creating SIP.</p>
         </div>
         <div class="insight-card">
           <span class="insight-tag">Product identity gap</span>
-          <p class="insight-quote">ETF doesn't feel different from buying a stock — its distinct value as a product category is invisible to users.</p>
+          <p class="insight-quote">ETF doesn't feel different from buying a stock, its distinct value as a product category is invisible to users.</p>
         </div>
         <div class="insight-card">
           <span class="insight-tag">Intent-first behaviour</span>
-          <p class="insight-quote">Users form a goal before they browse — the intent ("I want something stable") precedes the product search.</p>
+          <p class="insight-quote">Users form a goal before they browse, the intent ("I want something stable") precedes the product search.</p>
         </div>
         <div class="insight-card">
           <span class="insight-tag">Intent-led navigation</span>
-          <p class="insight-quote">Competitors anchor ETF discovery on intent categories like 'Tax saving' or 'High growth' — outperforming plain search.</p>
-        </div>
-        <div class="insight-card">
-          <span class="insight-tag">Conversion gap</span>
-          <p class="insight-quote">Active ETF clients are a small fraction of total users. Most browse without transacting — low turnover confirms this.</p>
-        </div>
-        <div class="insight-card">
-          <span class="insight-tag">Information overload</span>
-          <p class="insight-quote">Raw metrics — NAV, expense ratio, 1Y return — are shown without context. Users can't judge if a number is good or bad.</p>
+          <p class="insight-quote">Competitors anchor ETF discovery on categories like 'Tax saving' or 'High growth' outperforming plain search.</p>
         </div>
         <div class="insight-card">
           <span class="insight-tag">Trust through familiarity</span>
           <p class="insight-quote">Users default to Nifty 50 or Gold ETFs they've heard of. Lesser-known ETFs are skipped regardless of performance.</p>
-        </div>
-        <div class="insight-card">
-          <span class="insight-tag">SIP awareness gap</span>
-          <p class="insight-quote">SIP is the recommended entry point for ETF investing, yet most users have never considered it — it's buried, not surfaced.</p>
-        </div>
-        <div class="insight-card">
-          <span class="insight-tag">Retention friction</span>
-          <p class="insight-quote">Dashboard engagement drops after the first visit. Without a reason to return — alerts, updates, SIP status — users don't come back.</p>
         </div>
       </div>
     </div>
@@ -1356,6 +1345,22 @@
         requestAnimationFrame(updateOnScroll);
       }
     }, { passive: true });
+
+    // Scroll reveal for insight cards
+    (function() {
+      var cards = document.querySelectorAll('.insight-card');
+      var io = new IntersectionObserver(function(entries) {
+        entries.forEach(function(entry, i) {
+          if (entry.isIntersecting) {
+            var card = entry.target;
+            var idx = Array.prototype.indexOf.call(cards, card);
+            setTimeout(function() { card.classList.add('visible'); }, (idx % 3) * 80);
+            io.unobserve(card);
+          }
+        });
+      }, { threshold: 0.15 });
+      cards.forEach(function(c) { io.observe(c); });
+    })();
 
   </script>
 </body>
