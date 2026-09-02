@@ -15,6 +15,7 @@
       --border: #2E2E2E;
       --amber: #F04A23;
       --amber-dim: rgba(240,74,35,0.10);
+      --green: #4CAF7D;
       --text: #FAF9F7;
       --muted: #888784;
       --white: #FAF9F7;
@@ -468,22 +469,22 @@
     .ia-col.after { background: var(--surface); }
     .ia-arrow-col {
       display: flex; align-items: center; justify-content: center;
-      background: var(--amber-dim); border-right: 1px solid rgba(240,74,35,0.2);
+      background: rgba(176,160,216,0.10); border-right: 1px solid rgba(176,160,216,0.2);
     }
-    .ia-arrow-col svg { width: 22px; height: 22px; color: var(--amber); }
+    .ia-arrow-col svg { width: 22px; height: 22px; color: var(--accent); }
     .ia-side-label {
       font-size: 10px; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; margin-bottom: 12px;
     }
-    .ia-col.before .ia-side-label { color: rgba(250,249,247,0.35); }
-    .ia-col.after  .ia-side-label { color: var(--amber); }
+    .ia-col.before .ia-side-label { color: var(--amber); }
+    .ia-col.after  .ia-side-label { color: var(--green); }
     .ia-big { font-size: 56px; font-weight: 700; line-height: 1; margin-bottom: 8px; letter-spacing: -0.04em; }
-    .ia-col.before .ia-big { color: rgba(250,249,247,0.25); }
-    .ia-col.after  .ia-big { color: var(--amber); }
+    .ia-col.before .ia-big { color: var(--amber); }
+    .ia-col.after  .ia-big { color: var(--green); }
     .ia-sub { font-size: 14px; color: var(--muted); margin-bottom: 24px; }
     .ia-chips { display: flex; flex-wrap: wrap; gap: 7px; }
     .ia-chip { padding: 5px 12px; border-radius: 6px; font-size: 11px; font-weight: 600; }
-    .ia-col.before .ia-chip { background: rgba(250,249,247,0.06); border: 1px solid rgba(250,249,247,0.1); color: rgba(250,249,247,0.4); }
-    .ia-col.after  .ia-chip { background: rgba(240,74,35,0.1); border: 1px solid rgba(240,74,35,0.2); color: var(--amber); }
+    .ia-col.before .ia-chip { background: rgba(240,74,35,0.08); border: 1px solid rgba(240,74,35,0.2); color: var(--amber); }
+    .ia-col.after  .ia-chip { background: rgba(76,175,125,0.1); border: 1px solid rgba(76,175,125,0.2); color: var(--green); }
 
     /* IA SVG diagram */
     .ia-diagram {
@@ -498,7 +499,7 @@
       font-size: 9px; font-weight: 700; letter-spacing: 0.14em;
       text-transform: uppercase; color: var(--muted);
     }
-    .ia-diagram-label.after { color: var(--amber); }
+    .ia-diagram-label.after { color: var(--green); }
 
     /* ── TAB SHOWCASE ── */
     #s-tabs { background: #FAF9F7; padding: 120px 128px; }
@@ -692,7 +693,7 @@
   <section id="hero">
     <div class="hero-body-row">
       <div class="hero-left">
-        <h1 class="hero-title">Navigating a Brokerage<br>at Scale<span class="dot">.</span></h1>
+        <h1 class="hero-title">Overhauling navigation bar for a stock broker website<span class="dot">.</span></h1>
         <p class="hero-desc">
           How a data-led Information Architecture overhaul transformed a 119-link wall of chaos into an intent-driven, high-conversion navigation for 5paisa.
         </p>
@@ -932,96 +933,157 @@
           <span class="ia-diagram-label">Information Architecture</span>
           <span class="ia-diagram-label after">After Redesign</span>
         </div>
-        <svg viewBox="0 0 1600 600" xmlns="http://www.w3.org/2000/svg" style="width:100%;display:block;">
-          <rect width="1600" height="600" fill="#0C0E13"/>
-          <rect x="16" y="16" width="1568" height="44" rx="8" fill="#111318" stroke="#21263A" stroke-width="1"/>
-          <line x1="336" y1="24" x2="336" y2="52" stroke="#21263A" stroke-width="1"/>
-          <line x1="516" y1="24" x2="516" y2="52" stroke="#21263A" stroke-width="1"/>
-          <line x1="828" y1="24" x2="828" y2="52" stroke="#21263A" stroke-width="1"/>
-          <line x1="932" y1="24" x2="932" y2="52" stroke="#21263A" stroke-width="1"/>
-          <line x1="1304" y1="24" x2="1304" y2="52" stroke="#21263A" stroke-width="1"/>
-          <line x1="1408" y1="24" x2="1408" y2="52" stroke="#21263A" stroke-width="1"/>
-          <text x="176" y="43" text-anchor="middle" fill="#DDE1EC" font-family="Mulish,sans-serif" font-size="11" font-weight="700" letter-spacing="1.5">INVEST</text>
-          <text x="426" y="43" text-anchor="middle" fill="#DDE1EC" font-family="Mulish,sans-serif" font-size="11" font-weight="700" letter-spacing="1.5">TRADE</text>
-          <text x="672" y="43" text-anchor="middle" fill="#DDE1EC" font-family="Mulish,sans-serif" font-size="11" font-weight="700" letter-spacing="1.5">PRODUCTS</text>
-          <text x="880" y="43" text-anchor="middle" fill="#DDE1EC" font-family="Mulish,sans-serif" font-size="11" font-weight="700" letter-spacing="1.5">PRICING</text>
-          <text x="1118" y="43" text-anchor="middle" fill="#DDE1EC" font-family="Mulish,sans-serif" font-size="11" font-weight="700" letter-spacing="1.5">MARKETS</text>
-          <text x="1356" y="43" text-anchor="middle" fill="#DDE1EC" font-family="Mulish,sans-serif" font-size="11" font-weight="700" letter-spacing="1.5">LEARN</text>
-          <text x="1496" y="43" text-anchor="middle" fill="#DDE1EC" font-family="Mulish,sans-serif" font-size="11" font-weight="700" letter-spacing="1.5">PARTNER</text>
-          <line x1="176" y1="60" x2="176" y2="76" stroke="#21263A" stroke-width="1"/>
-          <line x1="426" y1="60" x2="426" y2="76" stroke="#21263A" stroke-width="1"/>
-          <line x1="672" y1="60" x2="672" y2="76" stroke="#21263A" stroke-width="1"/>
-          <line x1="1118" y1="60" x2="1118" y2="76" stroke="#21263A" stroke-width="1"/>
-          <rect x="16" y="76" width="316" height="492" rx="8" fill="#111318" stroke="#21263A" stroke-width="1"/>
-          <rect x="16" y="76" width="316" height="36" rx="8" fill="#1A1D26"/>
-          <rect x="16" y="96" width="316" height="16" fill="#1A1D26"/>
-          <text x="28" y="99" fill="#DDE1EC" font-family="Mulish,sans-serif" font-size="9" font-weight="900" letter-spacing="2">INVEST</text>
-          <text x="28" y="124" fill="#6B7290" font-family="Mulish,sans-serif" font-size="8" font-weight="800" letter-spacing="1.5">INVESTMENT PRODUCTS</text>
-          <circle cx="30" cy="141" r="2.5" fill="#4CAF7D"/><text x="40" y="145" fill="#DDE1EC" font-family="Mulish,sans-serif" font-size="11">Stocks</text>
-          <circle cx="30" cy="161" r="2.5" fill="#4CAF7D"/><text x="40" y="165" fill="#DDE1EC" font-family="Mulish,sans-serif" font-size="11">Mutual Funds</text>
-          <circle cx="30" cy="181" r="2.5" fill="#4CAF7D"/><text x="40" y="185" fill="#DDE1EC" font-family="Mulish,sans-serif" font-size="11">IPOs</text>
-          <circle cx="30" cy="201" r="2.5" fill="#4CAF7D"/><text x="40" y="205" fill="#DDE1EC" font-family="Mulish,sans-serif" font-size="11">ETF</text>
-          <circle cx="30" cy="221" r="2.5" fill="#4CAF7D"/><text x="40" y="225" fill="#DDE1EC" font-family="Mulish,sans-serif" font-size="11">US Stocks</text>
-          <circle cx="30" cy="241" r="2.5" fill="#4CAF7D"/><text x="40" y="245" fill="#DDE1EC" font-family="Mulish,sans-serif" font-size="11">NFO</text>
-          <line x1="16" y1="257" x2="332" y2="257" stroke="#21263A" stroke-width="1"/>
-          <text x="28" y="275" fill="#6B7290" font-family="Mulish,sans-serif" font-size="8" font-weight="800" letter-spacing="1.5">TOOLS</text>
-          <circle cx="30" cy="292" r="2.5" fill="#F04A23" opacity="0.8"/><text x="40" y="296" fill="#DDE1EC" font-family="Mulish,sans-serif" font-size="11">Brokerage Calculator</text>
-          <circle cx="30" cy="312" r="2.5" fill="#F04A23" opacity="0.8"/><text x="40" y="316" fill="#DDE1EC" font-family="Mulish,sans-serif" font-size="11">SIP Calculator</text>
-          <circle cx="30" cy="332" r="2.5" fill="#F04A23" opacity="0.8"/><text x="40" y="336" fill="#DDE1EC" font-family="Mulish,sans-serif" font-size="11">Stock Screener</text>
-          <rect x="94" y="85" width="72" height="18" rx="9" fill="#1A2A1A"/>
-          <text x="130" y="97" text-anchor="middle" fill="#4CAF7D" font-family="Mulish,sans-serif" font-size="9" font-weight="700">13 items</text>
-          <rect x="340" y="76" width="172" height="300" rx="8" fill="#111318" stroke="#21263A" stroke-width="1"/>
-          <rect x="340" y="76" width="172" height="36" rx="8" fill="#1A1D26"/>
-          <rect x="340" y="96" width="172" height="16" fill="#1A1D26"/>
-          <text x="352" y="99" fill="#DDE1EC" font-family="Mulish,sans-serif" font-size="9" font-weight="900" letter-spacing="2">TRADE</text>
-          <text x="352" y="124" fill="#6B7290" font-family="Mulish,sans-serif" font-size="8" font-weight="800" letter-spacing="1.5">TRADING PRODUCTS</text>
-          <circle cx="354" cy="141" r="2.5" fill="#4CAF7D"/><text x="364" y="145" fill="#DDE1EC" font-family="Mulish,sans-serif" font-size="11">Futures &amp; Options</text>
-          <circle cx="354" cy="161" r="2.5" fill="#4CAF7D"/><text x="364" y="165" fill="#DDE1EC" font-family="Mulish,sans-serif" font-size="11">Commodities</text>
-          <line x1="340" y1="177" x2="512" y2="177" stroke="#21263A" stroke-width="1"/>
-          <text x="352" y="196" fill="#6B7290" font-family="Mulish,sans-serif" font-size="8" font-weight="800" letter-spacing="1.5">TOOLS</text>
-          <circle cx="354" cy="213" r="2.5" fill="#F04A23" opacity="0.8"/><text x="364" y="217" fill="#DDE1EC" font-family="Mulish,sans-serif" font-size="11">Margin Calculator</text>
-          <circle cx="354" cy="233" r="2.5" fill="#F04A23" opacity="0.8"/><text x="364" y="237" fill="#DDE1EC" font-family="Mulish,sans-serif" font-size="11">MTF Calculator</text>
-          <rect x="406" y="85" width="72" height="18" rx="9" fill="#1A2A1A"/>
-          <text x="442" y="97" text-anchor="middle" fill="#4CAF7D" font-family="Mulish,sans-serif" font-size="9" font-weight="700">5 items</text>
-          <rect x="520" y="76" width="304" height="310" rx="8" fill="#111318" stroke="#21263A" stroke-width="1"/>
-          <rect x="520" y="76" width="304" height="36" rx="8" fill="#1A1D26"/>
-          <rect x="520" y="96" width="304" height="16" fill="#1A1D26"/>
-          <text x="532" y="99" fill="#DDE1EC" font-family="Mulish,sans-serif" font-size="9" font-weight="900" letter-spacing="2">PRODUCTS</text>
-          <text x="532" y="124" fill="#6B7290" font-family="Mulish,sans-serif" font-size="8" font-weight="800" letter-spacing="1.5">5PAISA PRODUCTS</text>
-          <circle cx="534" cy="141" r="2.5" fill="#4CAF7D"/><text x="544" y="145" fill="#DDE1EC" font-family="Mulish,sans-serif" font-size="10.5">5paisa Trading App</text>
-          <circle cx="674" cy="141" r="2.5" fill="#4CAF7D"/><text x="684" y="145" fill="#DDE1EC" font-family="Mulish,sans-serif" font-size="10.5">Trader's Terminal</text>
-          <circle cx="534" cy="161" r="2.5" fill="#4CAF7D"/><text x="544" y="165" fill="#DDE1EC" font-family="Mulish,sans-serif" font-size="10.5">AlgoSpace</text>
-          <circle cx="674" cy="161" r="2.5" fill="#4CAF7D"/><text x="684" y="165" fill="#DDE1EC" font-family="Mulish,sans-serif" font-size="10.5">FnO 360</text>
-          <circle cx="534" cy="181" r="2.5" fill="#4CAF7D"/><text x="544" y="185" fill="#DDE1EC" font-family="Mulish,sans-serif" font-size="10.5">Scalper Terminal</text>
-          <circle cx="674" cy="181" r="2.5" fill="#4CAF7D"/><text x="684" y="185" fill="#DDE1EC" font-family="Mulish,sans-serif" font-size="10.5">MTF</text>
-          <rect x="618" y="85" width="72" height="18" rx="9" fill="#1A2A1A"/>
-          <text x="654" y="97" text-anchor="middle" fill="#4CAF7D" font-family="Mulish,sans-serif" font-size="9" font-weight="700">12 items</text>
-          <rect x="936" y="76" width="364" height="468" rx="8" fill="#111318" stroke="#21263A" stroke-width="1"/>
-          <rect x="936" y="76" width="364" height="36" rx="8" fill="#1A1D26"/>
-          <rect x="936" y="96" width="364" height="16" fill="#1A1D26"/>
-          <text x="948" y="99" fill="#DDE1EC" font-family="Mulish,sans-serif" font-size="9" font-weight="900" letter-spacing="2">MARKETS</text>
-          <text x="948" y="203" fill="#6B7290" font-family="Mulish,sans-serif" font-size="8" font-weight="800" letter-spacing="1.5">MARKET MOVERS</text>
-          <circle cx="950" cy="220" r="2.5" fill="#4CAF7D"/><text x="960" y="224" fill="#DDE1EC" font-family="Mulish,sans-serif" font-size="11">Market Today</text>
-          <circle cx="1122" cy="220" r="2.5" fill="#4CAF7D"/><text x="1132" y="224" fill="#DDE1EC" font-family="Mulish,sans-serif" font-size="11">Volume Shockers</text>
-          <circle cx="950" cy="240" r="2.5" fill="#4CAF7D"/><text x="960" y="244" fill="#DDE1EC" font-family="Mulish,sans-serif" font-size="11">52 Week High</text>
-          <circle cx="950" cy="260" r="2.5" fill="#4CAF7D"/><text x="960" y="264" fill="#DDE1EC" font-family="Mulish,sans-serif" font-size="11">Top Gainers</text>
-          <rect x="1024" y="85" width="72" height="18" rx="9" fill="#1A2A1A"/>
-          <text x="1060" y="97" text-anchor="middle" fill="#4CAF7D" font-family="Mulish,sans-serif" font-size="9" font-weight="700">20+ items</text>
-          <rect x="1308" y="76" width="96" height="108" rx="8" fill="#111318" stroke="#21263A" stroke-width="1"/>
-          <rect x="1308" y="76" width="96" height="36" rx="8" fill="#1A1D26"/>
-          <text x="1320" y="99" fill="#6B7290" font-family="Mulish,sans-serif" font-size="9" font-weight="900" letter-spacing="1.5">LEARN</text>
-          <text x="1356" y="130" text-anchor="middle" fill="#6B7290" font-family="Mulish,sans-serif" font-size="22" opacity="0.6">↗</text>
-          <rect x="1412" y="76" width="172" height="108" rx="8" fill="#111318" stroke="#21263A" stroke-width="1"/>
-          <rect x="1412" y="76" width="172" height="36" rx="8" fill="#1A1D26"/>
-          <text x="1424" y="99" fill="#6B7290" font-family="Mulish,sans-serif" font-size="9" font-weight="900" letter-spacing="1.5">PARTNER</text>
-          <text x="1498" y="130" text-anchor="middle" fill="#6B7290" font-family="Mulish,sans-serif" font-size="22" opacity="0.6">↗</text>
-          <rect x="16" y="562" width="1568" height="1" fill="#21263A"/>
-          <circle cx="28" cy="585" r="4" fill="#4CAF7D"/>
-          <text x="40" y="589" fill="#6B7290" font-family="Mulish,sans-serif" font-size="10" font-weight="600">Product / Content Item</text>
-          <circle cx="200" cy="585" r="4" fill="#F04A23" opacity="0.8"/>
-          <text x="212" y="589" fill="#6B7290" font-family="Mulish,sans-serif" font-size="10" font-weight="600">Tool / Calculator</text>
-          <text x="360" y="589" fill="#6B7290" font-family="Mulish,sans-serif" font-size="10" font-weight="600">↗  Redirect = no dropdown, opens directly</text>
-          <text x="1100" y="589" fill="#6B7290" font-family="Mulish,sans-serif" font-size="10" font-weight="600">~40 high-intent destinations · down from 119+ · 66% fewer choices</text>
+        <svg viewBox="0 0 1600 480" xmlns="http://www.w3.org/2000/svg" style="width:100%;display:block;">
+          <!-- bg -->
+          <rect width="1600" height="480" fill="#181818"/>
+          <!-- nav bar: x=16..1584 (w=1568) -->
+          <rect x="16" y="8" width="1568" height="36" rx="6" fill="#242424" stroke="rgba(255,255,255,0.07)" stroke-width="1"/>
+          <!-- nav dividers (between panels, with 8px gap each side) -->
+          <line x1="326" y1="8" x2="326" y2="44" stroke="rgba(255,255,255,0.07)" stroke-width="1"/>
+          <line x1="530" y1="8" x2="530" y2="44" stroke="rgba(255,255,255,0.07)" stroke-width="1"/>
+          <line x1="856" y1="8" x2="856" y2="44" stroke="rgba(255,255,255,0.07)" stroke-width="1"/>
+          <line x1="954" y1="8" x2="954" y2="44" stroke="rgba(255,255,255,0.07)" stroke-width="1"/>
+          <line x1="1324" y1="8" x2="1324" y2="44" stroke="rgba(255,255,255,0.07)" stroke-width="1"/>
+          <line x1="1428" y1="8" x2="1428" y2="44" stroke="rgba(255,255,255,0.07)" stroke-width="1"/>
+          <!-- nav labels — centers of each column -->
+          <text x="171" y="29" text-anchor="middle" fill="#FAF9F7" font-family="Mulish,sans-serif" font-size="10" font-weight="700" letter-spacing="1.5">INVEST</text>
+          <text x="428" y="29" text-anchor="middle" fill="#FAF9F7" font-family="Mulish,sans-serif" font-size="10" font-weight="700" letter-spacing="1.5">TRADE</text>
+          <text x="693" y="29" text-anchor="middle" fill="#FAF9F7" font-family="Mulish,sans-serif" font-size="10" font-weight="700" letter-spacing="1.5">PRODUCTS</text>
+          <text x="905" y="29" text-anchor="middle" fill="#888784" font-family="Mulish,sans-serif" font-size="10" font-weight="700" letter-spacing="1.5">PRICING</text>
+          <text x="1139" y="29" text-anchor="middle" fill="#FAF9F7" font-family="Mulish,sans-serif" font-size="10" font-weight="700" letter-spacing="1.5">MARKETS</text>
+          <text x="1376" y="29" text-anchor="middle" fill="#888784" font-family="Mulish,sans-serif" font-size="10" font-weight="700" letter-spacing="1.5">LEARN</text>
+          <text x="1506" y="29" text-anchor="middle" fill="#888784" font-family="Mulish,sans-serif" font-size="10" font-weight="700" letter-spacing="1.5">PARTNER</text>
+
+          <!-- ── INVEST x=16 w=310 h=362 ── -->
+          <rect x="16" y="60" width="310" height="362" rx="6" fill="#1C1C1C" stroke="rgba(255,255,255,0.07)" stroke-width="1"/>
+          <rect x="16" y="60" width="310" height="36" rx="6" fill="#252525"/>
+          <rect x="16" y="78" width="310" height="18" fill="#252525"/>
+          <text x="28" y="82" fill="#FAF9F7" font-family="Mulish,sans-serif" font-size="9" font-weight="800" letter-spacing="2">INVEST</text>
+          <rect x="218" y="68" width="72" height="18" rx="9" fill="rgba(76,175,125,0.12)"/>
+          <text x="254" y="80" text-anchor="middle" fill="#4CAF7D" font-family="Mulish,sans-serif" font-size="9" font-weight="700">13 items</text>
+          <text x="28" y="112" fill="#888784" font-family="Mulish,sans-serif" font-size="8" font-weight="700" letter-spacing="1.5">INVESTMENT PRODUCTS</text>
+          <circle cx="30" cy="126" r="3" fill="#4CAF7D"/><text x="42" y="130" fill="#FAF9F7" font-family="Mulish,sans-serif" font-size="11">Stocks</text>
+          <circle cx="30" cy="146" r="3" fill="#4CAF7D"/><text x="42" y="150" fill="#FAF9F7" font-family="Mulish,sans-serif" font-size="11">Mutual Funds</text>
+          <circle cx="30" cy="166" r="3" fill="#4CAF7D"/><text x="42" y="170" fill="#FAF9F7" font-family="Mulish,sans-serif" font-size="11">IPOs</text>
+          <circle cx="30" cy="186" r="3" fill="#4CAF7D"/><text x="42" y="190" fill="#FAF9F7" font-family="Mulish,sans-serif" font-size="11">ETF</text>
+          <circle cx="30" cy="206" r="3" fill="#4CAF7D"/><text x="42" y="210" fill="#FAF9F7" font-family="Mulish,sans-serif" font-size="11">US Stocks</text>
+          <circle cx="30" cy="226" r="3" fill="#4CAF7D"/><text x="42" y="230" fill="#FAF9F7" font-family="Mulish,sans-serif" font-size="11">NFO</text>
+          <line x1="16" y1="244" x2="326" y2="244" stroke="rgba(255,255,255,0.06)" stroke-width="1"/>
+          <text x="28" y="262" fill="#888784" font-family="Mulish,sans-serif" font-size="8" font-weight="700" letter-spacing="1.5">TOOLS</text>
+          <circle cx="30" cy="278" r="3" fill="#B0A0D8"/><text x="42" y="282" fill="#FAF9F7" font-family="Mulish,sans-serif" font-size="11">Brokerage Calculator</text>
+          <circle cx="30" cy="298" r="3" fill="#B0A0D8"/><text x="42" y="302" fill="#FAF9F7" font-family="Mulish,sans-serif" font-size="11">SIP Calculator</text>
+          <circle cx="30" cy="318" r="3" fill="#B0A0D8"/><text x="42" y="322" fill="#FAF9F7" font-family="Mulish,sans-serif" font-size="11">Stock Screener</text>
+          <circle cx="30" cy="338" r="3" fill="#B0A0D8"/><text x="42" y="342" fill="#FAF9F7" font-family="Mulish,sans-serif" font-size="11">Stock Comparison</text>
+          <circle cx="30" cy="358" r="3" fill="#B0A0D8"/><text x="42" y="362" fill="#FAF9F7" font-family="Mulish,sans-serif" font-size="11">ELSS Calculator</text>
+          <circle cx="30" cy="378" r="3" fill="#B0A0D8"/><text x="42" y="382" fill="#FAF9F7" font-family="Mulish,sans-serif" font-size="11">Compare Mutual Funds</text>
+          <circle cx="30" cy="398" r="3" fill="#B0A0D8"/><text x="42" y="402" fill="#FAF9F7" font-family="Mulish,sans-serif" font-size="11">All Calculators</text>
+
+          <!-- ── TRADE x=334 w=196 h=232 ── -->
+          <rect x="334" y="60" width="196" height="232" rx="6" fill="#1C1C1C" stroke="rgba(255,255,255,0.07)" stroke-width="1"/>
+          <rect x="334" y="60" width="196" height="36" rx="6" fill="#252525"/>
+          <rect x="334" y="78" width="196" height="18" fill="#252525"/>
+          <text x="346" y="82" fill="#FAF9F7" font-family="Mulish,sans-serif" font-size="9" font-weight="800" letter-spacing="2">TRADE</text>
+          <rect x="434" y="68" width="64" height="18" rx="9" fill="rgba(76,175,125,0.12)"/>
+          <text x="466" y="80" text-anchor="middle" fill="#4CAF7D" font-family="Mulish,sans-serif" font-size="9" font-weight="700">5 items</text>
+          <text x="346" y="112" fill="#888784" font-family="Mulish,sans-serif" font-size="8" font-weight="700" letter-spacing="1.5">TRADING PRODUCTS</text>
+          <circle cx="348" cy="126" r="3" fill="#4CAF7D"/><text x="360" y="130" fill="#FAF9F7" font-family="Mulish,sans-serif" font-size="11">Futures &amp; Options</text>
+          <circle cx="348" cy="146" r="3" fill="#4CAF7D"/><text x="360" y="150" fill="#FAF9F7" font-family="Mulish,sans-serif" font-size="11">Commodities</text>
+          <line x1="334" y1="164" x2="530" y2="164" stroke="rgba(255,255,255,0.06)" stroke-width="1"/>
+          <text x="346" y="182" fill="#888784" font-family="Mulish,sans-serif" font-size="8" font-weight="700" letter-spacing="1.5">TOOLS</text>
+          <circle cx="348" cy="198" r="3" fill="#B0A0D8"/><text x="360" y="202" fill="#FAF9F7" font-family="Mulish,sans-serif" font-size="11">Margin Calculator</text>
+          <circle cx="348" cy="218" r="3" fill="#B0A0D8"/><text x="360" y="222" fill="#FAF9F7" font-family="Mulish,sans-serif" font-size="11">MTF Calculator</text>
+          <circle cx="348" cy="238" r="3" fill="#B0A0D8"/><text x="360" y="242" fill="#FAF9F7" font-family="Mulish,sans-serif" font-size="11">Stock Screener</text>
+          <circle cx="348" cy="258" r="3" fill="#B0A0D8"/><text x="360" y="262" fill="#FAF9F7" font-family="Mulish,sans-serif" font-size="11">All Calculators</text>
+
+          <!-- ── PRODUCTS x=538 w=318 h=192 ── -->
+          <rect x="538" y="60" width="318" height="192" rx="6" fill="#1C1C1C" stroke="rgba(255,255,255,0.07)" stroke-width="1"/>
+          <rect x="538" y="60" width="318" height="36" rx="6" fill="#252525"/>
+          <rect x="538" y="78" width="318" height="18" fill="#252525"/>
+          <text x="550" y="82" fill="#FAF9F7" font-family="Mulish,sans-serif" font-size="9" font-weight="800" letter-spacing="2">PRODUCTS</text>
+          <rect x="730" y="68" width="72" height="18" rx="9" fill="rgba(76,175,125,0.12)"/>
+          <text x="766" y="80" text-anchor="middle" fill="#4CAF7D" font-family="Mulish,sans-serif" font-size="9" font-weight="700">12 items</text>
+          <text x="550" y="112" fill="#888784" font-family="Mulish,sans-serif" font-size="8" font-weight="700" letter-spacing="1.5">5PAISA PRODUCTS</text>
+          <!-- col 1 x=550, col 2 x=701 -->
+          <circle cx="552" cy="126" r="3" fill="#4CAF7D"/><text x="564" y="130" fill="#FAF9F7" font-family="Mulish,sans-serif" font-size="10.5">5paisa Trading App</text>
+          <circle cx="701" cy="126" r="3" fill="#4CAF7D"/><text x="713" y="130" fill="#FAF9F7" font-family="Mulish,sans-serif" font-size="10.5">Trader's Terminal</text>
+          <circle cx="552" cy="146" r="3" fill="#4CAF7D"/><text x="564" y="150" fill="#FAF9F7" font-family="Mulish,sans-serif" font-size="10.5">AlgoSpace</text>
+          <circle cx="701" cy="146" r="3" fill="#4CAF7D"/><text x="713" y="150" fill="#FAF9F7" font-family="Mulish,sans-serif" font-size="10.5">5paisa EXE</text>
+          <circle cx="552" cy="166" r="3" fill="#4CAF7D"/><text x="564" y="170" fill="#FAF9F7" font-family="Mulish,sans-serif" font-size="10.5">T+5</text>
+          <circle cx="701" cy="166" r="3" fill="#4CAF7D"/><text x="713" y="170" fill="#FAF9F7" font-family="Mulish,sans-serif" font-size="10.5">FnO 360</text>
+          <circle cx="552" cy="186" r="3" fill="#4CAF7D"/><text x="564" y="190" fill="#FAF9F7" font-family="Mulish,sans-serif" font-size="10.5">Xstream APIs</text>
+          <circle cx="701" cy="186" r="3" fill="#4CAF7D"/><text x="713" y="190" fill="#FAF9F7" font-family="Mulish,sans-serif" font-size="10.5">Publisher Js</text>
+          <circle cx="552" cy="206" r="3" fill="#4CAF7D"/><text x="564" y="210" fill="#FAF9F7" font-family="Mulish,sans-serif" font-size="10.5">MTF</text>
+          <circle cx="701" cy="206" r="3" fill="#4CAF7D"/><text x="713" y="210" fill="#FAF9F7" font-family="Mulish,sans-serif" font-size="10.5">5paisa MCP</text>
+          <circle cx="552" cy="226" r="3" fill="#4CAF7D"/><text x="564" y="230" fill="#FAF9F7" font-family="Mulish,sans-serif" font-size="10.5">Scalper Terminal</text>
+          <circle cx="701" cy="226" r="3" fill="#4CAF7D"/><text x="713" y="230" fill="#FAF9F7" font-family="Mulish,sans-serif" font-size="10.5">Trade on Charts</text>
+
+          <!-- ── PRICING x=864 w=90 h=120 ── -->
+          <rect x="864" y="60" width="90" height="120" rx="6" fill="#1C1C1C" stroke="rgba(255,255,255,0.07)" stroke-width="1"/>
+          <rect x="864" y="60" width="90" height="36" rx="6" fill="#252525"/>
+          <rect x="864" y="78" width="90" height="18" fill="#252525"/>
+          <text x="876" y="82" fill="#888784" font-family="Mulish,sans-serif" font-size="9" font-weight="800" letter-spacing="1.5">PRICING</text>
+          <text x="909" y="114" text-anchor="middle" fill="#888784" font-family="Mulish,sans-serif" font-size="9">Direct link</text>
+          <text x="909" y="148" text-anchor="middle" fill="#888784" font-family="Mulish,sans-serif" font-size="28" opacity="0.4">↗</text>
+
+          <!-- ── MARKETS x=962 w=362 h=332 ── -->
+          <rect x="962" y="60" width="362" height="332" rx="6" fill="#1C1C1C" stroke="rgba(255,255,255,0.07)" stroke-width="1"/>
+          <rect x="962" y="60" width="362" height="36" rx="6" fill="#252525"/>
+          <rect x="962" y="78" width="362" height="18" fill="#252525"/>
+          <text x="974" y="82" fill="#FAF9F7" font-family="Mulish,sans-serif" font-size="9" font-weight="800" letter-spacing="2">MARKETS</text>
+          <rect x="1218" y="68" width="72" height="18" rx="9" fill="rgba(76,175,125,0.12)"/>
+          <text x="1254" y="80" text-anchor="middle" fill="#4CAF7D" font-family="Mulish,sans-serif" font-size="9" font-weight="700">20+ items</text>
+          <!-- MARKET MOVERS -->
+          <text x="974" y="112" fill="#888784" font-family="Mulish,sans-serif" font-size="8" font-weight="700" letter-spacing="1.5">MARKET MOVERS</text>
+          <circle cx="976" cy="126" r="3" fill="#4CAF7D"/><text x="988" y="130" fill="#FAF9F7" font-family="Mulish,sans-serif" font-size="11">Market Today</text>
+          <circle cx="1151" cy="126" r="3" fill="#4CAF7D"/><text x="1163" y="130" fill="#FAF9F7" font-family="Mulish,sans-serif" font-size="11">Volume Shockers</text>
+          <circle cx="976" cy="144" r="3" fill="#4CAF7D"/><text x="988" y="148" fill="#FAF9F7" font-family="Mulish,sans-serif" font-size="11">52 Week High</text>
+          <circle cx="1151" cy="144" r="3" fill="#4CAF7D"/><text x="1163" y="148" fill="#FAF9F7" font-family="Mulish,sans-serif" font-size="11">Value Shockers</text>
+          <circle cx="976" cy="162" r="3" fill="#4CAF7D"/><text x="988" y="166" fill="#FAF9F7" font-family="Mulish,sans-serif" font-size="11">52 Week Low</text>
+          <circle cx="1151" cy="162" r="3" fill="#4CAF7D"/><text x="1163" y="166" fill="#FAF9F7" font-family="Mulish,sans-serif" font-size="11">Only Buyers</text>
+          <circle cx="976" cy="180" r="3" fill="#4CAF7D"/><text x="988" y="184" fill="#FAF9F7" font-family="Mulish,sans-serif" font-size="11">FII DII</text>
+          <circle cx="1151" cy="180" r="3" fill="#4CAF7D"/><text x="1163" y="184" fill="#FAF9F7" font-family="Mulish,sans-serif" font-size="11">Only Sellers</text>
+          <circle cx="976" cy="198" r="3" fill="#4CAF7D"/><text x="988" y="202" fill="#FAF9F7" font-family="Mulish,sans-serif" font-size="11">Top Gainers</text>
+          <circle cx="1151" cy="198" r="3" fill="#4CAF7D"/><text x="1163" y="202" fill="#FAF9F7" font-family="Mulish,sans-serif" font-size="11">F&amp;O Ban List</text>
+          <circle cx="976" cy="216" r="3" fill="#4CAF7D"/><text x="988" y="220" fill="#FAF9F7" font-family="Mulish,sans-serif" font-size="11">Top Losers</text>
+          <circle cx="1151" cy="216" r="3" fill="#4CAF7D"/><text x="1163" y="220" fill="#FAF9F7" font-family="Mulish,sans-serif" font-size="11">Active Contracts</text>
+          <!-- STOCKS -->
+          <line x1="962" y1="232" x2="1324" y2="232" stroke="rgba(255,255,255,0.06)" stroke-width="1"/>
+          <text x="974" y="248" fill="#888784" font-family="Mulish,sans-serif" font-size="8" font-weight="700" letter-spacing="1.5">STOCKS</text>
+          <circle cx="976" cy="262" r="3" fill="#4CAF7D"/><text x="988" y="266" fill="#FAF9F7" font-family="Mulish,sans-serif" font-size="11">Nifty 50</text>
+          <circle cx="1151" cy="262" r="3" fill="#4CAF7D"/><text x="1163" y="266" fill="#FAF9F7" font-family="Mulish,sans-serif" font-size="11">Large Cap</text>
+          <circle cx="976" cy="280" r="3" fill="#4CAF7D"/><text x="988" y="284" fill="#FAF9F7" font-family="Mulish,sans-serif" font-size="11">Sensex</text>
+          <circle cx="1151" cy="280" r="3" fill="#4CAF7D"/><text x="1163" y="284" fill="#FAF9F7" font-family="Mulish,sans-serif" font-size="11">Mid Cap</text>
+          <!-- MUTUAL FUNDS -->
+          <line x1="962" y1="296" x2="1324" y2="296" stroke="rgba(255,255,255,0.06)" stroke-width="1"/>
+          <text x="974" y="312" fill="#888784" font-family="Mulish,sans-serif" font-size="8" font-weight="700" letter-spacing="1.5">MUTUAL FUNDS</text>
+          <circle cx="976" cy="326" r="3" fill="#4CAF7D"/><text x="988" y="330" fill="#FAF9F7" font-family="Mulish,sans-serif" font-size="11">Categories</text>
+          <circle cx="976" cy="344" r="3" fill="#4CAF7D"/><text x="988" y="348" fill="#FAF9F7" font-family="Mulish,sans-serif" font-size="11">AMCs</text>
+          <circle cx="976" cy="362" r="3" fill="#4CAF7D"/><text x="988" y="366" fill="#FAF9F7" font-family="Mulish,sans-serif" font-size="11">Schemes</text>
+
+          <!-- ── LEARN x=1332 w=96 h=120 ── -->
+          <rect x="1332" y="60" width="96" height="120" rx="6" fill="#1C1C1C" stroke="rgba(255,255,255,0.07)" stroke-width="1"/>
+          <rect x="1332" y="60" width="96" height="36" rx="6" fill="#252525"/>
+          <rect x="1332" y="78" width="96" height="18" fill="#252525"/>
+          <text x="1344" y="82" fill="#888784" font-family="Mulish,sans-serif" font-size="9" font-weight="800" letter-spacing="1.5">LEARN</text>
+          <text x="1380" y="114" text-anchor="middle" fill="#888784" font-family="Mulish,sans-serif" font-size="9">Direct link</text>
+          <text x="1380" y="148" text-anchor="middle" fill="#888784" font-family="Mulish,sans-serif" font-size="28" opacity="0.4">↗</text>
+
+          <!-- ── PARTNER x=1436 w=148 h=120 ── -->
+          <rect x="1436" y="60" width="148" height="120" rx="6" fill="#1C1C1C" stroke="rgba(255,255,255,0.07)" stroke-width="1"/>
+          <rect x="1436" y="60" width="148" height="36" rx="6" fill="#252525"/>
+          <rect x="1436" y="78" width="148" height="18" fill="#252525"/>
+          <text x="1448" y="82" fill="#888784" font-family="Mulish,sans-serif" font-size="9" font-weight="800" letter-spacing="1.5">PARTNER</text>
+          <text x="1510" y="114" text-anchor="middle" fill="#888784" font-family="Mulish,sans-serif" font-size="9">Direct link</text>
+          <text x="1510" y="148" text-anchor="middle" fill="#888784" font-family="Mulish,sans-serif" font-size="28" opacity="0.4">↗</text>
+
+          <!-- legend -->
+          <line x1="16" y1="438" x2="1584" y2="438" stroke="rgba(255,255,255,0.06)" stroke-width="1"/>
+          <circle cx="28" cy="458" r="4" fill="#4CAF7D"/>
+          <text x="40" y="462" fill="#888784" font-family="Mulish,sans-serif" font-size="10" font-weight="600">Product / Content</text>
+          <circle cx="178" cy="458" r="4" fill="#B0A0D8"/>
+          <text x="190" y="462" fill="#888784" font-family="Mulish,sans-serif" font-size="10" font-weight="600">Tool / Calculator</text>
+          <text x="340" y="462" fill="#888784" font-family="Mulish,sans-serif" font-size="10" font-weight="600">↗  Direct link — no dropdown</text>
+          <text x="960" y="462" fill="#888784" font-family="Mulish,sans-serif" font-size="10" font-weight="600">~40 high-intent destinations · down from 119+ · 66% fewer choices</text>
         </svg>
       </div>
     </div>
