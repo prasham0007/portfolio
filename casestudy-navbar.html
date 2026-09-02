@@ -76,19 +76,22 @@
     .nav-back svg { transition: transform 0.2s; }
     .nav-back:hover svg { transform: translateX(-3px); }
 
-    /* ── HERO ── */
+    /* ── HERO — fold 1 ── */
     #hero {
       min-height: calc(80svh + 40px);
-      display: flex; flex-direction: column; justify-content: flex-end;
+      display: flex; flex-direction: column;
+      justify-content: flex-end;
       padding: 140px 80px 0;
       position: relative; overflow: hidden;
     }
+
     .hero-label {
       font-size: 11px; font-weight: 800; letter-spacing: 0.18em;
       text-transform: uppercase; color: var(--muted);
       margin-bottom: 20px;
       animation: fadeUp 0.5s var(--ease) 0.1s both;
     }
+
     .hero-title {
       font-size: clamp(32px, 4vw, 64px);
       font-weight: 600; line-height: 1;
@@ -97,12 +100,17 @@
       animation: fadeUp 0.65s var(--ease) 0.2s both;
     }
     .hero-title .dot, .s-eyebrow .dot { color: var(--amber); }
+
+    /* Two-column row: large description left, meta right */
     .hero-body-row {
-      display: flex; align-items: flex-start; gap: 0; width: 100%;
+      display: flex; align-items: flex-start;
+      gap: 0; width: 100%;
+      will-change: transform, opacity;
     }
     .hero-left {
       flex: 1; padding-right: 10%;
       animation: fadeUp 0.65s var(--ease) 0.3s both;
+      will-change: transform, opacity;
     }
     .hero-desc {
       font-size: clamp(20px, 2.2vw, 32px);
@@ -110,6 +118,16 @@
       line-height: 1.5; letter-spacing: -0.01em;
       margin-bottom: 40px;
     }
+    .hero-cta {
+      display: inline-flex; align-items: center; gap: 8px;
+      border: 1px solid rgba(255,255,255,0.25);
+      border-radius: 999px; padding: 12px 28px;
+      font-size: 14px; font-weight: 600; color: var(--text);
+      text-decoration: none;
+      transition: border-color 0.2s, color 0.2s, transform 0.3s var(--ease);
+    }
+    .hero-cta:hover { border-color: rgba(255,255,255,0.6); color: var(--white); transform: translateY(-2px); }
+
     .hero-meta {
       width: 260px; flex-shrink: 0;
       display: flex; flex-direction: column; gap: 28px;
@@ -120,31 +138,114 @@
       font-size: 10px; font-weight: 500; letter-spacing: 0.16em;
       text-transform: uppercase; color: var(--muted);
     }
-    .hero-meta-val { font-size: 15px; font-weight: 400; color: var(--text); line-height: 1.5; }
+    .hero-meta-val {
+      font-size: 15px; font-weight: 400; color: var(--text);
+      line-height: 1.5;
+    }
 
-    /* ── COVER ── */
+    /* ── COVER — fold 2 ── */
     #cover {
-      height: 100svh;
+      height: auto;
       display: flex; align-items: center; justify-content: center;
       background: linear-gradient(to bottom, #181818 0, #181818 20svh, #FAF9F7 20svh);
       position: relative; overflow: hidden;
     }
     .cover-inner {
-      width: 100%; padding: 80px 64px 0;
-      display: flex; flex-direction: column; justify-content: flex-end;
-      height: 100%;
+      width: 100%;
+      padding: 80px 128px;
+      display: flex; flex-direction: column; justify-content: center;
+    }
+    .cover-label {
+      font-size: 11px; font-weight: 500;
+      letter-spacing: 0.18em; text-transform: uppercase;
+      color: rgba(24,24,24,0.4); margin-bottom: 24px;
+    }
+    .cover-meta-grid {
+      display: grid; grid-template-columns: repeat(2, auto);
+      gap: 0; width: fit-content;
+      border: 1px solid rgba(24,24,24,0.1);
+      border-radius: var(--radius); overflow: hidden;
+    }
+    .cover-meta-item {
+      padding: 20px 32px;
+      border-right: 1px solid rgba(24,24,24,0.1);
+    }
+    .cover-meta-item:last-child { border-right: none; }
+    .cover-meta-key {
+      font-size: 10px; font-weight: 500;
+      letter-spacing: 0.14em; text-transform: uppercase;
+      color: rgba(24,24,24,0.4); margin-bottom: 6px;
+    }
+    .cover-meta-val {
+      font-size: 14px; font-weight: 700;
+      color: rgba(24,24,24,0.85);
     }
     .cover-visual {
-      flex: 1; display: flex; align-items: flex-end; justify-content: center;
+      display: flex; align-items: center; justify-content: center;
     }
     .cover-placeholder {
-      width: 100%; height: 82svh;
+      /* aspect-ratio: image at 90% width → height = 0.9W×(841/1973); top pad = 5%W → total H = 0.4335W → ratio ≈ 2.307 */
+      width: 100%; aspect-ratio: 2.307;
       background: linear-gradient(145deg, #C8DCEF 0%, #A0C3E4 100%);
-      border-radius: 28px 28px 0 0;
-      display: flex; align-items: flex-end; justify-content: center;
-      padding: 40px 40px 0;
-      gap: 16px; overflow: hidden;
+      position: relative;
+      overflow: hidden;
     }
+    .cover-placeholder .cover-mock {
+      position: absolute; bottom: 0; left: 50%; transform: translateX(-50%);
+      width: 90%; pointer-events: none; display: block;
+      filter: drop-shadow(0 16px 40px rgba(0,0,0,0.28)) drop-shadow(0 2px 8px rgba(0,0,0,0.18));
+    }
+    /* Cover phones */
+    .cover-phone {
+      flex: 1; min-width: 0;
+      position: relative;
+      background: #1C1C1E;
+      border-radius: 13.3% / 6.36%;
+      aspect-ratio: 421/880;
+      box-shadow:
+        0 32px 64px rgba(0,0,0,0.50),
+        0 10px 24px rgba(0,0,0,0.30),
+        inset 0 0 0 1px rgba(255,255,255,0.10);
+    }
+    .cp-vol1 {
+      position: absolute;
+      left: -0.95%; top: 16.82%;
+      width: 0.95%; height: 4.09%;
+      background: #3A3A3C; border-radius: 2px 0 0 2px;
+    }
+    .cp-vol2 {
+      position: absolute;
+      left: -0.95%; top: 22.95%;
+      width: 0.95%; height: 4.09%;
+      background: #3A3A3C; border-radius: 2px 0 0 2px;
+    }
+    .cp-pwr {
+      position: absolute;
+      right: -0.95%; top: 24.09%;
+      width: 0.95%; height: 9.09%;
+      background: #3A3A3C; border-radius: 0 2px 2px 0;
+    }
+    .cover-phone-screen {
+      position: absolute;
+      left: 3.32%; top: 1.59%;
+      width: 93.35%;
+      height: 96.82%;
+      border-radius: 11.2% / 5.17%;
+      overflow: hidden;
+      background: #000;
+    }
+    .cover-phone-screen img {
+      width: 100%; height: 100%;
+      object-fit: cover; object-position: top;
+      display: block;
+    }
+    .cover-phone-di {
+      position: absolute; top: 1.41%;
+      left: 50%; transform: translateX(-50%);
+      width: 30.5%; height: 4%;
+      background: #000; border-radius: 999px; z-index: 2; pointer-events: none;
+    }
+    /* Keep browser CSS for navbar-specific mockups */
     .cover-browser {
       flex: 1; min-width: 0;
       background: #fff;
@@ -524,7 +625,7 @@
     @media (max-width: 1024px) {
       nav { padding: 0 48px; height: 80px; }
       #hero { padding: 120px 64px 0; }
-      .cover-inner { padding: 60px 40px 0; }
+      .cover-inner { padding: 60px 64px; }
       .cover-browser:last-child { display: none; }
       #s-impact { padding: 0 64px 100px; }
       .impact-grid { grid-template-columns: repeat(2, 1fr); }
@@ -552,7 +653,7 @@
       .hero-body-row { flex-direction: column; gap: 40px; }
       .hero-left { padding-right: 0; }
       .hero-meta { width: 100%; }
-      .cover-inner { padding: 40px 20px 0; }
+      .cover-inner { padding: 40px 20px; }
       .cover-meta-grid { grid-template-columns: 1fr 1fr; }
       #s-impact { padding: 0 20px 80px; }
       .impact-grid { grid-template-columns: 1fr 1fr; }
@@ -587,64 +688,46 @@
     </a>
   </nav>
 
-  <!-- HERO -->
+  <!-- FOLD 1 — HERO -->
   <section id="hero">
     <div class="hero-body-row">
       <div class="hero-left">
-        <div class="hero-label">Navigation Redesign &middot; Case Study</div>
-        <h1 class="hero-title">
-          Navigating a Brokerage<br>at Scale<span class="dot">.</span>
-        </h1>
-        <p class="hero-desc">How a data-led Information Architecture overhaul transformed a 119-link wall of chaos into an intent-driven, high-conversion navigation for 5paisa.</p>
+        <h1 class="hero-title">Navigating a Brokerage<br>at Scale<span class="dot">.</span></h1>
+        <p class="hero-desc">
+          How a data-led Information Architecture overhaul transformed a 119-link wall of chaos into an intent-driven, high-conversion navigation for 5paisa.
+        </p>
+        <a href="#" class="hero-cta" style="margin-top: 32px;">
+          View Live Site
+          <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M2 7h10M8 3l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </a>
       </div>
       <div class="hero-meta">
         <div class="hero-meta-item">
-          <span class="hero-meta-label">Duration</span>
-          <span class="hero-meta-val">8 Weeks</span>
+          <div class="hero-meta-label">Project Duration</div>
+          <div class="hero-meta-val">2 Months</div>
         </div>
         <div class="hero-meta-item">
-          <span class="hero-meta-label">Role</span>
-          <span class="hero-meta-val">Lead UX Designer &amp; Researcher</span>
+          <div class="hero-meta-label">Role</div>
+          <div class="hero-meta-val">Lead UX Designer &amp; Researcher</div>
         </div>
         <div class="hero-meta-item">
-          <span class="hero-meta-label">Platform</span>
-          <span class="hero-meta-val">5paisa Web</span>
+          <div class="hero-meta-label">Tools</div>
+          <div class="hero-meta-val">Figma, Figjam, Maze</div>
         </div>
         <div class="hero-meta-item">
-          <span class="hero-meta-label">Expertise</span>
-          <span class="hero-meta-val">IA · UX Strategy · Data-Led Design</span>
+          <div class="hero-meta-label">Skills</div>
+          <div class="hero-meta-val">IA, UX Strategy, Data-Led Design</div>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- COVER -->
+  <!-- FOLD 2 — COVER / PROJECT META -->
   <section id="cover">
     <div class="cover-inner">
       <div class="cover-visual">
         <div class="cover-placeholder">
-          <div class="cover-browser">
-            <div class="cover-browser-bar">
-              <div class="cover-browser-dot"></div>
-              <div class="cover-browser-dot"></div>
-              <div class="cover-browser-dot"></div>
-              <div class="cover-browser-url"></div>
-            </div>
-            <div class="cover-browser-screen">
-              <img src="images/tab-invest.png" alt="Invest tab redesign">
-            </div>
-          </div>
-          <div class="cover-browser" style="max-width:340px; flex: 0 0 340px;">
-            <div class="cover-browser-bar">
-              <div class="cover-browser-dot"></div>
-              <div class="cover-browser-dot"></div>
-              <div class="cover-browser-dot"></div>
-              <div class="cover-browser-url"></div>
-            </div>
-            <div class="cover-browser-screen">
-              <img src="images/tab-products.png" alt="Products tab redesign">
-            </div>
-          </div>
+          <img src="images/mock.svg" class="cover-mock" alt="Navigation redesign mockup">
         </div>
       </div>
       <div style="height: 40px;"></div>
