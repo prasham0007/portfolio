@@ -411,13 +411,13 @@
       display: flex; align-items: center;
     }
     .research-detail {
-      margin-bottom: 56px;
+      margin-bottom: 120px;
       border-left: 2px solid var(--amber); padding-left: 24px;
     }
     .research-detail-title { display: none; }
     .research-detail-text {
       font-size: 14px; font-weight: 400; color: rgba(24,24,24,0.6);
-      line-height: 1.6; width: 100%; max-width: 960px;
+      line-height: 1.6; width: 100%; max-width: 100%;
       transition: opacity 0.18s ease;
     }
     .define-grid {
@@ -441,7 +441,7 @@
     #s-process .s-heading { color: #181818; }
     #s-process .s-body { color: rgba(24,24,24,0.55); }
     .process-steps {
-      display: grid; grid-template-columns: repeat(3, 1fr);
+      display: grid; grid-template-columns: repeat(4, 1fr);
       margin-top: 56px; gap: 48px 32px;
     }
     .process-steps::before { display: none; }
@@ -695,7 +695,7 @@
       #s-define { padding: 100px 64px; }
       .define-grid { grid-template-columns: 1fr 1fr; }
       #s-process { padding: 100px 64px; }
-      .process-steps { grid-template-columns: repeat(3, 1fr); }
+      .process-steps { grid-template-columns: repeat(2, 1fr); }
       #s-solution { padding: 100px 64px; }
       .ia-body { grid-template-columns: 1fr; }
       .ia-arrow-col { display: none; }
@@ -868,33 +868,23 @@
       <div class="process-steps">
         <div class="process-step">
           <div class="step-node"><span class="step-num">01</span></div>
-          <div class="step-title">Empathize &amp; Audit</div>
-          <p class="step-desc">Deep-dived into analytics to identify Metric Crisis areas. Manually mapped all 119+ legacy links to quantify the full scope of the architecture problem.</p>
+          <div class="step-title">Secondary &amp; Primary Research</div>
+          <p class="step-desc">Conducted research with product audit, user research and competition benchmarking.</p>
         </div>
         <div class="process-step">
           <div class="step-node"><span class="step-num">02</span></div>
-          <div class="step-title">Define &amp; User Research</div>
-          <p class="step-desc">Conducted in-depth interviews with 12 participants spanning active traders to new investors, uncovering mental model mismatches in the existing taxonomy.</p>
+          <div class="step-title">Ideate &amp; Structure</div>
+          <p class="step-desc">Applied Hick's Law to reduce choices at each level. Categorisation of assets was done with a new intent-based sitemap.</p>
         </div>
         <div class="process-step">
           <div class="step-node"><span class="step-num">03</span></div>
-          <div class="step-title">Competitive Benchmarking</div>
-          <p class="step-desc">Audited 5 leading FinTech platforms to identify proven patterns — limiting top-level items to 4–7 and using action-oriented, intent-based labelling.</p>
+          <div class="step-title">Design &amp; Prototype</div>
+          <p class="step-desc">Created high-fidelity design for all 6 navigation tabs. Improved visual design by new iconography and micro-copy badges for each tab.</p>
         </div>
         <div class="process-step">
           <div class="step-node"><span class="step-num">04</span></div>
-          <div class="step-title">Ideate &amp; Structure</div>
-          <p class="step-desc">Applied Hick's Law to reduce choices at each level. Developed a new intent-based sitemap splitting navigation into "Invest" (long-term) and "Trade" (active execution).</p>
-        </div>
-        <div class="process-step">
-          <div class="step-node"><span class="step-num">05</span></div>
-          <div class="step-title">Prototype &amp; Design</div>
-          <p class="step-desc">Created high-fidelity mega-menus for all 6 navigation tabs. Developed colour-coded iconography and micro-copy badges for the Products tab.</p>
-        </div>
-        <div class="process-step">
-          <div class="step-node"><span class="step-num">06</span></div>
-          <div class="step-title">Validate &amp; Handoff</div>
-          <p class="step-desc">Delivered annotated mockups with clearly defined success metrics for engineering alignment. Established KPIs to track post-launch CTR improvements.</p>
+          <div class="step-title">Handoff &amp; Validate</div>
+          <p class="step-desc">Delivered annotated mockups with clearly defined interaction for engineering. Established KPIs to track post-launch CTR improvements.</p>
         </div>
       </div>
     </div>
@@ -906,39 +896,33 @@
       <div class="research-flow" id="research-flow">
         <div class="research-step active" data-step="0">
           <span class="research-step-num">01</span>
-          <span class="research-step-label">Analytics Audit</span>
+          <span class="research-step-label">Product Audit</span>
           <span class="research-step-dot"></span>
         </div>
         <div class="research-arrow"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 8h10M9 4l4 4-4 4"/></svg></div>
         <div class="research-step" data-step="1">
           <span class="research-step-num">02</span>
-          <span class="research-step-label">User Interviews</span>
+          <span class="research-step-label">User Research</span>
           <span class="research-step-dot"></span>
         </div>
         <div class="research-arrow"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 8h10M9 4l4 4-4 4"/></svg></div>
         <div class="research-step" data-step="2">
           <span class="research-step-num">03</span>
-          <span class="research-step-label">IA Audit</span>
+          <span class="research-step-label">Competitive Benchmarking</span>
           <span class="research-step-dot"></span>
         </div>
         <div class="research-arrow"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 8h10M9 4l4 4-4 4"/></svg></div>
         <div class="research-step" data-step="3">
           <span class="research-step-num">04</span>
-          <span class="research-step-label">Competitor Benchmarking</span>
-          <span class="research-step-dot"></span>
-        </div>
-        <div class="research-arrow"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 8h10M9 4l4 4-4 4"/></svg></div>
-        <div class="research-step" data-step="4">
-          <span class="research-step-num">05</span>
-          <span class="research-step-label">Synthesis</span>
+          <span class="research-step-label">Ideate &amp; Structure</span>
           <span class="research-step-dot"></span>
         </div>
       </div>
 
       <div class="research-detail" id="research-detail">
         <div class="research-detail-inner">
-          <div class="research-detail-title" id="research-detail-title">Analytics Audit</div>
-          <p class="research-detail-text" id="research-detail-text">Mapped all 119+ navigation entries and cross-referenced with click data. Core revenue products — Mutual Funds, IPOs — performed at less than 1/50th of the Login route, confirming a systemic discoverability failure.</p>
+          <div class="research-detail-title" id="research-detail-title">Product Audit</div>
+          <p class="research-detail-text" id="research-detail-text">Deep-dived into analytics to identify metric crisis areas. Mapped 119+ legacy links to quantify the full scope of the architecture problem.</p>
         </div>
       </div>
 
@@ -1406,11 +1390,10 @@
     // Research flow hover
     (function() {
       var details = [
-        { title: 'Analytics Audit', text: 'Mapped all 119+ navigation entries and cross-referenced with click data. Core revenue products — Mutual Funds, IPOs — performed at less than 1/50th of the Login route, confirming a systemic discoverability failure.' },
-        { title: 'User Interviews', text: 'Conducted in-depth interviews with 12 participants spanning active traders to first-time investors. Uncovered consistent mental model mismatches: "Technology" was universally skipped, "Resources" was ignored, and "Stocks" was expected to be a trading portal, not a data page.' },
-        { title: 'IA Audit', text: 'Manually catalogued all 119+ navigation entries across 5 top-level tabs. Identified 4-level nesting, duplicate links, and vague groupings that forced users into 3–4 clicks to reach any core product.' },
-        { title: 'Competitor Benchmarking', text: 'Audited 5 leading FinTech platforms including Zerodha, Groww, and Angel One. Identified consistent patterns: max 6 top-level items, intent-based labels ("Invest" vs "Trade"), and dedicated market data hubs.' },
-        { title: 'Synthesis', text: 'Organised findings into four friction patterns — taxonomy misalignment, category confusion, labelling friction, and intent collision. Applied Hick\'s Law to define the new IA principle: fewer choices at every level, each matched to a user intent.' },
+        { title: 'Product Audit', text: 'Deep-dived into analytics to identify metric crisis areas. Mapped 119+ legacy links to quantify the full scope of the architecture problem.' },
+        { title: 'User Research', text: 'Conducted interviews with 12 participants from active traders to new investors to find pain-points and mental model mismatches in the existing navigation.' },
+        { title: 'Competitive Benchmarking', text: 'Audited 5 leading competitors to identify proven patterns who were limiting top-level items to 4–7 and using action-oriented, intent-based labelling.' },
+        { title: 'Ideate & Structure', text: 'Applied Hick\'s Law to reduce choices at each level. Categorisation of assets was done with a new intent-based sitemap.' },
       ];
       var steps = document.querySelectorAll('#research-flow .research-step');
       var detailText = document.getElementById('research-detail-text');
