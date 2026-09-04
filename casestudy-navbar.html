@@ -592,6 +592,8 @@
       padding-left: 16px; position: relative; line-height: 1.5;
     }
 
+    .tab-card-img { display: none; } /* shown only on mobile */
+
     .tab-scroll-card .tab-pts li::before {
       content: ''; position: absolute; left: 0; top: 6px;
       width: 4px; height: 4px;
@@ -706,6 +708,11 @@
       .tabs-card-area { overflow: visible; height: auto; }
       .tab-scroll-card { position: relative !important; opacity: 1 !important; transform: none !important; pointer-events: auto; margin-bottom: 40px; padding-bottom: 40px; border-bottom: 1px solid rgba(24,24,24,0.08); }
       .tab-scroll-card:last-child { margin-bottom: 0; padding-bottom: 0; border-bottom: none; }
+      .tab-card-img {
+        display: block; width: 100%; margin-top: 28px;
+        border-radius: 10px;
+        box-shadow: 0 12px 40px rgba(0,0,0,0.10), 0 2px 8px rgba(0,0,0,0.06);
+      }
       #s-results { padding: 100px 64px; }
       #s-reflection { padding: 100px 64px; }
       .reflection-body { gap: 48px; }
@@ -1192,6 +1199,7 @@
               <li>Completely separated from active trading to prevent cognitive collision</li>
               <li>Brokerage and Stock Screener tools surfaced prominently</li>
             </ul>
+            <img class="tab-card-img" src="images/tab-invest.png" alt="Invest tab design">
           </div>
 
           <div class="tab-scroll-card" data-idx="1">
@@ -1204,6 +1212,7 @@
               <li>Active execution pathway distinct from long-term Invest tab</li>
               <li>Reduces cognitive collision between novice and expert flows</li>
             </ul>
+            <img class="tab-card-img" src="images/tab-trade.png" alt="Trade tab design">
           </div>
 
           <div class="tab-scroll-card" data-idx="2">
@@ -1216,6 +1225,7 @@
               <li>Colour-coded iconography with micro-copy badges for instant recognition</li>
               <li>Taxonomy now aligned with real user language and mental models</li>
             </ul>
+            <img class="tab-card-img" src="images/tab-products.png" alt="Products tab design">
           </div>
 
           <div class="tab-scroll-card" data-idx="3">
@@ -1228,6 +1238,7 @@
               <li>Market Today, Top Gainers/Losers instantly accessible</li>
               <li>Time-sensitive data separated from static product folders</li>
             </ul>
+            <img class="tab-card-img" src="images/tab-markets.png" alt="Markets tab design">
           </div>
 
         </div>
