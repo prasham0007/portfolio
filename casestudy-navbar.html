@@ -416,8 +416,8 @@
     }
     .research-detail-title { display: none; }
     .research-detail-text {
-      font-size: 15px; font-weight: 400; color: rgba(24,24,24,0.6);
-      line-height: 1.65; width: 820px; max-width: 100%;
+      font-size: 14px; font-weight: 400; color: rgba(24,24,24,0.6);
+      line-height: 1.6; width: 100%; max-width: 960px;
       transition: opacity 0.18s ease;
     }
     .define-grid {
@@ -668,14 +668,15 @@
       align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 20px;
     }
     .cs-footer-logo {
-      font-weight: 600; font-size: 20px;
+      font-family: 'Mulish', sans-serif; font-weight: 600; font-size: 20px;
       letter-spacing: 0.08em; text-transform: uppercase; color: var(--white);
     }
     .cs-footer-logo span { color: var(--amber); }
     .cs-footer-copy { font-size: 14px; color: var(--muted); }
     .cs-footer-links { display: flex; gap: 24px; }
     .cs-footer-links a {
-      font-size: 16px; color: var(--muted); font-weight: 500; transition: color 0.2s;
+      font-size: 16px; color: var(--muted); text-decoration: none;
+      font-weight: 500; transition: color 0.2s;
     }
     .cs-footer-links a:hover { color: var(--white); }
 
@@ -801,8 +802,8 @@
   <section id="s-background">
     <div class="s-inner">
       <span class="s-eyebrow">Background</span>
-      <p class="s-body">Global navigation bar failure</p>
-      <div class="bg-two-col">
+      <h2 class="s-heading">Global navigation bar failure<span style="color:var(--amber)">.</span></h2>
+            <div class="bg-two-col">
         <div>
           <p class="bg-body">With rapid acquisition-driven growth, 5paisa emerged as having multiple overlapping products and services. Their website (5paisa.com) reflected that complexity. It suffered from complex navigation that forced users into multiple disparate flows. It consisted of a <span class="bg-highlight">wall of links having 119+ entries</span> and poor categorisation, <span class="bg-amber">3–4 steps</span> to reach core product, vague labels, segmented user journeys, outdated interaction and visual design.</p>
           <p class="bg-body">During discovery, this global navigation turned out to be a major pain point for users. Users couldn't efficiently access intended content and ended up going through unnecessary flows. <span class="bg-highlight">Confusing IA was the main cause of decision paralysis.</span></p>
@@ -1288,11 +1289,12 @@
 
   <!-- FOOTER -->
   <footer class="cs-footer">
-    <span class="cs-footer-logo">Prasham Chavda<span>.</span></span>
-    <span class="cs-footer-copy">Navigation Redesign Case Study · 5paisa Capital · 2024</span>
+    <div class="cs-footer-logo">Prasham Chavda<span>.</span></div>
+    <div class="cs-footer-copy">&copy; 2026 Prasham Chavda</div>
     <div class="cs-footer-links">
-      <a href="index.html">← All Work</a>
-      <a href="casestudy-etf.html">ETF Case Study →</a>
+      <a href="index.html">Home</a>
+      <a href="index.html#work">Work</a>
+      <a href="mailto:prasham0007@gmail.com">Contact</a>
     </div>
   </footer>
 
