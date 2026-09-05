@@ -721,7 +721,19 @@
       .cover-meta-item:nth-child(2) { border-right: none; }
       .cover-meta-item:nth-child(3) { border-top: 1px solid rgba(24,24,24,0.12); }
       #s-impact { padding: 0 64px 100px; }
-      .impact-grid { grid-template-columns: repeat(2, 1fr); }
+      .impact-grid { grid-template-columns: repeat(2, 1fr); column-gap: 48px; row-gap: 48px; }
+      .impact-stat::after { display: none; }
+      .impact-stat:nth-child(odd)::after {
+        display: block; content: ''; position: absolute;
+        right: -24px; top: 0; width: 1px; height: 100%;
+        background: linear-gradient(to bottom, transparent 0%, rgba(250,249,247,0.45) 50%, transparent 100%);
+      }
+      .impact-stat:nth-child(3)::before,
+      .impact-stat:nth-child(4)::before {
+        content: ''; position: absolute;
+        top: -24px; left: 0; height: 1px; width: 100%;
+        background: linear-gradient(to right, transparent 0%, rgba(250,249,247,0.45) 50%, transparent 100%);
+      }
       #s-background { padding: 100px 64px; }
       #s-process { padding: 100px 64px; }
       .process-steps { grid-template-columns: repeat(2, 1fr); }
@@ -759,16 +771,9 @@
       #s-web { padding: 80px 20px; }
       #s-reflection { padding: 80px 20px; }
 
-      /* impact card mobile: 2×2 grid with correct dividers */
-      .impact-card { padding: 32px 24px; }
-      .impact-grid { grid-template-columns: 1fr 1fr; column-gap: 0; row-gap: 0; }
-      .impact-stat::after { display: none; } /* hide desktop ::after dividers */
-      .impact-stat { padding: 24px 20px; }
-      /* vertical divider: right edge of col 1 */
-      .impact-stat:nth-child(odd) { border-right: 1px solid rgba(250,249,247,0.15); }
-      /* horizontal divider: bottom edge of row 1 */
-      .impact-stat:nth-child(1),
-      .impact-stat:nth-child(2) { border-bottom: 1px solid rgba(250,249,247,0.15); }
+      /* impact card mobile: 2×2 grid with gradient separators */
+      .impact-card { padding: 28px 20px; }
+      .impact-grid { grid-template-columns: 1fr 1fr; column-gap: 32px; row-gap: 32px; }
       .process-steps { grid-template-columns: 1fr; gap: 32px; }
       .insight-grid { grid-template-columns: 1fr; }
       .reflection-body { grid-template-columns: 1fr; gap: 40px; }
