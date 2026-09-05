@@ -1208,7 +1208,7 @@
       <div class="ds-device">
         <div class="ds-device-screen">
           <div class="ds-dynamic-island"></div>
-          <iframe class="ds-screen-iframe ds-iframe-light" src="etf-ds-screen.html?v=1" style="opacity:0;" onload="setTimeout(() => this.style.opacity='1', 400)"></iframe>
+          <iframe class="ds-screen-iframe ds-iframe-light" src="etf-ds-screen.html?v=1" style="opacity:0;" onload="(function(f){setTimeout(()=>f.style.opacity='1',400);try{var d=f.contentDocument,last=null;d.addEventListener('touchstart',function(e){last=e.touches[0].clientY;},{passive:true});d.addEventListener('touchmove',function(e){if(last===null)return;var dy=last-e.touches[0].clientY;last=e.touches[0].clientY;e.target.dispatchEvent(new WheelEvent('wheel',{bubbles:true,cancelable:true,deltaY:dy*2.5,deltaMode:0}));},{passive:true});d.addEventListener('touchend',function(){last=null;},{passive:true});}catch(e){}})(this)"></iframe>
           <iframe class="ds-screen-iframe ds-iframe-dark"  src="etf-ds-screen-dark.html" style="position:absolute;inset:0;opacity:0;pointer-events:none;"></iframe>
         </div>
       </div>
