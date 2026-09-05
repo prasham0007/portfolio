@@ -759,8 +759,16 @@
       #s-web { padding: 80px 20px; }
       #s-reflection { padding: 80px 20px; }
 
-      /* grids → single column */
-      .impact-grid { grid-template-columns: 1fr 1fr; }
+      /* impact card mobile: 2×2 grid with correct dividers */
+      .impact-card { padding: 32px 24px; }
+      .impact-grid { grid-template-columns: 1fr 1fr; column-gap: 0; row-gap: 0; }
+      .impact-stat::after { display: none; } /* hide desktop ::after dividers */
+      .impact-stat { padding: 24px 20px; }
+      /* vertical divider: right edge of col 1 */
+      .impact-stat:nth-child(odd) { border-right: 1px solid rgba(250,249,247,0.15); }
+      /* horizontal divider: bottom edge of row 1 */
+      .impact-stat:nth-child(1),
+      .impact-stat:nth-child(2) { border-bottom: 1px solid rgba(250,249,247,0.15); }
       .process-steps { grid-template-columns: 1fr; gap: 32px; }
       .insight-grid { grid-template-columns: 1fr; }
       .reflection-body { grid-template-columns: 1fr; gap: 40px; }
