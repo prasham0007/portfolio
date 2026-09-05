@@ -794,6 +794,11 @@
       .ds-device { transform: scale(0.72); transform-origin: center center; }
 
       .cs-footer { padding: 32px 20px; flex-direction: column; align-items: flex-start; gap: 16px; }
+
+      /* cover phones on mobile: show 2, hide 2 */
+      .cover-placeholder { height: 60svh; gap: 12px; padding: 24px 20px; }
+      .cover-phone:nth-child(3),
+      .cover-phone:nth-child(4) { display: none; }
     }
   </style>
 </head>
