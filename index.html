@@ -1343,7 +1343,7 @@
     const start = performance.now();
     function step(now) {
       const p = Math.min((now - start) / duration, 1);
-      const eased = 1 - Math.pow(1 - p, 3);
+      const eased = p;
       const val = isDecimal ? (eased * target).toFixed(1) : Math.floor(eased * target);
       el.textContent = val + suffix;
       if (p < 1) requestAnimationFrame(step);
@@ -1357,7 +1357,7 @@
         const el = e.target;
         const target = parseFloat(el.dataset.count);
         const suffix = el.dataset.suffix || '';
-        countUp(el, target, suffix, 1600);
+        countUp(el, target, suffix, 900);
         statObserver.unobserve(el);
       }
     });
