@@ -656,8 +656,10 @@
 
     /* ── REFLECTION ── */
     #s-reflection { background: #181818; padding: 120px 128px; }
-    #s-reflection .s-eyebrow { color: #888784; }
-    #s-reflection .s-heading { color: #FAF9F7; }
+    .reflection-single {
+      font-size: clamp(16px, 1.5vw, 20px); font-weight: 400;
+      color: rgba(250,249,247,0.6); line-height: 1.8;
+    }
     .reflection-body {
       margin-top: 40px;
       display: grid; grid-template-columns: 1fr 1fr; gap: 56px 80px;
@@ -1275,26 +1277,9 @@
   <!-- REFLECTION -->
   <section id="s-reflection">
     <div class="s-inner">
-      <span class="s-eyebrow">Reflection</span>
-      <h2 class="s-heading">What this project taught me<span class="dot">.</span></h2>
-      <div class="reflection-body">
-        <div class="reflection-item">
-          <span class="reflection-label">What worked</span>
-          <p class="reflection-text">Anchoring every decision in data first — the analytics audit gave the project authority that opinion-based feedback couldn't challenge. When a stakeholder pushed back on removing "Technology," the click data ended the conversation.</p>
-        </div>
-        <div class="reflection-item">
-          <span class="reflection-label">What I'd do differently</span>
-          <p class="reflection-text">I'd run tree testing earlier. Validating the new taxonomy with users before high-fidelity mockups would have surfaced edge cases sooner — particularly around the Invest vs. Trade split for users who do both.</p>
-        </div>
-        <div class="reflection-item">
-          <span class="reflection-label">What I learned</span>
-          <p class="reflection-text">In a complex, high-stakes financial product, minimising choices is the single most powerful way to build user trust and accelerate conversion. Design's leverage is highest at the IA layer, not the visual layer.</p>
-        </div>
-        <div class="reflection-item">
-          <span class="reflection-label">What surprised me</span>
-          <p class="reflection-text">How much of the problem was labelling, not structure. Renaming one tab from "Technology" to "Products" was the single highest-impact change in the entire redesign — and it took 30 seconds to implement.</p>
-        </div>
-      </div>
+      <span class="s-eyebrow" style="color:#888784;">Reflection</span>
+      <h2 class="s-heading" style="color:#FAF9F7;">What this project taught me<span class="dot">.</span></h2>
+      <p class="reflection-single">Anchoring decisions from user data gave the project authority that opinion-based feedback couldn't challenge. In a complex financial product, minimising choices is one of the ways to build user trust and accelerate conversion. Design's leverage is highest at the IA layer, not the visual layer. And what surprised me most is how much of the problem was labelling, not structure. Restructuring Technology into Products as a tab was the single highest-impact change in the entire redesign.</p>
     </div>
   </section>
 
