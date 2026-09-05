@@ -160,7 +160,7 @@
 
     /* ── COVER — fold 2 ── */
     #cover {
-      height: 100svh;
+      height: auto;
       display: flex; align-items: center; justify-content: center;
       background: linear-gradient(to bottom, #181818 0, #181818 20svh, #FAF9F7 20svh);
       position: relative; overflow: hidden;
@@ -169,7 +169,6 @@
       width: 100%;
       padding: 80px 128px;
       display: flex; flex-direction: column; justify-content: center;
-      height: 100%;
     }
     .cover-label {
       font-size: 11px; font-weight: 500;
@@ -200,11 +199,11 @@
       flex: 1; display: flex; align-items: center; justify-content: center;
     }
     .cover-placeholder {
-      width: 100%; height: 80svh;
+      width: 100%;
       background: linear-gradient(145deg, #CEC4E8 0%, #B0A0D8 100%);
-      display: flex; align-items: center; justify-content: center;
+      display: flex; align-items: flex-end; justify-content: center;
       gap: clamp(20px, 3.2vw, 48px);
-      padding: 32px clamp(20px, 4vw, 64px);
+      padding: 48px clamp(20px, 4vw, 64px) 0;
       overflow: hidden;
     }
     /* Cover phones — same style as .ds-device, scaled proportionally */
