@@ -372,7 +372,7 @@
     }
 
     /* ── RESEARCH & INSIGHT ── */
-    #s-define { background: #F0EFED; padding: 120px 128px; }
+    #s-define { background: #E8E6E3; padding: 120px 128px; }
     #s-define .s-heading { color: #181818; }
     .problem-stmt {
       font-size: clamp(20px, 2.2vw, 32px); font-weight: 600;
@@ -397,8 +397,10 @@
     }
     .research-step-label {
       font-size: 18px; font-weight: 600; color: #181818; white-space: nowrap;
-      transition: color 0.2s;
+      transition: color 0.2s, font-weight 0s;
     }
+    .research-step:hover .research-step-label,
+    .research-step.active .research-step-label { font-weight: 700; }
     .research-step.active .research-step-label { color: var(--amber); }
     .research-step-dot {
       position: absolute; bottom: -2px; left: 50%; transform: translateX(-50%);
@@ -421,19 +423,26 @@
       transition: opacity 0.18s ease;
     }
     .define-grid {
-      display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 12px; margin-bottom: 48px;
+      display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 16px; margin-bottom: 48px;
     }
     .insight-card {
-      background: #E8E6E3; border-radius: 14px; padding: 24px 28px;
-      display: flex; flex-direction: column; gap: 12px;
+      background: linear-gradient(160deg, #ffffff 0%, #fdfaf9 100%);
+      border-radius: 16px;
+      padding: 28px 28px 32px;
+      display: flex; flex-direction: column; gap: 14px;
+      border: 1px solid rgba(24,24,24,0.07);
+      box-shadow:
+        0 1px 0 rgba(255,255,255,0.9) inset,
+        0 2px 4px rgba(24,24,24,0.05),
+        0 8px 24px rgba(24,24,24,0.08);
     }
     .insight-tag {
-      font-size: 10px; font-weight: 700; letter-spacing: 0.14em;
-      text-transform: uppercase; color: var(--amber);
+      font-size: 18px; font-weight: 700; letter-spacing: -0.01em;
+      color: #181818; line-height: 1.2;
     }
     .insight-quote {
       font-size: 14px; font-weight: 400;
-      color: rgba(24,24,24,0.65); line-height: 1.6;
+      color: rgba(24,24,24,0.55); line-height: 1.65;
     }
 
     /* ── PROCESS ── */
@@ -929,7 +938,7 @@
       <div class="define-grid">
         <div class="insight-card">
           <span class="insight-tag">Taxonomy misalignment</span>
-          <p class="insight-quote">Users consistently skipped "Technology" when looking for trading tools — the label didn't match their mental model of where a trading platform should live.</p>
+          <p class="insight-quote">Users consistently skipped "Technology" when looking for trading tools. The label didn't match their mental model of where a trading platform should live.</p>
         </div>
         <div class="insight-card">
           <span class="insight-tag">Category confusion</span>
@@ -937,19 +946,19 @@
         </div>
         <div class="insight-card">
           <span class="insight-tag">Labelling friction</span>
-          <p class="insight-quote">"Resources" was non-descriptive and actively avoided. High-value tools were hiding behind the worst possible label — invisible in plain sight.</p>
+          <p class="insight-quote">"Resources" was non-descriptive and actively avoided. Trading tools were hiding behind the worst possible label and were invisible in plain sight.</p>
         </div>
         <div class="insight-card">
-          <span class="insight-tag">Power user friction</span>
-          <p class="insight-quote">BTST, Penny Stocks, and live analytics were buried in static product folders — significant friction for traders who need time-sensitive data without transactional clutter.</p>
+          <span class="insight-tag">Poor categorisation</span>
+          <p class="insight-quote">Live market, Indices and top companies all were placed together under stocks which were the main cause of confusion for traders who need time-sensitive data without transactional clutter.</p>
         </div>
         <div class="insight-card">
           <span class="insight-tag">Intent collision</span>
-          <p class="insight-quote">Long-term investors and active traders shared the same navigation path. No separation between "I want to invest" and "I want to trade" created constant intent collision.</p>
+          <p class="insight-quote">Long-term investors and active traders shared the same navigation path. No separation between "I want to invest" and "I want to trade" created a constant intent collision.</p>
         </div>
         <div class="insight-card">
           <span class="insight-tag">Depth overload</span>
-          <p class="insight-quote">Reaching any core product required 3–4 clicks. Each nesting level added cognitive cost — users gave up or used search as a workaround rather than navigating.</p>
+          <p class="insight-quote">Reaching any core product required 3–4 clicks. Each nesting level added cognitive cost and that led users to give up or used search as a workaround rather than navigating.</p>
         </div>
       </div>
     </div>
